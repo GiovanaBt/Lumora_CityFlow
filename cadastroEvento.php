@@ -1,7 +1,7 @@
 <?php
-include 'testeConexao.php';
+include 'Conexao.php';
 
-$categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM Categoria')
+$categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM Categoria');
 
 ?>
 
@@ -9,15 +9,11 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Cadastro de Eventos</title>
 </head>
 <body>
     <h2>Preencha as lacunas para cadastrar seu evento</h2>
-    <form action="enviarCadastroEvento.php" method = "POST">
-
-        <label>Nome/id do Usuário Organizador</label><br>
-        <input type="number" name="id_usuarios" required><br><br>   
+    <form action="enviarCadastroEvento.php" method = "POST">  
 
         <label>Nome do Evento</label><br>
         <input type="text" name="descricao" required><br><br>
@@ -37,11 +33,17 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
         <label>Ponto de referencia</label><br>
         <input type="text" name="ponto_referencia" required><br><br>
 
-        <label>Data do Evento</label><br>
-        <input type="date" name="data_evento" required><br><br>
+        <label>Data de Início do evento</label><br>
+        <input type="date" name="data_inicio_evento" required><br><br>
+
+        <label>Data de Fim do evento</label><br>
+        <input type="date" name="data_fim_evento" required><br><br>
         
-        <label>Horário do Evento</label><br>
-        <input type="time" name="horario_evento" required><br><br>
+        <label>Horário de Início do Evento</label><br>
+        <input type="time" name="horario_inicio_evento" required><br><br>
+
+        <label>Horário de Fim do Evento</label><br>
+        <input type="time" name="horario_fim_evento" required><br><br>
 
     <label for="categorias">Escolha uma categoria para seu Evento:</label><br>
     <select id="categorias" name="categorias">  
