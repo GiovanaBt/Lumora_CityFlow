@@ -20,10 +20,6 @@ session_start();
         <img src="imgs/logoCityFlow_removebg.png" alt="logo">
     </div>
 
-    <div class="hamburguer" id="hamburguer">
-        <i class="fa-solid fa-bars"></i>
-    </div>
-
     <ul class="menu" id="menu">
     <li><a href="#informacoes">Informações</a></li>
     <li><a href="cadastroEvento.php">Divulgar Eventos</a></li>
@@ -31,7 +27,6 @@ session_start();
     <?php if (isset($_SESSION['usuario_id'])): ?>
         <li class="perfil">
             <a href="index.php">
-                <i class="fa-solid fa-circle-user"></i>
                 <i class="fa-solid fa-circle-user"></i>
                 <?php echo $_SESSION['nome_usuario'];?>
             </a>
@@ -46,11 +41,19 @@ session_start();
         </li>
 
     <?php else: ?>
+    <div class="menu-container">
+         <li>
+            <a id="hamburguer" class="hamburguer">
+                <i class="fa-solid fa-bars"></i>
+            </a>
+        </li>
         <li>
             <a id="abrirModal">
                 <i class="fa-solid fa-circle-user"></i>
             </a>
         </li>
+    </div>
+        
     <?php endif; ?>
 
 </ul>
