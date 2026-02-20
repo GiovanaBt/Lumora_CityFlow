@@ -19,13 +19,21 @@ header {
 }
 
 .botaoMapa {
-    background-color: linear-gradient(45deg, #2dbac9, #a8329e);
+    background: linear-gradient(45deg, #a8329e, #23b8b8); 
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px 40px;
+    border-radius: 100px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase; 
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .hamburguer {
@@ -41,6 +49,7 @@ header {
     gap: 30px;
     margin: 0;
     padding: 0;
+    font-size: 18px;
 }
 .menu a {
     color: white;
