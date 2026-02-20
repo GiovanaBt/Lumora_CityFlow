@@ -94,7 +94,12 @@ header {
     font-size: 14px;
 }
 
-
+.hamburguer {
+    color: white;
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
 
 
 
