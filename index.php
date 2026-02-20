@@ -9,7 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <title>City Flow - Concte-se à cultura de sua cidade</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="imgs/cityFlow.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -25,7 +25,8 @@ session_start();
         </a>
         <ul class="menu" id="menu"> <!-- Menu de navegação do header -->
             <li><a href="#informacoes">INFORMAÇÕES</a></li>
-            <li><a href="cadastroEvento.php">DIVULGAR EVENTOS</a></li>
+            <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i>DIVULGAR EVENTOS</a></li>
+            
 
 
             <?php if (isset($_SESSION['usuario_id'])): ?> <!-- Verifica se o usuário está logado -->
@@ -47,17 +48,13 @@ session_start();
             <?php else: ?>
 
                 <div class="menu-container"> <!-- Container para o menu hambúrguer e o ícone de usuário -->
-                    <li>
                         <a id="hamburguer" class="hamburguer"> <!-- Ícone do menu hambúrguer -->
                             <i class="fa-solid fa-bars"></i>
                         </a>
-                        
-                    </li>
-                    <li>
+
                         <a id="abrirModal"> <!-- Ícone de usuário para abrir o modal de login -->
                             <i class="fa-solid fa-circle-user"></i>
                         </a>
-                    </li>
                 </div>
 
             <?php endif; ?> <!-- Fim da verificação de login -->
