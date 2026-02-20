@@ -19,6 +19,10 @@ session_start();
         <img src="imgs/logoCityFlow_removebg.png" alt="logo">
     </div>
 
+    <div class="hamburguer" id="hamburguer">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
     <ul class="menu" id="menu">
     <li><a href="#informacoes">Informações</a></li>
     <li><a href="cadastroEvento.php">Divulgar Eventos</a></li>
@@ -44,54 +48,40 @@ session_start();
         </li>
 
     <?php else: ?>
-    <div class="menu-container">
-         <li>
-            <a id="hamburguer" class="hamburguer">
-                <i class="fa-solid fa-bars"></i>
-            </a>
-        </li>
         <li>
             <a id="abrirModal">
                 <i class="fa-solid fa-circle-user"></i>
             </a>
         </li>
-    </div>
-        
     <?php endif; ?>
 
 </ul>
 
 </header>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<div id="map" style="height:400px;"></div>
 
-<h1 class='h1'>tela inicial</h1>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+var map = L.map('map').setView([-23.55, -46.63], 13);
 
-<div id="modal" class="modal">
-    <div class="modal-conteudo">
-        <span class="fechar">&times;</span>
-        <h1>Que bom ter você aqui!</h1>
-        <h3>Faça seu Login</h3>
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+}).addTo(map);
 
-        <form action="fazerLogin.php" method="POST">
+// localização do usuário
+navigator.geolocation.getCurrentPosition(function(pos) {
+    var lat = pos.coords.latitude;
+    var lon = pos.coords.longitude;
 
-            <label>E-mail</label><br>
-            <input type="text" name="emailLogin"><br><br>
+    map.setView([lat, lon], 15);
+    L.marker([lat, lon]).addTo(map)
+        .bindPopup("Você está aqui")
+        .openPopup();
+});
 
-            <label>Senha</label><br>
-            <input type="text" name="senhaLogin"><br><br>
-
-            <button type="submit">Entrar</button>
-            <?php
-                echo "<script>window.location.href = 'index.php';
-                </script>";
-            ?>
-        </form>
-
-        <h4>Não possui uma conta?</h4>
-        <a href="cadastroUsuario.php">Cadastre-se</a>
-    </div>
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+// adicionar ponto ao clicar
+map.on('click', function(e){
+    L.marker(e.latlng).addTo(map);
+});
+</script>

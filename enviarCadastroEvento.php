@@ -9,10 +9,27 @@
     
 </body>
 </html>
+
 <?php
 include 'Conexao.php';
 
 session_start();
+
+$nomeImagem = "";
+
+if(isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0){
+
+    $diretorio = "uploads/";
+
+    if(!file_exists($diretorio)){
+        mkdir($diretorio, 0777, true);
+    }
+
+    $extensao = pathinfo($_FILES["imagem"]["name"], PATHINFO_EXTENSION);
+    $nomeImagem = uniqid() . "." . $extensao;
+
+    move_uploaded_file($_FILES["imagem"]["tmp_name"], $diretorio . $nomeImagem);
+}
 
 
 $idUsuario = $_SESSION['usuario_id'];
@@ -32,8 +49,10 @@ $horarioFimEvento = $_POST['horario_fim_evento'];
 $categorias = $_POST['categorias'];
 $eventoConcluido = $_POST['evento_concluido'];
        
- $sql= "INSERT INTO Eventos_Cadastrados(id_usuarios, descricao, rua, bairro, numero, cidade, ponto_referencia, data_inicio_evento, data_fim_evento, horario_inicio_evento, horario_fim_evento, id_categoria, evento_concluido)
-    VALUES ('$idUsuario','$nomeDoEvento', '$rua', '$bairro', '$numero', '$cidade', '$pontoReferencia','$dataInicioEvento', '$dataFimEvento', '$horarioInicioEvento', '$horarioFimEvento', '$categorias', '$eventoConcluido')";
+ $sql= "INSERT INTO Eventos_Cadastrados(id_usuarios, descricao, rua, bairro, numero, cidade, ponto_referencia, 
+ data_inicio_evento, data_fim_evento, horario_inicio_evento, horario_fim_evento, id_categoria, evento_concluido, Imagem)
+    VALUES ('$idUsuario','$nomeDoEvento', '$rua', '$bairro', '$numero', '$cidade', '$pontoReferencia',
+    '$dataInicioEvento', '$dataFimEvento', '$horarioInicioEvento', '$horarioFimEvento', '$categorias', '$eventoConcluido', '$nomeImagem')";
 
     
 if ($conexao->query($sql) === TRUE) {

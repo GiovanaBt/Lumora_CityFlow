@@ -13,7 +13,8 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 </head>
 <body>
     <h2>Preencha as lacunas para cadastrar seu evento</h2>
-    <form action="enviarCadastroEvento.php" method = "POST">  
+    
+   <form action="enviarCadastroEvento.php" method="POST" enctype="multipart/form-data">
 
         <label>Nome do Evento</label><br>
         <input type="text" name="descricao" required><br><br>
@@ -29,7 +30,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
         <label>Cidade</label><br>
         <input type="text" name="cidade" required><br><br>
-
+        
         <label>Ponto de referencia</label><br>
         <input type="text" name="ponto_referencia" required><br><br>
 
@@ -45,9 +46,10 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
         <label>Horário de Fim do Evento</label><br>
         <input type="time" name="horario_fim_evento" required><br><br>
 
-    <label for="categorias">Escolha uma categoria para seu Evento:</label><br>
-    <select id="categorias" name="categorias">  
-    <option value="" disabled selected>Selecione uma categoria</option> 
+        <label for="categorias">Escolha uma categoria para seu Evento:</label><br>
+        <select id="categorias" name="categorias">  
+        <option value="" disabled selected>Selecione uma categoria</option> 
+
     <?php 
       if ($categorias && mysqli_num_rows($categorias) > 0) {
           while ($row = mysqli_fetch_assoc($categorias)) {
@@ -57,11 +59,13 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
           echo "<option value=''>Nenhuma categoria disponível</option>";
       }
     ?>
-    </select>  <br><br>
+    </select><br><br>
 
         <label>O evento foi concluido?</label><br>
         <input type="text" name="evento_concluido" required><br><br>
 
+        <label>Capa do Evento</label><br>
+        <input type="file" name="imagem" accept="image/*"><br><br>
 
         <button type="submit">Enviar</button>
     </form>
