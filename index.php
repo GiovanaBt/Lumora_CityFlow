@@ -3,7 +3,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>City Flow - Concte-se à cultura de sua cidade</title>
@@ -81,8 +81,8 @@ session_start();
 
             <button type="submit">Entrar</button>
             <?php
-                echo "<script>window.location.href = 'index.php';
-                </script>";
+                // echo "<script>window.location.href = 'index.php';
+                // </script>";
             ?>
         </form>
 
