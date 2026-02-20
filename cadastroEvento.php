@@ -30,7 +30,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
         <label>Cidade</label><br>
         <input type="text" name="cidade" required><br><br>
-
+        
         <label>Ponto de referencia</label><br>
         <input type="text" name="ponto_referencia" required><br><br>
 
