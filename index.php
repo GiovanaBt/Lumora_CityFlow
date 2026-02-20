@@ -3,8 +3,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>City Flow - Concte-se à cultura de sua cidade</title>
@@ -75,12 +74,13 @@ session_start();
                 <input type="text" name="emailLogin"><br><br>
 
                 <label>Senha</label><br>
-                <input type="text" name="senhaLogin"><br><br>
+                <input type="text" name="senhaLogin"><br><br>                
+
 
                 <button type="submit">Entrar</button>
                 <?php
-                echo "<script>window.location.href = 'index.php';
-                </script>"; // Redireciona para a página inicial após o login
+                // echo "<script>window.location.href = 'index.php';
+                // </script>";
                 ?>
             </form>
 
