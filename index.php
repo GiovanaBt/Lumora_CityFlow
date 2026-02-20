@@ -7,91 +7,90 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>City Flow - Concte-se à cultura de sua cidade</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="shortcut icon" href="imgs/logoCityFlow_removebg.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
 <body>
-<header>
-    <div class='logo'>
-        <img src="imgs/logoCityFlow_removebg.png" alt="logo">
-    </div>
+    <header>
+        <div class='logo'>
+            <a href="index.php"></a>
+            <img src="imgs/cityFlow.webp" alt="logo"> <!-- Logo -->
+        </div>
+        <a href="mapa.php" target="_blank">
+            <button class="botaoMapa">MAPA</button> <!-- Botão para acessar o mapa em uma nova aba -->
+        </a>
+        <ul class="menu" id="menu"> <!-- Menu de navegação do header -->
+            <li><a href="#informacoes">INFORMAÇÕES</a></li>
+            <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i>DIVULGAR EVENTOS</a></li>
+            
 
-    <ul class="menu" id="menu">
-    <li><a href="#informacoes">Informações</a></li>
-    <li><a href="cadastroEvento.php">Divulgar Eventos</a></li>
 
-    <a href="mapa.php" target="_blank">
-    <button class="bMapa">Ver eventos no mapa</button>
-    </a>
+            <?php if (isset($_SESSION['usuario_id'])): ?> <!-- Verifica se o usuário está logado -->
+                <li class="perfil">
+                    <a href="index.php">
+                        <i class="fa-solid fa-circle-user"></i>
+                        <?php echo $_SESSION['nome_usuario']; ?>
+                    </a>
 
-    <?php if (isset($_SESSION['usuario_id'])): ?>
-        <li class="perfil">
-            <a href="index.php">
-                <i class="fa-solid fa-circle-user"></i>
-                <?php echo $_SESSION['nome_usuario'];?>
-            </a>
+                    <ul class="submenu">
+                        <li><a href="minhaConta.php">Minha conta</a></li>
+                        <li><a href="minhaConta.php#favoritos">Favoritos</a></li>
+                        <li><a href="minhaConta.php#meusEventos">Meus eventos</a></li>
+                        <li><a href="ajuda.php">Central de ajuda</a></li>
+                        <li><a href="logout.php">Sair</a></li>
+                    </ul>
+                </li>
 
-            <ul class="submenu">
-                <li><a href="minhaConta.php">Minha conta</a></li>
-                <li><a href="minhaConta.php#favoritos">Favoritos</a></li>
-                <li><a href="minhaConta.php#meusEventos">Meus eventos</a></li>
-                <li><a href="ajuda.php">Central de ajuda</a></li>
-                <li><a href="logout.php">Sair</a></li>
-            </ul>
-        </li>
+            <?php else: ?>
 
-    <?php else: ?>
-    <div class="menu-container">
-         <li>
-            <a id="hamburguer" class="hamburguer">
-                <i class="fa-solid fa-bars"></i>
-            </a>
-        </li>
-        <li>
-            <a id="abrirModal">
-                <i class="fa-solid fa-circle-user"></i>
-            </a>
-        </li>
-    </div>
-        
-    <?php endif; ?>
+                <div class="menu-container"> <!-- Container para o menu hambúrguer e o ícone de usuário -->
+                        <a id="hamburguer" class="hamburguer"> <!-- Ícone do menu hambúrguer -->
+                            <i class="fa-solid fa-bars"></i>
+                        </a>
 
-</ul>
+                        <a id="abrirModal"> <!-- Ícone de usuário para abrir o modal de login -->
+                            <i class="fa-solid fa-circle-user"></i>
+                        </a>
+                </div>
 
-</header>
+            <?php endif; ?> <!-- Fim da verificação de login -->
 
-<h1 class='h1'>tela inicial</h1>
+        </ul>
 
-<div id="modal" class="modal">
-    <div class="modal-conteudo">
-        <span class="fechar">&times;</span>
-        <h1>Que bom ter você aqui!</h1>
-        <h3>Faça seu Login</h3>
+    </header>
 
-        <form action="fazerLogin.php" method="POST">
+    <div id="modal" class="modal"> <!-- Modal de login, inicialmente oculto, que será exibido ao clicar no ícone de usuário -->
+        <div class="modal-conteudo">
+            <span class="fechar">&times;</span> <!-- Botão para fechar o modal -->
+            <h1>Que bom ter você aqui!</h1>
+            <h3>Faça seu Login</h3>
 
-            <label>E-mail</label><br>
-            <input type="text" name="emailLogin"><br><br>
+            <form action="fazerLogin.php" method="POST">
 
-            <label>Senha</label><br>
-            <input type="text" name="senhaLogin"><br><br>
+                <label>E-mail</label><br>
+                <input type="text" name="emailLogin"><br><br>
 
-            <button type="submit">Entrar</button>
-            <?php
+                <label>Senha</label><br>
+                <input type="text" name="senhaLogin"><br><br>                
+
+
+                <button type="submit">Entrar</button>
+                <?php
                 // echo "<script>window.location.href = 'index.php';
                 // </script>";
-            ?>
-        </form>
+                ?>
+            </form>
 
-        <h4>Não possui uma conta?</h4>
-        <a href="cadastroUsuario.php">Cadastre-se</a>
-    </div>
-</div>
+            <h4>Não possui uma conta?</h4>
+            <a href="cadastroUsuario.php">Cadastre-se</a>
+        </div>
+    </div> <!-- Fim do modal de login -->
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
