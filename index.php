@@ -15,8 +15,8 @@ session_start();
 
 <body>
 <header>
-    <div class='logo'>
-        <img src="imgs/logoCityFlow_removebg.png" alt="logo">
+    <div class='logo'> 
+        <img src="imgs/logoCityFlow_removebg.png" alt="logo"> <!-- Logo da empresa -->
     </div>
 
     <ul class="menu" id="menu">
