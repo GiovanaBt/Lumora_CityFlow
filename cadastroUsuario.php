@@ -3,9 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Usuário</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000ff;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #fff;
+        }
+
+        form {
+            background-color: #000;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #2db9c9ac;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #2dbac9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #a8329e;
+        }
+    </style>
 </head>
 <body>
-    <h2>Preencha as lacunas para cadastrar-se</h2>
+    <h2>Preencha o formulário abaixo para cadastrar-se</h2>
     <form action="enviarCadastroUsuario.php" method = "POST">
         <label>Nome Completo</label><br>
         <input type="text" name="nomeCompleto"><br><br>
