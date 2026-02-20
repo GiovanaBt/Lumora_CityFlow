@@ -7,9 +7,10 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>City Flow - Concte-se à cultura de sua cidade</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="imgs/logoCityFlow_removebg.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
 
 </head>
 
@@ -30,6 +31,7 @@ session_start();
     <?php if (isset($_SESSION['usuario_id'])): ?>
         <li class="perfil">
             <a href="index.php">
+                <i class="fa-solid fa-circle-user"></i>
                 <i class="fa-solid fa-circle-user"></i>
                 <?php echo $_SESSION['nome_usuario'];?>
             </a>
