@@ -26,8 +26,6 @@ header a {
     transform: scale(1.05); /* Efeito suave ao passar o mouse */
 }
 
-
-
 .fa-circle-plus { /* Ícone de adicionar evento no menu, usando a cor turquesa para destacar */
     color: #2dbac9;
     margin-right: 8px; /* Espaço entre o ícone e o texto */
@@ -50,16 +48,15 @@ header a {
     transform: scale(1.05); /* Efeito suave ao passar o mouse */
 }
 
-.menu-container {
+.menu-container { /* Container para entrar */
     display: flex;
     align-items: center;
-    gap: 15px; /* Espaço entre o hamburguer e o bonequinho */
     padding: 8px 20px;
     border-radius: 100px; /* Deixa as pontas totalmente redondas */
-    background: linear-gradient(#000, #000) padding-box,
+    background: linear-gradient(#000, #000) padding-box, /* Cria um gradiente para a borda, mas mantém o fundo preto */
         linear-gradient(45deg, #a8329e, #2dbac9) border-box;
-    border: 2px solid transparent;
-    font-size: 10px;
+    border: 2px solid transparent; /* Define a borda transparente para usar o gradiente como borda */
+    font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s;
 }
@@ -76,6 +73,21 @@ header a {
 }
 .perfil:hover .submenu {
     display: block;
+}
+
+/* Seleciona o link e o ícone/texto dentro do menu-container */
+#abrirModal {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+#abrirModal i { /* Estiliza o ícone e o texto dentro do link de entrar */
+    font-style: normal;            /* Remove o itálico padrão da tag <i> */
+    font-weight: bold;             /* Deixa em negrito como o restante do menu */
+    color: white;
+    font-size: 16px;               /* Ajuste o tamanho conforme preferir */
+    gap: 8px;                      /* Espaço entre o ícone e o texto */
 }
 
 /* MENU (Informações e Divulgar Eventos) */

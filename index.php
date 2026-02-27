@@ -47,10 +47,11 @@ session_start();
 
             <?php else: ?>
 
-                <div class="menu-container"> <!-- Container para o menu hambúrguer e o ícone de usuário -->
+                <div class="menu-container"> <!-- Container para entrar -->
 
                         <a id="abrirModal"> <!-- Ícone de usuário para abrir o modal de login -->
-                            <i class="fa-solid fa-arrow-right-to-bracket"> Entrar</i>
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            <span class="texto-entrar">ENTRAR</span>
                         </a>
                 </div>
 
@@ -88,6 +89,10 @@ session_start();
     </div> <!-- Fim do modal de login -->
 
     <script src="script.js"></script>
+
+    <section>
+        
+    </section>
 
 </body>
 
