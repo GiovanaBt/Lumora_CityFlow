@@ -11,7 +11,7 @@
             padding: 20px;
         }
 
-        h2 {
+        h1 {
             text-align: center;
         }
 
@@ -58,7 +58,7 @@
 
 <body>
     <form action="enviarCadastroUsuario.php" method="POST">
-        <h2>Preencha o formulário abaixo para cadastrar-se</h2>
+        <h1>Preencha o formulário abaixo para cadastrar-se</h1>
         <label>Nome Completo</label>
         <input type="text" name="nomeCompleto"><br><br>
 
