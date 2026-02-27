@@ -31,10 +31,8 @@ session_start();
             <?php if (isset($_SESSION['usuario_id'])): ?> <!-- Verifica se o usuário está logado -->
                 <li class="perfil">
                     <a href="index.php">
-                        <a id="hamburguer" class="hamburguer"> <!-- Ícone do menu hambúrguer -->
-                            <i class="fa-solid fa-bars"></i>
-                        </a>
-                        <i class="fa-solid fa-circle-user"></i>
+                        
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
                         <?php echo $_SESSION['nome_usuario']; ?>
                     </a>
 
@@ -52,7 +50,7 @@ session_start();
                 <div class="menu-container"> <!-- Container para o menu hambúrguer e o ícone de usuário -->
 
                         <a id="abrirModal"> <!-- Ícone de usuário para abrir o modal de login -->
-                            <i class="fa-solid fa-circle-user"></i>
+                            <i class="fa-solid fa-arrow-right-to-bracket"> Entrar</i>
                         </a>
                 </div>
 
