@@ -60,8 +60,8 @@ $result = $stmt->get_result();
 
             <ul class="submenu">
                 <li><a href="minhaConta.php">Minha conta</a></li>
-                <li><a href="favoritos.php">Favoritos</a></li>
-                <li><a href="meusEventos.php">Meus eventos</a></li>
+                <li><a href="minhaConta.php#favoritos.php">Favoritos</a></li>
+                <li><a href="minhaConta.php#meusEventos.php">Meus eventos</a></li>
                 <li><a href="ajuda.php">Central de ajuda</a></li>
                 <li><a href="logout.php">Sair</a></li>
             </ul>
@@ -85,7 +85,7 @@ $result = $stmt->get_result();
     </section>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <section id="meusEventos">
-<h1 style="text-align:center;">Meus Eventos</h1>
+    <h1 style="text-align:center;">Meus Eventos</h1>
 
 <div class="container">
 
