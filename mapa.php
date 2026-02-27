@@ -8,7 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <title>City Flow - Concte-se à cultura de sua cidade</title>
     <link rel="stylesheet" href="index.css">
-    <link rel="shortcut icon" href="imgs/logoCityFlow_removebg.png" type="image/x-icon">
+    <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -16,7 +16,7 @@ session_start();
 <body>
 <header>
     <div class='logo'>
-        <img src="imgs/logoCityFlow_removebg.png" alt="logo">
+        <img src="imgs/logoCityFlow.webp" alt="logo">
     </div>
 
     <div class="hamburguer" id="hamburguer">

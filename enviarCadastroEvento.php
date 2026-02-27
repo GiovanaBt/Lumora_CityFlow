@@ -47,16 +47,17 @@ $horarioInicioEvento = $_POST['horario_inicio_evento'];
 $horarioFimEvento = $_POST['horario_fim_evento'];
 
 $categorias = $_POST['categorias'];
-$eventoConcluido = $_POST['evento_concluido'];
        
  $sql= "INSERT INTO Eventos_Cadastrados(id_usuarios, descricao, rua, bairro, numero, cidade, ponto_referencia, 
- data_inicio_evento, data_fim_evento, horario_inicio_evento, horario_fim_evento, id_categoria, evento_concluido, Imagem)
+ data_inicio_evento, data_fim_evento, horario_inicio_evento, horario_fim_evento, id_categoria, Imagem)
     VALUES ('$idUsuario','$nomeDoEvento', '$rua', '$bairro', '$numero', '$cidade', '$pontoReferencia',
-    '$dataInicioEvento', '$dataFimEvento', '$horarioInicioEvento', '$horarioFimEvento', '$categorias', '$eventoConcluido', '$nomeImagem')";
+    '$dataInicioEvento', '$dataFimEvento', '$horarioInicioEvento', '$horarioFimEvento', '$categorias', '$nomeImagem')";
 
     
 if ($conexao->query($sql) === TRUE) {
-    echo "Evento Cadastrado com sucesso";
+    echo "<script>
+            window.location.href = 'index.php';
+          </script>";
 } else {
     // echo "Erro ao efetuar cadastro" . $conexao->error;
     
