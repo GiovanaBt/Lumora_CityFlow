@@ -1,52 +1,41 @@
 /* HEADER */
 header {
     background-color: #000000;
-    display: flex;
-    align-items: center;
-    /* Alinha tudo verticalmente no centro */
-    justify-content: flex-start;
-    /* Alinha os blocos à esquerda por padrão */
-    padding: 10px 40px;
-    gap: 30px;
-    /* Espaçamento entre Logo, Mapa e Menu */
+    display: flex; /* Usa flexbox para layout horizontal */
+    align-items: center; /* Alinha tudo verticalmente no centro */
+    justify-content: flex-start; /* Alinha os blocos à esquerda por padrão */
+    padding: 10px 40px; /* Espaçamento interno do header */
+    gap: 30px; /* Espaçamento entre Logo, Mapa e Menu */
+    box-shadow: 0px 4px 10px #2db9c992; /* Sombra sutil para destacar o header */
 }
 header>a:has(.botaoMapa) {
-    margin-right: auto;
-    /* Truque: consome o espaço vazio à direita, jogando o menu para o fim */
+    margin-right: auto; /* Truque: consome o espaço vazio à direita, jogando o menu para o fim */
 }
 header a {
-    text-decoration: none;
+    text-decoration: none; /* Remove sublinhado dos links */
 }
 
-.logo {
+.logo { /* Bloco da logo, para garantir que o menu fique à direita */
     display: flex;
     align-items: center;
 }
 .logo img {
-    height: 60px;
+    height: 60px; /* Ajusta a altura da logo para se encaixar bem no header */
 }
 .logo:hover {
     transform: scale(1.05); /* Efeito suave ao passar o mouse */
 }
 
-.perfil {
-    position: relative;
-}
-.perfil:hover .submenu {
-    display: block;
-}
 
-.fa-circle-plus {
-    /* Ícone de adicionar evento no menu, usando a cor turquesa para destacar */
+
+.fa-circle-plus { /* Ícone de adicionar evento no menu, usando a cor turquesa para destacar */
     color: #2dbac9;
-    margin-right: 8px;
-    /* Espaço entre o ícone e o texto */
+    margin-right: 8px; /* Espaço entre o ícone e o texto */
     font-size: 1.2em;
 }
 
 .botaoMapa {
-    background: linear-gradient(45deg, #2dbac9, #a8329e);
-    /* Corrigido de background-color */
+    background: linear-gradient(45deg, #2dbac9, #a8329e); /* Corrigido de background-color */
     color: white;
     border: none;
     padding: 10px 30px;
@@ -64,41 +53,36 @@ header a {
 .menu-container {
     display: flex;
     align-items: center;
-    gap: 15px;
-    /* Espaço entre o hamburguer e o bonequinho */
+    gap: 15px; /* Espaço entre o hamburguer e o bonequinho */
     padding: 8px 20px;
-    border-radius: 100px;
-    /* Deixa as pontas totalmente redondas */
+    border-radius: 100px; /* Deixa as pontas totalmente redondas */
     background: linear-gradient(#000, #000) padding-box,
         linear-gradient(45deg, #a8329e, #2dbac9) border-box;
     border: 2px solid transparent;
-
+    font-size: 10px;
     cursor: pointer;
     transition: transform 0.2s;
 }
-
 .menu-container:hover {
-    transform: scale(1.05);
-    /* Efeito suave ao passar o mouse */
+    transform: scale(1.05); /* Efeito suave ao passar o mouse */
 }
-
 .menu-container i {
     color: white;
     font-size: 20px;
 }
-
-.hamburguer {
-    color: white;
-    flex-direction: column;
-    cursor: pointer;
+.perfil { /* Bloco do perfil, para o submenu de opções */
+    display: flex;
+    position: relative;
+}
+.perfil:hover .submenu {
+    display: block;
 }
 
 /* MENU (Informações e Divulgar Eventos) */
 .menu {
     list-style: none;
     display: flex;
-    align-items: center;
-    /* Alinha os itens do menu verticalmente */
+    align-items: center; /* Alinha os itens do menu verticalmente */
     gap: 30px;
     margin: 0;
     padding: 0;
@@ -112,13 +96,11 @@ header a {
 .menu a {
     display: flex;
     align-items: center;
-    gap: 8px;
-    /* Espaço entre o ícone + e o texto */
+    gap: 8px; /* Espaço entre o ícone + e o texto */
     color: white;
     text-decoration: none;
     font-weight: bold;
-    line-height: 1;
-    /* Remove alturas de linha excessivas */
+    line-height: 1; /* Remove alturas de linha excessivas */
 }
 
 .menu a:hover {
@@ -133,9 +115,6 @@ header a {
     padding: 10px;
     border: 1px solid #080000;
 }
-
-
-
 .submenu li {
     margin: 5px 0;
 }
@@ -149,8 +128,12 @@ header a {
     font-size: 14px;
 }
 
+/* TELA DE LOGIN */
+
+
 /* CORPO DO SITE */
 body {
+    background-color: #000000;
     margin: 0;
     font-family: Arial, sans-serif;
 }
