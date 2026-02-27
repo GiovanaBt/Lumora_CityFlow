@@ -55,7 +55,9 @@ $categorias = $_POST['categorias'];
 
     
 if ($conexao->query($sql) === TRUE) {
-    echo "Evento Cadastrado com sucesso";
+    echo "<script>
+            window.location.href = 'index.php';
+          </script>";
 } else {
     // echo "Erro ao efetuar cadastro" . $conexao->error;
     
