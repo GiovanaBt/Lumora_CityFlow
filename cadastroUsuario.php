@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Usuário</title>
@@ -11,11 +12,11 @@
         }
 
         h2 {
-            color: #fff;
+            text-align: center;
         }
 
         form {
-            background-color: #000;
+            background-color: #fff;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px #2db9c9ac;
@@ -41,40 +42,41 @@
         }
 
         button {
-            background-color: #2dbac9;
+            text-align: center;
+            align-items: center;
+            background: linear-gradient(45deg, #a8329e, #2dbac9);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
+            padding: 10px 30px;
+            border-radius: 100px;
             cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #a8329e;
+            font-weight: bold;
+            transition: transform 0.2s;
         }
     </style>
 </head>
+
 <body>
-    <h2>Preencha o formulário abaixo para cadastrar-se</h2>
-    <form action="enviarCadastroUsuario.php" method = "POST">
-        <label>Nome Completo</label><br>
+    <form action="enviarCadastroUsuario.php" method="POST">
+        <h2>Preencha o formulário abaixo para cadastrar-se</h2>
+        <label>Nome Completo</label>
         <input type="text" name="nomeCompleto"><br><br>
 
-        <label>Data de Nascimento </label><br>
+        <label>Data de Nascimento </label>
         <input type="date" name="dataNascimento" required><br><br>
 
-        <label>E-mail</label><br>
+        <label>E-mail</label>
         <input type="text" name="email" required><br><br>
 
-        <label>Senha</label><br>
-        <input type="text" name="senha" required><br><br>
+        <label>Senha</label>
+        <input type="password" name="senha" required><br><br>
 
-        <label>Nome de Usuário</label><br>
+        <label>Nome de Usuário</label>
         <input type="text" name="nomeUsuario" required><br><br>
 
 
         <button type="submit">Enviar</button>
     </form>
 </body>
-</html>
 
+</html>
