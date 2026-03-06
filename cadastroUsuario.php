@@ -29,7 +29,7 @@
         <input type="text" name="nomeUsuario" required><br><br>
 
 
-        <button type="submit">Enviar</button>
+        <button type="submit">ENVIAR</button>
     </form>
 </body>
 
