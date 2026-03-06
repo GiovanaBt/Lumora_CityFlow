@@ -1,59 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Usuário</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000000ff;
-            padding: 20px;
-        }
+    <title>City Flow - Cadastro de Usuário</title>
+    <link rel="stylesheet" href="cadastroUsuario.css">
+    <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        h1 {
-            text-align: center;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px #2db9c9ac;
-            max-width: 400px;
-            margin: auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input[type="text"],
-        input[type="date"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            text-align: center;
-            align-items: center;
-            background: linear-gradient(45deg, #a8329e, #2dbac9);
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 100px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-    </style>
 </head>
 
 <body>
