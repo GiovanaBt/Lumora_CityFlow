@@ -74,12 +74,11 @@ session_start();
 
             <form action="fazerLogin.php" method="POST">
 
-                <label>E-MAIL</label><br>
-                <input type="text" name="emailLogin"><br><br>
+                <label>E-MAIL:</label><br>
+                <input type="text" name="emailLogin" placeholder="Digite aqui o seu E-mail"><br><br>
 
-                <label>SENHA</label><br>
-                <input type="password" name="senhaLogin"><br><br>
-
+                <label>SENHA:</label><br>
+                <input type="password" name="senhaLogin" placeholder="Digite aqui a sua senha"><br><br>
 
                 <button type="submit">ENTRAR</button>
                 <?php

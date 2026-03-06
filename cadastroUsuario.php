@@ -14,20 +14,19 @@
     <form action="enviarCadastroUsuario.php" method="POST">
         <h1>PREENCHA O FORMULÁRIO ABAIXO PARA CADASTRAR-SE</h1>
         <label>NOME COMPLETO:</label>
-        <input type="text" name="nomeCompleto"><br><br>
+        <input type="text" name="nomeCompleto" placeholder="Digite aqui o seu nome completo" required><br><br>
 
         <label>DATA DE NASCIMENTO:</label>
-        <input type="date" name="dataNascimento" required><br><br>
+        <input type="date" name="dataNascimento" placeholder="Selecione a data de nascimento" required><br><br>
 
         <label>E-MAIL:</label>
-        <input type="text" name="email" required><br><br>
+        <input type="text" name="email" placeholder="Digite aqui o seu E-mail" required><br><br>
 
         <label>SENHA:</label>
-        <input type="password" name="senha" required><br><br>
+        <input type="password" name="senha" placeholder="Digite aqui a sua senha" required><br><br>
 
         <label>NOME DE USUÁRIO:</label>
-        <input type="text" name="nomeUsuario" required><br><br>
-
+        <input type="text" name="nomeUsuario" placeholder="Digite aqui o seu nome de usuário" required><br><br>
 
         <button type="submit">ENVIAR</button>
     </form>
