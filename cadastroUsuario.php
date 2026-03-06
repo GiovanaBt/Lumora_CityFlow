@@ -12,20 +12,20 @@
 
 <body>
     <form action="enviarCadastroUsuario.php" method="POST">
-        <h1>Preencha o formulário abaixo para cadastrar-se</h1>
-        <label>Nome Completo</label>
+        <h1>PREENCHA O FORMULÁRIO ABAIXO PARA CADASTRAR-SE</h1>
+        <label>NOME COMPLETO:</label>
         <input type="text" name="nomeCompleto"><br><br>
 
-        <label>Data de Nascimento </label>
+        <label>DATA DE NASCIMENTO:</label>
         <input type="date" name="dataNascimento" required><br><br>
 
-        <label>E-mail</label>
+        <label>E-MAIL:</label>
         <input type="text" name="email" required><br><br>
 
-        <label>Senha</label>
+        <label>SENHA:</label>
         <input type="password" name="senha" required><br><br>
 
-        <label>Nome de Usuário</label>
+        <label>NOME DE USUÁRIO:</label>
         <input type="text" name="nomeUsuario" required><br><br>
 
 
