@@ -11,6 +11,23 @@ session_start();
     <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+        <link 
+        rel="stylesheet" 
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100vh; /* ocupa a tela inteira */
+            width: 100%;
+        }
+    </style>
+    
 </head>
 
 <body>
@@ -58,30 +75,48 @@ session_start();
 </ul>
 
 </header>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<div id="map" style="height:400px;"></div>
+<div id="map"></div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<!-- JS do Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
-var map = L.map('map').setView([-23.55, -46.63], 13);
+    // Criar o mapa (posição inicial padrão - Brasil)
+    var map = L.map('map').setView([-23.5505, -46.6333], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap'
-}).addTo(map);
+    // Adicionar camada do OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
 
-// localização do usuário
-navigator.geolocation.getCurrentPosition(function(pos) {
-    var lat = pos.coords.latitude;
-    var lon = pos.coords.longitude;
+    // Verificar se o navegador suporta geolocalização
+    if (navigator.geolocation) {
 
-    map.setView([lat, lon], 15);
-    L.marker([lat, lon]).addTo(map)
-        .bindPopup("Você está aqui")
-        .openPopup();
-});
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
 
-// adicionar ponto ao clicar
-map.on('click', function(e){
-    L.marker(e.latlng).addTo(map);
-});
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+
+                // Centralizar mapa na posição do usuário
+                map.setView([lat, lon], 15);
+
+                // Adicionar marcador
+                L.marker([lat, lon])
+                    .addTo(map)
+                    .bindPopup("📍 Você está aqui!")
+                    .openPopup();
+
+            },
+            function(error) {
+                alert("Não foi possível obter sua localização.");
+            }
+        );
+
+    } else {
+        alert("Seu navegador não suporta geolocalização.");
+    }
 </script>
+
+</body>
+</html>
