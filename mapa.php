@@ -1,7 +1,19 @@
 <?php
+include 'Conexao.php';
+
+$sql = "SELECT id_evento, descricao, latitude, longitude, rua, bairro, numero 
+        FROM Eventos_Cadastrados";
+
+$result = $conexao->query($sql);
+
+$eventos = [];
+
+while($row = $result->fetch_assoc()){
+    $eventos[] = $row;
+}
+
 
 session_start();
-
 ?>
 
 
@@ -70,13 +82,10 @@ session_start();
 
 </style>
 
-   
-
 </head>
 
-
-
 <body>
+
 
 <header>
 
@@ -281,3 +290,4 @@ session_start();
 </body>
 
 </html>
+
