@@ -110,5 +110,27 @@ session_start();
     </section>
 
 </body>
+                <?php
+// Exemplo de dados - no futuro você pode puxar isso de um banco MySQL
+$eventos = [
+    ['titulo' => 'SHOW DO TNBHD EM JACAREÍ', 'data' => '10.02.2025', 'local' => 'PARQUE DA CIDADE', 'imgs' => 'imgs/show supimpa.jpg'],
+    // Adicione mais arrays aqui para outros slides
+];
+?>
 
+<div class="carousel-container">
+    <?php foreach ($eventos as $evento): ?>
+        <div class="carousel-slide" style="background-image: url('<?php echo $evento['imgs']; ?>');">
+            <div class="overlay">
+                <h1><?php echo $evento['titulo']; ?></h1>
+                <p><?php echo $evento['data']; ?></p>
+                <p><?php echo $evento['local']; ?></p>
+                <button>Saiba mais</button>
+            </div>
+        </div>
+    <?php endforeach; ?>
+    <button class="nav-btn prev">
+    <i class="fi fi-ts-arrow-circle-right"></i></button><link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <button class="nav-btn next">
+    <i class="fi fi-rr-angle-circle-right"></i></button><link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 </html>
