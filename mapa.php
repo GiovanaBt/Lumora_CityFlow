@@ -1,121 +1,78 @@
 <?php
-session_start();
+include 'Conexao.php';
+
+$sql = "SELECT id_evento, descricao, latitude, longitude, rua, bairro, numero 
+        FROM Eventos_Cadastrados";
+
+$result = $conexao->query($sql);
+
+$eventos = [];
+
+while($row = $result->fetch_assoc()){
+    $eventos[] = $row;
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>City Flow - Concte-se à cultura de sua cidade</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<title>CityFlow - Mapa de Eventos</title>
 
-        <link 
-        rel="stylesheet" 
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    />
-
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #map {
-            height: 100vh; /* ocupa a tela inteira */
-            width: 100%;
-        }
-    </style>
-    
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link rel="stylesheet" href="mapa.css">
 </head>
 
 <body>
-<header>
-    <div class='logo'>
-        <img src="imgs/logoCityFlow.webp" alt="logo">
-    </div>
 
-    <div class="hamburguer" id="hamburguer">
-        <i class="fa-solid fa-bars"></i>
-    </div>
-
-    <ul class="menu" id="menu">
-    <li><a href="#informacoes">Informações</a></li>
-    <li><a href="cadastroEvento.php">Divulgar Eventos</a></li>
-
-    <a href="mapa.php" target="_blank">
-    <button class="bMapa">Ver eventos no mapa</button>
-    </a>
-
-    <?php if (isset($_SESSION['usuario_id'])): ?>
-        <li class="perfil">
-            <a href="index.php">
-                <i class="fa-solid fa-circle-user"></i>
-                <?php echo $_SESSION['nome_usuario'];?>
-            </a>
-
-            <ul class="submenu">
-                <li><a href="minhaConta.php">Minha conta</a></li>
-                <li><a href="minhaConta.php#favoritos">Favoritos</a></li>
-                <li><a href="minhaConta.php#meusEventos">Meus eventos</a></li>
-                <li><a href="ajuda.php">Central de ajuda</a></li>
-                <li><a href="logout.php">Sair</a></li>
-            </ul>
-        </li>
-
-    <?php else: ?>
-        <li>
-            <a id="abrirModal">
-                <i class="fa-solid fa-circle-user"></i>
-            </a>
-        </li>
-    <?php endif; ?>
-
-</ul>
-
-</header>
 <div id="map"></div>
 
-<!-- JS do Leaflet -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script>
-    // Criar o mapa (posição inicial padrão - Brasil)
-    var map = L.map('map').setView([-23.5505, -46.6333], 13);
 
-    // Adicionar camada do OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+let map = L.map('map').setView([-23.22, -45.90], 12);
 
-    // Verificar se o navegador suporta geolocalização
-    if (navigator.geolocation) {
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution:'© OpenStreetMap'
+}).addTo(map);
 
-        navigator.geolocation.getCurrentPosition(
-            function(position) {
 
-                var lat = position.coords.latitude;
-                var lon = position.coords.longitude;
+navigator.geolocation.getCurrentPosition(function(pos){
 
-                // Centralizar mapa na posição do usuário
-                map.setView([lat, lon], 15);
+    var lat = pos.coords.latitude;
+    var lon = pos.coords.longitude;
 
-                // Adicionar marcador
-                L.marker([lat, lon])
-                    .addTo(map)
-                    .bindPopup("📍 Você está aqui!")
-                    .openPopup();
+    map.setView([lat,lon],14);
 
-            },
-            function(error) {
-                alert("Não foi possível obter sua localização.");
-            }
-        );
+    L.marker([lat,lon])
+    .addTo(map)
+    .bindPopup("📍 Você está aqui")
+    .openPopup();
 
-    } else {
-        alert("Seu navegador não suporta geolocalização.");
-    }
+});
+
+
+let eventos = <?php echo json_encode($eventos); ?>;
+
+// console.log(eventos);
+
+eventos.forEach(function(evento){
+    if(evento.latitude && evento.longitude){
+    let popupHTML = `<div class="popupEvento">
+
+    <b>${evento.descricao}</b>
+    <p>${evento.rua} ${evento.numero}, ${evento.bairro}</p>
+    </div>`;
+
+L.marker([evento.latitude,evento.longitude])
+.addTo(map)
+.bindPopup(popupHTML);
+
+}
+
+});
+
 </script>
 
 </body>
