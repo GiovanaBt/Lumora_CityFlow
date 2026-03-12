@@ -1,111 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 session_start();
-include 'Conexao.php';
-
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: index.php");
-    exit();
-}
-
-$idUsuario = $_SESSION['usuario_id'];
-
-$sql = "SELECT * FROM Eventos_Cadastrados 
-        WHERE id_usuarios = ? 
-        ORDER BY id_evento DESC";
-
-$stmt = $conexao->prepare($sql);
-$stmt->bind_param("i", $idUsuario);
-$stmt->execute();
-
-$result = $stmt->get_result();
 ?>
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>City Flow - Concte-se à cultura de sua cidade</title>
-    <link rel="stylesheet" href="minhaConta.css">
-    <link rel="shortcut icon" href="imgs/logoCityFlow_removebg.png" type="image/x-icon">
+    <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
 
 <body>
-<header>
+    <header>
     <div class='logo'>
-    <a href="index.php">
-        <img src="imgs/logoCityFlow.webp" alt="logo">
-    </a>
+        <a href="index.php">
+            <img src="imgs/cityFlow.webp" alt="logo">
+        </a>
     </div>
 
     <div class="hamburguer" id="hamburguer">
         <i class="fa-solid fa-bars"></i>
     </div>
 
-    <ul class="menu" id="menu">
-    <li><a href="#informacoes">Informações</a></li>
-    <li><a href="cadastroEvento.php">Divulgar Eventos</a></li>
+    <a href="mapa.php" target="_blank">
+        <button class="botaoMapa">MAPA</button> 
+    </a>
 
-    <?php if (isset($_SESSION['usuario_id'])): ?>
-        <!-- Usuário LOGADO -->
-        <li class="perfil">
-            <a href="#">
-                <i class="fa-solid fa-circle-user"></i>
-                <?php echo $_SESSION['nome_usuario']; ?>
-            </a>
+    <nav> 
+        <ul class="menu" id="menu"> 
+            <li><a href="index.php">INÍCIO</a></li>
+            <li><a href="#informacoes">INFORMAÇÕES</a></li>
+            <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i>DIVULGAR EVENTOS</a></li>
 
-            <ul class="submenu">
-                <li><a href="minhaConta.php">Minha conta</a></li>
-                <li><a href="minhaConta.php#favoritos.php">Favoritos</a></li>
-                <li><a href="minhaConta.php#meusEventos.php">Meus eventos</a></li>
-                <li><a href="ajuda.php">Central de ajuda</a></li>
-                <li><a href="logout.php">Sair</a></li>
-            </ul>
-        </li>
+            <?php 
+            /* Início do bloco PHP: Verifica se o usuário está logado.
+               Se existir um 'usuario_id' na sessão, ele mostra o menu de Perfil.
+            */
+            if (isset($_SESSION['usuario_id'])): 
+            ?> 
+                <li class="perfil">
+                    <a href="#">
+                        <i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?> <i class="fa-solid fa-chevron-down" style="font-size: 10px; margin-left: 5px;"></i> </a>
 
-    <?php else: ?>
-        <li>
-            <a id="abrirModal">
-                <i class="fa-solid fa-circle-user"></i>
-            </a>
-        </li>
-    <?php endif; ?>
-</ul>
-
+                    <ul class="submenu">
+                        <li class="submenu-header">PERFIL</li> 
+                        
+                        <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
+                        <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
+                        <li><a href="minhaConta.php#meusEventos"><i class="fa-solid fa-calendar-days"></i> Meus eventos</a></li>
+                        
+                        <hr style="border: 0.5px solid #333; margin: 5px 15px; opacity: 0.2;">
+                        
+                        <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
+                    </ul>
+                </li>
+            <?php 
+            /* Caso o usuário NÃO esteja logado (else), mostra o botão de login.
+            */
+            else: 
+            ?>
+                <li>
+                    <div class="menu-container" id="abrirModal">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i> <span class="texto-entrar">ENTRAR</span>
+                    </div>
+                </li>
+            <?php endif; // Fim da condição PHP ?> 
+        </ul>
+    </nav>
 </header>
-<body>
-    <h1>Minha conta eba eba </h1>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <section id="favoritos">
-        <h1>Favoritos</h1>
-    </section>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <section id="meusEventos">
-    <h1 style="text-align:center;">Meus Eventos</h1>
-
-<div class="container">
-
-    <div class="container">
-
-    <?php while($row = $result->fetch_assoc()): ?>
-
-        <div class="card">
-            <img src="uploads/<?= $row['Imagem']; ?>" alt="<?= $row['descricao']; ?>">
-
-            <div class="nome"><?= $row['descricao']; ?></div>
-            <div class="local"><?= $row['rua']; ?> <?= $row['numero']; ?>, <?= $row['bairro']; ?></div>
-            <div class="data">Data: <?= date("d/m/Y", strtotime($row['data_inicio_evento'])); ?></div>
-        </div>
-
-    <?php endwhile; ?>
-
-    </div>
-
-</div>
-    </section>
-</body>
-</html>

@@ -27,8 +27,8 @@ header a {
 }
 
 .fa-circle-plus { /* Ícone de adicionar evento no menu, usando a cor turquesa para destacar */
-    color: #2dbac9;
-    margin-right: 8px; /* Espaço entre o ícone e o texto */
+    color: #16cee2;
+    margin-right: 2px; /* Espaço entre o ícone e o texto */
     font-size: 1.2em;
 }
 
@@ -67,9 +67,12 @@ header a {
     color: white;
     font-size: 20px;
 }
-.perfil { /* Bloco do perfil, para o submenu de opções */
+.perfil { 
     display: flex;
-    position: relative;
+    align-items: center;
+    position: relative; /* ESSENCIAL: Isso diz ao submenu para se alinhar por aqui */
+    cursor: pointer;
+    height: 100%; /* Garante que o hover funcione em toda a área */
 }
 .perfil:hover .submenu { /* Exibe o submenu ao passar o mouse sobre o perfil */
     display: block;
@@ -124,35 +127,117 @@ header a {
 .submenu { 
     display: none;
     position: absolute;
-    background: rgb(39, 28, 28); /* Fundo escuro para o submenu */
+    top: 100%;
+    right: 0;
+    min-width: 220px;
+    
+    /* Fundo: Preto levemente transparente */
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+    
+    /* Borda Gradiente */
+    border: 1px solid transparent;
+    border-image: linear-gradient(45deg, #2dbac9, #a8329e) 1;
+    
+    /* REDUZIDO: de 15px para 5px no topo */
+    padding: 5px 0; 
+    margin-top: 0px; 
     list-style: none;
-    padding: 10px;
-    border: 1px solid #080000; /* Borda para destacar o submenu */
-}
-.submenu li { /* Estiliza os itens do submenu para garantir que fiquem alinhados e com espaçamento adequado */
-    margin: 5px 0;
+    z-index: 9999;
+    
+    /* Sombra com brilho externo */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8), 
+                0px 0px 15px rgba(45, 185, 201, 0.2);
 }
 
+/* Título interno */
+.submenu::before {
+    content: "PERFIL";
+    display: block;
+    font-size: 13px;
+    color: #2dbac9;
+    letter-spacing: 2px;
+    
+    /* ALTERE O PRIMEIRO NÚMERO (6px) PARA UM MAIOR */
+    padding: 15px 21px 1px 21px; 
+    
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+/* Itens da lista */
+.submenu li {
+    width: 100%;
+    /* REMOVIDO: margens que empurravam os itens para baixo */
+    margin: 0 !important; 
+}
+
+.submenu li a {
+    /* REDUZIDO: padding vertical de 12px para 8px para ficar mais compacto */
+    padding: 8px 20px; 
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    gap: 10px; /* Garante espaço entre ícone e texto */
+}
+
+/* Efeito ao passar o mouse */
+.submenu li a:hover {
+    background: rgba(45, 185, 201, 0.1);
+    color: #2dbac9;
+    border-left: 3px solid #a8329e;
+    padding-left: 25px;
+}
+
+/* Item da CENTRAL DE AJUDA (Mesma cor do perfil) */
+.submenu li a[href="ajuda.php"] {
+    color: #ffffff; /* Mantém branco, muda para turquesa no hover automático acima */
+}
+
+/* Item de SAIR (Vermelho) */
+.submenu li a[href="logout.php"] {
+    color: #ff4d4d;
+}
+
+.submenu li a[href="logout.php"]:hover {
+    background: rgba(255, 77, 77, 0.1);
+    border-left-color: #ff4d4d;
+}
+/* Item da CENTRAL DE AJUDA */
+.submenu li a[href="ajuda.php"] {
+    color: #ffffff;
+}
+
+.submenu li a[href="ajuda.php"]:hover {
+    background: rgba(45, 185, 201, 0.1);
+    color: #2dbac9;
+    border-left: 3px solid #2dbac9; /* Cor turquesa para diferenciar do roxo do perfil */
+}
 /* TELA DE LOGIN */
 .modal {
-    display: none; /* Esconde a modal por padrão */
-    position: fixed; /* Fixa a modal na tela */
+    display: none; 
+    position: fixed; 
     z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente para destacar a modal */
+    background-color: rgba(0, 0, 0, 0.5); 
 }
-
 .modal-conteudo { /* Estiliza o conteúdo da modal para centralizá-lo e dar um visual agradável */
     background-color: #fff;
     margin: 10% auto;
     padding: 20px;
     width: 400px; /* Largura fixa para a modal */
-    border-radius: 8px;
+    border-radius: 15px;
     position: relative; /* Para posicionar o botão de fechar dentro da modal */
     text-align: center; /* Centraliza o texto dentro da modal */
+    box-shadow: 0px 0px 25px #2dbac9; /* Sombra para dar profundidade */
 }
 .modal-conteudo h1 { /* Estiliza o título da modal para destacá-lo */
     margin-bottom: 10px;
@@ -163,9 +248,11 @@ header a {
     font-size: 18px;
 }
 .modal-conteudo input{ /* Estiliza os campos de entrada para torná-los mais atraentes e fáceis de usar */
-    padding: 10px;
+    padding: 15px 10px;
+    width: 100%; 
+    box-sizing: border-box;
     border: 1.5px solid #a8329e;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .modal-conteudo input:focus { /* Estiliza os campos de entrada quando estão em foco para dar feedback visual ao usuário */
     outline: none;
@@ -207,6 +294,14 @@ header a {
 body {
     background-color: #000000;
     margin: 0;
+    margin-bottom: 20px;
     font-family: Arial, sans-serif;
+}
+/* Esconde o ícone em telas de computador */
+.hamburguer {
+    display: none;
+    font-size: 28px;
+    color: #2dbac9;
+    cursor: pointer;
 }
 

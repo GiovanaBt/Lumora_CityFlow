@@ -1,48 +1,117 @@
+/* CONFIGURAÇÕES GERAIS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-            font-family: Arial, sans-serif;
-            background-color: #000000ff;
-            padding: 20px;
-        }
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o formulário horizontalmente */
+    min-height: 100vh;
+}
 
-        h1 {
-            text-align: center;
-        }
+/* HEADER */
+header {
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 40px;
+    width: 100%;
+    box-shadow: 0px 4px 10px #2db9c992;
+    margin-bottom: 30px;
+}
 
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px #2db9c9ac;
-            max-width: 400px;
-            margin: auto;
-        }
+.logo img {
+    height: 60px;
+    display: block;
+}
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
+/* FORMULÁRIO (QUADRADO BRANCO) */
+form {
+    background-color: #ffffff; /* Branco sólido, como você fez */
+    padding: 40px 30px 30px 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 350px; /* Reduzido o tamanho horizontal */
+    box-shadow: 0px 0px 25px #2dbac9;
+    position: relative;
+    text-align: left; /* Alinhamento do texto interno */
+}
 
-        input[type="text"],
-        input[type="date"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
+/* BOTÃO VOLTAR */
+.btn-voltar {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    text-decoration: none;
+    color: #a8329e;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-        button {
-            text-align: center;
-            align-items: center;
-            background: linear-gradient(45deg, #a8329e, #2dbac9);
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 100px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
+.btn-voltar:hover {
+    color: #2dbac9;
+}
+
+/* TEXTOS */
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 13px;
+    font-weight: normal;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 15px 10px; /* Mais alto na vertical */
+    margin-bottom: 15px;
+    border: 1.5px solid #a8329e;
+    border-radius: 8px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #2dbac9;
+}
+
+/* BOTÃO ENVIAR (CENTRALIZADO NO MEIO DO QUADRADO) */
+button {
+    display: block;
+    margin: 10px auto 0; /* O 'auto' nas laterais centraliza o botão */
+    background: linear-gradient(45deg, #a8329e, #2dbac9);
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
