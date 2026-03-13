@@ -1,29 +1,47 @@
 <?php
 session_start();
-include 'Conexao.php';
 
-$emailLogin = $_POST['emailLogin'];
+/* CONEXÃO COM BANCO */
+$host = "localhost";
+$usuario = "root";
+$senha = "Home@spSENAI2025!";
+$banco = "cityflow";
+
+$conn = new mysqli($host, $usuario, $senha, $banco);
+
+if ($conn->connect_error) {
+    die("Erro de conexão: " . $conn->connect_error);
+}
+
+/* RECEBER DADOS DO FORM */
+$email = $_POST['emailLogin'];
 $senhaLogin = $_POST['senhaLogin'];
 
-$sql = "SELECT * FROM Usuarios 
-        WHERE email = '$emailLogin' 
-        AND senha = '$senhaLogin'";
+/* QUERY SEGURA */
+$sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
 
-$resultado = $conexao->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ss", $email, $senhaLogin);
 
-if ($resultado->num_rows > 0) {
+$stmt->execute();
+
+$resultado = $stmt->get_result();
+
+if ($resultado->num_rows == 1) {
+
     $usuario = $resultado->fetch_assoc();
 
     $_SESSION['usuario_id'] = $usuario['id_usuarios'];
     $_SESSION['nome_usuario'] = $usuario['nome_usuario'];
 
+    header("Location: index.php");
+    exit();
+
+} else {
+
+    $_SESSION['erro_login'] = "Usuário ou senha incorretos";
 
     header("Location: index.php");
     exit();
-} else {
-    // Login inválido
-    header("Location: index.php?erro=1");
-    exit();
 }
-
 ?>
