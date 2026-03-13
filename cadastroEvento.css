@@ -1,0 +1,550 @@
+/* 1. VARIÁVEIS E CONFIGURAÇÕES GERAIS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --bg-color: #0d1117;        /* Fundo super escuro */
+    --card-bg: #161b22;         /* Fundo das seções */
+    --accent-color: #00d4ff;    /* Azul neon/Ciano */
+    --text-color: #ffffff;
+    --label-color: #e6edf3;
+    --placeholder-color: #6e7681;
+    --border-color: #30363d;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o container na tela */
+}
+
+/* Container que segura todos os quadrados */
+.main-container {
+    width: 95%;
+    max-width: 1200px; /* Deixa largo para os lados igual à foto 2 */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding-bottom: 50px;
+}
+
+.main-title {
+    color: white;
+    text-align: center;
+    font-size: 2rem;
+    margin: 20px 0 40px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* 2. ESTILO PADRONIZADO DOS CARDS (QUADRADOS) */
+.card-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 35px;
+    width: 100%; 
+    box-sizing: border-box;
+    
+    /* Borda lateral com gradiente roxo/ciano */
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #9333ea, var(--accent-color)) 1;
+    
+    /* Força os filhos a não encolherem no centro */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; 
+}
+
+.card-section h2 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: left; /* Títulos alinhados à esquerda conforme o padrão */
+}
+
+.card-section .subtitle {
+    color: #8b949e;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+/* 3. ESTILIZAÇÃO DE INPUTS, LABELS E GRIDS */
+.input-group {
+    margin-bottom: 25px;
+    width: 100%;
+
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--label-color);
+}
+
+.required {
+    color: #ff4500;
+    margin-left: 3px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: 14px 15px;
+    background-color: var(--bg-color);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+    border-color: #fff;
+}
+
+/* 4. SEÇÕES ESPECÍFICAS */
+
+/* Seção 1: Upload de Imagem */
+.image-upload {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.upload-placeholder {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--bg-color);
+    position: relative;
+    transition: 0.2s;
+}
+
+.upload-placeholder:hover {
+    border-color: var(--accent-color);
+    background-color: rgba(0, 212, 255, 0.05);
+}
+
+.upload-placeholder input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Seção 2: Data e Horário */
+.datetime-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.input-with-icon {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-color);
+    border: 1px solid var(--accent-color) !important;
+    border-radius: 4px;
+    height: 48px;
+}
+
+.icon-box {
+    padding: 0 12px;
+    border-right: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.input-with-icon input {
+    border: none !important;
+    border: 1px solid var(--accent-color) !important;
+}
+
+/* Seção 3: Editor de Descrição */
+.editor-container {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.editor-toolbar {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    background-color: rgba(0, 212, 255, 0.05);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.editor-toolbar button {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--accent-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.editor-toolbar button:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+}
+
+
+.description-box {
+    width: 100% !important;   /* Ocupa a largura toda do card */
+    min-height: 400px;         /* Define a altura grande da Foto 2 */
+    max-width: 100%;           /* Garante que não passe da borda */
+    
+    background-color: var(--bg-color);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 20px;
+    color: white;
+    
+    outline: none;
+    box-sizing: border-box;    /* Essencial para o tamanho bater certo */
+    display: block;            /* Garante que se comporte como um bloco largo */
+    overflow-y: visible;       /* Remove aquela barra de rolagem da Foto 1 */
+}
+
+.description-textarea {
+    width: 100%;
+    min-height: 350px; /* Altura da Foto 2 */
+    background-color: var(--bg-color);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 8px;
+    padding: 20px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    resize: vertical; /* Permite que o usuário estique se precisar */
+    box-sizing: border-box;
+    line-height: 1.5;
+    transition: 0.3s;
+}
+
+.description-textarea:focus {
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    border-color: #ffffff;
+}
+
+/* Customiza a barra de rolagem para não ficar branca */
+.description-textarea::-webkit-scrollbar {
+    width: 8px;
+}
+
+.description-textarea::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 10px;
+}
+
+.description-textarea::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+
+
+
+
+/* Seção 4: Endereço */
+.address-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 15px;
+}
+
+.col-full { grid-column: span 12; }
+.col-large { grid-column: span 9; }
+.col-small { grid-column: span 3; }
+.col-medium { grid-column: span 6; }
+
+/* Seção 5: Responsabilidades e Botão */
+.checkbox-container {
+    display: flex;
+    gap: 15px;
+    color: #8b949e;
+    font-size: 0.9rem;
+}
+
+.checkbox-container input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-color);
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.btn-send {
+    background-color: var(--accent-color);
+    color: #000;
+    border: none;
+    padding: 18px 80px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+    transition: 0.3s;
+}
+
+.btn-send:hover {
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+    background-color: #fff;
+}
+
+/* Responsividade Mobile */
+@media (max-width: 850px) {
+    .datetime-grid { grid-template-columns: 1fr 1fr; }
+    .image-upload { grid-template-columns: 1fr; }
+    .col-large, .col-small, .col-medium { grid-column: span 12; }
+}
+
+
+
+
+
+
+
+/* 1. VARIÁVEIS E CONFIGURAÇÕES GERAIS */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --bg-color: #0d1117;
+    --card-bg: #161b22;
+    --accent-color: #00d4ff;
+    --text-color: #ffffff;
+    --label-color: #e6edf3;
+    --placeholder-color: #6e7681;
+    --border-color: #30363d;
+}
+
+/* CENTRALIZAÇÃO NA TELA INTEIRA */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    /* Centraliza o conteúdo horizontalmente */
+    justify-content: center; /* Centraliza verticalmente se a página for curta */
+    min-height: 100vh;
+}
+
+/* CONTAINER DOS QUADRADOS */
+.main-container {
+    width: 100%;
+    max-width: 1000px; /* Largura equilibrada entre a Foto 1 e a 2 */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.main-title {
+    color: white;
+    text-align: center; /* Centraliza o título principal */
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+/* 2. ESTILO DOS CARDS (QUADRADOS CENTRALIZADOS) */
+.card-section {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%; 
+    box-sizing: border-box;
+    border-left: 5px solid;
+    border-image: linear-gradient(to bottom, #9333ea, var(--accent-color)) 1;
+    
+    /* CENTRALIZA O CONTEÚDO DENTRO DO QUADRADO */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os elementos (como botões e uploads) */
+    text-align: center;  /* Centraliza todos os textos (H2, P, Labels) */
+}
+
+.card-section h2 {
+    font-size: 1.4rem;
+    margin: 0 0 10px 0;
+    width: 100%;
+}
+
+.card-section .subtitle {
+    color: #8b949e;
+    font-size: 0.95rem;
+    margin-bottom: 35px;
+    width: 100%;
+}
+
+/* 3. INPUTS E GRIDS (LARGURA TOTAL MESMO NO CENTRO) */
+.input-group {
+    width: 100%; /* Ocupa a largura total do quadrado para não encolher */
+    margin-bottom: 25px;
+    text-align: left; /* Mantém o texto dentro do input alinhado à esquerda para leitura */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--label-color);
+    text-align: left; /* Alinha o rótulo à esquerda acima do input */
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--bg-color);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 6px;
+    color: white;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* 4. GRIDS ESPECÍFICOS CENTRALIZADOS */
+.datetime-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+}
+
+.image-upload {
+    display: flex;
+    flex-direction: column; /* Coloca a info embaixo da imagem para centralizar melhor */
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.upload-placeholder {
+    width: 100%;
+    max-width: 500px; /* Limita o tamanho da área de upload para ficar elegante */
+    height: 200px;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+}
+
+/* 5. BOTÃO FINAL CENTRALIZADO */
+.button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.btn-send {
+    background-color: #1dc7dd;
+    color: #000;
+    border: none;
+    padding: 20px 100px; /* Botão bem largo e centralizado */
+    font-size: 1.2rem;
+    font-weight: 800;
+    border-radius: 50px; /* Estilo pílula igual aos menus modernos */
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+    transition: 0.3s;
+}
+
+.btn-send:hover {
+    transform: scale(1.05);
+    background-color: #fff;
+    box-shadow: 0 0 30px #1dc7dd;
+}
+
+/* Responsividade */
+@media (max-width: 800px) {
+    .datetime-grid { grid-template-columns: 1fr 1fr; }
+    .btn-send { width: 100%; padding: 20px; }
+}
+
+
+
+
+.btn-send {
+    /* 1. Tamanho e Centralização */
+    display: block;
+    width: 450px;           /* Define um tamanho fixo menor */
+    margin: 60px auto;      /* Centraliza o botão na tela */
+    
+    /* 2. Cores e Estilo Neon */
+    background-color: #1dc7dd; 
+    color: #ffffff;            /* Texto branco para dar contraste */
+    border: none;
+    border-radius: 8px;
+    
+    /* 3. Espaçamento Interno e Fonte */
+    padding: 15px 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    
+    /* 4. Efeito de Brilho */
+    box-shadow: 0 0 15px #871de3;
+    transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse */
+.btn-send:hover {
+    background-color: #19b2c6;
+    box-shadow: 0 0 25px #871de3;
+    transform: translateY(-2px); /* Ele "sobe" de leve */
+}
+
+
+
+
+.card-section {
+    padding-bottom: 60px; /* Reduza este valor se estiver maior */
+}
+
+
+.btn-send {
+    margin-bottom: 5px; /* Reduza este valor se estiver maior */
+}
