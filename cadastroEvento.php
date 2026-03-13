@@ -29,7 +29,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
         <div class="input-group">
             <label for="nome">Nome do Evento <span class="required">*</span></label>
-            <input type="text" id="nome" name="nome" placeholder="Nome do Evento">
+            <input type="text" id="nome" placeholder="Nome do Evento" name="nome">
         </div>
 
         <div class="input-group image-upload">
@@ -46,16 +46,22 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
         <div class="input-group">
             <label for="categoria">Escolha uma categoria para seu Evento <span class="required">*</span></label>
-            <select id="categoria" name="categoria">
+            <select id="categoria" name="categorias">
                 <option value="" disabled selected>Selecione uma categoria</option>
-                </select>
+                <?php 
+                if ($categorias && mysqli_num_rows($categorias) > 0) {
+                    while ($row = mysqli_fetch_assoc($categorias)) {
+                    echo "<option value='{$row['id_categoria']}'>{$row['categoria_evento']}</option>";
+                }
+                } else {
+                    echo "<option value=''>Nenhuma categoria disponível</option>";
+                }
+                ?>
+            </select>
         </div>
     </section>
 
 </div>
-
-
-
 
 
 <section class="card-section">
@@ -69,7 +75,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                 <div class="icon-box">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 </div>
-                <input type="date">
+                <input type="date" name="data_inicio_evento">
             </div>
         </div>
 
@@ -79,7 +85,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                 <div class="icon-box">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </div>
-                <input type="time">
+                <input type="time" name="horario_inicio_evento">
             </div>
         </div>
 
@@ -89,7 +95,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                 <div class="icon-box">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 </div>
-                <input type="date">
+                <input type="date" name="data_fim_evento">
             </div>
         </div>
 
@@ -99,7 +105,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                 <div class="icon-box">
                     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </div>
-                <input type="time">
+                <input type="time" name="horario_fim_evento">
             </div>
         </div>
     </div>
@@ -114,7 +120,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
     <h2>3. DESCRIÇÃO DO EVENTO</h2>
     <p class="subtitle">Conte todos os detalhes do seu evento, como a programação e os diferenciais da sua produção!</p>
 
-    <textarea class="description-textarea" placeholder="Adicione aqui a descrição do seu evento..."></textarea>
+    <textarea class="description-textarea" placeholder="Adicione aqui a descrição do seu evento..." name="descricao"></textarea>
 </div>
 
 
@@ -128,37 +134,37 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
     <div class="address-grid">
         <div class="input-group col-medium">
             <label>Cidade <span class="required">*</span></label>
-            <input type="text" placeholder="Nome da cidade">
+            <input type="text" placeholder="Nome da cidade" name="cidade">
         </div>
 
         <div class="input-group col-medium">
             <label>Bairro <span class="required">*</span></label>
-            <input type="text" placeholder="Nome do bairro">
+            <input type="text" placeholder="Nome do bairro" name="bairro">
         </div>
 
         <div class="input-group col-medium">
             <label>Nome da Av./Rua <span class="required">*</span></label>
-            <input type="text" placeholder="Nome da Av./Rua">
+            <input type="text" placeholder="Nome da Av./Rua" name="rua">
         </div>
 
         <div class="input-group col-medium">
             <label>CEP <span class="required">*</span></label>
-            <input type="text" placeholder="_____-___">
+            <input type="text" placeholder="_____-___" name="cep">
         </div>
 
         <div class="input-group col-large">
             <label>Ponto de Referência <span class="required">*</span></label>
-            <input type="text" placeholder="Ponto de referência">
+            <input type="text" placeholder="Ponto de referência" name="ponto_referencia">
         </div>
 
         <div class="input-group col-small">
             <label>Número <span class="required">*</span></label>
-            <input type="text" placeholder="Número">
+            <input type="text" placeholder="Número" name="numero">
         </div>
 
         <div class="input-group col-full">
             <label>Complemento</label>
-            <input type="text" placeholder="Complemento">
+            <input type="text" placeholder="Complemento" name="complemento">
         </div>
     </div>
 </section>
