@@ -1,5 +1,13 @@
 <?php
 session_start();
+include 'Conexao.php';
+
+$idUsuario = $_SESSION['usuario_id'];
+
+$sql = "SELECT * FROM Eventos_Cadastrados 
+where id_usuarios = $idUsuario
+ORDER BY id_evento DESC";
+$result = $conexao->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +19,55 @@ session_start();
     <link rel="stylesheet" href="index.css">
     <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background: #000000ff;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 20px;
+    padding: 30px;
+}
+.card {
+    background: linear-gradient(45deg, #a8329e, #2dbac9);
+    border-radius: 20px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 20px 20px 0 0;
+}
+.nome {
+    font-size: 22px;
+    margin: 10px 0;
+}
+.local {
+    color: #000000ff;
+}
+.data {
+    color: #3f3f3fff;
+}
+.btn {
+    display: block;
+    margin: 10px auto;
+    width: 70%;
+    padding: 10px;
+    background: #25d366;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+}
+.meusEventos {
+    color: white;
+    text-align: center;
+}
+</style>
 
 </head>
 
@@ -72,3 +129,23 @@ session_start();
         </ul>
     </nav>
 </header>
+
+<section id='meusEventos'>
+<h1 class='meusEventos'>Meus Eventos</h1>
+
+<div class="container">
+    <?php while($row = $result->fetch_assoc()): ?>
+    <a href="eventos.php?id=<?= $row['id_evento']; ?>" target="_blank" style="text-decoration:none; color:inherit;">
+
+    <div class="card">
+        <img src="uploads/<?= $row['Imagem']; ?>" alt="<?= $row['descricao']; ?>">
+        <div class="descricao"><?= $row['descricao']; ?></div>
+        <div class="local"><?= $row['rua'] . ", " . $row['numero'] . " - " . $row['bairro']; ?></div>
+        <div class="data">Data: <?= date("d/m/Y", strtotime($row['data_inicio_evento'])); ?></div>
+    </div>
+
+    <?php endwhile; ?>
+</div>
+</section>
+
+</body>
