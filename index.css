@@ -51,21 +51,32 @@ header a {
 .menu-container { /* Container para entrar */
     display: flex;
     align-items: center;
+    gap: 12px; /* <--- ADICIONE ESTA LINHA (mude o número para o espaço que desejar) */
     padding: 8px 20px;
-    border-radius: 100px; /* Deixa as pontas totalmente redondas */
-    background: linear-gradient(#000, #000) padding-box, /* Cria um gradiente para a borda, mas mantém o fundo preto */
-        linear-gradient(45deg, #a8329e, #2dbac9) border-box;
-    border: 2px solid transparent; /* Define a borda transparente para usar o gradiente como borda */
+    border-radius: 100px; 
+    background: linear-gradient(#000, #000) padding-box, 
+                linear-gradient(45deg, #a8329e, #2dbac9) border-box;
+    border: 2px solid transparent; 
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s;
-}
+}   
 .menu-container:hover {
     transform: scale(1.05); /* Efeito suave ao passar o mouse */
 }
 .menu-container i { /* Estiliza o ícone e o texto dentro do link de entrar */
     color: white;
-    font-size: 20px;
+    font-size: 15px;
+}
+/* Garante que o ícone e o texto dentro do botão sejam clicáveis e brancos */
+#abrirModal i, 
+#abrirModal span,
+.menu-container i {
+    color: #ffffff !important; 
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    pointer-events: none; /* Faz o clique passar para o container pai */
 }
 .perfil { 
     display: flex;
@@ -304,41 +315,3 @@ body {
     color: #2dbac9;
     cursor: pointer;
 }
-
-.carousel-container {
-    position: relative;
-    width: 100%;
-    height: 350px; /* Ajuste conforme necessário */
-    overflow: hidden;
-}
-.carousel-slide {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-}
-
-.overlay {
-    background: rgba(0, 0, 0, 0.6); /* Escurece a imagem */
-    padding: 20px;
-    border-radius: 10px;
-}
-
-.nav-btn {
-    position: absolute;
-    top: 50%;
-    background: none;
-    border: 1px solid white;
-    color: white;
-    padding: 15px;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.prev { left: 20px; }
-.next { right: 20px; }
