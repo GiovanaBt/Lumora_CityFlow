@@ -75,7 +75,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
             </div>
 
             <div class="input-group image-upload">
-                <label for="capa">Capa do Evento (opcional)</label>
+                <label for="capa">Capa do Evento  <span class="required">*</span><label>
                 <div class="upload-placeholder">
                     <span>Clique ou arraste a imagem aqui</span>
                     <input type="file" id="capa" name="capa">
@@ -152,7 +152,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
         <div class="card-section">
             <h2>3. DESCRIÇÃO DO EVENTO</h2>
-            <p class="subtitle">Conte todos os detalhes do seu evento!</p>
+            <p class="subtitle">Conte todos os detalhes do seu evento! <span class="required">*</span></p>
             <textarea class="description-textarea" placeholder="Adicione aqui a descrição do seu evento..." name="descricao"></textarea>
         </div>
 
