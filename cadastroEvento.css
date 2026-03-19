@@ -16,19 +16,218 @@ body {
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    overflow-x: hidden;
+    /* MUDE PARA BLOCK: Isso permite que o Header ocupe 100% da largura livremente */
+    display: block; 
+    min-height: 100vh;
+}
+
+
+/* 2. HEADER TOTALMENTE COLADO E ESTICADO */
+header {
+    width: 100%;               /* Ocupa toda a largura da tela */
+    background-color: #000000;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; /* Distribui logo e menu nas extremidades */
+    padding: 15px 40px;        /* Espaçamento interno vertical e horizontal */
+    box-shadow: 0px 4px 15px rgba(45, 185, 201, 0.4); 
+    box-sizing: border-box;    /* Impede que o padding "estoure" a largura */
+    
+    position: relative;        
+    top: 0;                    /* Garante que comece no pixel zero */
+    left: 0;
+    margin: 0 !important;      /* Remove qualquer margem residual */
+    z-index: 1000;             /* Fica por cima de outros elementos */
+}
+
+/* Ajuste para o título não ficar grudado no header agora que ele subiu */
+.main-title {
+    margin-top: 50px !important; 
+
+}
+header>a:has(.botaoMapa) {
+    margin-right: auto; /* Truque: consome o espaço vazio à direita, jogando o menu para o fim */
+}
+header a {
+    text-decoration: none; /* Remove sublinhado dos links */
+}
+
+.logo { /* Bloco da logo, para garantir que o menu fique à direita */
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza o container na tela */
+    align-items: center;
+}
+.logo img {
+    height: 60px; /* Ajusta a altura da logo para se encaixar bem no header */
+}
+.logo:hover {
+    transform: scale(1.05); /* Efeito suave ao passar o mouse */
+}
+
+.fa-circle-plus { /* Ícone de adicionar evento no menu, usando a cor turquesa para destacar */
+    color: #16cee2;
+    margin-right: 2px; /* Espaço entre o ícone e o texto */
+    font-size: 1.2em;
+}
+
+.botaoMapa {
+    background: linear-gradient(45deg, #2dbac9, #a8329e); /* Corrigido de background-color */
+    color: white;
+    border: none;
+    padding: 10px 30px; 
+    border-radius: 100px; /* Deixa as pontas totalmente redondas */
+    cursor: pointer;
+    font-weight: bold; /* Deixa o texto em negrito */
+    display: flex;
+    align-items: center;
+}
+
+.botaoMapa:hover {
+    transform: scale(1.05); /* Efeito suave ao passar o mouse */
+}
+
+.menu-container { /* Container para entrar */
+    display: flex;
+    align-items: center;
+    gap: 12px; /* <--- ADICIONE ESTA LINHA (mude o número para o espaço que desejar) */
+    padding: 8px 20px;
+    border-radius: 100px; 
+    background: linear-gradient(#000, #000) padding-box, 
+                linear-gradient(45deg, #a8329e, #2dbac9) border-box;
+    border: 2px solid transparent; 
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}   
+.menu-container:hover {
+    transform: scale(1.05); /* Efeito suave ao passar o mouse */
+}
+.menu-container i { /* Estiliza o ícone e o texto dentro do link de entrar */
+    color: white;
+    font-size: 15px;
+}
+/* Garante que o ícone e o texto dentro do botão sejam clicáveis e brancos */
+#abrirModal i, 
+#abrirModal span,
+.menu-container i {
+    color: #ffffff !important; 
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    pointer-events: none; /* Faz o clique passar para o container pai */
+}
+.perfil { 
+    display: flex;
+    align-items: center;
+    position: relative; /* ESSENCIAL: Isso diz ao submenu para se alinhar por aqui */
+    cursor: pointer;
+    height: 100%; /* Garante que o hover funcione em toda a área */
+}
+.perfil:hover .submenu { /* Exibe o submenu ao passar o mouse sobre o perfil */
+    display: block;
+}
+.submenu { 
+    display: none;
+    position: absolute;
+    /* ALTERE DE 100% PARA 115% (ou o valor que preferir) */
+    top: 115%; 
+    right: 0;
+    min-width: 220px;
+    
+    /* Fundo: Preto levemente transparente */
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+    
+    /* Borda Gradiente */
+    border: 1px solid transparent;
+    border-image: linear-gradient(45deg, #2dbac9, #a8329e) 1;
+    
+    padding: 5px 0; 
+    list-style: none;
+    z-index: 9999;
+    
+    /* Sombra com brilho externo */
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8), 
+                0px 0px 15px rgba(45, 185, 201, 0.2);
+}
+
+/* Título interno */
+.submenu::before {
+    content: "PERFIL";
+    display: block;
+    font-size: 13px;
+    color: #2dbac9;
+    letter-spacing: 2px;
+    
+    /* ALTERE O PRIMEIRO NÚMERO (6px) PARA UM MAIOR */
+    padding: 15px 21px 15px 21px;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+/* Itens da lista */
+.submenu li {
+    width: 100%;
+    /* REMOVIDO: margens que empurravam os itens para baixo */
+    margin: 0 !important; 
+}
+
+.submenu li a {
+    /* REDUZIDO: padding vertical de 12px para 8px para ficar mais compacto */
+    padding: 8px 20px; 
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    gap: 10px; /* Garante espaço entre ícone e texto */
+}
+
+/* Efeito ao passar o mouse */
+.submenu li a:hover {
+    background: rgba(45, 185, 201, 0.1);
+    color: #2dbac9;
+    border-left: 3px solid #a8329e;
+    padding-left: 25px;
+}
+
+/* Item da CENTRAL DE AJUDA (Mesma cor do perfil) */
+.submenu li a[href="ajuda.php"] {
+    color: #ffffff; /* Mantém branco, muda para turquesa no hover automático acima */
+}
+
+/* Item de SAIR (Vermelho) */
+.submenu li a[href="logout.php"] {
+    color: #ff4d4d;
+}
+
+.submenu li a[href="logout.php"]:hover {
+    background: rgba(255, 77, 77, 0.1);
+    border-left-color: #ff4d4d;
+}
+/* Item da CENTRAL DE AJUDA */
+.submenu li a[href="ajuda.php"] {
+    color: #ffffff;
+}
+
+.submenu li a[href="ajuda.php"]:hover {
+    background: rgba(45, 185, 201, 0.1);
+    color: #2dbac9;
+    border-left: 3px solid #2dbac9; /* Cor turquesa para diferenciar do roxo do perfil */
 }
 
 /* Container que segura todos os quadrados */
 .main-container {
-    width: 95%;
-    max-width: 1200px; /* Deixa largo para os lados igual à foto 2 */
+    width: 90%;           /* Largura responsiva para celulares */
+    max-width: 1000px;    /* Largura fixa máxima para ficar igual à sua foto */
+    margin: 40px auto;    /* O 'auto' nas laterais CENTRALIZA o container na tela */
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 30px;
     padding-bottom: 50px;
 }
 
@@ -45,24 +244,24 @@ body {
 .card-section {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 35px;
+    border-radius: 12px;
+    padding: 40px;
     width: 100%; 
     box-sizing: border-box;
-    
     /* Borda lateral com gradiente roxo/ciano */
     border-left: 5px solid;
     border-image: linear-gradient(to bottom, #9333ea, var(--accent-color)) 1;
-    
-    /* Força os filhos a não encolherem no centro */
+      /* Força os filhos a não encolherem no centro */
     display: flex;
     flex-direction: column;
-    align-items: stretch; 
+    align-items: center; /* Centraliza os elementos (como botões e uploads) */
+    text-align: center;  /* Centraliza todos os textos (H2, P, Labels) */
 }
 
+
 .card-section h2 {
-    font-size: 1.3rem;
-    margin-top: 0;
+    font-size: 1.4rem;
+    margin-top:  0 0 10px 0;
     margin-bottom: 10px;
     text-transform: uppercase;
     text-align: left; /* Títulos alinhados à esquerda conforme o padrão */
@@ -71,14 +270,15 @@ body {
 .card-section .subtitle {
     color: #8b949e;
     font-size: 0.95rem;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
+    width: 100%;
 }
 
-/* 3. ESTILIZAÇÃO DE INPUTS, LABELS E GRIDS */
+/* 3. INPUTS E GRIDS (LARGURA TOTAL MESMO NO CENTRO) */
 .input-group {
+    width: 100%; /* Ocupa a largura total do quadrado para não encolher */
     margin-bottom: 25px;
-    width: 100%;
-
+    text-align: left; /* Mantém o texto dentro do input alinhado à esquerda para leitura */
 }
 
 label {
@@ -87,6 +287,7 @@ label {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--label-color);
+    text-align: left; /* Alinha o rótulo à esquerda acima do input */
 }
 
 .required {
@@ -120,24 +321,26 @@ input:focus, textarea:focus, select:focus {
 
 /* Seção 1: Upload de Imagem */
 .image-upload {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 30px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+    width:100%;
 }
 
 .upload-placeholder {
+    position: relative; /* ADICIONE ESTA LINHA: Isso prende o input dentro do quadrado */
+    width:100%;
+    max-width: 500px;
     border: 2px dashed var(--border-color);
     border-radius: 8px;
-    height: 180px;
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     background-color: var(--bg-color);
-    position: relative;
-    transition: 0.2s;
 }
 
 .upload-placeholder:hover {
@@ -213,7 +416,6 @@ input:focus, textarea:focus, select:focus {
     box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
 }
 
-
 .description-box {
     width: 100% !important;   /* Ocupa a largura toda do card */
     min-height: 400px;         /* Define a altura grande da Foto 2 */
@@ -266,10 +468,6 @@ input:focus, textarea:focus, select:focus {
 .description-textarea::-webkit-scrollbar-track {
     background: var(--bg-color);
 }
-
-
-
-
 
 /* Seção 4: Endereço */
 .address-grid {
@@ -327,224 +525,68 @@ input:focus, textarea:focus, select:focus {
     .image-upload { grid-template-columns: 1fr; }
     .col-large, .col-small, .col-medium { grid-column: span 12; }
 }
-
-
-
-
-
-
-
-/* 1. VARIÁVEIS E CONFIGURAÇÕES GERAIS */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-:root {
-    --bg-color: #0d1117;
-    --card-bg: #161b22;
-    --accent-color: #00d4ff;
-    --text-color: #ffffff;
-    --label-color: #e6edf3;
-    --placeholder-color: #6e7681;
-    --border-color: #30363d;
-}
-
-/* CENTRALIZAÇÃO NA TELA INTEIRA */
-body {
+/* Container que agrupa Ícone + Input */
+.input-with-icon {
+    display: flex;
+    align-items: center;
     background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;    /* Centraliza o conteúdo horizontalmente */
-    justify-content: center; /* Centraliza verticalmente se a página for curta */
-    min-height: 100vh;
-}
-
-/* CONTAINER DOS QUADRADOS */
-.main-container {
-    width: 100%;
-    max-width: 1000px; /* Largura equilibrada entre a Foto 1 e a 2 */
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.main-title {
-    color: white;
-    text-align: center; /* Centraliza o título principal */
-    font-size: 2.2rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-/* 2. ESTILO DOS CARDS (QUADRADOS CENTRALIZADOS) */
-.card-section {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 40px;
-    width: 100%; 
-    box-sizing: border-box;
-    border-left: 5px solid;
-    border-image: linear-gradient(to bottom, #9333ea, var(--accent-color)) 1;
-    
-    /* CENTRALIZA O CONTEÚDO DENTRO DO QUADRADO */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza os elementos (como botões e uploads) */
-    text-align: center;  /* Centraliza todos os textos (H2, P, Labels) */
-}
-
-.card-section h2 {
-    font-size: 1.4rem;
-    margin: 0 0 10px 0;
-    width: 100%;
-}
-
-.card-section .subtitle {
-    color: #8b949e;
-    font-size: 0.95rem;
-    margin-bottom: 35px;
-    width: 100%;
-}
-
-/* 3. INPUTS E GRIDS (LARGURA TOTAL MESMO NO CENTRO) */
-.input-group {
-    width: 100%; /* Ocupa a largura total do quadrado para não encolher */
-    margin-bottom: 25px;
-    text-align: left; /* Mantém o texto dentro do input alinhado à esquerda para leitura */
-}
-
-label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--label-color);
-    text-align: left; /* Alinha o rótulo à esquerda acima do input */
-}
-
-input[type="text"],
-input[type="date"],
-input[type="time"],
-select,
-textarea {
-    width: 100%;
-    padding: 15px;
-    background-color: var(--bg-color);
-    border: 1.5px solid var(--accent-color);
+    border: 1.5px solid var(--accent-color); /* Borda única ao redor de tudo */
     border-radius: 6px;
-    color: white;
-    box-sizing: border-box;
-    outline: none;
-}
-
-/* 4. GRIDS ESPECÍFICOS CENTRALIZADOS */
-.datetime-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    width: 100%;
-}
-
-.image-upload {
-    display: flex;
-    flex-direction: column; /* Coloca a info embaixo da imagem para centralizar melhor */
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-}
-
-.upload-placeholder {
-    width: 100%;
-    max-width: 500px; /* Limita o tamanho da área de upload para ficar elegante */
-    height: 200px;
-    border: 2px dashed var(--border-color);
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--bg-color);
-}
-
-/* 5. BOTÃO FINAL CENTRALIZADO */
-.button-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin: 40px 0;
-}
-
-.btn-send {
-    background-color: #1dc7dd;
-    color: #000;
-    border: none;
-    padding: 20px 100px; /* Botão bem largo e centralizado */
-    font-size: 1.2rem;
-    font-weight: 800;
-    border-radius: 50px; /* Estilo pílula igual aos menus modernos */
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+    height: 48px;
+    overflow: hidden; /* Garante que o input não passe por cima do arredondamento */
     transition: 0.3s;
 }
 
-.btn-send:hover {
-    transform: scale(1.05);
-    background-color: #fff;
-    box-shadow: 0 0 30px #1dc7dd;
+/* Foco na caixa inteira ao clicar no input */
+.input-with-icon:focus-within {
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+    border-color: #ffffff;
 }
 
-/* Responsividade */
-@media (max-width: 800px) {
-    .datetime-grid { grid-template-columns: 1fr 1fr; }
-    .btn-send { width: 100%; padding: 20px; }
+/* Caixa do Ícone (SVG) */
+.icon-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    background-color: rgba(0, 212, 255, 0.05); /* Fundo sutil */
+    border-right: 1.5px solid var(--accent-color); /* Linha divisória vertical */
+    color: var(--accent-color);
+    height: 100%;
 }
 
+/* O campo de data/hora real */
+.input-with-icon input {
+    flex: 1;
+    background: transparent !important; /* Remove o fundo padrão */
+    border: none !important;           /* Remove a borda padrão do input */
+    color: white !important;
+    padding: 0 10px;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+    height: 100%;
+}
 
-
-
-.btn-send {
-    /* 1. Tamanho e Centralização */
-    display: block;
-    width: 450px;           /* Define um tamanho fixo menor */
-    margin: 60px auto;      /* Centraliza o botão na tela */
-    
-    /* 2. Cores e Estilo Neon */
-    background-color: #1dc7dd; 
-    color: #ffffff;            /* Texto branco para dar contraste */
-    border: none;
-    border-radius: 8px;
-    
-    /* 3. Espaçamento Interno e Fonte */
-    padding: 15px 0;
-    font-size: 1.1rem;
-    font-weight: bold;
-    text-transform: uppercase;
+/* Ajuste para o ícone de calendário nativo do navegador ficar visível no tema escuro */
+input::-webkit-calendar-picker-indicator {
+    filter: invert(1); 
     cursor: pointer;
-    
-    /* 4. Efeito de Brilho */
-    box-shadow: 0 0 15px #871de3;
-    transition: all 0.3s ease;
+    margin-right: 5px;
+}
+/* Oculta totalmente o ícone nativo da direita */
+input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0; /* Fica invisível */
+    cursor: pointer;
 }
 
-/* Efeito ao passar o mouse */
-.btn-send:hover {
-    background-color: #19b2c6;
-    box-shadow: 0 0 25px #871de3;
-    transform: translateY(-2px); /* Ele "sobe" de leve */
-}
-
-
-
-
-.card-section {
-    padding-bottom: 60px; /* Reduza este valor se estiver maior */
-}
-
-
-.btn-send {
-    margin-bottom: 5px; /* Reduza este valor se estiver maior */
+/* Garante que o container permita o posicionamento do ícone invisível */
+.input-with-icon {
+    position: relative; 
 }

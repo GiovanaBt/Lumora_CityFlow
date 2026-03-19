@@ -139,7 +139,8 @@ header a {
 .submenu { 
     display: none;
     position: absolute;
-    top: 100%;
+    /* ALTERE DE 100% PARA 115% (ou o valor que preferir) */
+    top: 115%; 
     right: 0;
     min-width: 220px;
     
@@ -151,9 +152,7 @@ header a {
     border: 1px solid transparent;
     border-image: linear-gradient(45deg, #2dbac9, #a8329e) 1;
     
-    /* REDUZIDO: de 15px para 5px no topo */
     padding: 5px 0; 
-    margin-top: 0px; 
     list-style: none;
     z-index: 9999;
     
@@ -171,11 +170,11 @@ header a {
     letter-spacing: 2px;
     
     /* ALTERE O PRIMEIRO NÚMERO (6px) PARA UM MAIOR */
-    padding: 15px 21px 1px 21px; 
-    
+    padding: 15px 21px 15px 21px;
     font-weight: bold;
     opacity: 0.7;
 }
+
 
 /* Itens da lista */
 .submenu li {
