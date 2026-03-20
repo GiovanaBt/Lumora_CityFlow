@@ -71,14 +71,14 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
             <div class="input-group">
                 <label for="nome">Nome do Evento <span class="required">*</span></label>
-                <input type="text" id="nome" placeholder="Nome do Evento" name="nome">
+                <input type="text" id="nome" placeholder="Nome do Evento" name="nome" required>
             </div>
 
             <div class="input-group image-upload">
-                <label for="capa">Capa do Evento  <span class="required">*</span><label>
+                <label for="capa">Capa do Evento  <span class="required">*</span></label>
                 <div class="upload-placeholder">
                     <span>Clique ou arraste a imagem aqui</span>
-                    <input type="file" id="capa" name="capa">
+                    <input type="file" id="capa" name="capa" required>
                 </div>
                 <div class="upload-info">
                     <p>A dimensão recomendada é de <strong>1600 x 838</strong></p>
@@ -88,7 +88,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
             <div class="input-group">
                 <label for="categoria">Escolha uma categoria para seu Evento <span class="required">*</span></label>
-                <select id="categoria" name="categorias">
+                <select id="categoria" name="categorias" required>
                     <option value="" disabled selected>Selecione uma categoria</option>
                     <?php 
                     if ($categorias && mysqli_num_rows($categorias) > 0) {
@@ -114,7 +114,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <div class="icon-box">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                         </div>
-                        <input type="date" name="data_inicio_evento">
+                        <input type="date" name="data_inicio_evento" required>
                     </div>
                 </div>
 
@@ -124,7 +124,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <div class="icon-box">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         </div>
-                        <input type="time" name="horario_inicio_evento">
+                        <input type="time" name="horario_inicio_evento" required>
                     </div>
                 </div>
 
@@ -134,7 +134,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <div class="icon-box">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                         </div>
-                        <input type="date" name="data_fim_evento">
+                        <input type="date" name="data_fim_evento" required>
                     </div>
                 </div>
 
@@ -144,7 +144,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <div class="icon-box">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         </div>
-                        <input type="time" name="horario_fim_evento">
+                        <input type="time" name="horario_fim_evento" required>
                     </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
         <div class="card-section">
             <h2>3. DESCRIÇÃO DO EVENTO</h2>
             <p class="subtitle">Conte todos os detalhes do seu evento! <span class="required">*</span></p>
-            <textarea class="description-textarea" placeholder="Adicione aqui a descrição do seu evento..." name="descricao"></textarea>
+            <textarea class="description-textarea" placeholder="Adicione aqui a descrição do seu evento..." name="descricao" required></textarea>
         </div>
 
         <section class="card-section">
@@ -162,28 +162,28 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
             <div class="address-grid">
                 <div class="input-group col-medium">
+                    <label>CEP <span class="required">*</span></label>
+                    <input type="text" id="cep" placeholder="00000-000" name="cep" maxlength="9" oninput="mascaraCEP(this)" required>
+                </div>
+                <div class="input-group col-medium">
                     <label>Cidade <span class="required">*</span></label>
-                    <input type="text" placeholder="Nome da cidade" name="cidade">
+                    <input type="text" id="cidade" placeholder="Nome da cidade" name="cidade" required>
                 </div>
                 <div class="input-group col-medium">
                     <label>Bairro <span class="required">*</span></label>
-                    <input type="text" placeholder="Nome do bairro" name="bairro">
+                    <input type="text" id="bairro" placeholder="Nome do bairro" name="bairro" required>
                 </div>
                 <div class="input-group col-medium">
                     <label>Nome da Av./Rua <span class="required">*</span></label>
-                    <input type="text" placeholder="Nome da Av./Rua" name="rua">
-                </div>
-                <div class="input-group col-medium">
-                    <label>CEP <span class="required">*</span></label>
-                    <input type="text" placeholder="_____-___" name="cep">
+                    <input type="text" id="rua" placeholder="Nome da Av./Rua" name="rua" required>
                 </div>
                 <div class="input-group col-large">
                     <label>Ponto de Referência <span class="required">*</span></label>
-                    <input type="text" placeholder="Ponto de referência" name="ponto_referencia">
+                    <input type="text" placeholder="Ponto de referência" name="ponto_referencia" required>
                 </div>
                 <div class="input-group col-small">
                     <label>Número <span class="required">*</span></label>
-                    <input type="text" placeholder="Número" name="numero">
+                    <input type="text" id="numero" placeholder="Número" name="numero" required>
                 </div>
                 <div class="input-group col-full">
                     <label>Complemento</label>
@@ -203,15 +203,47 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
         </section>
 
         <button type="submit" class="btn-send">Enviar Evento</button>
-    </div> </form>
-    <script>
+    </div> 
+</form>
+
+<script>
+// --- FUNÇÕES DE MÁSCARA E API DO PROFESSOR ---
+
+function mascaraCEP(input) {
+    let v = input.value.replace(/\D/g, "").substring(0, 8);
+    v = v.replace(/(\d{5})(\d)/, "$1-$2");
+    input.value = v;
+
+    // Se o CEP tiver 8 números, faz a busca
+    if (v.replace("-", "").length === 8) {
+        buscarCEP(v.replace("-", ""));
+    }
+}
+
+function buscarCEP(valorCep) {
+    let url = "https://viacep.com.br/ws/" + valorCep + "/json/";
+
+    fetch(url)
+        .then(res => res.json())
+        .then(dados => {
+            if (!dados.erro) {
+                document.getElementById('rua').value = dados.logradouro;
+                document.getElementById('bairro').value = dados.bairro;
+                document.getElementById('cidade').value = dados.localidade;
+                document.getElementById('numero').focus(); 
+            }
+        })
+        .catch(error => console.error("Erro ao buscar CEP:", error));
+}
+
+// --- SEU CÓDIGO ORIGINAL DOS ÍCONES ---
+
 document.querySelectorAll('.input-with-icon').forEach(container => {
     const iconBox = container.querySelector('.icon-box');
     const input = container.querySelector('input');
 
     if (iconBox && input) {
         iconBox.addEventListener('click', () => {
-            // Abre o seletor nativo (calendário ou relógio)
             input.showPicker(); 
         });
     }
