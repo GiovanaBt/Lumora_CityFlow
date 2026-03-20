@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 :root {
-    --bg-color: #0d1117;        /* Fundo super escuro */
-    --card-bg: #161b22;         /* Fundo das seções */
-    --accent-color: #00d4ff;    /* Azul neon/Ciano */
+    --bg-color: #0d1117;         /* Fundo super escuro */
+    --card-bg: #161b22;          /* Fundo das seções */
+    --accent-color: #00d4ff;     /* Azul neon/Ciano */
     --text-color: #ffffff;
     --label-color: #e6edf3;
     --placeholder-color: #6e7681;
@@ -26,20 +26,20 @@ body {
 
 /* 2. HEADER TOTALMENTE COLADO E ESTICADO */
 header {
-    width: 100%;               /* Ocupa toda a largura da tela */
+    width: 100%;                /* Ocupa toda a largura da tela */
     background-color: #000000;
     display: flex; 
     align-items: center; 
     justify-content: space-between; /* Distribui logo e menu nas extremidades */
-    padding: 15px 40px;        /* Espaçamento interno vertical e horizontal */
+    padding: 15px 40px;         /* Espaçamento interno vertical e horizontal */
     box-shadow: 0px 4px 15px rgba(45, 185, 201, 0.4); 
-    box-sizing: border-box;    /* Impede que o padding "estoure" a largura */
+    box-sizing: border-box;     /* Impede que o padding "estoure" a largura */
     
-    position: relative;        
-    top: 0;                    /* Garante que comece no pixel zero */
+    position: relative;         
+    top: 0;                     /* Garante que comece no pixel zero */
     left: 0;
-    margin: 0 !important;      /* Remove qualquer margem residual */
-    z-index: 1000;             /* Fica por cima de outros elementos */
+    margin: 0 !important;       /* Remove qualquer margem residual */
+    z-index: 1000;              /* Fica por cima de outros elementos */
 }
 
 /* Ajuste para o título não ficar grudado no header agora que ele subiu */
@@ -589,4 +589,77 @@ input::-webkit-calendar-picker-indicator {
 /* Garante que o container permita o posicionamento do ícone invisível */
 .input-with-icon {
     position: relative; 
+}
+
+/* --- ADIÇÃO: ESTILIZAÇÃO DOS NOVOS BOTÕES DE AÇÃO --- */
+
+/* --- BOTÕES DE AÇÃO (ESTILIZAÇÃO CITY FLOW) --- */
+
+.form-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 40px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.form-actions button {
+    padding: 14px 30px;
+    border-radius: 100px; /* Mantém o padrão arredondado do botão MAPA */
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Botão Cancelar: Tom de cinza escuro para não brigar com as cores principais */
+.btn-cancel { 
+    background-color: #21262d; 
+    color: #f0f6fc;
+    border: 1px solid var(--border-color) !important;
+}
+
+/* Botão Pré-visualizar: Borda gradiente (estilo o botão ENTRAR) */
+.btn-preview { 
+    background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box, 
+                linear-gradient(45deg, #a8329e, #2dbac9) border-box;
+    border: 2px solid transparent !important;
+    color: white;
+}
+
+/* Botão Rascunho: Cor sólida do tema (Ciano) */
+.btn-draft { 
+    background-color: rgba(0, 212, 255, 0.1);
+    color: var(--accent-color);
+    border: 1.5px solid var(--accent-color) !important;
+}
+
+/* Botão Publicar: Gradiente vibrante (estilo o botão MAPA) */
+.btn-send { 
+    background: linear-gradient(45deg, #2dbac9, #a8329e);
+    color: white;
+    box-shadow: 0px 4px 15px rgba(45, 185, 201, 0.3);
+}
+
+/* Efeitos de Hover unificados */
+.form-actions button:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+.btn-send:hover {
+    box-shadow: 0px 0px 20px rgba(168, 50, 158, 0.5);
+}
+
+.btn-cancel:hover {
+    background-color: #f85149; /* Vermelho apenas no hover do cancelar */
+    border-color: #f85149 !important;
 }

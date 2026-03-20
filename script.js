@@ -85,3 +85,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+ function preVisualizar() {
+    // Pega os dados do formulário
+    const nome = document.getElementById('nome').value;
+    const desc = document.querySelector('.description-textarea').value;
+    const cidade = document.getElementById('cidade').value;
+    const data = document.querySelector('input[name="data_inicio_evento"]').value;
+
+    // Cria um alerta simples ou um Modal personalizado
+    // Aqui um exemplo rápido via alert, mas o ideal é popular um Modal HTML
+    alert(`PRÉ-VISUALIZAÇÃO DO EVENTO:\n\nNome: ${nome}\nCidade: ${cidade}\nData: ${data}\nDescrição: ${desc}`);
+    
+    // Se quiser algo mais avançado, você pode fazer o seguinte:
+    // window.open('previa.php?nome='+nome+'&cidade='+cidade, '_blank');
+}

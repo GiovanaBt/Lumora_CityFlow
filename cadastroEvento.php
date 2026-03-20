@@ -2,15 +2,20 @@
 include 'Conexao.php';
 if (!isset($_SESSION)) { session_start(); }
 
-$categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM Categoria');
+// Proteção: Se não estiver logado, redireciona para a index ou exibe erro
+if (!isset($_SESSION['usuario_id'])) {
+    echo "<script>alert('Você precisa estar logado para acessar esta página.'); window.location.href='index.php';</script>";
+    exit;
+}
 
+$categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM Categoria');
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Eventos</title>
+    <title>CityFlow - Cadastro de Eventos</title>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="cadastroEvento.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -19,7 +24,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 
 <header>
     <div class="logo">
-        <a href="index.php"><img src="imgs/cityFlow.webp"></a>
+        <a href="index.php"><img src="imgs/cityFlow.webp" alt="Logo CityFlow"></a>
     </div>
 
     <div class="hamburguer" id="hamburguer">
@@ -33,7 +38,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
     <nav>
         <ul class="menu">
             <li><a href="index.php">INÍCIO</a></li>
-            <li><a href="#informacoes">INFORMAÇÕES</a></li>
+            <li><a href="index.php#informacoes">INFORMAÇÕES</a></li>
             <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
 
             <?php if (isset($_SESSION['usuario_id'])): ?>
@@ -59,7 +64,6 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
     </nav>
 </header>
 
-
 <h1 class="main-title">CADASTRO DE EVENTO</h1>
 
 <form action="enviarCadastroEvento.php" method="POST" enctype="multipart/form-data">
@@ -78,7 +82,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                 <label for="capa">Capa do Evento  <span class="required">*</span></label>
                 <div class="upload-placeholder">
                     <span>Clique ou arraste a imagem aqui</span>
-                    <input type="file" id="capa" name="capa" required>
+                    <input type="file" id="capa" name="capa" accept="image/*" required>
                 </div>
                 <div class="upload-info">
                     <p>A dimensão recomendada é de <strong>1600 x 838</strong></p>
@@ -114,7 +118,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <div class="icon-box">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                         </div>
-                        <input type="date" name="data_inicio_evento" required>
+                        <input type="date" name="data_inicio_evento" id="data_inicio" required>
                     </div>
                 </div>
 
@@ -124,7 +128,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <div class="icon-box">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         </div>
-                        <input type="time" name="horario_inicio_evento" required>
+                        <input type="time" name="horario_inicio_evento" id="hora_inicio" required>
                     </div>
                 </div>
 
@@ -134,7 +138,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <div class="icon-box">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                         </div>
-                        <input type="date" name="data_fim_evento" required>
+                        <input type="date" name="data_fim_evento" id="data_fim" required>
                     </div>
                 </div>
 
@@ -144,7 +148,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <div class="icon-box">
                             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                         </div>
-                        <input type="time" name="horario_fim_evento" required>
+                        <input type="time" name="horario_fim_evento" id="hora_fim" required>
                     </div>
                 </div>
             </div>
@@ -153,7 +157,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
         <div class="card-section">
             <h2>3. DESCRIÇÃO DO EVENTO</h2>
             <p class="subtitle">Conte todos os detalhes do seu evento! <span class="required">*</span></p>
-            <textarea class="description-textarea" placeholder="Adicione aqui a descrição do seu evento..." name="descricao" required></textarea>
+            <textarea id="descricao" class="description-textarea" placeholder="Adicione aqui a descrição do seu evento..." name="descricao" required></textarea>
         </div>
 
         <section class="card-section">
@@ -179,15 +183,11 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                 </div>
                 <div class="input-group col-large">
                     <label>Ponto de Referência <span class="required">*</span></label>
-                    <input type="text" placeholder="Ponto de referência" name="ponto_referencia" required>
+                    <input type="text" id="ponto_referencia" placeholder="Ponto de referência" name="ponto_referencia" required>
                 </div>
                 <div class="input-group col-small">
                     <label>Número <span class="required">*</span></label>
                     <input type="text" id="numero" placeholder="Número" name="numero" required>
-                </div>
-                <div class="input-group col-full">
-                    <label>Complemento</label>
-                    <input type="text" placeholder="Complemento" name="complemento">
                 </div>
             </div>
         </section>
@@ -202,19 +202,22 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
             </div>
         </section>
 
-        <button type="submit" class="btn-send">Enviar Evento</button>
+        <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="window.location.href='index.php'">CANCELAR</button>
+            <button type="button" class="btn-preview" onclick="preVisualizar()">PRÉ-VISUALIZAR</button>
+            <button type="submit" name="status" value="rascunho" class="btn-draft">SALVAR RASCUNHO</button>
+            <button type="submit" name="status" value="publicado" class="btn-send">PUBLICAR EVENTO</button>
+        </div>
     </div> 
 </form>
 
 <script>
-// --- FUNÇÕES DE MÁSCARA E API DO PROFESSOR ---
-
+// --- BUSCA DE CEP ---
 function mascaraCEP(input) {
     let v = input.value.replace(/\D/g, "").substring(0, 8);
     v = v.replace(/(\d{5})(\d)/, "$1-$2");
     input.value = v;
 
-    // Se o CEP tiver 8 números, faz a busca
     if (v.replace("-", "").length === 8) {
         buscarCEP(v.replace("-", ""));
     }
@@ -222,7 +225,6 @@ function mascaraCEP(input) {
 
 function buscarCEP(valorCep) {
     let url = "https://viacep.com.br/ws/" + valorCep + "/json/";
-
     fetch(url)
         .then(res => res.json())
         .then(dados => {
@@ -236,16 +238,48 @@ function buscarCEP(valorCep) {
         .catch(error => console.error("Erro ao buscar CEP:", error));
 }
 
-// --- SEU CÓDIGO ORIGINAL DOS ÍCONES ---
+// --- FUNÇÃO DE PRÉ-VISUALIZAÇÃO ---
+function preVisualizar() {
+    const nome = document.getElementById('nome').value || "Evento sem nome";
+    const desc = document.getElementById('descricao').value || "Sem descrição disponível.";
+    const cidade = document.getElementById('cidade').value || "Cidade não informada";
+    const bairro = document.getElementById('bairro').value || "Bairro não informado";
+    const data = document.getElementById('data_inicio').value || "Data não definida";
+    const hora = document.getElementById('hora_inicio').value || "Horário não definido";
 
+    // Cria uma pequena janela pop-up para simular como ficaria
+    const popup = window.open('', 'Previa', 'width=600,height=700');
+    popup.document.write(`
+        <html>
+        <head>
+            <title>Prévia CityFlow</title>
+            <style>
+                body { background: #0d1117; color: white; font-family: 'Inter', sans-serif; padding: 30px; }
+                .card { border: 2px solid #00d4ff; padding: 20px; border-radius: 15px; background: #161b22; }
+                h1 { color: #00d4ff; margin-bottom: 5px; }
+                .info { color: #8b949e; margin-bottom: 20px; font-size: 0.9rem; }
+                p { line-height: 1.6; white-space: pre-wrap; }
+                .btn { display: inline-block; padding: 10px 20px; background: #00d4ff; color: black; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 20px; cursor: pointer; }
+            </style>
+        </head>
+        <body>
+            <div class="card">
+                <div class="info">📅 ${data} às ${hora} | 📍 ${bairro}, ${cidade}</div>
+                <h1>${nome}</h1>
+                <p>${desc}</p>
+                <div class="btn" onclick="window.close()">VOLTAR AO CADASTRO</div>
+            </div>
+        </body>
+        </html>
+    `);
+}
+
+// --- CONTROLE DOS ÍCONES DE DATA/HORA ---
 document.querySelectorAll('.input-with-icon').forEach(container => {
     const iconBox = container.querySelector('.icon-box');
     const input = container.querySelector('input');
-
     if (iconBox && input) {
-        iconBox.addEventListener('click', () => {
-            input.showPicker(); 
-        });
+        iconBox.addEventListener('click', () => { input.showPicker(); });
     }
 });
 </script>
