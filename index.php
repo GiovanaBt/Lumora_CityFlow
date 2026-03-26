@@ -21,7 +21,9 @@ if(!empty($_SESSION['erro_login'])){
 }
 
 /* 3. BUSCAR EVENTOS */
-$sql = "SELECT * FROM eventos_cadastrados 
+// Note que agora selecionamos explicitamente o 'titulo' e o 'id_evento'
+$sql = "SELECT id_evento, titulo, Imagem, data_inicio_evento, bairro, cidade 
+        FROM eventos_cadastrados 
         WHERE data_inicio_evento >= CURDATE() 
         ORDER BY data_inicio_evento 
         LIMIT 5";
@@ -117,12 +119,15 @@ $resultado = $conn->query($sql);
                 $activeClass = ($i == 0) ? "active" : "";
             ?>
                 <div class="carousel-slide <?php echo $activeClass; ?>" 
-                     style="background-image:url('uploads/<?php echo $evento['Imagem']; ?>')">
+                     style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('uploads/<?php echo $evento['Imagem']; ?>')">
                     <div class="overlay">
-                        <h1><?php echo $evento['descricao']; ?></h1>
+                        <h1><?php echo htmlspecialchars($evento['titulo']); ?></h1>
                         <p><i class="fa-regular fa-calendar"></i> <?php echo date("d/m/Y", strtotime($evento['data_inicio_evento'])); ?></p>
-                        <p><i class="fa-solid fa-location-dot"></i> <?php echo $evento['bairro']; ?> - <?php echo $evento['cidade']; ?></p>
-                        <button class="btn-saiba">Saiba mais</button>
+                        <p><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($evento['bairro']); ?> - <?php echo htmlspecialchars($evento['cidade']); ?></p>
+                        
+                        <a href="eventos.php?id=<?php echo $evento['id_evento']; ?>">
+                            <button class="btn-saiba">Saiba mais</button>
+                        </a>
                     </div>
                 </div>
             <?php 
@@ -137,7 +142,6 @@ $resultado = $conn->query($sql);
 
 <?php if($erroLogin != ""): ?>
 <script>
-    // Abre o modal automaticamente se houver erro vindo do PHP
     document.addEventListener("DOMContentLoaded", function(){
         const modalLogin = document.getElementById("modal");
         if(modalLogin) {

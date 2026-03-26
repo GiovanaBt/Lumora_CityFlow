@@ -99,3 +99,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Se quiser algo mais avançado, você pode fazer o seguinte:
     // window.open('previa.php?nome='+nome+'&cidade='+cidade, '_blank');
 }
+function mostrarPrevia(input) {
+    const preview = document.getElementById('image-preview');
+    const texto = document.getElementById('upload-text');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block'; // Mostra a imagem selecionada
+            texto.style.display = 'none';    // Esconde a frase "Clique ou arraste"
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
