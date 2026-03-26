@@ -150,6 +150,152 @@ $resultado = $conn->query($sql);
     });
 </script>
 <?php endif; ?>
+<?php
+// 1. Definição dos Dados
+$colecoes = [
+    ['label' => 'MÚSICA',     'slug' => 'musica',      'icone' => 'img/icon-music.png'],
+    ['label' => 'DANÇA',      'slug' => 'danca',       'icone' => 'img/icon-dance.png'],
+    ['label' => 'LEITURA',    'slug' => 'leitura',     'icone' => 'img/icon-book.png'],
+    ['label' => 'GASTRONOMIA', 'slug' => 'gastronomia', 'icone' => 'img/icon-food.png'],
+    ['label' => 'ESPORTE',    'slug' => 'esporte',     'icone' => 'img/icon-sport.png'],
+    ['label' => 'CINEMA',    'slug' => 'cinema',     'icone' => 'img/icon-cinema.png'],
+    ['label' => 'TEATRO',    'slug' => 'teatro',     'icone' => 'img/icon-teatro.png'],
+    ['label' => 'PERFORMANCE',    'slug' => 'performance',     'icone' => 'img/icon-performance.png'],
+    ['label' => 'PINTURA/ARTE',    'slug' => 'pintura/arte',     'icone' => 'img/icon-pintura/arte.png'],
+    ['label' => 'EDUCAÇÃO',    'slug' => 'educação',     'icone' => 'img/icon-educação.png'],
+    ['label' => 'STANDUP',    'slug' => 'stand up',     'icone' => 'img/icon-standup.png'],
+    ['label' => 'CONGRESSOS E PALESTRAS',    'slug' => 'Congressos e palestras',     'icone' => 'img/icon-Congressos e palestras.png'],
+    ['label' => 'CURSOS E WORKSHOPS',    'slug' => 'Cursos e workshops',     'icone' => 'img/icon-Cursos e workshops.png'],
+    ['label' => 'PRIDE',    'slug' => 'Pride',     'icone' => 'img/icon-Pride.png'],
+    ['label' => 'REIGIÃO E ESPIRITUALIDADE',    'slug' => 'Religião e espiritualidade',     'icone' => 'img/icon-Religião e espiritualidade.png'],
+    ['label' => 'RECITAR',    'slug' => 'Recitar',     'icone' => 'img/icon-Recitar.png'],
+    ['label' => 'ESCRITA/POEMAS',    'slug' => 'Escrita/poemas',     'icone' => 'img/icon-Escrita/poemas.png'],
+];
+?>
 
+<section class="container-carrossel">
+    <h3>EXPLORE NOSSAS COLEÇÕES</h3>
+
+    <div class="track" id="carrossel-track">
+        <?php foreach ($colecoes as $colecao): ?>
+            <a href="categoria.php?tipo=<?php echo $colecao['slug']; ?>" class="card">
+                <div class="icon-box">
+                    <img src="<?php echo $colecao['icone']; ?>" alt="Ícone <?php echo $colecao['label']; ?>" style="width: 45px; transition: transform 0.3s;">
+                </div>
+                <span><?php echo $colecao['label']; ?></span>
+            </a>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="btn-next">
+        <button class="arrow prev" onclick="rolarEsquerda()">&#10094;</button>
+        <button class="arrow next" onclick="rolarDireita()">&#10095;</button>
+    </div>
+</section>
+
+<style>
+.container-carrossel {
+    background: linear-gradient(135deg, #3d1a42 0%, #1a3a4a 100%);
+    padding: 40px 20px;
+    border-radius: 25px;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    overflow: hidden;
+}
+
+.track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 10px;
+    /* Suaviza o scroll manual e via JS */
+    scroll-behavior: smooth; 
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.track::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    background: rgba(233, 236, 239, 1);
+    min-width: 140px;
+    height: 140px;
+    border-radius: 22px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-weight: 700;
+    font-size: 11px;
+    flex-shrink: 0;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    
+    /* Animação suave ao passar o mouse */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Efeito de "Levantar" o card ao passar o mouse */
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    background: #ffffff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.card:hover img {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.btn-next {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.arrow {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px); /* Efeito de vidro */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.arrow:hover {
+    background: #fff;
+    color: #3d1a42;
+    transform: scale(1.1);
+}
+
+.arrow:active {
+    transform: scale(0.9);
+}
+</style>
+
+<script>
+const track = document.getElementById('carrossel-track');
+
+function rolarDireita() {
+    // Rola uma quantidade baseada na largura do card + gap
+    track.scrollBy({ left: 320, behavior: 'smooth' });
+}
+
+function rolarEsquerda() {
+    track.scrollBy({ left: -320, behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
