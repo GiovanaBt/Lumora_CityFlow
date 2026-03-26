@@ -9,9 +9,8 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $nomeImagem = "";
 
-// CORREÇÃO: O nome no HTML é "capa", então usamos $_FILES['capa']
+// Processamento da Imagem
 if(isset($_FILES['capa']) && $_FILES['capa']['error'] == 0){
-
     $diretorio = "uploads/";
 
     if(!file_exists($diretorio)){
@@ -26,32 +25,60 @@ if(isset($_FILES['capa']) && $_FILES['capa']['error'] == 0){
 
 // Coleta de dados do formulário
 $idUsuario = $_SESSION['usuario_id'];
-// No seu dump, 'descricao' parece ser usado para o NOME/TÍTULO do evento
-$nomeDoEvento = mysqli_real_escape_string($conexao, $_POST['nome']); 
+
+// 1. Título do evento (O nome que aparece nos cards)
+$tituloEvento = mysqli_real_escape_string($conexao, $_POST['nome']); 
+
+// 2. Descrição detalhada (O texto longo da seção 3)
 $descricaoDetalhada = mysqli_real_escape_string($conexao, $_POST['descricao']);
+
+// 3. Dados de localização
 $rua = mysqli_real_escape_string($conexao, $_POST['rua']);
 $bairro = mysqli_real_escape_string($conexao, $_POST['bairro']);
 $numero = (int)$_POST['numero'];
 $cidade = mysqli_real_escape_string($conexao, $_POST['cidade']);
+
+// 4. Ponto de Referência (Agora salvo de forma limpa, sem o título junto)
 $pontoReferencia = mysqli_real_escape_string($conexao, $_POST['ponto_referencia']);
 
+// 5. Datas, Horários e Categoria
 $dataInicioEvento = $_POST['data_inicio_evento'];
 $dataFimEvento = $_POST['data_fim_evento'];
 $horarioInicioEvento = $_POST['horario_inicio_evento'];
 $horarioFimEvento = $_POST['horario_fim_evento'];
 $categoriaId = $_POST['categorias'];
 
-// SQL atualizado para bater com as colunas do seu DUMP
-// Nota: Usei a variável $nomeDoEvento na coluna 'descricao' pois vi no seu dump 
-// que você salva o título do evento (ex: "Workshop de Jazz") nela.
+// SQL ORGANIZADO: Cada informação na sua respectiva coluna
 $sql = "INSERT INTO eventos_cadastrados (
-            id_usuarios, descricao, rua, bairro, numero, cidade, ponto_referencia, 
-            data_inicio_evento, data_fim_evento, horario_inicio_evento, horario_fim_evento, 
-            id_categoria, Imagem
+            id_usuarios, 
+            titulo, 
+            descricao, 
+            rua, 
+            bairro, 
+            numero, 
+            cidade, 
+            ponto_referencia, 
+            data_inicio_evento, 
+            data_fim_evento, 
+            horario_inicio_evento, 
+            horario_fim_evento, 
+            id_categoria, 
+            Imagem
         ) VALUES (
-            '$idUsuario', '$nomeDoEvento', '$rua', '$bairro', $numero, '$cidade', '$pontoReferencia', 
-            '$dataInicioEvento', '$dataFimEvento', '$horarioInicioEvento', '$horarioFimEvento', 
-            '$categoriaId', '$nomeImagem'
+            '$idUsuario', 
+            '$tituloEvento', 
+            '$descricaoDetalhada', 
+            '$rua', 
+            '$bairro', 
+            $numero, 
+            '$cidade', 
+            '$pontoReferencia', 
+            '$dataInicioEvento', 
+            '$dataFimEvento', 
+            '$horarioInicioEvento', 
+            '$horarioFimEvento', 
+            '$categoriaId', 
+            '$nomeImagem'
         )";
 
 if ($conexao->query($sql) === TRUE) {

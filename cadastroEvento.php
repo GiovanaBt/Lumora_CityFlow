@@ -36,26 +36,40 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 <body>  
 <header>
     <div class="logo">
-        <a href="index.php"><img src="imgs/cityFlow.webp" alt="Logo CityFlow"></a>
+        <a href="index.php"><img src="imgs/cityFlow.webp"></a>
     </div>
+
     <div class="hamburguer" id="hamburguer">
         <i class="fa-solid fa-bars"></i>
     </div>
+
     <a href="mapa.php" target="_blank">
         <button class="botaoMapa">MAPA</button>
     </a>
+
     <nav>
         <ul class="menu">
             <li><a href="index.php">INÍCIO</a></li>
-            <li><a href="index.php#informacoes">INFORMAÇÕES</a></li>
+            <li><a href="#informacoes">INFORMAÇÕES</a></li>
             <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
+
             <?php if (isset($_SESSION['usuario_id'])): ?>
                 <li class="perfil">
                     <a href="#"><i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?></a>
                     <ul class="submenu">
                         <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
+                        <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
+                        <li><a href="ajuda.php"><i class="fa-solid fa-circle-question"></i> Central de ajuda</a></li>
+                        <hr style="border:0.5px solid #333; margin:5px 15px; opacity:0.2;">
                         <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
                     </ul>
+                </li>
+            <?php else: ?>
+                <li>
+                    <div class="menu-container" id="abrirModal">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        <span class="texto-entrar">ENTRAR</span>
+                    </div>
                 </li>
             <?php endif; ?>
         </ul>
@@ -138,11 +152,10 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
             </div>
         </section>
 
-        <section class="card-section">
-            <h2>3. DESCRIÇÃO DO EVENTO</h2>
-            <p class="subtitle">Conte todos os detalhes do seu evento! <span class="required">*</span></p>
-            <textarea id="descricao" class="description-textarea" placeholder="Adicione aqui a descrição do seu evento..." name="descricao" required></textarea>
-        </section>
+        <<div class="campo-cadastro">
+    <label>3. DESCRIÇÃO DO EVENTO</label>
+    <textarea name="descricao" rows="6" placeholder="Descreva as atividades, cronograma e detalhes..."></textarea>
+</div>
 
         <section class="card-section">
             <h2>4. ONDE O SEU EVENTO VAI ACONTECER?</h2>
