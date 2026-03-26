@@ -1,0 +1,260 @@
+/* Container Principal */
+.info-container {
+    background-color: #1E293B; /* Fundo preto conforme as fotos */
+    color: white;
+    font-family: 'Arial', sans-serif;
+    padding: 40px 20px;
+    text-align: center;
+    min-height: 100vh;
+    /* Localize a classe do seu container azul e adicione isso: */
+border: 4px solid transparent;
+background-image: linear-gradient(#1a2433, #1a2433), 
+                  linear-gradient(to bottom, #9333ea, #00d4ff);
+background-origin: border-box;
+background-clip: padding-box, border-box;
+border-radius: 12px; /* Para as pontas ficarem arredondadas como na sua foto */
+}
+
+.info-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info-subtitle {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+ /* Este é o seletor para o quadro principal azulado */
+.container-principal {
+   /* 1. Cria o espaço para a borda */
+  border: 2px solid transparent; 
+
+  /* 2. Aplica o degradê na borda mantendo o fundo original */
+  background-image: linear-gradient(#1e293b, #1e293b), 
+                    linear-gradient(to bottom, #9333ea, #00d4ff);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+
+/* Accordion (Sanfona) */
+.accordion-group {
+    max-width: 600px;
+    margin: 0 auto;
+}
+}
+
+.accordion-item {
+    background-color: white;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    text-align: left;
+}
+
+.accordion-header {
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #6a3093; /* Cor roxa similar ao logo/botão */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+}
+
+.accordion-header::-webkit-details-marker {
+    display: none;
+}
+
+.accordion-content {
+    padding: 0 20px 20px 20px;
+    color: #1E293B; /* Texto interno escuro para leitura no fundo branco */
+    line-height: 1.5;
+}
+
+.accordion {
+  background: #eee;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+/* Remove setinha padrão */
+summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/* Setinha custom */
+.arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  transform: rotate(45deg);
+  transition: 0.3s;
+}
+
+/* Girar quando aberto */
+details[open] .arrow {
+  transform: rotate(-135deg);
+}
+
+/* Espaço do conteúdo */
+.content {
+  margin-top: 10px;
+}
+
+
+/* Configurações de Fundo e Texto */
+body {
+    background-color: #0b0b0b; /* Preto levemente mais suave como na foto */
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.info-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Títulos */
+.main-title {
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.info-subtitle {
+    color: white;
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 25px;
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+
+/* Seções e Accordions */
+.info-section {
+    margin-bottom: 50px;
+}
+
+.accordion-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espaço entre as caixas brancas */
+}
+
+.accordion-item {
+    background-color: white;
+    border-radius: 8px; /* Cantos arredondados como na foto */
+    overflow: hidden;
+    text-align: left;
+    transition: 0.3s;
+}
+
+summary {
+    list-style: none;
+    padding: 20px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+.arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+}
+
+/* Quando aberto */
+details[open] .arrow {
+    transform: rotate(180deg);
+}
+
+details[open] {
+    padding-bottom: 15px;
+}
+
+.content {
+    padding: 0 25px 10px 25px;
+    color: #1E293B;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+
+/* Desenha a seta fina estilo "V" */
+.arrow {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #000; /* Grossura da linha */
+    border-bottom: 2px solid #000; /* Grossura da linha */
+    transform: rotate(45deg); /* Faz virar um V para baixo */
+    transition: transform 0.3s ease;
+    margin-right: 5px;
+}
+
+/* Quando o accordion abre, a seta gira para cima */
+details[open] .arrow {
+    transform: rotate(-135deg); /* Gira para ficar o V para cima */
+    margin-top: 5px;
+}
+
+
+
+
+
+/* Estilo do container */
+.accordion-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+/* Cabeçalho clicável */
+.accordion-header {
+  background-color: #fff;
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+/* A Seta */
+.arrow {
+  transition: transform 0.3s ease;
+  transform: rotate(-90deg); /* Começa apontando para baixo ou lado */
+  font-size: 18px;
+}
+
+/* Conteúdo escondido por padrão */
+.accordion-content {
+  display: none;
+  padding: 20px;
+  border-top: 1px solid #eee;
+  background-color: #fafafa;
+}
