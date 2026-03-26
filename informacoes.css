@@ -254,7 +254,7 @@ details[open] .arrow {
 /* Conteúdo escondido por padrão */
 .accordion-content {
   display: none;
-  padding: 20px;
+  padding: 30px;
   border-top: 1px solid #eee;
   background-color: #fafafa;
 }
