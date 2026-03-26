@@ -5,7 +5,7 @@ session_start();
 $host = "localhost";
 $usuario = "root";
 $senha = "Home@spSENAI2025!";
-$banco = "cityflow";
+$banco = "CityFlow";
 
 $conn = new mysqli($host, $usuario, $senha, $banco);
 
@@ -56,7 +56,7 @@ $resultado = $conn->query($sql);
     <nav>
         <ul class="menu">
             <li><a href="index.php">INÍCIO</a></li>
-            <li><a href="#informacoes">INFORMAÇÕES</a></li>
+            <li><a href="informacoes.php">INFORMAÇÕES</a></li>
             <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
 
             <?php if (isset($_SESSION['usuario_id'])): ?>
