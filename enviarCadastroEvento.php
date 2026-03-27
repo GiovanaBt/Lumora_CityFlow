@@ -38,6 +38,49 @@ $bairro = mysqli_real_escape_string($conexao, $_POST['bairro']);
 $numero = (int)$_POST['numero'];
 $cidade = mysqli_real_escape_string($conexao, $_POST['cidade']);
 
+// ----------------------
+// CONVERSÃO DE ENDEREÇO
+// ----------------------
+
+// Trata número inválido
+$numero = trim($numero);
+
+if($numero == "Não consta" || $numero == "S/N" || empty($numero)){
+    $endereco = "$rua, $bairro, $cidade, Brasil";
+}else{
+    $endereco = "$rua $numero, $bairro, $cidade, Brazil";
+}
+
+// Monta URL
+$enderecoFormatado = urlencode($endereco);
+
+$url = "https://nominatim.openstreetmap.org/search?q=".$enderecoFormatado."&format=json&limit=1";
+
+// Configuração obrigatória
+$options = [
+    "http" => [
+        "method" => "GET",
+        "header" => "User-Agent: CityFlowApp/1.0\r\n"
+    ]
+];
+
+$context = stream_context_create($options);
+
+// Faz requisição
+$resposta = file_get_contents($url, false, $context);
+
+$dados = json_decode($resposta, true);
+
+// Validação forte (resolve seu erro DEFINITIVAMENTE)
+if(empty($dados) || !isset($dados[0]['lat']) || !isset($dados[0]['lon'])){
+    echo "Erro: endereço não encontrado. Verifique os dados.";
+    exit();
+}
+
+// Agora SEMPRE terá valor
+$latitude = $dados[0]['lat'];
+$longitude = $dados[0]['lon'];
+
 // 4. Ponto de Referência (Agora salvo de forma limpa, sem o título junto)
 $pontoReferencia = mysqli_real_escape_string($conexao, $_POST['ponto_referencia']);
 
@@ -49,45 +92,54 @@ $horarioFimEvento = $_POST['horario_fim_evento'];
 $categoriaId = $_POST['categorias'];
 
 // SQL ORGANIZADO: Cada informação na sua respectiva coluna
-$sql = "INSERT INTO eventos_cadastrados (
-            id_usuarios, 
-            titulo, 
-            descricao, 
-            rua, 
-            bairro, 
-            numero, 
-            cidade, 
-            ponto_referencia, 
-            data_inicio_evento, 
-            data_fim_evento, 
-            horario_inicio_evento, 
-            horario_fim_evento, 
-            id_categoria, 
-            Imagem
-        ) VALUES (
-            '$idUsuario', 
-            '$tituloEvento', 
-            '$descricaoDetalhada', 
-            '$rua', 
-            '$bairro', 
-            $numero, 
-            '$cidade', 
-            '$pontoReferencia', 
-            '$dataInicioEvento', 
-            '$dataFimEvento', 
-            '$horarioInicioEvento', 
-            '$horarioFimEvento', 
-            '$categoriaId', 
-            '$nomeImagem'
-        )";
+$sql = "INSERT INTO Eventos_Cadastrados(
+    id_usuarios, 
+    titulo, 
+    descricao, 
+    rua, 
+    bairro, 
+    numero, 
+    cidade, 
+    ponto_referencia, 
+    latitude,
+    longitude,
+    data_inicio_evento, 
+    data_fim_evento, 
+    horario_inicio_evento, 
+    horario_fim_evento, 
+    id_categoria, 
+    Imagem
+)
+
+VALUES(
+    '$idUsuario', 
+    '$tituloEvento', 
+    '$descricaoDetalhada', 
+    '$rua', 
+    '$bairro', 
+    $numero, 
+    '$cidade', 
+    '$pontoReferencia', 
+    $latitude,
+    $longitude,
+    '$dataInicioEvento', 
+    '$dataFimEvento', 
+    '$horarioInicioEvento', 
+    '$horarioFimEvento', 
+    '$categoriaId', 
+    '$nomeImagem'
+)";
 
 if ($conexao->query($sql) === TRUE) {
+
     echo "<script>
-            alert('Evento publicado com sucesso!');
             window.location.href = 'index.php';
           </script>";
+
 } else {
-    echo "Erro ao cadastrar: " . $conexao->error;
+
+    echo "Erro ao cadastrar evento: " . $conexao->error;
+
 }
 
 $conexao->close();
