@@ -19,6 +19,10 @@ border-radius: 12px; /* Para as pontas ficarem arredondadas como na sua foto */
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 10px;
+    /* Se o seu título for um h1, use: */
+    color: #ffffff;       /* Define a cor branca */
+    text-align: center;   /* Centraliza o texto horizontalmente */
+    width: 100%;          /* Garante que ele ocupe a largura total para centralizar */
 }
 
 .info-subtitle {
@@ -53,6 +57,11 @@ border-radius: 12px; /* Para as pontas ficarem arredondadas como na sua foto */
     overflow: hidden;
     text-align: left;
 }
+
+.accordion-item summary {
+    color: #7a23cb;
+}
+
 
 .accordion-header {
     padding: 15px 20px;
@@ -195,9 +204,13 @@ details[open] {
 
 .content {
     padding: 0 25px 10px 25px;
-    color: #1E293B;
+    color: #000000;
     line-height: 1.6;
     font-size: 0.95rem;
+}
+
+.content p {
+    color: #9333ea;
 }
 
 
@@ -218,9 +231,6 @@ details[open] .arrow {
     transform: rotate(-135deg); /* Gira para ficar o V para cima */
     margin-top: 5px;
 }
-
-
-
 
 
 /* Estilo do container */
@@ -257,4 +267,382 @@ details[open] .arrow {
   padding: 30px;
   border-top: 1px solid #eee;
   background-color: #fafafa;
+}
+
+
+
+
+
+
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 40px;
+    gap: 30px;
+    box-shadow: 0px 4px 10px rgba(45, 185, 201, 0.4);
+    z-index: 1000;
+}
+
+.logo img {
+    height: 55px;
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Empurra o botão Mapa e o Menu para alinhar corretamente */
+header > a:has(.botaoMapa) {
+    margin-right: auto;
+}
+
+.botaoMapa {
+    background: linear-gradient(45deg, #2dbac9, #a8329e);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.botaoMapa:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(45, 185, 201, 0.5);
+}
+
+/* --- 3. MENU DE NAVEGAÇÃO --- */
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #2dbac9;
+}
+
+/* --- 4. SUBMENU DO PERFIL (AJUSTADO) --- */
+.perfil {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    /* Ajuste de tamanho que resolveu seu problema anterior */
+    min-width: 190px;
+    width: max-content;
+    background: rgba(13, 13, 13, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+    border-image: linear-gradient(45deg, #2dbac9, #a8329e) 1;
+    padding: 10px 0;
+    list-style: none;
+    z-index: 9999;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.perfil:hover .submenu {
+    display: block;
+}
+
+.submenu::before {
+    content: "PERFIL";
+    display: block;
+    font-size: 11px;
+    color: #2dbac9;
+    letter-spacing: 2px;
+    padding: 10px 20px;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.submenu li a {
+    padding: 12px 20px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+}
+
+.submenu li a:hover {
+    background: rgba(45, 185, 201, 0.1);
+    color: #2dbac9;
+    border-left: 3px solid #a8329e;
+    padding-left: 25px;
+}
+
+/* --- 5. CONTEÚDO PRINCIPAL DO EVENTO --- */
+.main-container {
+    max-width: 1200px;
+    margin: 120px auto 60px;
+    padding: 0 20px;
+}
+
+.btn-voltar {
+    color: #00bcd4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+.btn-voltar:hover {
+    filter: brightness(1.2);
+}
+
+.header-evento {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.badge-categoria {
+    background: #00bcd4;
+    color: #000;
+    padding: 6px 18px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.header-evento h1 {
+    font-size: 3.2rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1.1;
+}
+
+/* --- 6. GRID E INFORMAÇÕES --- */
+.grid-evento {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.container-imagem img {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid #30363d;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.secao-info {
+    background: #161b22;
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid #30363d;
+    margin-bottom: 25px;
+}
+
+.secao-info h3 {
+    color: #00bcd4;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+}
+
+.info-item p {
+    margin-bottom: 8px;
+    color: #c9d1d9;
+    font-size: 1.05rem;
+}
+
+.descricao-texto {
+    color: #8b949e;
+    white-space: pre-wrap;
+    text-align: justify;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+/* --- 7. RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    .grid-evento {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-evento h1 {
+        font-size: 2.2rem;
+    }
+    
+    header {
+        padding: 10px 20px;
+    }
+}
+/*Body*/
+/* --- 1. CONFIGURAÇÕES GERAIS E RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #0b0e14;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+/* --- 2. HEADER E LOGO --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px 40px;
+    gap: 30px;
+    box-shadow: 0px 4px 10px rgba(45, 185, 201, 0.4);
+    z-index: 1000;
+}
+
+.logo img {
+    height: 55px;
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Empurra o botão Mapa e o Menu para alinhar corretamente */
+header > a:has(.botaoMapa) {
+    margin-right: auto;
+}
+
+.botaoMapa {
+    background: linear-gradient(45deg, #2dbac9, #a8329e);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.botaoMapa:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(45, 185, 201, 0.5);
+}
+
+/* --- 3. MENU DE NAVEGAÇÃO --- */
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #2dbac9;
+}
+
+/* --- 4. SUBMENU DO PERFIL (AJUSTADO) --- */
+.perfil {
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    /* Ajuste de tamanho que resolveu seu problema anterior */
+    min-width: 190px;
+    width: max-content;
+    background: rgba(13, 13, 13, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+    border-image: linear-gradient(45deg, #2dbac9, #a8329e) 1;
+    padding: 10px 0;
+    list-style: none;
+    z-index: 9999;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.perfil:hover .submenu {
+    display: block;
+}
+
+.submenu::before {
+    content: "PERFIL";
+    display: block;
+    font-size: 11px;
+    color: #2dbac9;
+    letter-spacing: 2px;
+    padding: 10px 20px;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.submenu li a {
+    padding: 12px 20px;
+    font-size: 14px;
+    border-left: 3px solid transparent;
+}
+
+.submenu li a:hover {
+    background: rgba(45, 185, 201, 0.1);
+    color: #2dbac9;
+    border-left: 3px solid #a8329e;
+    padding-left: 25px;
 }
