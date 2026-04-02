@@ -432,3 +432,113 @@ transparent
 color:white;
 box-sizing:border-box;
 }
+
+/* ============================================================
+   SEÇÃO DE EVENTOS ESTILO POLAROID (DESIGN DA IMAGEM)
+   ============================================================ */
+
+.secao-eventos-dinamica {
+    background-color: #000;
+    padding: 60px 40px;
+    overflow: hidden;
+}
+
+.grupo-categoria {
+    margin-bottom: 60px;
+}
+
+/* Títulos com as cores da imagem original */
+.titulo-categoria {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 32px;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.titulo-categoria .azul-neon { color: #00cbd6; text-transform: uppercase; }
+.titulo-categoria .roxo-neon { color: #a532ad; text-transform: uppercase; }
+
+/* Fileira de cards com scroll horizontal */
+.fileira-scroll {
+    display: flex;
+    gap: 50px;
+    overflow-x: auto;
+    padding: 20px 10px 40px 10px;
+    scrollbar-width: none; /* Firefox */
+}
+
+.fileira-scroll::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+.card-evento-horizontal {
+    display: flex;
+    align-items: center;
+    min-width: 400px;
+    transition: transform 0.3s;
+}
+
+/* Moldura estilo Polaroid Branca */
+.moldura-foto {
+    background: #ffffff;
+    padding: 10px 10px 30px 10px;
+    box-shadow: 6px 6px 0px #ff9800; /* Sombra Laranja padrão */
+    transform: rotate(-2deg);
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+/* Alterna rotação e cor da sombra para o segundo card, terceiro, etc */
+.card-evento-horizontal:nth-child(even) .moldura-foto {
+    box-shadow: 6px 6px 0px #9c27b0; /* Sombra Roxa */
+    transform: rotate(2deg);
+}
+
+.moldura-foto img {
+    width: 210px;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+    border: 1px solid #eee;
+}
+
+/* Informações do Evento ao lado da foto */
+.info-evento-lateral {
+    margin-left: -15px; /* Faz o texto "entrar" um pouco na foto como na imagem */
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 2px solid #333; /* Linha horizontal da imagem */
+    padding-top: 10px;
+}
+
+.texto-data-local {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.btn-saiba-mais-polaroid {
+    background-color: #ff9800; /* Laranja */
+    color: #fff !important;
+    text-decoration: none;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    display: inline-block;
+    width: fit-content;
+    text-transform: uppercase;
+}
+
+/* Botão roxo para os cards pares */
+.card-evento-horizontal:nth-child(even) .btn-saiba-mais-polaroid {
+    background-color: #ba68c8;
+}
+
+.btn-saiba-mais-polaroid:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}

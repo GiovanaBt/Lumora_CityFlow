@@ -58,7 +58,7 @@ $resultado = $conn->query($sql);
     <nav>
         <ul class="menu">
             <li><a href="index.php">INÍCIO</a></li>
-            <li><a href="informacoes.php">INFORMAÇÕES</a></li>
+            <li><a href="informacoes.php"><i class="fa-solid fa-circle-info"></i>INFORMAÇÕES</a></li>
             <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
 
             <?php if (isset($_SESSION['usuario_id'])): ?>
@@ -297,5 +297,172 @@ function rolarEsquerda() {
     track.scrollBy({ left: -320, behavior: 'smooth' });
 }
 </script>
+<?php
+// Dados para os carrosséis superiores
+$eventos_topo = [
+    ['titulo' => 'CINE JOIA', 'data' => '18.03', 'cor' => '#ff6600', 'img' => 'https://picsum.photos/400/300?random=1'],
+    ['titulo' => 'PQ. PDC', 'data' => '30.04', 'cor' => '#8a2be2', 'img' => 'https://picsum.photos/400/300?random=2'],
+    ['titulo' => 'CINE JOIA', 'data' => '18.03', 'cor' => '#ff6600', 'img' => 'https://picsum.photos/400/300?random=1'],
+];
+
+// Dados para a "Última Chamada"
+$eventos_lista = [
+    ["titulo" => "CONFERÊNCIA TECH RIO", "local" => "Centro de Convenções Sul - RJ", "data" => "Quinta, 15 de Outubro às 09:00", "imagem" => "https://picsum.photos/seed/1/400/300"],
+    ["titulo" => "SEMINÁRIO INOVAÇÃO DIGITAL", "local" => "Auditório Tech Hub - Niterói", "data" => "Sábado, 17 de Outubro às 10:30", "imagem" => "https://picsum.photos/seed/2/400/300"],
+    ["titulo" => "JANTAR DE GALA BENEFICENTE", "local" => "Clube Harmonia - Ipanema", "data" => "Sexta, 23 de Outubro às 20:00", "imagem" => "https://picsum.photos/seed/3/400/300"],
+    ["titulo" => "SHOW DE ROCK: BANDA X", "local" => "Estádio Nilton Santos - Rio", "data" => "Sexta, 30 de Outubro às 21:00", "imagem" => "https://picsum.photos/seed/4/400/300"],
+    ["titulo" => "WORKSHOP GASTRONOMIA", "local" => "Espaço Gourmet - Barra da Tijuca", "data" => "Domingo, 25 de Outubro às 11:00", "imagem" => "https://picsum.photos/seed/5/400/300"],
+    ["titulo" => "FESTIVAL DE MÚSICA", "local" => "Marina da Glória - RJ", "data" => "Sábado, 24 de Outubro às 22:00", "imagem" => "https://picsum.photos/seed/6/400/300"],
+];
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonte principal -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:ital,wght@0,400;0,700;1,300&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --neon-blue: #00f2ff; --neon-purple: #bd34d1; }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* PADRONIZAÇÃO: usar mesma fonte da "Última Chamada" */
+        .font-destaque {
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        .moldura-rasgada {
+            background: #fff;
+            padding: 10px 10px 50px 10px;
+            position: relative;
+            clip-path: polygon(0% 2%, 100% 0%, 98% 95%, 80% 98%, 20% 94%, 0% 100%);
+            transform: rotate(-1deg);
+            box-shadow: 15px 15px 0 var(--cor);
+        }
+
+        .secao-carrossel { position: relative; margin-bottom: 60px; }
+
+        .seta-next {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            z-index: 10;
+        }
+
+        .info-tag {
+            position: absolute;
+            bottom: 20px;
+            left: -10px;
+            background: #000;
+            padding: 4px 12px;
+            border-bottom: 4px solid var(--neon-blue);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transform: rotate(1deg);
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        .btn-saiba-mais {
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            background: var(--cor);
+            color: #fff;
+            padding: 4px 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        .card-lista {
+            background: linear-gradient(145deg, #2d0b3d 0%, #0a2322 100%);
+            border: 1px solid #222;
+        }
+    </style>
+</head>
+
+<body class="p-8">
+
+<div class="max-w-6xl mx-auto">
+
+<?php 
+$secoes = ["EVENTOS HOJE", "EVENTOS FAMOSOS", "EVENTOS PARA CRIANÇAS"];
+foreach ($secoes as $titulo): 
+?>
+<section class="secao-carrossel">
+    <br><br><br>
+
+    <!-- TÍTULOS AGORA PADRONIZADOS -->
+    <h2 class="font-destaque text-4xl text-[#00f2ff] mb-8" style="text-shadow: 3px 3px #bd34d1;">
+        <?= $titulo ?>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+        <?php foreach ($eventos_topo as $e): ?>
+        <div class="relative group" style="--cor: <?= $e['cor'] ?>;">
+            <div class="moldura-rasgada">
+                <img src="<?= $e['img'] ?>" class="w-full h-48 object-cover">
+                <div class="info-tag"><?= $e['data'] ?> <?= $e['titulo'] ?></div>
+                <a href="#" class="btn-saiba-mais">SAIBA MAIS</a>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        <div class="seta-next">→</div>
+    </div>
+</section>
+<?php endforeach; ?>
+
+<h1 class="font-destaque text-6xl italic mt-20 mb-12">
+    <span class="text-[#36cfc9]">ÚLTIMA</span> 
+    <span class="text-[#bd34d1] ml-2">CHAMADA!</span>
+</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<?php foreach ($eventos_lista as $ev): ?>
+<div class="card-lista rounded-[2.5rem] p-4 flex items-center shadow-2xl border-l-8 border-[#bd34d1]">
+    
+    <div class="w-32 h-32 flex-shrink-0">
+        <img src="<?= $ev['imagem'] ?>" class="w-full h-full object-cover rounded-3xl">
+    </div>
+    
+    <div class="ml-6">
+        <h3 class="font-destaque text-[#ff8a3d] text-lg uppercase leading-tight mb-1">
+            <?= $ev['titulo'] ?>
+        </h3>
+        <p class="text-gray-300 text-sm italic font-light">
+            <?= $ev['local'] ?>
+        </p>
+        <p class="text-gray-400 text-xs mt-2 font-bold">
+            <?= $ev['data'] ?>
+        </p>
+    </div>
+
+</div>
+<?php endforeach; ?>
+</div>
+
+</div>
+
+<footer class="h-20"></footer>
 </body>
 </html>
