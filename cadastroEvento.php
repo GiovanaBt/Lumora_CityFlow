@@ -50,7 +50,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
     <nav>
         <ul class="menu">
             <li><a href="index.php">INÍCIO</a></li>
-            <li><a href="#informacoes">INFORMAÇÕES</a></li>
+            <li><a href="informacoes.php"><i class="fa-solid fa-circle-info"></i>INFORMAÇÕES</a></li>
             <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
 
             <?php if (isset($_SESSION['usuario_id'])): ?>
@@ -152,7 +152,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
             </div>
         </section>
 
-        <<div class="campo-cadastro">
+        <div class="campo-cadastro">
     <label>3. DESCRIÇÃO DO EVENTO</label>
     <textarea name="descricao" rows="6" placeholder="Descreva as atividades, cronograma e detalhes..."></textarea>
 </div>
@@ -193,7 +193,7 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
             <div class="checkbox-container">
                 <input type="checkbox" id="termos" name="termos" required>
                 <label for="termos">
-                    Ao publicar este evento, declaro estar de acordo com os <a href="#">Termos de Uso</a>, bem como estar ciente da <a href="#">Política de Privacidade</a>.
+                    Ao publicar este evento, declaro estar de acordo com os <a href="informacoes.php#termosUsos">Termos de Uso</a>, bem como estar ciente da <a href="informacoes.php">Política de Privacidade</a>.
                 </label>
             </div>
         </section>
