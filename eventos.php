@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'Conexao.php';
 
 $id = isset($_GET['id']) ? mysqli_real_escape_string($conexao, $_GET['id']) : 0;
@@ -12,7 +13,7 @@ $result = $conexao->query($sql);
 $evento = $result->fetch_assoc();
 
 if (!$evento) {
-    die("<style>body{background:#000;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;}</style><h1>Evento não encontrado!</h1>");
+    die("<link rel='stylesheet' href='style_evento.css'><div class='error-container'><h1>Evento não encontrado!</h1></div>");
 }
 ?>
 
@@ -22,29 +23,47 @@ if (!$evento) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= htmlspecialchars($evento['titulo']); ?> | CityFlow</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0b0e14; color: #ffffff; padding: 20px; }
-        .main-container { max-width: 1100px; margin: 40px auto; }
-        .header-evento { text-align: center; margin-bottom: 40px; }
-        .badge-categoria { background: #00bcd4; color: #000; padding: 6px 16px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; text-transform: uppercase; }
-        /* Ajuste para o título não quebrar o visual se for longo */
-        .header-evento h1 { font-size: 2.8rem; margin-top: 15px; text-transform: uppercase; color: #fff; line-height: 1.2; }
-        .grid-evento { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; }
-        .container-imagem img { width: 100%; border-radius: 15px; border: 1px solid #30363d; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .secao-info { background: #161b22; padding: 25px; border-radius: 12px; border: 1px solid #30363d; margin-bottom: 20px; }
-        .secao-info h3 { color: #00bcd4; margin-bottom: 12px; font-size: 1.1rem; text-transform: uppercase; }
-        .info-item p { margin-bottom: 8px; color: #c9d1d9; font-size: 1.1rem; }
-        .descricao-texto { color: #8b949e; line-height: 1.8; white-space: pre-wrap; font-size: 1.1rem; text-align: justify; }
-        
-        /* Botão de voltar para facilitar a navegação */
-        .btn-voltar { display: inline-block; margin-bottom: 20px; color: #00bcd4; text-decoration: none; font-weight: bold; }
-        .btn-voltar:hover { text-decoration: underline; }
-
-        @media (max-width: 850px) { .grid-evento { grid-template-columns: 1fr; } }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style_evento.css">
 </head>
 <body>
+
+<header class="header-principal">
+    <div class="logo">
+        <a href="index.php"><img src="imgs/cityFlow.webp" alt="Logo"></a>
+    </div>
+    <a href="mapa.php" target="_blank">
+        <button class="botaoMapa">MAPA</button>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="index.php">INÍCIO</a></li>
+            <li><a href="informacoes.php">INFORMAÇÕES</a></li>
+            <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
+
+            <?php if (isset($_SESSION['usuario_id'])): ?>
+                <li class="perfil">
+                    <a href="#"><i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?></a>
+                    <ul class="submenu">
+                        <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
+                        <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
+                        <li><a href="ajuda.php"><i class="fa-solid fa-circle-question"></i> Central de ajuda</a></li>
+                        <hr style="border:0.5px solid #333; margin:5px 15px; opacity:0.2;">
+                        <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
+                    </ul>
+                </li>
+            <?php else: ?>
+                <li>
+                    <div class="menu-container" id="abrirModal">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        <span class="texto-entrar">ENTRAR</span>
+                    </div>
+                </li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+</header>
 
 <div class="main-container">
     <a href="index.php" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar para o Início</a>
@@ -71,19 +90,19 @@ if (!$evento) {
             </section>
 
             <section class="secao-info">
-    <h3>📍 Localização</h3>
-    <div class="info-item">
-        <p><strong>Cidade:</strong> <?= htmlspecialchars($evento['cidade']); ?></p>
-        <p><strong>Endereço:</strong> <?= htmlspecialchars($evento['rua']); ?>, <?= $evento['numero']; ?></p>
-        <p><strong>Bairro:</strong> <?= htmlspecialchars($evento['bairro']); ?></p>
-        
-        <?php if(!empty($evento['ponto_referencia'])): ?>
-            <p style="color: #00bcd4; font-size: 0.9rem; margin-top: 10px;">
-                <strong>Ponto de Referência:</strong> <?= htmlspecialchars($evento['ponto_referencia']); ?>
-            </p>
-        <?php endif; ?>
-    </div>
-</section>
+                <h3>📍 Localização</h3>
+                <div class="info-item">
+                    <p><strong>Cidade:</strong> <?= htmlspecialchars($evento['cidade']); ?></p>
+                    <p><strong>Endereço:</strong> <?= htmlspecialchars($evento['rua']); ?>, <?= $evento['numero']; ?></p>
+                    <p><strong>Bairro:</strong> <?= htmlspecialchars($evento['bairro']); ?></p>
+                    
+                    <?php if(!empty($evento['ponto_referencia'])): ?>
+                        <p class="ponto-referencia">
+                            <strong>Ponto de Referência:</strong> <?= htmlspecialchars($evento['ponto_referencia']); ?>
+                        </p>
+                    <?php endif; ?>
+                </div>
+            </section>
 
             <section class="secao-info">
                 <h3>📝 Sobre o Evento</h3>
