@@ -18,41 +18,21 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="cadastroEvento.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        .upload-placeholder { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 200px; border: 2px dashed #30363d; border-radius: 10px; background: #0d1117; transition: 0.3s; }
-        .upload-placeholder:hover { border-color: #00d4ff; }
-        #image-preview { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; display: none; }
-        #upload-text { z-index: 2; position: relative; color: #6e7681; font-size: 0.9rem; }
-        .upload-placeholder input[type="file"] { position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 3; }
-        
-        .controles-foto { display: none; flex: 1; margin-left: 20px; min-width: 250px; text-align: left; }
-        .btn-foto-acao { background: transparent; border-radius: 20px; padding: 8px 15px; cursor: pointer; font-weight: bold; transition: 0.3s; margin-bottom: 15px; text-transform: uppercase; font-size: 0.75rem; }
-        .btn-foto-acao:hover { transform: scale(1.05); opacity: 0.8; }
-
-        .modal-previa { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-        .modal-card { background: #161b22; border: 1px solid #00d4ff; width: 90%; max-width: 400px; border-radius: 20px; overflow: hidden; box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); }
-    </style>
 </head>
 <body>  
 <header>
     <div class="logo">
-        <a href="index.php"><img src="imgs/cityFlow.webp"></a>
+        <a href="index.php"><img src="imgs/cityFlow.webp" alt="Logo CityFlow"></a>
     </div>
-
-    <div class="hamburguer" id="hamburguer">
-        <i class="fa-solid fa-bars"></i>
-    </div>
-
     <a href="mapa.php" target="_blank">
         <button class="botaoMapa">MAPA</button>
     </a>
-
     <nav>
         <ul class="menu">
             <li><a href="index.php">INÍCIO</a></li>
-            <li><a href="informacoes.php"><i class="fa-solid fa-circle-info"></i>INFORMAÇÕES</a></li>
+            <li><a href="informacoes.php">INFORMAÇÕES</a></li>
             <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
-
+            
             <?php if (isset($_SESSION['usuario_id'])): ?>
                 <li class="perfil">
                     <a href="#"><i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?></a>
@@ -60,16 +40,8 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                         <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
                         <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
                         <li><a href="ajuda.php"><i class="fa-solid fa-circle-question"></i> Central de ajuda</a></li>
-                        <hr style="border:0.5px solid #333; margin:5px 15px; opacity:0.2;">
                         <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
                     </ul>
-                </li>
-            <?php else: ?>
-                <li>
-                    <div class="menu-container" id="abrirModal">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                        <span class="texto-entrar">ENTRAR</span>
-                    </div>
                 </li>
             <?php endif; ?>
         </ul>
@@ -98,13 +70,15 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
                     </div>
 
                     <div id="area-controles" class="controles-foto">
-                        <div style="display: flex; gap: 10px;">
-                            <button type="button" class="btn-foto-acao" style="border: 1px solid #00d4ff; color: #00d4ff;" onclick="document.getElementById('capa').click()">TROCAR IMAGEM</button>
-                            <button type="button" class="btn-foto-acao" style="border: 1px solid #ff4b4b; color: #ff4b4b;" onclick="limparFoto()">REMOVER</button>
-                        </div>
-                        <label style="font-size: 0.85rem; color: #8b949e; display: block; margin-bottom: 5px;">Descrição da imagem (acessibilidade)</label>
-                        <textarea name="alt_text" id="alt_text" placeholder="Descreva a imagem..." style="width: 100%; height: 70px; background: #0d1117; color: white; border: 1px solid #30363d; padding: 10px; border-radius: 8px; resize: none;"></textarea>
-                    </div>
+    <div class="botoes-foto-flex">
+        <button type="button" class="btn-foto-acao btn-trocar" onclick="document.getElementById('capa').click()">TROCAR IMAGEM</button>
+        <button type="button" class="btn-foto-acao btn-remover" onclick="limparFoto()">REMOVER</button>
+    </div>
+    
+    <label class="label-acessibilidade">Descrição da imagem (acessibilidade)</label>
+    
+    <textarea name="alt_text" id="alt_text" placeholder="Descreva a imagem..." class="input-acessibilidade"></textarea>
+</div>
                 </div>
             </div>
 
@@ -206,18 +180,6 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
     </div> 
 </form>
 
-<div id="modalPrevia" class="modal-previa">
-    <div class="modal-card">
-        <img id="p-img" src="" style="width:100%; height:180px; object-fit:cover; display:none;">
-        <div style="padding: 20px;">
-            <h2 id="p-nome" style="color:#00d4ff; margin:0; font-size: 1.4rem;"></h2>
-            <p id="p-data" style="color:#8b949e; font-size:0.8rem; margin:10px 0;"></p>
-            <p id="p-desc" style="color:white; font-size:0.9rem; line-height:1.4; max-height:120px; overflow-y:auto;"></p>
-            <button type="button" onclick="fecharPrevia()" style="width:100%; padding:12px; background:#00d4ff; border:none; border-radius:100px; color:#000; font-weight:bold; margin-top:15px; cursor:pointer;">FECHAR</button>
-        </div>
-    </div>
-</div>
-
 <script>
 // LÓGICA DA FOTO
 function gerenciarFoto(input) {
@@ -268,19 +230,6 @@ function mascaraCEP(input) {
     v = v.replace(/(\d{5})(\d)/, "$1-$2");
     input.value = v;
 }
-
-// LÓGICA DA PRÉVIA
-function abrirPrevia() {
-    document.getElementById('p-nome').innerText = document.getElementById('nome').value || "Título";
-    document.getElementById('p-desc').innerText = document.getElementById('descricao').value || "Sem descrição.";
-    document.getElementById('p-data').innerText = `📅 ${document.getElementById('data_inicio').value} | 📍 ${document.getElementById('cidade').value}`;
-    const foto = document.getElementById('image-preview');
-    const pImg = document.getElementById('p-img');
-    if(foto.style.display !== 'none') { pImg.src = foto.src; pImg.style.display = 'block'; }
-    document.getElementById('modalPrevia').style.display = 'flex';
-}
-
-function fecharPrevia() { document.getElementById('modalPrevia').style.display = 'none'; }
 </script>
 </body>
 </html>

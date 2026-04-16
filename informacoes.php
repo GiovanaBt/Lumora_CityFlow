@@ -26,23 +26,17 @@ if (!isset($_SESSION['usuario_id'])) {
 <h1 class="info-title">INFORMAÇÕES</i></h1><br><br> 
 <header>
     <div class="logo">
-        <a href="index.php"><img src="imgs/cityFlow.webp"></a>
+        <a href="index.php"><img src="imgs/cityFlow.webp" alt="Logo CityFlow"></a>
     </div>
-
-    <div class="hamburguer" id="hamburguer">
-        <i class="fa-solid fa-bars"></i>
-    </div>
-
     <a href="mapa.php" target="_blank">
         <button class="botaoMapa">MAPA</button>
     </a>
-
     <nav>
         <ul class="menu">
             <li><a href="index.php">INÍCIO</a></li>
-            <li><a href="informacoes.php"><i class="fa-solid fa-circle-info"></i>INFORMAÇÕES</a></li>
+            <li><a href="informacoes.php">INFORMAÇÕES</a></li>
             <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
-
+            
             <?php if (isset($_SESSION['usuario_id'])): ?>
                 <li class="perfil">
                     <a href="#"><i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?></a>
@@ -50,22 +44,13 @@ if (!isset($_SESSION['usuario_id'])) {
                         <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
                         <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
                         <li><a href="ajuda.php"><i class="fa-solid fa-circle-question"></i> Central de ajuda</a></li>
-                        <hr style="border:0.5px solid #333; margin:5px 15px; opacity:0.2;">
                         <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
                     </ul>
-                </li>
-            <?php else: ?>
-                <li>
-                    <div class="menu-container" id="abrirModal">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                        <span class="texto-entrar">ENTRAR</span>
-                    </div>
                 </li>
             <?php endif; ?>
         </ul>
     </nav>
 </header>
-
 <h1 class="info-title">INFORMAÇÕES</h1><br><br>
 <main class="info-container">
     <h2 class="info-subtitle">INFORMAÇÕES GERAIS</h2>

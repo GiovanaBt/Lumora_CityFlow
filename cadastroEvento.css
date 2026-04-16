@@ -730,3 +730,62 @@ input::-webkit-calendar-picker-indicator {
     font-family: inherit; /* Garante que o texto de exemplo também mude */
     color: #6e7681;
 }
+/* Container dos botões Trocar/Remover */
+.botoes-foto-flex {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilo base para os botões de ação da foto */
+.btn-foto-acao {
+    padding: 10px 20px;
+    border-radius: 100px; /* Seguindo o padrão arredondado do seu site */
+    font-weight: bold;
+    cursor: pointer;
+    background: transparent;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn-foto-acao:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Cores específicas dos botões */
+.btn-trocar {
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-remover {
+    border: 1px solid #ff4b4b;
+    color: #ff4b4b;
+}
+
+/* Estilização da Label de Acessibilidade */
+.label-acessibilidade {
+    font-size: 0.85rem;
+    color: #8b949e;
+    display: block;
+    margin-bottom: 5px;
+    margin-top: 15px; /* Espaço entre os botões e a label */
+    text-align: left;
+}
+
+/* Estilização do Textarea de Acessibilidade */
+.input-acessibilidade {
+    width: 100%;
+    height: 70px;
+    background: var(--bg-color); /* Usando sua variável de fundo escuro */
+    color: white;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 8px;
+    resize: none;
+    box-sizing: border-box; /* Garante que o padding não estoure a largura */
+}
+
+.input-acessibilidade:focus {
+    border-color: var(--accent-color);
+    outline: none;
+}
