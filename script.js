@@ -115,3 +115,26 @@ function mostrarPrevia(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+// Captura o elemento do carrossel
+const track = document.getElementById('carrossel-track');
+
+/**
+ * Rola o carrossel para a direita
+ */
+function rolarDireita() {
+    // Rola uma quantidade fixa (320px) de forma suave
+    track.scrollBy({ 
+        left: 320, 
+        behavior: 'smooth' 
+    });
+}
+
+/**
+ * Rola o carrossel para a esquerda
+ */
+function rolarEsquerda() {
+    track.scrollBy({ 
+        left: -320, 
+        behavior: 'smooth' 
+    });
+}
