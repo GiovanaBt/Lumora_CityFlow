@@ -14,7 +14,9 @@ $categorias = mysqli_query($conexao, 'SELECT id_categoria, categoria_evento FROM
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CityFlow - Cadastro de Eventos</title>
+    <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="cadastroEvento.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">

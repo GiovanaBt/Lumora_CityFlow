@@ -16,215 +16,14 @@ body {
     color: var(--text-color);
     font-family: 'Inter', sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 50;
     overflow-x: hidden;
-    /* MUDE PARA BLOCK: Isso permite que o Header ocupe 100% da largura livremente */
-    display: block; 
     min-height: 100vh;
-}
 
-
-/* 2. HEADER TOTALMENTE COLADO E ESTICADO */
-header {
-    width: 100%;                /* Ocupa toda a largura da tela */
-    background-color: #000000;
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; /* Distribui logo e menu nas extremidades */
-    padding: 15px 40px;         /* Espaçamento interno vertical e horizontal */
-    box-shadow: 0px 4px 15px rgba(45, 185, 201, 0.4); 
-    box-sizing: border-box;     /* Impede que o padding "estoure" a largura */
-    
-    position: relative;         
-    top: 0;                     /* Garante que comece no pixel zero */
-    left: 0;
-    margin: 0 !important;       /* Remove qualquer margem residual */
-    z-index: 1000;              /* Fica por cima de outros elementos */
-}
-
-/* Ajuste para o título não ficar grudado no header agora que ele subiu */
-.main-title {
-    margin-top: 50px !important; 
-
-}
-header>a:has(.botaoMapa) {
-    margin-right: auto; /* Truque: consome o espaço vazio à direita, jogando o menu para o fim */
-}
-header a {
-    text-decoration: none; /* Remove sublinhado dos links */
-}
-
-.logo { /* Bloco da logo, para garantir que o menu fique à direita */
-    display: flex;
-    align-items: center;
-}
-.logo img {
-    height: 60px; /* Ajusta a altura da logo para se encaixar bem no header */
-}
-.logo:hover {
-    transform: scale(1.05); /* Efeito suave ao passar o mouse */
-}
-
-.fa-circle-plus { /* Ícone de adicionar evento no menu, usando a cor turquesa para destacar */
-    color: #16cee2;
-    margin-right: 2px; /* Espaço entre o ícone e o texto */
-    font-size: 1.2em;
-}
-
-.botaoMapa {
-    background: linear-gradient(45deg, #2dbac9, #a8329e); /* Corrigido de background-color */
-    color: white;
-    border: none;
-    padding: 10px 30px; 
-    border-radius: 100px; /* Deixa as pontas totalmente redondas */
-    cursor: pointer;
-    font-weight: bold; /* Deixa o texto em negrito */
-    display: flex;
-    align-items: center;
-}
-
-.botaoMapa:hover {
-    transform: scale(1.05); /* Efeito suave ao passar o mouse */
-}
-
-.menu-container { /* Container para entrar */
-    display: flex;
-    align-items: center;
-    gap: 12px; /* <--- ADICIONE ESTA LINHA (mude o número para o espaço que desejar) */
-    padding: 8px 20px;
-    border-radius: 100px; 
-    background: linear-gradient(#000, #000) padding-box, 
-                linear-gradient(45deg, #a8329e, #2dbac9) border-box;
-    border: 2px solid transparent; 
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s;
-}   
-.menu-container:hover {
-    transform: scale(1.05); /* Efeito suave ao passar o mouse */
-}
-.menu-container i { /* Estiliza o ícone e o texto dentro do link de entrar */
-    color: white;
-    font-size: 15px;
-}
-/* Garante que o ícone e o texto dentro do botão sejam clicáveis e brancos */
-#abrirModal i, 
-#abrirModal span,
-.menu-container i {
-    color: #ffffff !important; 
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    pointer-events: none; /* Faz o clique passar para o container pai */
-}
-.perfil { 
-    display: flex;
-    align-items: center;
-    position: relative; /* ESSENCIAL: Isso diz ao submenu para se alinhar por aqui */
-    cursor: pointer;
-    height: 100%; /* Garante que o hover funcione em toda a área */
-}
-.perfil:hover .submenu { /* Exibe o submenu ao passar o mouse sobre o perfil */
-    display: block;
-}
-.submenu { 
-    display: none;
-    position: absolute;
-    /* ALTERE DE 100% PARA 115% (ou o valor que preferir) */
-    top: 115%; 
-    right: 0;
-    min-width: 220px;
-    
-    /* Fundo: Preto levemente transparente */
-    background: rgba(13, 13, 13, 0.95);
-    backdrop-filter: blur(10px);
-    
-    /* Borda Gradiente */
-    border: 1px solid transparent;
-    border-image: linear-gradient(45deg, #2dbac9, #a8329e) 1;
-    
-    padding: 5px 0; 
-    list-style: none;
-    z-index: 9999;
-    
-    /* Sombra com brilho externo */
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.8), 
-                0px 0px 15px rgba(45, 185, 201, 0.2);
-}
-
-/* Título interno */
-.submenu::before {
-    content: "PERFIL";
-    display: block;
-    font-size: 13px;
-    color: #2dbac9;
-    letter-spacing: 2px;
-    
-    /* ALTERE O PRIMEIRO NÚMERO (6px) PARA UM MAIOR */
-    padding: 15px 21px 15px 21px;
-    font-weight: bold;
-    opacity: 0.7;
-}
-
-/* Itens da lista */
-.submenu li {
-    width: 100%;
-    /* REMOVIDO: margens que empurravam os itens para baixo */
-    margin: 0 !important; 
-}
-
-.submenu li a {
-    /* REDUZIDO: padding vertical de 12px para 8px para ficar mais compacto */
-    padding: 8px 20px; 
-    display: flex;
-    align-items: center;
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border-left: 3px solid transparent;
-    gap: 10px; /* Garante espaço entre ícone e texto */
-}
-
-/* Efeito ao passar o mouse */
-.submenu li a:hover {
-    background: rgba(45, 185, 201, 0.1);
-    color: #2dbac9;
-    border-left: 3px solid #a8329e;
-    padding-left: 25px;
-}
-
-/* Item da CENTRAL DE AJUDA (Mesma cor do perfil) */
-.submenu li a[href="ajuda.php"] {
-    color: #ffffff; /* Mantém branco, muda para turquesa no hover automático acima */
-}
-
-/* Item de SAIR (Vermelho) */
-.submenu li a[href="logout.php"] {
-    color: #ff4d4d;
-}
-
-.submenu li a[href="logout.php"]:hover {
-    background: rgba(255, 77, 77, 0.1);
-    border-left-color: #ff4d4d;
-}
-/* Item da CENTRAL DE AJUDA */
-.submenu li a[href="ajuda.php"] {
-    color: #ffffff;
-}
-
-.submenu li a[href="ajuda.php"]:hover {
-    background: rgba(45, 185, 201, 0.1);
-    color: #2dbac9;
-    border-left: 3px solid #2dbac9; /* Cor turquesa para diferenciar do roxo do perfil */
 }
 
 /* Container que segura todos os quadrados */
 .main-container {
-    width: 90%;           /* Largura responsiva para celulares */
-    max-width: 1000px;    /* Largura fixa máxima para ficar igual à sua foto */
-    margin: 40px auto;    /* O 'auto' nas laterais CENTRALIZA o container na tela */
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -788,4 +587,18 @@ input::-webkit-calendar-picker-indicator {
 .input-acessibilidade:focus {
     border-color: var(--accent-color);
     outline: none;
+}
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+.page-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
 }

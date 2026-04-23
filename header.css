@@ -1,0 +1,262 @@
+/* =========================
+   RESET GLOBAL (EVITA BUGS ENTRE PÁGINAS)
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY (ESPAÇO CORRETO DO HEADER FIXO)
+========================= */
+body {
+    margin: 0;
+    padding-top: 90px; /* ALTURA REAL DO HEADER */
+    font-family: Arial, sans-serif;
+    background-color: #000;
+}
+
+/* =========================
+   HEADER FIXO PADRONIZADO
+========================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+
+    background-color: #000;
+    box-shadow: 0px 4px 10px rgba(45, 185, 201, 0.4);
+
+    padding: 0 40px;
+    box-sizing: border-box;
+     gap: 35px; /* aumenta aqui */
+}
+
+/* LADO ESQUERDO (LOGO + MAPA) */
+.left-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* empurra menu para direita */
+nav {
+    margin-left: auto;
+}
+
+/* links sem padrão quebrado */
+header a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================
+   LOGO
+========================= */
+.logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.logo img {
+    height: 60px;
+    transition: transform 0.2s;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+/* =========================
+   BOTÃO MAPA
+========================= */
+.botaoMapa {
+    background: linear-gradient(45deg, #2dbac9, #a8329e);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 100px;
+    font-weight: bold;
+
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.botaoMapa:hover {
+    transform: scale(1.05);
+}
+
+/* =========================
+   MENU PRINCIPAL
+========================= */
+.menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+
+    margin: 0;
+    padding: 0;
+
+    white-space: nowrap; /* EVITA QUEBRA E SUMIÇO DO NOME */
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #2dbac9;
+}
+
+/* =========================
+   ÍCONE +
+========================= */
+.fa-circle-plus {
+    color: #16cee2;
+    font-size: 1.2em;
+}
+
+/* =========================
+   PERFIL
+========================= */
+.perfil {
+    position: relative;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.perfil:hover .submenu {
+    display: block;
+}
+
+/* =========================
+   SUBMENU
+========================= */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+
+    min-width: 220px;
+
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid #2dbac9;
+    border-radius: 10px;
+
+    padding: 5px 0;
+    list-style: none;
+
+    z-index: 9999;
+
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
+}
+
+.submenu::before {
+    content: "PERFIL";
+    display: block;
+    padding: 12px 20px;
+    font-size: 13px;
+    color: #2dbac9;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.submenu li a {
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.submenu li a:hover {
+    background: rgba(45,185,201,0.1);
+    color: #2dbac9;
+    padding-left: 25px;
+}
+
+/* SAIR */
+.submenu li a[href="logout.php"] {
+    color: #ff4d4d;
+}
+
+/* =========================
+   BOTÃO ENTRAR
+========================= */
+.menu-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 8px 20px;
+    border-radius: 100px;
+
+    background: #000;
+    border: 2px solid transparent;
+    background-image: linear-gradient(#000,#000),
+        linear-gradient(45deg,#a8329e,#2dbac9);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.menu-container:hover {
+    transform: scale(1.05);
+}
+
+.menu-container i,
+.menu-container span {
+    color: #fff;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 999;
+}
+
+.modal-conteudo {
+    background: #fff;
+    width: 400px;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 25px #2dbac9;
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Editor Drag & Drop Compose</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 { margin-bottom: 10px; }
+
+    .toolbar button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .editor {
+      border: 1px solid #ccc;
+      min-height: 300px;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .component {
+      border: 1px dashed #333;
+      padding: 5px;
+      margin: 5px 0;
+      cursor: move;
+      background-color: #f9f9f9;
+    }
+
+    button#generate {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+
+    pre#output {
+      background: #eee;
+      padding: 10px;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Editor Drag & Drop - Jetpack Compose</h1>
+
+  <div class="toolbar">
+    <button onclick="addComponent('Text')">Text</button>
+    <button onclick="addComponent('Button')">Button</button>
+  </div>
+
+  <div id="editor" class="editor" ondragover="allowDrop(event)" ondrop="drop(event)">
+    <!-- componentes -->
+  </div>
+
+  <button id="generate" onclick="gerarCompose()">Gerar Compose</button>
+
+  <h2>Código Compose Gerado:</h2>
+  <pre id="output"></pre>
+
+  <script>
+    let components = [];
+    let draggedId = null;
+    const editor = document.getElementById('editor');
+
+    function addComponent(type) {
+      const id = components.length;
+      const comp = { id, type, text: type };
+      components.push(comp);
+
+      const el = document.createElement('div');
+      el.className = 'component';
+      el.draggable = true;
+      el.id = `comp-${id}`;
+      el.innerText = `${type} (Clique para editar)`;
+
+      el.ondragstart = () => { draggedId = id; }
+
+      el.onclick = () => {
+        const newText = prompt('Digite o texto do componente:', comp.text);
+        if (newText) {
+          comp.text = newText;
+          el.innerText = `${type}: ${comp.text}`;
+        }
+      }
+
+      editor.appendChild(el);
+    }
+
+    // Drag & Drop
+    function allowDrop(ev) { ev.preventDefault(); }
+
+    function drop(ev) {
+      ev.preventDefault();
+      const draggedEl = document.getElementById(`comp-${draggedId}`);
+      const target = ev.target.closest('.component');
+
+      if (target && target.id !== `comp-${draggedId}`) {
+        editor.insertBefore(draggedEl, target.nextSibling);
+      } else {
+        editor.appendChild(draggedEl);
+      }
+
+      // Atualiza ordem
+      const newOrder = [];
+      editor.querySelectorAll('.component').forEach(el => {
+        const id = parseInt(el.id.replace('comp-', ''));
+        newOrder.push(components.find(c => c.id === id));
+      });
+      components = newOrder;
+    }
+
+    // Gerador Jetpack Compose
+    function gerarCompose() {
+      let code = `@Composable\nfun MyScreen() {\n    Column(\n        modifier = Modifier\n            .fillMaxSize()\n            .padding(16.dp)\n    ) {\n`;
+
+      components.forEach(comp => {
+        if (comp.type === 'Text') {
+          code += `        Text(text = "${comp.text}")\n`;
+        } else if (comp.type === 'Button') {
+          code += `        Button(onClick = { /* TODO */ }) {\n            Text("${comp.text}")\n        }\n`;
+        }
+      });
+
+      code += '    }\n}';
+      document.getElementById('output').innerText = code;
+    }
+  </script>
+</body>
+</html>
