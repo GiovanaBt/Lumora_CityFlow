@@ -18,6 +18,182 @@ body {
 }
 
 /* =========================
+   MODAL
+========================= */
+/* ===== MODAL (FUNDO) ===== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+
+    background-color: rgba(0, 0, 0, 0.6);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+/* ===== CONTEÚDO DO MODAL (MAIS LARGO) ===== */
+.modal-conteudo {
+    background-color: #fff;
+
+    width: 500px;
+    max-width: 95%;
+
+    padding: 22px 28px;
+
+    border-radius: 15px;
+
+    position: relative;
+    text-align: center;
+
+    box-shadow: 0px 0px 25px rgba(45, 185, 201, 0.6);
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* leve ajuste geral */
+}
+
+/* ===== BOTÃO FECHAR ===== */
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    font-size: 22px;
+    cursor: pointer;
+
+    color: #a8329e;
+}
+
+.fechar:hover {
+    color: #fff;
+}
+/* ===== BOTÃO SAIR (SUBMENU) ===== */
+.submenu .btn-sair {
+    color: #e74c3c !important; /* vermelho */
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* HOVER */
+.submenu .btn-sair:hover {
+    background-color: #e74c3c;
+    color: #fff !important;
+    border-radius: 6px;
+}
+/* LINKS DO SUBMENU */
+.submenu li a {
+    display: block;          /* 🔥 ocupa toda a linha */
+    width: 100%;
+    padding: 10px 15px;      /* cria área clicável */
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* HOVER PADRÃO */
+.submenu li a:hover {
+    background-color: rgba(45, 186, 201, 0.1); /* verde bem leve */
+    color: #2dbac9; /* texto verde */
+    border-radius: 6px;
+}
+/* BOTÃO SAIR */
+nav .submenu li a.btn-sair {
+    color: #e74c3c;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+}
+
+/* HOVER COMPLETO */
+nav .submenu li a.btn-sair:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
+
+/* ===== TÍTULO E SUBTÍTULO (🔥 NOVO AJUSTE) ===== */
+.modal-conteudo h2 {
+    margin-bottom: 3px; /* aproxima do texto abaixo */
+}
+
+.modal-conteudo p {
+    margin-top: 0;
+    margin-bottom: 10px; /* controla distância pro form */
+}
+
+/* ===== FORM ===== */
+.modal-conteudo form {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-conteudo label {
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+.modal-conteudo input {
+    padding: 12px;
+    border: 1.5px solid #a8329e;
+    border-radius: 8px;
+}
+
+.modal-conteudo input:focus {
+    outline: none;
+    border-color: #2dbac9;
+}
+
+/* ===== BOTÃO ===== */
+.modal-conteudo button {
+    background: linear-gradient(45deg, #a8329e, #2dbac9);
+    color: white;
+
+    border: none;
+    padding: 12px;
+    border-radius: 100px;
+
+    cursor: pointer;
+    font-weight: bold;
+
+    transition: 0.2s;
+
+    margin-top: 12px; /* afasta da senha */
+}
+
+.modal-conteudo button:hover {
+    transform: scale(1.05);
+}
+
+/* ===== TEXTO FINAL ===== */
+.modal-conteudo h4 {
+    font-weight: normal;
+    font-size: 15px;
+    color: #555;
+
+    margin-top: 18px; /* distância do botão */
+    margin-bottom: 0;
+}
+
+/* ===== OPCIONAL ===== */
+.form-login {
+    padding-top: 10px;
+}
+.modal-conteudo h2 {
+    margin-bottom: 5px; /* diminui espaço abaixo do título */
+}
+
+.modal-conteudo p,
+.modal-conteudo h3 {
+    margin-top: 0;       /* remove espaço acima */
+    margin-bottom: 10px; /* controla distância pro form */
+}
+/* =========================
    CARROSSEL PRINCIPAL
 ========================= */
 

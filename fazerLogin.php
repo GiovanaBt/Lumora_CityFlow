@@ -1,28 +1,23 @@
 <?php
 session_start();
 
-/* CONEXÃO COM BANCO */
-$host = "localhost";
-$usuario = "root";
-$senha = "Home@spSENAI2025!";
-$banco = "cityflow";
-
-$conn = new mysqli($host, $usuario, $senha, $banco);
-
-if ($conn->connect_error) {
-    die("Erro de conexão: " . $conn->connect_error);
+/* PROTEÇÃO */
+if (!isset($_POST['emailLogin']) || !isset($_POST['senhaLogin'])) {
+    header("Location: index.php");
+    exit();
 }
 
-/* RECEBER DADOS DO FORM */
+/* CONEXÃO */
+$conn = new mysqli("localhost", "root", "Home@spSENAI2025!", "cityflow");
+
+/* DADOS */
 $email = $_POST['emailLogin'];
 $senhaLogin = $_POST['senhaLogin'];
 
-/* QUERY SEGURA */
+/* QUERY */
 $sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
-
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $email, $senhaLogin);
-
 $stmt->execute();
 
 $resultado = $stmt->get_result();
@@ -33,6 +28,8 @@ if ($resultado->num_rows == 1) {
 
     $_SESSION['usuario_id'] = $usuario['id_usuarios'];
     $_SESSION['nome_usuario'] = $usuario['nome_usuario'];
+
+    unset($_SESSION['erro_login']); // 🔥 IMPORTANTE
 
     header("Location: index.php");
     exit();

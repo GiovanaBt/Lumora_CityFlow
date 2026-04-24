@@ -88,6 +88,7 @@ $resultado = $conn->query($sql);
 <div id="modal" class="modal">
     <div class="modal-conteudo">
         <span class="fechar">&times;</span>
+
         <h1>QUE BOM TER VOCÊ AQUI!</h1>
         <h3>FAÇA SEU LOGIN</h3>
 
@@ -98,15 +99,46 @@ $resultado = $conn->query($sql);
         <form action="fazerLogin.php" method="POST">
             <label>E-MAIL:</label>
             <input type="email" name="emailLogin" required>
+
             <label>SENHA:</label>
             <input type="password" name="senhaLogin" required>
+
             <button type="submit">ENTRAR</button>
         </form>
 
         <h4>Não possui uma conta?</h4>
         <a href="cadastroUsuario.php">Cadastre-se</a>
     </div>
-</div>
+</div> 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const logado = <?php echo isset($_SESSION['usuario_id']) ? 'true' : 'false'; ?>;
+    const modal = document.getElementById("modal");
+
+    // 🔥 SE ESTIVER LOGADO → ESCONDE O MODAL
+    if (logado && modal) {
+        modal.style.display = "none";
+    }
+
+    // 🔥 BOTÃO ABRIR MODAL
+    const abrir = document.getElementById("abrirModal");
+    if (abrir) {
+        abrir.addEventListener("click", () => {
+            if (!logado) modal.style.display = "flex";
+        });
+    }
+
+    // 🔥 BOTÃO FECHAR
+    const fechar = document.querySelector(".fechar");
+    if (fechar) {
+        fechar.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+    }
+
+});
+</script>
 
 <section class="carousel-section">
     <div class="carousel-container">
