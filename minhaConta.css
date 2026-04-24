@@ -1,0 +1,267 @@
+body {
+    background: #000;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* =========================
+   TÍTULO PRINCIPAL
+========================= */
+.titulo-principal {
+    font-family: 'Poppins', sans-serif;
+    font-size: 36px;
+    text-align: center;
+    text-transform: uppercase;
+
+    background: linear-gradient(45deg, #a8329e, #2dbac9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    margin: 40px 0 5px;
+    letter-spacing: 2px;
+}
+
+/* SUBTÍTULO */
+.subtitulo {
+    text-align: center;
+    font-size: 16px;
+    color: #aaa;
+    margin-bottom: 40px;
+}
+
+/* =========================
+   LAYOUT PRINCIPAL
+========================= */
+.layout-conta {
+    display: flex;
+    gap: 40px;
+    padding: 30px 50px;
+}
+
+/* ESQUERDA (DADOS) */
+.lado-esquerdo {
+    width: 32%;
+    background: rgba(20,20,20,0.9);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* DIREITA */
+.lado-direito {
+    width: 68%;
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    .layout-conta {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .lado-esquerdo,
+    .lado-direito {
+        width: 100%;
+    }
+}
+
+/* =========================
+   GRID DADOS
+========================= */
+.grid-dados {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* CAMPO */
+.campo {
+    position: relative;
+}
+
+/* LABEL */
+.campo label {
+    color: #ccc;
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* INPUT */
+.campo input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #a8329e;
+
+    background: #111;
+    color: #fff;
+
+    transition: 0.3s;
+}
+
+/* FOCO */
+.campo input:focus {
+    border-color: #2dbac9;
+    outline: none;
+}
+
+/* ÍCONE EDITAR */
+.campo i {
+    position: absolute;
+    right: 10px;
+    top: 35px;
+
+    color: #a8329e;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.campo i:hover {
+    color: #2dbac9;
+}
+
+/* BOTÃO */
+.btn-salvar {
+    display: none;
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+
+    border-radius: 30px;
+    border: none;
+
+    background: linear-gradient(45deg, #a8329e, #2dbac9);
+    color: white;
+
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-salvar:hover {
+    transform: scale(1.05);
+}
+
+/* =========================
+   CARDS (já melhorados)
+========================= */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    position: relative;
+    background: rgba(20, 20, 20, 0.9);
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    padding: 1px;
+
+    background: linear-gradient(45deg, #a8329e, #2dbac9);
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* IMAGEM */
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    transition: 0.4s;
+}
+
+.card:hover img {
+    transform: scale(1.08);
+}
+
+/* TEXTO */
+.descricao {
+    padding: 12px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 15px;
+}
+
+.local {
+    padding: 0 12px 12px;
+    font-size: 13px;
+    color: #2dbac9;
+}
+
+/* =========================
+   TÍTULOS DAS SEÇÕES
+========================= */
+.secao {
+    font-size: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0 20px;
+}
+
+.secao::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, #a8329e, #2dbac9);
+}
+
+/* =========================
+   SCROLL BONITO
+========================= */
+.lado-direito {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.lado-direito::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lado-direito::-webkit-scrollbar-thumb {
+    background: linear-gradient(#a8329e, #2dbac9);
+    border-radius: 10px;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+.container p {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 20px;
+
+    background: #111;
+    border-radius: 10px;
+    border: 1px dashed #333;
+    color: #aaa;
+}

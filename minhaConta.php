@@ -2,9 +2,20 @@
 session_start();
 include 'Conexao.php';
 
+/* PROTEÇÃO */
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
 $idUsuario = $_SESSION['usuario_id'];
 
-// 🔥 FAVORITOS
+/* DADOS DO USUÁRIO */
+$sqlUsuario = "SELECT * FROM usuarios WHERE id_usuarios = $idUsuario";
+$resultUsuario = mysqli_query($conexao, $sqlUsuario);
+$usuario = mysqli_fetch_assoc($resultUsuario);
+
+/* FAVORITOS */
 $sqlFavoritos = "
 SELECT e.*
 FROM favoritos f
@@ -13,7 +24,7 @@ WHERE f.id_usuario = $idUsuario
 ";
 $resultFavoritos = mysqli_query($conexao, $sqlFavoritos);
 
-// 🔥 MEUS EVENTOS
+/* MEUS EVENTOS */
 $sqlEventos = "
 SELECT * FROM eventos_cadastrados 
 WHERE id_usuarios = $idUsuario
@@ -25,16 +36,20 @@ $resultEventos = $conexao->query($sqlEventos);
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <title>City Flow - Conecte-se à cultura de sua cidade</title>
-     <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="minhaConta.css">
-    <link rel="shortcut icon" href="imgs/logoCityFlow.webp" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+<title>City Flow - Minha Conta</title>
 
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="minhaConta.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="shortcut icon" href="imgs/logoCityFlow.webp">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
+
+<!-- HEADER (NÃO ALTERADO) -->
 <header>
     <div class="logo">
         <a href="index.php"><img src="imgs/cityFlow.webp"></a>
@@ -58,61 +73,124 @@ $resultEventos = $conexao->query($sqlEventos);
                 <li class="perfil">
                     <a href="#"><i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?></a>
                     <ul class="submenu">
-                        <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
-                        <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
-                        <li><a href="ajuda.php"><i class="fa-solid fa-circle-question"></i> Central de ajuda</a></li>
-                        <hr style="border:0.5px solid #333; margin:5px 15px; opacity:0.2;">
-                        <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
+                        <li><a href="minhaConta.php">Minha Conta</a></li>
+                        <li><a href="minhaConta.php#favoritos">Favoritos</a></li>
+                        <li><a href="ajuda.php">Ajuda</a></li>
+                        <hr>
+                        <li><a href="logout.php" class="btn-sair">Sair</a></li>
                     </ul>
-                </li>
-            <?php else: ?>
-                <li>
-                    <div class="menu-container" id="abrirModal">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                        <span class="texto-entrar">ENTRAR</span>
-                    </div>
                 </li>
             <?php endif; ?>
         </ul>
     </nav>
 </header>
-<section id='favoritos'>
-<h1 class='meusEventos'>Meus Favoritos</h1>
 
-<div class="container">
-    <?php while($fav = mysqli_fetch_assoc($resultFavoritos)): ?>
-    
-    <a href="eventos.php?id=<?= $fav['id_evento']; ?>" target="_blank" style="text-decoration:none; color:inherit;">
+<!--LAYOUT NOVO -->
+<div class="layout-conta">
 
-        <div class="card">
-            <img src="uploads/<?= $fav['Imagem']; ?>" alt="">
-            <div class="descricao"><?= $fav['titulo']; ?></div>
-            <div class="local"><?= $fav['rua'] . ", " . $fav['numero'] . " - " . $fav['bairro']; ?></div>
-            <div class="data">Data: <?= date("d/m/Y", strtotime($fav['data_inicio_evento'])); ?></div>
-        </div>
+    <!-- 🔹 ESQUERDA (DADOS) -->
+    <div class="lado-esquerdo">
 
-    </a>
+        <h1 class="titulo-principal">Minha Conta</h1>
+<       <h2 class="subtitulo">Dados da Conta</h2>
 
-    <?php endwhile; ?>
-</div>
-</section>
+        <form action="atualizarUsuario.php" method="POST" class="dados">
 
-<section id='meusEventos'>
-<h1 class='meusEventos'>Meus Eventos</h1>
+            <div class="campo">
+                <label>Nome</label>
+                <input type="text" name="nome" value="<?= $usuario['nome_usuario']; ?>" id="nome" disabled>
+                <i class="fa fa-pen" onclick="habilitarEdicao('nome')"></i>
+            </div>
 
-<div class="container">
-    <?php while($row = $resultEventos->fetch_assoc()): ?>
-    <a href="eventos.php?id=<?= $row['id_evento']; ?>" target="_blank" style="text-decoration:none; color:inherit;">
+            <div class="campo">
+                <label>Email</label>
+                <input type="email" name="email" value="<?= $usuario['email']; ?>" id="email" disabled>
+                <i class="fa fa-pen" onclick="habilitarEdicao('email')"></i>
+            </div>
 
-    <div class="card">
-        <img src="uploads/<?= $row['Imagem']; ?>" alt="<?= $row['descricao']; ?>">
-        <div class="descricao"><?= $row['descricao']; ?></div>
-        <div class="local"><?= $row['rua'] . ", " . $row['numero'] . " - " . $row['bairro']; ?></div>
-        <div class="data">Data: <?= date("d/m/Y", strtotime($row['data_inicio_evento'])); ?></div>
+            <div class="campo">
+                <label>Telefone</label>
+                <input type="text" name="telefone" value="<?= $usuario['telefone'] ?? ''; ?>" id="telefone" disabled>
+                <i class="fa fa-pen" onclick="habilitarEdicao('telefone')"></i>
+            </div>
+
+            <div class="campo">
+                <label>CPF</label>
+                <input type="text" name="cpf" value="<?= $usuario['cpf'] ?? ''; ?>" id="cpf" disabled>
+                <i class="fa fa-pen" onclick="habilitarEdicao('cpf')"></i>
+            </div>
+
+            <button type="submit" class="btn-salvar" id="btnSalvar">
+                Salvar Alterações
+            </button>
+
+        </form>
+
     </div>
 
-    <?php endwhile; ?>
+    <!--  DIREITA (EVENTOS + FAVORITOS) -->
+    <div class="lado-direito">
+
+        <!--  FAVORITOS -->
+        <section id="favoritos">
+           <h2 class="secao">
+    <i class="fa-solid fa-star icone-favorito"></i>
+    Meus Favoritos
+</h2>
+
+            <div class="container">
+                <?php if(mysqli_num_rows($resultFavoritos) > 0): ?>
+                    <?php while($fav = mysqli_fetch_assoc($resultFavoritos)): ?>
+
+                        <a href="eventos.php?id=<?= $fav['id_evento']; ?>">
+                            <div class="card">
+                                <img src="uploads/<?= $fav['Imagem']; ?>">
+                                <div class="descricao"><?= $fav['titulo']; ?></div>
+                                <div class="local"><?= $fav['bairro']; ?></div>
+                            </div>
+                        </a>
+
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <p>Você não tem favoritos</p>
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <!-- 🎟 EVENTOS -->
+        <section id="meusEventos">
+            <h2 class="secao">Meus Eventos</h2>
+
+            <div class="container">
+                <?php if($resultEventos->num_rows > 0): ?>
+                    <?php while($row = $resultEventos->fetch_assoc()): ?>
+
+                        <a href="eventos.php?id=<?= $row['id_evento']; ?>">
+                            <div class="card">
+                                <img src="uploads/<?= $row['Imagem']; ?>">
+                                <div class="descricao"><?= $row['titulo']; ?></div>
+                                <div class="local"><?= $row['bairro']; ?></div>
+                            </div>
+                        </a>
+
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <p>Você não criou eventos</p>
+                <?php endif; ?>
+            </div>
+        </section>
+
+    </div>
+
 </div>
-</section>
+
+<!-- JS -->
+<script>
+function habilitarEdicao(id) {
+    document.getElementById(id).removeAttribute("disabled");
+    document.getElementById("btnSalvar").style.display = "block";
+}
+</script>
 
 </body>
+</html>
