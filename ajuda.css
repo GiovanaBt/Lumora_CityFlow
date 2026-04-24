@@ -1,0 +1,115 @@
+
+.central-container {
+    padding-top: 100px; /* Ajuste esse valor conforme a altura do seu header */
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Título com a cor Turquesa do Logo */
+h1.titulo-central {
+    color: #00ced1; 
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+h2.subtitulo-faq {
+    color: #ff00ff; /* Roxo vibrante */
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Container do FAQ estilizado como um Card */
+.faq-container {
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 0px #ff8c00; /* Sombra sólida Laranja (estilo Polaroid) */
+}
+
+/* Cabeçalho dos Tópicos */
+.topic-header {
+    width: 100%;
+    padding: 15px;
+    background: #252525;
+    border: none;
+    border-bottom: 1px solid #333;
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+    color: #00ced1;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    transition: 0.3s;
+}
+
+.topic-header:hover {
+    background-color: #333;
+    color: #ffffff;
+}
+
+.topic-content {
+    display: none;
+    background: #1a1a1a;
+}
+
+/* Itens de Pergunta */
+.faq-item {
+    border-bottom: 1px solid #222;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    text-align: left;
+    font-size: 14px;
+    color: #ff8c00; /* Laranja dos botões "Saiba Mais" */
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.faq-question:hover {
+    color: #ff00ff;
+}
+
+/* Respostas */
+.faq-answer {
+    display: none;
+    padding: 10px 25px 20px 25px;
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* Seção Atendimento */
+.atendimento-section {
+    margin-top: 10px;
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #00ced1;
+}
+
+.titulo-atendimento {
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.atendimento-info p {
+    font-size: 14px;
+    color: #00ced1;
+    margin: 0;
+}
+
+/* Auxiliares */
+.active-content {
+    display: block !important;
+}
