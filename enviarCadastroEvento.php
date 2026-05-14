@@ -115,6 +115,7 @@ INSERT INTO eventos_cadastrados (
     titulo,
     descricao,
 
+    classificacao_indicativa,
     rua,
     bairro,
     numero,
@@ -148,6 +149,7 @@ VALUES (
     '$longitude',
 
     '$nomeImagem'
+    '$classificacaoIndicativa'
 )
 ";
 
@@ -184,6 +186,11 @@ if($conexao->query($sql)){
                 $conexao,
                 $horasInicio[$i]
             );
+
+            $classificacaoIndicativa = mysqli_real_escape_string(
+            $conexao,
+            $_POST['classificacao_indicativa']
+        );
 
         $horaFim =
             mysqli_real_escape_string(

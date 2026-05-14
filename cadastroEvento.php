@@ -1,29 +1,53 @@
 <?php
+
+/* =========================================================
+   CONEXÃO
+========================================================= */
+
 include 'Conexao.php';
+
+/* =========================================================
+   SESSÃO
+========================================================= */
 
 if (!isset($_SESSION)) {
     session_start();
 }
 
+/* =========================================================
+   VERIFICA LOGIN
+========================================================= */
+
 if (!isset($_SESSION['usuario_id'])) {
-    echo "<script>
-            alert('Você precisa estar logado para acessar esta página.');
-            window.location.href='index.php';
-          </script>";
+
+    echo "
+    <script>
+        alert('Você precisa estar logado para acessar esta página.');
+        window.location.href='index.php';
+    </script>
+    ";
+
     exit;
 }
+
+/* =========================================================
+   BUSCA CATEGORIAS
+========================================================= */
 
 $categorias = mysqli_query(
     $conexao,
     "SELECT id_categoria, categoria_evento FROM categoria"
 );
+
 ?>
 
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
 
+    <!-- META TAGS -->
     <meta charset="UTF-8">
 
     <meta
@@ -31,12 +55,17 @@ $categorias = mysqli_query(
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>CityFlow - Cadastro de Eventos</title>
+    <!-- TÍTULO -->
+    <title>
+        CityFlow - Cadastro de Eventos
+    </title>
 
+    <!-- CSS -->
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="cadastroEvento.css">
 
+    <!-- FONT AWESOME -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -46,8 +75,13 @@ $categorias = mysqli_query(
 
 <body>
 
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header>
 
+    <!-- LOGO -->
     <div class="logo">
 
         <a href="index.php">
@@ -61,6 +95,7 @@ $categorias = mysqli_query(
 
     </div>
 
+    <!-- BOTÃO MAPA -->
     <a href="mapa.php" target="_blank">
 
         <button class="botaoMapa">
@@ -69,6 +104,7 @@ $categorias = mysqli_query(
 
     </a>
 
+    <!-- MENU -->
     <nav>
 
         <ul class="menu">
@@ -101,6 +137,7 @@ $categorias = mysqli_query(
 
             </li>
 
+            <!-- PERFIL -->
             <?php if (isset($_SESSION['usuario_id'])): ?>
 
                 <li class="perfil">
@@ -113,6 +150,7 @@ $categorias = mysqli_query(
 
                     </a>
 
+                    <!-- SUBMENU -->
                     <ul class="submenu">
 
                         <li>
@@ -175,9 +213,17 @@ $categorias = mysqli_query(
 
 </header>
 
+<!-- =========================================================
+     TÍTULO
+========================================================= -->
+
 <h1 class="main-title">
     CADASTRO DE EVENTO
 </h1>
+
+<!-- =========================================================
+     FORMULÁRIO
+========================================================= -->
 
 <form
     action="enviarCadastroEvento.php"
@@ -187,13 +233,21 @@ $categorias = mysqli_query(
 
 <div class="main-container">
 
-    <!-- 1. INFORMAÇÕES BÁSICAS -->
-    <section class="card-section basic-info">
+    <!-- =====================================================
+         INFORMAÇÕES BÁSICAS
+    ====================================================== -->
+
+    <section class="card-section">
 
         <h2>
-            1. INFORMAÇÕES BÁSICAS
+            INFORMAÇÕES BÁSICAS
         </h2>
 
+        <p class="subtitle">
+            Preencha os dados principais do seu evento.
+        </p>
+
+        <!-- NOME -->
         <div class="input-group">
 
             <label for="nome">
@@ -215,18 +269,9 @@ $categorias = mysqli_query(
         </div>
 
         <!-- FOTO -->
-        <div
-            class="input-group image-upload"
-            style="text-align:left;"
-        >
+        <div class="input-group image-upload">
 
-            <label
-                style="
-                    display:block;
-                    width:100%;
-                    text-align:left;
-                "
-            >
+            <label>
 
                 Capa do Evento
 
@@ -234,19 +279,12 @@ $categorias = mysqli_query(
 
             </label>
 
-            <div
-                style="
-                    display:flex;
-                    gap:20px;
-                    flex-wrap:wrap;
-                    width:100%;
-                "
-            >
+            <div class="upload-flex">
 
+                <!-- ÁREA FOTO -->
                 <div
                     class="upload-placeholder"
                     id="drop-zone"
-                    style="flex:0 0 300px;"
                 >
 
                     <span id="upload-text">
@@ -271,6 +309,7 @@ $categorias = mysqli_query(
 
                 </div>
 
+                <!-- CONTROLES -->
                 <div
                     id="area-controles"
                     class="controles-foto"
@@ -278,6 +317,7 @@ $categorias = mysqli_query(
 
                     <div class="botoes-foto-flex">
 
+                        <!-- TROCAR -->
                         <button
                             type="button"
                             class="btn-foto-acao btn-trocar"
@@ -288,6 +328,7 @@ $categorias = mysqli_query(
 
                         </button>
 
+                        <!-- REMOVER -->
                         <button
                             type="button"
                             class="btn-foto-acao btn-remover"
@@ -300,6 +341,7 @@ $categorias = mysqli_query(
 
                     </div>
 
+                    <!-- ALT -->
                     <label class="label-acessibilidade">
 
                         Descrição da imagem
@@ -310,6 +352,7 @@ $categorias = mysqli_query(
                         name="alt_text"
                         id="alt_text"
                         class="input-acessibilidade"
+                        placeholder="Descreva a imagem para acessibilidade..."
                     ></textarea>
 
                 </div>
@@ -360,30 +403,123 @@ $categorias = mysqli_query(
 
     </section>
 
-    <!-- 2. DATAS -->
-    <section class="card-section">
+    <!-- =====================================================
+         CLASSIFICAÇÃO
+    ====================================================== -->
+
+    <section class="card-section card-classificacao">
 
         <h2>
-            2. DATAS E HORÁRIOS
+            CLASSIFICAÇÃO INDICATIVA
         </h2>
 
         <p class="subtitle">
+            Selecione a faixa etária recomendada para o evento.
+        </p>
 
+        <div class="classificacao-container">
+
+            <!-- LIVRE -->
+            <input
+                type="radio"
+                name="classificacao"
+                id="class-l"
+                value="L"
+                required
+            >
+
+            <label for="class-l" class="classificacao-box livre">
+                L
+            </label>
+
+            <!-- 10 -->
+            <input
+                type="radio"
+                name="classificacao"
+                id="class-10"
+                value="10"
+            >
+
+            <label for="class-10" class="classificacao-box c10">
+                10
+            </label>
+
+            <!-- 12 -->
+            <input
+                type="radio"
+                name="classificacao"
+                id="class-12"
+                value="12"
+            >
+
+            <label for="class-12" class="classificacao-box c12">
+                12
+            </label>
+
+            <!-- 14 -->
+            <input
+                type="radio"
+                name="classificacao"
+                id="class-14"
+                value="14"
+            >
+
+            <label for="class-14" class="classificacao-box c14">
+                14
+            </label>
+
+            <!-- 16 -->
+            <input
+                type="radio"
+                name="classificacao"
+                id="class-16"
+                value="16"
+            >
+
+            <label for="class-16" class="classificacao-box c16">
+                16
+            </label>
+
+            <!-- 18 -->
+            <input
+                type="radio"
+                name="classificacao"
+                id="class-18"
+                value="18"
+            >
+
+            <label for="class-18" class="classificacao-box c18">
+                18
+            </label>
+
+        </div>
+
+    </section>
+
+    <!-- =====================================================
+         DATAS
+    ====================================================== -->
+
+    <section class="card-section">
+
+        <h2>
+            DATAS E HORÁRIOS
+        </h2>
+
+        <p class="subtitle">
             Adicione todas as datas do seu evento.
-
         </p>
 
         <div id="datas-container">
 
+            <!-- ITEM DATA -->
             <div class="data-item">
 
                 <!-- DATA -->
                 <div class="input-group">
 
                     <label>
-
                         Data do Evento
-
                     </label>
 
                     <div class="input-with-icon">
@@ -404,13 +540,11 @@ $categorias = mysqli_query(
 
                 </div>
 
-                <!-- HORA INICIO -->
+                <!-- INICIO -->
                 <div class="input-group">
 
                     <label>
-
                         Hora Início
-
                     </label>
 
                     <div class="input-with-icon">
@@ -431,13 +565,11 @@ $categorias = mysqli_query(
 
                 </div>
 
-                <!-- HORA FIM -->
+                <!-- FIM -->
                 <div class="input-group">
 
                     <label>
-
                         Hora Fim
-
                     </label>
 
                     <div class="input-with-icon">
@@ -458,6 +590,7 @@ $categorias = mysqli_query(
 
                 </div>
 
+                <!-- REMOVER -->
                 <button
                     type="button"
                     class="btn-remover-data"
@@ -471,6 +604,7 @@ $categorias = mysqli_query(
 
         </div>
 
+        <!-- ADICIONAR -->
         <button
             type="button"
             class="btn-add-data"
@@ -485,28 +619,27 @@ $categorias = mysqli_query(
 
     </section>
 
-    <!-- DESCRIÇÃO -->
+    <!-- =====================================================
+         DESCRIÇÃO
+    ====================================================== -->
+
     <section class="card-section">
 
         <h2>
-            3. DESCRIÇÃO DO EVENTO
+            DESCRIÇÃO DO EVENTO
         </h2>
 
+         <p class="subtitle">
+            Coloque informações referente a organização do seu evento.
+        </p>
+
         <div class="input-group">
-
-            <label for="descricao">
-
-                Descrição
-
-                <span class="required">*</span>
-
-            </label>
 
             <textarea
                 id="descricao"
                 name="descricao"
                 rows="6"
-                placeholder="Descreva o evento..."
+                placeholder="Ex: Evento de tecnologia com palestras, networking e apresentações."
                 required
             ></textarea>
 
@@ -514,17 +647,18 @@ $categorias = mysqli_query(
 
     </section>
 
-    <!-- LOCAL -->
+    <!-- =====================================================
+         LOCAL
+    ====================================================== -->
+
     <section class="card-section">
 
         <h2>
-            4. ONDE O EVENTO VAI ACONTECER?
+            ONDE O EVENTO VAI ACONTECER?
         </h2>
 
         <p class="subtitle">
-
             Adicione as informações de localização.
-
         </p>
 
         <div class="address-grid">
@@ -533,11 +667,8 @@ $categorias = mysqli_query(
             <div class="input-group col-medium">
 
                 <label>
-
                     CEP
-
                     <span class="required">*</span>
-
                 </label>
 
                 <input
@@ -555,17 +686,15 @@ $categorias = mysqli_query(
             <div class="input-group col-medium">
 
                 <label>
-
                     Cidade
-
                     <span class="required">*</span>
-
                 </label>
 
                 <input
                     type="text"
                     id="cidade"
                     name="cidade"
+                    placeholder="Ex: São Paulo"
                     required
                 >
 
@@ -575,17 +704,15 @@ $categorias = mysqli_query(
             <div class="input-group col-medium">
 
                 <label>
-
                     Bairro
-
                     <span class="required">*</span>
-
                 </label>
 
                 <input
                     type="text"
                     id="bairro"
                     name="bairro"
+                    placeholder="Ex: Centro"
                     required
                 >
 
@@ -595,35 +722,32 @@ $categorias = mysqli_query(
             <div class="input-group col-medium">
 
                 <label>
-
                     Rua
-
                     <span class="required">*</span>
-
                 </label>
 
                 <input
                     type="text"
                     id="rua"
                     name="rua"
+                    placeholder="Ex: Avenida Paulista"
                     required
                 >
 
             </div>
 
-            <!-- REFERENCIA -->
+            <!-- REFERÊNCIA -->
             <div class="input-group col-large">
 
                 <label>
-
                     Ponto de Referência
-
                 </label>
 
                 <input
                     type="text"
                     id="ponto_referencia"
                     name="ponto_referencia"
+                    placeholder="Ex: Próximo ao shopping"
                 >
 
             </div>
@@ -632,17 +756,15 @@ $categorias = mysqli_query(
             <div class="input-group col-small">
 
                 <label>
-
                     Número
-
                     <span class="required">*</span>
-
                 </label>
 
                 <input
                     type="text"
                     id="numero"
                     name="numero"
+                    placeholder="Ex: 1500"
                     required
                 >
 
@@ -652,11 +774,14 @@ $categorias = mysqli_query(
 
     </section>
 
-    <!-- TERMOS -->
+    <!-- =====================================================
+         TERMOS
+    ====================================================== -->
+
     <section class="card-section">
 
         <h2>
-            5. RESPONSABILIDADES
+            RESPONSABILIDADES
         </h2>
 
         <div class="checkbox-container">
@@ -668,18 +793,33 @@ $categorias = mysqli_query(
             >
 
             <label for="termos">
-                    Ao publicar este evento, declaro estar de acordo 
-                    com os <a href="informacoes.php#termosUsos">Termos de Uso</a>, bem como
-                     estar ciente da <a href="informacoes.php">Política de Privacidade</a>.
-                </label>
+
+                Ao publicar este evento, declaro estar de acordo
+                com os
+
+                <a href="informacoes.php#termosUsos">
+                    Termos de Uso
+                </a>
+
+                e com a
+
+                <a href="informacoes.php">
+                    Política de Privacidade
+                </a>.
+
+            </label>
 
         </div>
 
     </section>
 
-    <!-- BOTÕES -->
+    <!-- =====================================================
+         BOTÕES
+    ====================================================== -->
+
     <div class="form-actions">
 
+        <!-- CANCELAR -->
         <button
             type="button"
             class="btn-cancel"
@@ -690,6 +830,7 @@ $categorias = mysqli_query(
 
         </button>
 
+        <!-- ENVIAR -->
         <button
             type="submit"
             class="btn-send"
@@ -705,9 +846,15 @@ $categorias = mysqli_query(
 
 </form>
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
 
-/* FOTO */
+/* =========================================================
+   FOTO
+========================================================= */
 
 function gerenciarFoto(input){
 
@@ -739,6 +886,10 @@ function gerenciarFoto(input){
     }
 }
 
+/* =========================================================
+   LIMPAR FOTO
+========================================================= */
+
 function limparFoto(){
 
     document.getElementById('capa').value = "";
@@ -754,7 +905,9 @@ function limparFoto(){
     document.getElementById('alt_text').value = "";
 }
 
-/* CEP */
+/* =========================================================
+   VIA CEP
+========================================================= */
 
 document
 .getElementById('cep')
@@ -791,7 +944,9 @@ document
     }
 });
 
-/* DATAS */
+/* =========================================================
+   ADICIONAR DATA
+========================================================= */
 
 function adicionarData(){
 
@@ -885,13 +1040,14 @@ function adicionarData(){
             <i class="fa-solid fa-trash"></i>
 
         </button>
-
     `;
 
     container.appendChild(div);
 }
 
-/* REMOVER DATA */
+/* =========================================================
+   REMOVER DATA
+========================================================= */
 
 document.addEventListener('click', e => {
 

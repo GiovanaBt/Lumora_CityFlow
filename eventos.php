@@ -256,6 +256,16 @@ if(isset($_SESSION['usuario_id'])){
                     <?= htmlspecialchars($evento['titulo']); ?>
 
                 </h1>
+                <!--CLASSIFICAÇÃO INDICATIVA -->
+                <div class="classificacao">
+
+                <i class="fa-solid fa-user-shield"></i>
+
+                Classificação:
+                
+                <?= htmlspecialchars($evento['classificacao_indicativa']); ?>
+
+            </div>
 
                 <!-- DATAS -->
                 <div class="datas-evento">

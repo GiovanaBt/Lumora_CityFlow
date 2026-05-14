@@ -411,6 +411,121 @@ body{
 
     line-height:1.8;
 }
+/*==========================================================
+CLASSIFICAÇÃO INDICATIVA
+===========================================================*/
+.classificacao{
+    margin-top: 15px;
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.06);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.classificacao i{
+    color: #00d4ff;
+}
+/* =========================
+CLASSIFICAÇÃO INDICATIVA
+========================= */
+
+.classificacao-grid{
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:15px;
+}
+
+.classificacao-grid input[type="radio"]{
+    display:none;
+}
+
+.classificacao-box{
+    width:85px;
+    height:85px;
+
+    border-radius:16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:32px;
+    font-weight:900;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:0.25s;
+
+    border:3px solid transparent;
+
+    box-shadow:
+        0 0 15px rgba(0,0,0,0.4);
+
+    user-select:none;
+}
+
+/* CORES */
+
+.livre{
+    background:#35c759;
+}
+
+.dez{
+    background:#3fa9f5;
+}
+
+.doze{
+    background:#f7c331;
+}
+
+.quatorze{
+    background:#f28c28;
+}
+
+.dezesseis{
+    background:#ff4d4d;
+}
+
+.dezoito{
+    background:#111;
+}
+
+/* HOVER */
+
+.classificacao-box:hover{
+    transform:translateY(-5px) scale(1.04);
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,0.15);
+}
+
+/* SELECIONADO */
+
+.classificacao-grid input[type="radio"]:checked + .classificacao-box{
+
+    border:3px solid #00d4ff;
+
+    transform:scale(1.08);
+
+    box-shadow:
+        0 0 20px rgba(0,212,255,0.7),
+        0 0 40px rgba(0,212,255,0.3);
+}
 
 /* =========================================================
    AÇÕES
