@@ -1,150 +1,115 @@
-/* Importação de fonte moderna */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-body {
-    background-color: #0a0a0c; /* Fundo levemente azulado para profundidade */
-    font-family: 'Inter', sans-serif;
-    color: #ffffff;
-}
 
 .central-container {
-    padding: 140px 5% 60px 5%; /* Aumentado o respiro superior e lateral */
-    max-width: 600px; /* Um pouco mais largo para leitura confortável */
-    margin-left: 0;
-    margin-right: auto;
+    padding-top: 100px; /* Ajuste esse valor conforme a altura do seu header */
+    max-width: 400px;
+    margin: 0 auto;
 }
 
-/* Título com degradê sutil */
+/* Título com a cor Turquesa do Logo */
 h1.titulo-central {
-    font-weight: 800;
-    font-size: 36px;
-    letter-spacing: -1px;
-    background: linear-gradient(90deg, #00ced1, #00f2fe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 8px;
+    color: #00ced1; 
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 h2.subtitulo-faq {
-    color: #a0a0ab; /* Cinza elegante em vez de roxo neon */
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 40px;
-    font-weight: 600;
-}
-
-/* Accordion Moderno */
-.faq-container {
-    background: transparent;
-    border: none;
-    box-shadow: none; /* Removemos a sombra pesada antiga */
-}
-
-.faq-topic {
-    background: #16161a;
-    border: 1px solid #27272a;
-    border-radius: 16px;
-    margin-bottom: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    overflow: hidden;
-}
-
-.faq-topic:hover {
-    border-color: #00ced166;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-}
-
-.topic-header {
-    padding: 24px;
-    background: transparent;
-    border: none;
-    color: #f4f4f5;
-    font-size: 18px;
+    color: #ff00ff; /* Roxo vibrante */
+    font-size: 16px;
+    margin-bottom: 20px;
     font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
-/* Ícone de seta estilizado */
-.topic-header span {
-    background: #27272a;
-    width: 32px;
-    height: 32px;
+/* Container do FAQ estilizado como um Card */
+.faq-container {
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 5px 5px 0px #ff8c00; /* Sombra sólida Laranja (estilo Polaroid) */
+}
+
+/* Cabeçalho dos Tópicos */
+.topic-header {
+    width: 100%;
+    padding: 15px;
+    background: #252525;
+    border: none;
+    border-bottom: 1px solid #333;
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
+    color: #00ced1;
+    cursor: pointer;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 12px;
+    justify-content: space-between;
     transition: 0.3s;
 }
 
-/* Estilização das perguntas internas */
+.topic-header:hover {
+    background-color: #333;
+    color: #ffffff;
+}
+
+.topic-content {
+    display: none;
+    background: #1a1a1a;
+}
+
+/* Itens de Pergunta */
 .faq-item {
-    border-top: 1px solid #27272a;
-    padding: 8px 16px;
+    border-bottom: 1px solid #222;
 }
 
 .faq-question {
-    color: #00ced1;
-    font-weight: 600;
-    font-size: 15px;
-    padding: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.faq-question:before {
-    content: "•";
-    color: #ff00ff;
-    font-size: 20px;
-}
-
-.faq-answer {
-    color: #a1a1aa;
-    line-height: 1.8;
-    padding: 0 16px 24px 42px;
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    text-align: left;
     font-size: 14px;
+    color: #ff8c00; /* Laranja dos botões "Saiba Mais" */
+    cursor: pointer;
+    transition: 0.2s;
 }
 
-/* Card de Atendimento Minimalista */
+.faq-question:hover {
+    color: #ff00ff;
+}
+
+/* Respostas */
+.faq-answer {
+    display: none;
+    padding: 10px 25px 20px 25px;
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* Seção Atendimento */
 .atendimento-section {
-    margin-top: 40px;
-    background: linear-gradient(145deg, #16161a, #09090b);
-    border: 1px solid #27272a;
-    padding: 30px;
-    border-radius: 20px;
-    display: inline-flex;
-    flex-direction: column;
+    margin-top: 10px;
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid #00ced1;
 }
 
 .titulo-atendimento {
-    font-size: 14px;
-    color: #71717a;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
+    color: #ffffff;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .atendimento-info p {
-    font-size: 18px;
-    font-weight: 700;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    font-size: 14px;
+    color: #00ced1;
+    margin: 0;
 }
 
-/* Animação suave para o JS */
+/* Auxiliares */
 .active-content {
     display: block !important;
-    animation: slideDown 0.4s ease-out;
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }

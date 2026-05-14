@@ -22,10 +22,9 @@ if(!empty($_SESSION['erro_login'])){
 
 /* 3. BUSCAR EVENTOS */
 // Note que agora selecionamos explicitamente o 'titulo' e o 'id_evento'
-$sql = "SELECT id_evento, titulo, Imagem, data_inicio_evento, bairro, cidade 
+$sql = "SELECT id_evento, titulo, Imagem, bairro, cidade 
         FROM eventos_cadastrados 
-        WHERE data_inicio_evento >= CURDATE() 
-        ORDER BY data_inicio_evento 
+        ORDER BY id_evento DESC 
         LIMIT 5";
 $resultado = $conn->query($sql);
 ?>
@@ -116,12 +115,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const logado = <?php echo isset($_SESSION['usuario_id']) ? 'true' : 'false'; ?>;
     const modal = document.getElementById("modal");
 
-    // 🔥 SE ESTIVER LOGADO → ESCONDE O MODAL
+    // SE ESTIVER LOGADO → ESCONDE O MODAL
     if (logado && modal) {
         modal.style.display = "none";
     }
 
-    // 🔥 BOTÃO ABRIR MODAL
+    // BOTÃO ABRIR MODAL
     const abrir = document.getElementById("abrirModal");
     if (abrir) {
         abrir.addEventListener("click", () => {
@@ -129,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // 🔥 BOTÃO FECHAR
+    // BOTÃO FECHAR
     const fechar = document.querySelector(".fechar");
     if (fechar) {
         fechar.addEventListener("click", () => {
@@ -141,37 +140,224 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 
 <section class="carousel-section">
+
     <div class="carousel-container">
-        <button class="arrow prev">&#10094;</button>
-        <button class="arrow next">&#10095;</button>
 
         <?php if($resultado && $resultado->num_rows > 0): ?>
+
             <?php 
             $i = 0;
+
             while($evento = $resultado->fetch_assoc()): 
+
                 $activeClass = ($i == 0) ? "active" : "";
             ?>
-                <div class="carousel-slide <?php echo $activeClass; ?>" 
-                     style="background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('uploads/<?php echo $evento['Imagem']; ?>')">
+
+                <div 
+                    class="carousel-slide <?php echo $activeClass; ?>"
+
+                    style="
+                        background-image:
+                        linear-gradient(
+                            rgba(0,0,0,0.25),
+                            rgba(0,0,0,0.65)
+                        ),
+                        url('uploads/<?php echo htmlspecialchars($evento['Imagem']); ?>');
+                    "
+                >
+
                     <div class="overlay">
-                        <h1><?php echo htmlspecialchars($evento['titulo']); ?></h1>
-                        <p><i class="fa-regular fa-calendar"></i> <?php echo date("d/m/Y", strtotime($evento['data_inicio_evento'])); ?></p>
-                        <p><i class="fa-solid fa-location-dot"></i> <?php echo htmlspecialchars($evento['bairro']); ?> - <?php echo htmlspecialchars($evento['cidade']); ?></p>
-                        
-                        <a href="eventos.php?id=<?php echo $evento['id_evento']; ?>">
-                            <button class="btn-saiba">Saiba mais</button>
+
+                        <h1>
+                            <?php echo htmlspecialchars($evento['titulo']); ?>
+                        </h1>
+
+                        <p>
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <?php 
+                            $sql = "SELECT id_evento, titulo, Imagem, bairro, cidade, data_inicio_evento
+        FROM eventos_cadastrados 
+        ORDER BY id_evento DESC 
+        LIMIT 5";
+                            ?>
+                        </p>
+
+                        <p>
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <?php 
+                            echo htmlspecialchars($evento['bairro']); 
+                            ?>
+
+                            -
+
+                            <?php 
+                            echo htmlspecialchars($evento['cidade']); 
+                            ?>
+                        </p>
+
+                        <a 
+                            href="eventos.php?id=<?php echo $evento['id_evento']; ?>" 
+                            class="btn-saiba"
+                        >
+                            Saiba mais
                         </a>
+
                     </div>
+
                 </div>
+
             <?php 
                 $i++;
             endwhile; 
             ?>
+
         <?php endif; ?>
+
+        <!-- SETA ESQUERDA -->
+        <button class="carousel-arrow prev">
+
+            <i class="fa-solid fa-chevron-left"></i>
+
+        </button>
+
+        <!-- SETA DIREITA -->
+        <button class="carousel-arrow next">
+
+            <i class="fa-solid fa-chevron-right"></i>
+
+        </button>
+
     </div>
+
 </section>
 
-<script src="script.js"></script>
+<script>
+
+const slides = document.querySelectorAll('.carousel-slide');
+
+const prevBtn = document.querySelector('.carousel-arrow.prev');
+
+const nextBtn = document.querySelector('.carousel-arrow.next');
+
+let current = 0;
+
+/* =====================================
+   ATUALIZA CARROSSEL
+===================================== */
+
+function updateCarousel(){
+
+    slides.forEach(slide => {
+
+        slide.classList.remove(
+            'active',
+            'prev',
+            'next'
+        );
+
+    });
+
+    slides[current].classList.add('active');
+
+    const prev =
+        (current - 1 + slides.length)
+        % slides.length;
+
+    const next =
+        (current + 1)
+        % slides.length;
+
+    slides[prev].classList.add('prev');
+
+    slides[next].classList.add('next');
+}
+
+/* =====================================
+   PRÓXIMO SLIDE
+===================================== */
+
+function nextSlide(){
+
+    current++;
+
+    if(current >= slides.length){
+
+        current = 0;
+    }
+
+    updateCarousel();
+}
+
+/* =====================================
+   SLIDE ANTERIOR
+===================================== */
+
+function prevSlide(){
+
+    current--;
+
+    if(current < 0){
+
+        current = slides.length - 1;
+    }
+
+    updateCarousel();
+}
+
+/* =====================================
+   EVENTOS DOS BOTÕES
+===================================== */
+
+nextBtn.addEventListener('click', () => {
+
+    nextSlide();
+
+    resetAutoSlide();
+
+});
+
+prevBtn.addEventListener('click', () => {
+
+    prevSlide();
+
+    resetAutoSlide();
+
+});
+
+/* =====================================
+   AUTO SLIDE
+===================================== */
+
+let autoSlide = setInterval(() => {
+
+    nextSlide();
+
+}, 5000);
+
+/* =====================================
+   RESETA O TEMPO
+===================================== */
+
+function resetAutoSlide(){
+
+    clearInterval(autoSlide);
+
+    autoSlide = setInterval(() => {
+
+        nextSlide();
+
+    }, 5000);
+}
+
+/* =====================================
+   INICIA
+===================================== */
+
+updateCarousel();
+
+</script>
 
 <?php if($erroLogin != ""): ?>
 <script>
@@ -184,140 +370,77 @@ document.addEventListener("DOMContentLoaded", function() {
 </script>
 <?php endif; ?>
 <?php
-// 1. Definição dos Dados
 $colecoes = [
-    ['label' => 'MÚSICA',     'slug' => 'musica',      'icone' => 'img/icon-music.png'],
-    ['label' => 'DANÇA',      'slug' => 'danca',       'icone' => 'img/icon-dance.png'],
-    ['label' => 'LEITURA',    'slug' => 'leitura',     'icone' => 'img/icon-book.png'],
-    ['label' => 'GASTRONOMIA', 'slug' => 'gastronomia', 'icone' => 'img/icon-food.png'],
-    ['label' => 'ESPORTE',    'slug' => 'esporte',     'icone' => 'img/icon-sport.png'],
-    ['label' => 'CINEMA',    'slug' => 'cinema',     'icone' => 'img/icon-cinema.png'],
-    ['label' => 'TEATRO',    'slug' => 'teatro',     'icone' => 'img/icon-teatro.png'],
-    ['label' => 'PERFORMANCE',    'slug' => 'performance',     'icone' => 'img/icon-performance.png'],
-    ['label' => 'PINTURA/ARTE',    'slug' => 'pintura/arte',     'icone' => 'img/icon-pintura/arte.png'],
-    ['label' => 'EDUCAÇÃO',    'slug' => 'educação',     'icone' => 'img/icon-educação.png'],
-    ['label' => 'STANDUP',    'slug' => 'stand up',     'icone' => 'img/icon-standup.png'],
-    ['label' => 'CONGRESSOS E PALESTRAS',    'slug' => 'Congressos e palestras',     'icone' => 'img/icon-Congressos e palestras.png'],
-    ['label' => 'CURSOS E WORKSHOPS',    'slug' => 'Cursos e workshops',     'icone' => 'img/icon-Cursos e workshops.png'],
-    ['label' => 'PRIDE',    'slug' => 'Pride',     'icone' => 'img/icon-Pride.png'],
-    ['label' => 'REIGIÃO E ESPIRITUALIDADE',    'slug' => 'Religião e espiritualidade',     'icone' => 'img/icon-Religião e espiritualidade.png'],
-    ['label' => 'RECITAR',    'slug' => 'Recitar',     'icone' => 'img/icon-Recitar.png'],
-    ['label' => 'ESCRITA/POEMAS',    'slug' => 'Escrita/poemas',     'icone' => 'img/icon-Escrita/poemas.png'],
+
+    ['label' => 'MÚSICA', 'slug' => 'musica', 'icone' => 'fa-solid fa-music'],
+
+    ['label' => 'DANÇA', 'slug' => 'danca', 'icone' => 'fa-solid fa-person-dress'],
+
+    ['label' => 'LEITURA', 'slug' => 'leitura', 'icone' => 'fa-solid fa-book-open'],
+
+    ['label' => 'GASTRONOMIA', 'slug' => 'gastronomia', 'icone' => 'fa-solid fa-utensils'],
+
+    ['label' => 'ESPORTE', 'slug' => 'esporte', 'icone' => 'fa-solid fa-football'],
+
+    ['label' => 'CINEMA', 'slug' => 'cinema', 'icone' => 'fa-solid fa-film'],
+
+    ['label' => 'TEATRO', 'slug' => 'teatro', 'icone' => 'fa-solid fa-masks-theater'],
+
+    ['label' => 'PERFORMANCE', 'slug' => 'performance', 'icone' => 'fa-solid fa-star'],
+
+    ['label' => 'PINTURA/ARTE', 'slug' => 'pintura', 'icone' => 'fa-solid fa-palette'],
+
+    ['label' => 'EDUCAÇÃO', 'slug' => 'educacao', 'icone' => 'fa-solid fa-graduation-cap'],
+
+    ['label' => 'STANDUP', 'slug' => 'standup', 'icone' => 'fa-solid fa-microphone'],
+
+    ['label' => 'CONGRESSOS', 'slug' => 'congressos', 'icone' => 'fa-solid fa-users'],
+
+    ['label' => 'WORKSHOPS', 'slug' => 'workshops', 'icone' => 'fa-solid fa-laptop'],
+
+    ['label' => 'PRIDE', 'slug' => 'pride', 'icone' => 'fa-solid fa-rainbow'],
+
+    ['label' => 'ESPIRITUALIDADE', 'slug' => 'espiritualidade', 'icone' => 'fa-solid fa-dove'],
+
+    ['label' => 'RECITAR', 'slug' => 'recitar', 'icone' => 'fa-solid fa-pen-nib'],
+
+    ['label' => 'POEMAS', 'slug' => 'poemas', 'icone' => 'fa-solid fa-feather']
 ];
 ?>
 
 <section class="container-carrossel">
+
     <h3>EXPLORE NOSSAS COLEÇÕES</h3>
 
     <div class="track" id="carrossel-track">
+
         <?php foreach ($colecoes as $colecao): ?>
+
             <a href="categoria.php?tipo=<?php echo $colecao['slug']; ?>" class="card">
+
                 <div class="icon-box">
-                    <img src="<?php echo $colecao['icone']; ?>" alt="Ícone <?php echo $colecao['label']; ?>" style="width: 45px; transition: transform 0.3s;">
+
+                    <i class="<?php echo $colecao['icone']; ?>"></i>
+
                 </div>
+
                 <span><?php echo $colecao['label']; ?></span>
+
             </a>
+
         <?php endforeach; ?>
+
     </div>
 
     <div class="btn-next">
+
         <button class="arrow prev" onclick="rolarEsquerda()">&#10094;</button>
+
         <button class="arrow next" onclick="rolarDireita()">&#10095;</button>
+
     </div>
+
 </section>
-
-<style>
-.container-carrossel {
-    background: linear-gradient(135deg, #3d1a42 0%, #1a3a4a 100%);
-    padding: 40px 20px;
-    border-radius: 25px;
-    position: relative;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #fff;
-    overflow: hidden;
-}
-
-.track {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 20px 10px;
-    /* Suaviza o scroll manual e via JS */
-    scroll-behavior: smooth; 
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.track::-webkit-scrollbar {
-    display: none;
-}
-
-.card {
-    background: rgba(233, 236, 239, 1);
-    min-width: 140px;
-    height: 140px;
-    border-radius: 22px;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #333;
-    font-weight: 700;
-    font-size: 11px;
-    flex-shrink: 0;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    
-    /* Animação suave ao passar o mouse */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Efeito de "Levantar" o card ao passar o mouse */
-.card:hover {
-    transform: translateY(-10px) scale(1.05);
-    background: #ffffff;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-.card:hover img {
-    transform: rotate(10deg) scale(1.1);
-}
-
-.btn-next {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 20px;
-}
-
-.arrow {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px); /* Efeito de vidro */
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.arrow:hover {
-    background: #fff;
-    color: #3d1a42;
-    transform: scale(1.1);
-}
-
-.arrow:active {
-    transform: scale(0.9);
-}
-</style>
-
 <script>
 const track = document.getElementById('carrossel-track');
 
@@ -330,5 +453,6 @@ function rolarEsquerda() {
     track.scrollBy({ left: -320, behavior: 'smooth' });
 }
 </script>
+
 </body>
 </html>

@@ -44,20 +44,28 @@ body {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 12px;
+
+    /* AQUI ESTÁ O EFEITO DE "MARGEM GRANDE" */
+    width: 92%;
+    margin: 35px auto;
+
     padding: 40px;
-    width: 100%; 
     box-sizing: border-box;
-    /* Borda lateral com gradiente roxo/ciano */
-    border-left: 5px solid;
-    border-image: linear-gradient(to bottom, #9333ea, var(--accent-color)) 1;
-      /* Força os filhos a não encolherem no centro */
+
+    /* borda lateral neon */
+    border-left: 4px solid transparent;
+    background-image: 
+        linear-gradient(var(--card-bg), var(--card-bg)),
+        linear-gradient(to bottom, #9333ea, var(--accent-color));
+
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza os elementos (como botões e uploads) */
-    text-align: center;  /* Centraliza todos os textos (H2, P, Labels) */
+    align-items: center;
+    text-align: center;
 }
-
-
 .card-section h2 {
     font-size: 1.4rem;
     margin-top:  0 0 10px 0;
@@ -127,7 +135,17 @@ input:focus, textarea:focus, select:focus {
     gap: 20px;
     width:100%;
 }
+.upload-placeholder img {
+    position: absolute;
+    top: 0;
+    left: 0;
 
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover; /* ou contain se quiser ver tudo sem corte */
+    border-radius: 8px;
+}
 .upload-placeholder {
     position: relative; /* ADICIONE ESTA LINHA: Isso prende o input dentro do quadrado */
     width:100%;
@@ -149,123 +167,233 @@ input:focus, textarea:focus, select:focus {
 
 .upload-placeholder input[type="file"] {
     position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     opacity: 0;
     cursor: pointer;
+    z-index: 2;
+}
+#area-controles {
+    display: none;
 }
 
-/* Seção 2: Data e Horário */
-.datetime-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+#image-preview {
+    display: none;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================================
+   DATAS MÚLTIPLAS
+========================================= */
+
+#datas-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
     width: 100%;
 }
 
-.input-with-icon {
+.data-item{
+    display: grid;
+
+    grid-template-columns:
+    1fr
+    1fr
+    1fr
+    1fr
+    60px;
+
+    gap: 15px;
+
+    align-items: end;
+
+    background: rgba(255,255,255,.02);
+
+    border:
+        1px solid rgba(255,255,255,.06);
+
+    padding: 20px;
+
+    border-radius: 16px;
+}
+/* =========================
+   CENTRALIZAÇÃO - DATAS
+========================= */
+
+#datas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza os itens */
+    gap: 20px;
+    width: 100%;
+}
+
+/* Cada linha de data/hora */
+.data-item {
+    width: 100%;
+    max-width: 900px; /* controla largura do bloco */
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 60px;
+    gap: 15px;
+
+    align-items: end;
+    background: rgba(255,255,255,.02);
+    border: 1px solid rgba(255,255,255,.06);
+    padding: 20px;
+    border-radius: 16px;
+}
+
+/* Centraliza botão de adicionar */
+.btn-add-data {
+    display: block;
+    margin: 20px auto 0 auto; /* centraliza horizontalmente */
+}
+
+/* BOTÃO ADD */
+
+.btn-add-data{
+    margin-top: 20px;
+
+    padding: 14px 22px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #f97316
+        );
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.btn-add-data:hover{
+    transform: scale(1.03);
+}
+
+/* REMOVER */
+
+.btn-remover-data {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+
     display: flex;
     align-items: center;
-    background-color: var(--bg-color);
-    border: 1px solid var(--accent-color) !important;
-    border-radius: 4px;
-    height: 48px;
-}
+    justify-content: center;
 
-.icon-box {
-    padding: 0 12px;
-    border-right: 1px solid var(--accent-color);
-    color: var(--accent-color);
-}
-
-.input-with-icon input {
-    border: none !important;
-    border: 1px solid var(--accent-color) !important;
-}
-
-/* Seção 3: Editor de Descrição */
-.editor-container {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background-color: var(--bg-color);
-    overflow: hidden;
-}
-
-.editor-toolbar {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    background-color: rgba(0, 212, 255, 0.05);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.editor-toolbar button {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    color: var(--accent-color);
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-
-.editor-toolbar button:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-    box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
-}
-
-.description-box {
-    width: 100% !important;   /* Ocupa a largura toda do card */
-    min-height: 400px;         /* Define a altura grande da Foto 2 */
-    max-width: 100%;           /* Garante que não passe da borda */
-    
-    background-color: var(--bg-color);
-    border: 1.5px solid var(--accent-color);
-    border-radius: 8px;
-    padding: 20px;
-    color: white;
-    
-    outline: none;
-    box-sizing: border-box;    /* Essencial para o tamanho bater certo */
-    display: block;            /* Garante que se comporte como um bloco largo */
-    overflow-y: visible;       /* Remove aquela barra de rolagem da Foto 1 */
-}
-
-.description-textarea {
-    width: 100%;
-    min-height: 350px; /* Altura da Foto 2 */
-    background-color: var(--bg-color);
-    border: 1.5px solid var(--accent-color);
-    border-radius: 8px;
-    padding: 20px;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    outline: none;
-    resize: vertical; /* Permite que o usuário estique se precisar */
-    box-sizing: border-box;
-    line-height: 1.5;
-    transition: 0.3s;
-}
-
-.description-textarea:focus {
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
-    border-color: #ffffff;
-}
-
-/* Customiza a barra de rolagem para não ficar branca */
-.description-textarea::-webkit-scrollbar {
-    width: 8px;
-}
-
-.description-textarea::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
+    border: none;
     border-radius: 10px;
+    background: #ff4d4d;
+    color: #fff;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
 }
 
-.description-textarea::-webkit-scrollbar-track {
+.btn-remover-data i {
+    font-size: 16px;
+}
+/* MOBILE */
+
+@media(max-width: 900px){
+
+    .data-item{
+        grid-template-columns: 1fr;
+    }
+
+    .btn-remover-data{
+        width: 100%;
+    }
+    .data-item{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+/* garante que todos os inputs tenham mesmo comportamento */
+.data-item .input-group{
+    flex: 1;
+    min-width: 180px;
+}
+
+/* BOTÃO SEM ENCOLHER NUNCA */
+.btn-remover-data {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: none;
+    border-radius: 10px;
+    background: #ff4d4d;
+    color: #fff;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.btn-remover-data i {
+    font-size: 18px !important;
+    line-height: 1;
+}
+}
+.campo-cadastro{
+    width: 100%;
+    margin-top: 60px;   /* 👈 desce o bloco */
+    margin-bottom: 40px;
+}
+
+.campo-cadastro label{
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--label-color);
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.campo-cadastro textarea{
+    width: 100%;
+    min-height: 450px;  /* 👈 aumenta altura */
+    padding: 20px;
+    border-radius: 10px;
+
     background: var(--bg-color);
+    border: 1.5px solid var(--accent-color);
+    color: white;
+
+    font-size: 1rem;
+    line-height: 1.5;
+
+    resize: vertical;
 }
 
 /* Seção 4: Endereço */
@@ -601,4 +729,29 @@ html, body {
     margin: 0 auto;
     padding: 20px;
     width: 100%;
+}
+/* ÍCONES DE DATA E HORÁRIO */
+.icon-box i{
+    font-size: 14px;
+}
+
+/* CAIXA DO ÍCONE */
+/* ÍCONES DE DATA E HORÁRIO */
+.icon-box{
+    width: 44px;
+    min-width: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-box i{
+    font-size: 18px;
+    line-height: 1;
+
+    display: block;        /* 👈 MUITO importante */
+    position: relative;
+
+    top: 6px;              /* ajuste fino padrão */
 }

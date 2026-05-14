@@ -1,23 +1,4 @@
 /* =========================
-   BASE DO SITE (ÚNICA VEZ)
-========================= */
-
-body {
-    background-color: #000;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    padding-top: 90px;
-}
-
-/* Hamburger (mobile) */
-.hamburguer {
-    display: none;
-    font-size: 28px;
-    color: #2dbac9;
-    cursor: pointer;
-}
-
-/* =========================
    MODAL
 ========================= */
 /* ===== MODAL (FUNDO) ===== */
@@ -193,112 +174,580 @@ nav .submenu li a.btn-sair:hover {
     margin-top: 0;       /* remove espaço acima */
     margin-bottom: 10px; /* controla distância pro form */
 }
-/* =========================
-   CARROSSEL PRINCIPAL
-========================= */
 
-.carousel-container {
-    position: relative;
+/* =========================================
+   CARROSSEL STREET / CITYFLOW
+   PALETA ROXA + LARANJA
+========================================= */
+
+.carousel-section{
     width: 100%;
-    max-width: 1100px;
-    height: 450px;
-    margin: 60px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    padding: 20px 0 50px;
+
     overflow: hidden;
 }
 
-/* Slides */
-.carousel-slide {
+/* =========================================
+   CONTAINER
+========================================= */
+
+.carousel-container{
+    position: relative;
+
+    width: 100%;
+    max-width: 980px;
+
+    height: 380px;
+
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: visible;
+}
+
+/* =========================================
+   SLIDES
+========================================= */
+
+.carousel-slide{
     position: absolute;
-    width: 70%;
+
+    width: 72%;
     height: 100%;
+
     background-size: cover;
     background-position: center;
-    border-radius: 15px;
-    transition: all 0.6s ease;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
     opacity: 0;
-    transform: translateX(0);
+
+    transition:
+        transform .55s ease,
+        opacity .55s ease,
+        filter .55s ease;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
 }
 
-/* Slide ativo */
-.carousel-slide.active {
-    opacity: 1;
-    transform: scale(1);
-    z-index: 3;
-}
+/* ESCURECIMENTO */
+.carousel-slide::before{
+    content: "";
 
-/* Slide anterior */
-.carousel-slide.prev {
-    opacity: 0.6;
-    transform: translateX(-60%) scale(0.8);
-    z-index: 2;
-}
-
-/* Próximo slide */
-.carousel-slide.next {
-    opacity: 0.6;
-    transform: translateX(60%) scale(0.8);
-    z-index: 2;
-}
-
-/* =========================
-   BOTÕES DO CARROSSEL
-   (NOME CORRIGIDO PRA EVITAR CONFLITO)
-========================= */
-
-.carousel-arrow {
     position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(10,10,10,.92),
+            rgba(15,15,15,.45),
+            transparent
+        );
+
+    z-index: 1;
+}
+
+/* =========================================
+   ATIVO
+========================================= */
+
+.carousel-slide.active{
+    opacity: 1;
+
+    transform:
+        scale(1);
+
+    z-index: 5;
+}
+
+/* =========================================
+   ESQUERDA
+========================================= */
+
+.carousel-slide.prev{
+    opacity: .35;
+
+    transform:
+        translateX(-65%)
+        scale(.82);
+
+    z-index: 2;
+
+    filter: grayscale(.2);
+}
+
+/* =========================================
+   DIREITA
+========================================= */
+
+.carousel-slide.next{
+    opacity: .35;
+
+    transform:
+        translateX(65%)
+        scale(.82);
+
+    z-index: 2;
+
+    filter: grayscale(.2);
+}
+/* =========================================
+   OVERLAY
+========================================= */
+
+.overlay{
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    padding: 28px;
+
+    z-index: 5;
+
+    color: white;
+}
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.overlay h1{
+    font-size: 38px;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    margin-bottom: 14px;
+
+    text-transform: uppercase;
+
+    letter-spacing: -1px;
+
+    text-shadow:
+        3px 3px 0px rgba(0,0,0,.45);
+}
+
+/* =========================================
+   INFOS
+========================================= */
+
+.overlay p{
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color:
+        rgba(255,255,255,.92);
+}
+
+/* ÍCONES */
+.overlay p i{
+    color:  #00d4ff;
+}
+
+/* =========================================
+   BOTÃO
+========================================= */
+
+.btn-saiba{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 14px;
+
+    padding:
+        12px 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6d28d9,
+            #9333ea
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    border-radius: 4px;
+
+    letter-spacing: 1px;
+
+    border:
+        #00d4ff;
+
+    box-shadow:
+         #00d4ff;
+    transition: .25s ease;
+}
+
+/* HOVER */
+.btn-saiba:hover{
+    transform:
+        translate(-3px,-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #a855f7
+        );
+
+    box-shadow:
+        #00d4ff;
+}
+
+/* =========================================
+   SETAS
+========================================= */
+
+.carousel-arrow{
+    position: absolute;
+
     top: 50%;
+
     transform: translateY(-50%);
 
-    background: white;
+    width: 54px;
+    height: 54px;
+
     border: none;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
 
-    font-size: 22px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     cursor: pointer;
-    z-index: 3;
 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    z-index: 50;
+
+    font-size: 18px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6d28d9,
+            #9333ea
+        );
+
+    border:
+        2px solid #00d4ff;
+
+    box-shadow:
+     #00d4ff;
+
+    transition: .25s ease;
+}
+
+/* POSIÇÕES */
+.carousel-arrow.prev{
+    left: -65px;
+}
+
+.carousel-arrow.next{
+    right: -65px;
+}
+
+/* HOVER */
+.carousel-arrow:hover{
+    transform:
+        translateY(-50%)
+        rotate(-6deg)
+        scale(1.06);
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #a855f7
+        );
+
+    box-shadow:
+        #00d4ff;
+}
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media(max-width: 1000px){
+
+    .carousel-arrow.prev{
+        left: 10px;
+    }
+
+    .carousel-arrow.next{
+        right: 10px;
+    }
+}
+
+@media(max-width: 768px){
+
+    .carousel-container{
+        height: 300px;
+    }
+
+    .carousel-slide{
+        width: 94%;
+    }
+
+    .carousel-slide.prev,
+    .carousel-slide.next{
+        opacity: 0;
+    }
+
+    .overlay{
+        padding: 22px;
+    }
+
+    .overlay h1{
+        font-size: 24px;
+    }
+
+    .overlay p{
+        font-size: 12px;
+    }
+
+    .btn-saiba{
+        padding: 10px 18px;
+
+        font-size: 11px;
+    }
+
+    .carousel-arrow{
+        width: 44px;
+        height: 44px;
+
+        font-size: 14px;
+    }
+}
+/* =========================
+   CARROSSEL DE COLEÇÕES
+========================= */
+
+.container-carrossel {
+    background: linear-gradient(135deg, #3d1a42 0%, #1a3a4a 100%);
+
+    padding: 40px 20px;
+
+    border-radius: 25px;
+
+    margin: 60px auto;
+
+    width: 90%;
+
+    overflow: hidden;
+}
+
+.container-carrossel h3 {
+    font-size: 14px;
+    font-weight: 700;
+
+    text-align: left;
+
+    margin-bottom: 15px;
+    margin-left: 10px;
+
+    letter-spacing: 1px;
+
+    color: white;
+}
+.track {
+    display: flex;
+
+    gap: 20px;
+
+    overflow-x: auto;
+
+    scroll-behavior: smooth;
+
+    padding: 10px;
+
+    scrollbar-width: none;
+
+    -ms-overflow-style: none;
+}
+
+.track::-webkit-scrollbar {
+    display: none;
+}
+
+.card {
+    min-width: 150px;
+    height: 150px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    color: #333;
+
+    transition: all 0.3s ease;
+
+    flex-shrink: 0;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.icon-box {
+    font-size: 42px;
+
+    color: #a8329e;
+
+    margin-bottom: 15px;
+
     transition: 0.3s;
 }
 
-.carousel-arrow:hover {
-    background: #f2f2f2;
-    transform: translateY(-50%) scale(1.05);
+.card:hover .icon-box {
+    transform: scale(1.2) rotate(8deg);
+
+    color: #2dbac9;
 }
 
-.carousel-arrow.prev {
-    left: 15px;
+.card span {
+    font-size: 13px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    padding: 0 10px;
+
+    line-height: 18px;
 }
 
-.carousel-arrow.next {
-    right: 15px;
-}
+/* BOTÕES DAS SETAS */
 
-/* =========================
-   OVERLAY DO CARROSSEL
-========================= */
+.arrow {
+    background: rgba(255,255,255,0.1);
 
-.overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    width: 100%;
-    padding: 25px;
-
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.85),
-        rgba(0,0,0,0.4),
-        transparent
-    );
+    border: 1px solid rgba(255,255,255,0.3);
 
     color: white;
+
+    width: 50px;
+    height: 50px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: 0.3s;
+
+    backdrop-filter: blur(5px);
+}
+
+.arrow:hover {
+    background: white;
+
+    color: #3d1a42;
+
+    transform: scale(1.1);
+}
+/* =========================
+   SETAS NAS LATERAIS
+========================= */
+.container-carrossel {
+    background: linear-gradient(135deg, #3d1a42 0%, #1a3a4a 100%);
+
+    padding: 30px 90px;
+
+    border-radius: 25px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    margin: 40px auto;
+}
+
+.btn-next {
+    position: absolute;
+    top: 50%;
+    left: 35px;
+    width: calc(100% - 70px);
+
+    display: flex;
+    justify-content: space-between;
+
+    transform: translateY(-50%);
+
+    pointer-events: none;
     box-sizing: border-box;
+}
+
+.btn-next button {
+    pointer-events: all;
+}
+
+/* ESTILO DAS SETAS */
+.btn-next .arrow {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(5px);
+
+    color: white;
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-next .arrow:hover {
+    background: white;
+    color: #6c2bd9;
+
+    transform: scale(1.1);
 }
