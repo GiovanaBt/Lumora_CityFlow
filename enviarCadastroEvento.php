@@ -4,15 +4,18 @@ include 'Conexao.php';
 
 session_start();
 
-/* SEGURANÇA */
+/* =========================================================
+   SEGURANÇA
+========================================================= */
 
 if (!isset($_SESSION['usuario_id'])) {
 
     die("Você precisa estar logado.");
-
 }
 
-/* IMAGEM */
+/* =========================================================
+   IMAGEM
+========================================================= */
 
 $nomeImagem = "";
 
@@ -26,7 +29,6 @@ if (
     if(!file_exists($diretorio)){
 
         mkdir($diretorio, 0777, true);
-
     }
 
     $extensao = pathinfo(
@@ -43,7 +45,9 @@ if (
     );
 }
 
-/* DADOS */
+/* =========================================================
+   DADOS
+========================================================= */
 
 $idUsuario =
     $_SESSION['usuario_id'];
@@ -99,12 +103,26 @@ $pontoReferencia =
 $categoriaId =
     (int)$_POST['categorias'];
 
-/* LATITUDE E LONGITUDE */
+/* =========================================================
+   CLASSIFICAÇÃO INDICATIVA
+========================================================= */
+
+$classificacaoIndicativa =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['classificacao']
+    );
+
+/* =========================================================
+   LATITUDE E LONGITUDE
+========================================================= */
 
 $latitude = 0;
 $longitude = 0;
 
-/* INSERT EVENTO */
+/* =========================================================
+   INSERT EVENTO
+========================================================= */
 
 $sql = "
 INSERT INTO eventos_cadastrados (
@@ -116,6 +134,7 @@ INSERT INTO eventos_cadastrados (
     descricao,
 
     classificacao_indicativa,
+
     rua,
     bairro,
     numero,
@@ -138,6 +157,8 @@ VALUES (
     '$tituloEvento',
     '$descricao',
 
+    '$classificacaoIndicativa',
+
     '$rua',
     '$bairro',
     '$numero',
@@ -149,7 +170,7 @@ VALUES (
     '$longitude',
 
     '$nomeImagem'
-    '$classificacaoIndicativa'
+
 )
 ";
 
@@ -158,7 +179,9 @@ if($conexao->query($sql)){
     $idEvento =
         $conexao->insert_id;
 
-    /* DATAS */
+    /* =====================================================
+       DATAS
+    ===================================================== */
 
     $datas =
         $_POST['datas'];
@@ -186,11 +209,6 @@ if($conexao->query($sql)){
                 $conexao,
                 $horasInicio[$i]
             );
-
-            $classificacaoIndicativa = mysqli_real_escape_string(
-            $conexao,
-            $_POST['classificacao_indicativa']
-        );
 
         $horaFim =
             mysqli_real_escape_string(
@@ -235,8 +253,7 @@ if($conexao->query($sql)){
 
 }else{
 
-    echo "Erro: " . $conexao->error;
-
+    echo 'Erro: ' . $conexao->error;
 }
 
 $conexao->close();

@@ -173,17 +173,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         </h1>
 
                         <p>
-                            <i class="fa-regular fa-calendar"></i>
-
-                            <?php 
-                            $sql = "SELECT id_evento, titulo, Imagem, bairro, cidade, data_inicio_evento
-        FROM eventos_cadastrados 
-        ORDER BY id_evento DESC 
-        LIMIT 5";
-                            ?>
-                        </p>
-
-                        <p>
                             <i class="fa-solid fa-location-dot"></i>
 
                             <?php 
