@@ -1,604 +1,1471 @@
-/* 1. VARIÁVEIS E CONFIGURAÇÕES GERAIS */
+/* =========================================================
+   IMPORTAÇÃO DE FONTE
+========================================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+
+/* =========================================================
+   VARIÁVEIS GLOBAIS
+========================================================= */
+
 :root {
-    --bg-color: #0d1117;         /* Fundo super escuro */
-    --card-bg: #161b22;          /* Fundo das seções */
-    --accent-color: #00d4ff;     /* Azul neon/Ciano */
+
+    --bg-color: #0d1117;
+    --card-bg: #161b22;
+
+    --accent-color: #00d4ff;
+
     --text-color: #ffffff;
     --label-color: #e6edf3;
     --placeholder-color: #6e7681;
+
     --border-color: #30363d;
 }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 50;
-    overflow-x: hidden;
-    min-height: 100vh;
 
-}
+/* =========================================================
+   RESET E CONFIGURAÇÕES GERAIS
+========================================================= */
 
-/* Container que segura todos os quadrados */
-.main-container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    padding-bottom: 50px;
-}
-
-.main-title {
-    color: white;
-    text-align: center;
-    font-size: 2rem;
-    margin: 20px 0 40px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* 2. ESTILO PADRONIZADO DOS CARDS (QUADRADOS) */
-.card-section {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 40px;
-    width: 100%; 
+*{
     box-sizing: border-box;
-    /* Borda lateral com gradiente roxo/ciano */
-    border-left: 5px solid;
-    border-image: linear-gradient(to bottom, #9333ea, var(--accent-color)) 1;
-      /* Força os filhos a não encolherem no centro */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza os elementos (como botões e uploads) */
-    text-align: center;  /* Centraliza todos os textos (H2, P, Labels) */
+}
+
+html,
+body{
+
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+
+    background-color: var(--bg-color);
+
+    color: var(--text-color);
+
+    font-family: 'Inter', sans-serif;
+
+    margin: 0;
+
+    padding: 50;
+
+    min-height: 100vh;
 }
 
 
-.card-section h2 {
-    font-size: 1.4rem;
-    margin-top:  0 0 10px 0;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    text-align: left; /* Títulos alinhados à esquerda conforme o padrão */
-}
+/* =========================================================
+   WRAPPER PRINCIPAL
+========================================================= */
 
-.card-section .subtitle {
-    color: #8b949e;
-    font-size: 0.95rem;
-    margin-bottom: 35px;
+.page-wrapper {
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 20px;
+
     width: 100%;
 }
 
-/* 3. INPUTS E GRIDS (LARGURA TOTAL MESMO NO CENTRO) */
-.input-group {
-    width: 100%; /* Ocupa a largura total do quadrado para não encolher */
-    margin-bottom: 25px;
-    text-align: left; /* Mantém o texto dentro do input alinhado à esquerda para leitura */
+
+/* =========================================================
+   TÍTULO PRINCIPAL
+========================================================= */
+
+.main-title{
+
+    margin-top: 150px;
+
+    margin-bottom: 35px;
+
+    text-align: center;
+
+    font-size: 42px;
+
+    font-weight: 900;
+
+    color: #fff;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
 }
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+
+.main-container {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+
+    padding-bottom: 50px;
+}
+
+
+/* =========================================================
+   CARDS / SEÇÕES
+========================================================= */
+
+.card-section {
+
+    background-color: var(--card-bg);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 12px;
+
+    width: 92%;
+
+    margin: 35px auto;
+
+    padding: 40px;
+
+    position: relative;
+
+    box-sizing: border-box;
+
+    border-left: 4px solid transparent;
+
+    background-image:
+        linear-gradient(var(--card-bg), var(--card-bg)),
+        linear-gradient(to bottom, #9333ea, var(--accent-color));
+
+    background-origin: border-box;
+
+    background-clip: padding-box, border-box;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   TÍTULOS DOS CARDS
+========================================================= */
+
+.card-section h2 {
+
+    width: 100%;
+
+    font-size: 1.4rem;
+
+    margin: 0 0 10px 0;
+
+    text-transform: uppercase;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   SUBTÍTULOS
+========================================================= */
+
+.card-section .subtitle {
+
+    color: #8b949e;
+
+    font-size: 0.95rem;
+
+    margin-bottom: 35px;
+
+    width: 100%;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   INPUT GROUP
+========================================================= */
+
+.input-group {
+
+    width: 100%;
+
+    margin-bottom: 25px;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   LABELS
+========================================================= */
 
 label {
+
     display: block;
+
     margin-bottom: 10px;
+
     font-size: 0.9rem;
+
     font-weight: 600;
+
     color: var(--label-color);
-    text-align: left; /* Alinha o rótulo à esquerda acima do input */
+
+    text-align: left;
 }
 
+
+/* =========================================================
+   CAMPO OBRIGATÓRIO
+========================================================= */
+
 .required {
+
     color: #ff4500;
+
     margin-left: 3px;
 }
+
+
+/* =========================================================
+   INPUTS PADRÃO
+========================================================= */
 
 input[type="text"],
 input[type="date"],
 input[type="time"],
 select,
 textarea {
+
     width: 100%;
+
     padding: 14px 15px;
+
     background-color: var(--bg-color);
+
     border: 1.5px solid var(--accent-color);
+
     border-radius: 6px;
+
     color: white;
+
     font-size: 1rem;
+
     box-sizing: border-box;
+
     outline: none;
+
     transition: 0.3s;
 }
 
-input:focus, textarea:focus, select:focus {
+
+/* =========================================================
+   FOCUS INPUTS
+========================================================= */
+
+input:focus,
+textarea:focus,
+select:focus {
+
     box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+
     border-color: #fff;
 }
 
-/* 4. SEÇÕES ESPECÍFICAS */
 
-/* Seção 1: Upload de Imagem */
-.image-upload {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    grid-template-columns: 320px 1fr;
-    gap: 20px;
-    width:100%;
+/* =========================================================
+   PLACEHOLDERS
+========================================================= */
+
+input::placeholder,
+textarea::placeholder {
+
+    color: var(--placeholder-color);
 }
+
+
+/* =========================================================
+   ÁREA DE UPLOAD
+========================================================= */
+
+.image-upload {
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CONTAINER DO UPLOAD
+========================================================= */
+
+.upload-container,
+.upload-flex {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: flex-start;
+
+    gap: 30px;
+
+    flex-wrap: wrap;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   QUADRADO DE UPLOAD
+========================================================= */
 
 .upload-placeholder {
-    position: relative; /* ADICIONE ESTA LINHA: Isso prende o input dentro do quadrado */
-    width:100%;
-    max-width: 500px;
-    border: 2px dashed var(--border-color);
-    border-radius: 8px;
-    height: 200px;
+
+    position: relative;
+
+    width: 320px;
+
+    height: 320px;
+
+    border: 2px dashed rgba(255,255,255,0.18);
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,0.03);
+
     display: flex;
-    flex-direction: column;
+
+    align-items: center;
+
     justify-content: center;
-    align-items: center;
-    background-color: var(--bg-color);
-}
 
-.upload-placeholder:hover {
-    border-color: var(--accent-color);
-    background-color: rgba(0, 212, 255, 0.05);
-}
-
-.upload-placeholder input[type="file"] {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-}
-
-/* Seção 2: Data e Horário */
-.datetime-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    width: 100%;
-}
-
-.input-with-icon {
-    display: flex;
-    align-items: center;
-    background-color: var(--bg-color);
-    border: 1px solid var(--accent-color) !important;
-    border-radius: 4px;
-    height: 48px;
-}
-
-.icon-box {
-    padding: 0 12px;
-    border-right: 1px solid var(--accent-color);
-    color: var(--accent-color);
-}
-
-.input-with-icon input {
-    border: none !important;
-    border: 1px solid var(--accent-color) !important;
-}
-
-/* Seção 3: Editor de Descrição */
-.editor-container {
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    background-color: var(--bg-color);
     overflow: hidden;
-}
 
-.editor-toolbar {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-    background-color: rgba(0, 212, 255, 0.05);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.editor-toolbar button {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    color: var(--accent-color);
-    padding: 5px 10px;
-    border-radius: 4px;
     cursor: pointer;
-}
 
-
-.editor-toolbar button:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-    box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
-}
-
-.description-box {
-    width: 100% !important;   /* Ocupa a largura toda do card */
-    min-height: 400px;         /* Define a altura grande da Foto 2 */
-    max-width: 100%;           /* Garante que não passe da borda */
-    
-    background-color: var(--bg-color);
-    border: 1.5px solid var(--accent-color);
-    border-radius: 8px;
-    padding: 20px;
-    color: white;
-    
-    outline: none;
-    box-sizing: border-box;    /* Essencial para o tamanho bater certo */
-    display: block;            /* Garante que se comporte como um bloco largo */
-    overflow-y: visible;       /* Remove aquela barra de rolagem da Foto 1 */
-}
-
-.description-textarea {
-    width: 100%;
-    min-height: 350px; /* Altura da Foto 2 */
-    background-color: var(--bg-color);
-    border: 1.5px solid var(--accent-color);
-    border-radius: 8px;
-    padding: 20px;
-    color: white;
-    font-family: 'Inter', sans-serif;
-    font-size: 1rem;
-    outline: none;
-    resize: vertical; /* Permite que o usuário estique se precisar */
-    box-sizing: border-box;
-    line-height: 1.5;
     transition: 0.3s;
 }
 
-.description-textarea:focus {
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+
+/* =========================================================
+   HOVER UPLOAD
+========================================================= */
+
+.upload-placeholder:hover {
+
+    border-color: #00d4ff;
+
+    background: rgba(0,212,255,0.05);
+}
+
+
+/* =========================================================
+   TEXTO UPLOAD
+========================================================= */
+
+#upload-text {
+
+    color: #9b9b9b;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+
+/* =========================================================
+   IMAGEM PREVIEW
+========================================================= */
+
+#image-preview {
+
+    display: none;
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   INPUT FILE
+========================================================= */
+
+.upload-placeholder input[type="file"] {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    opacity: 0;
+
+    cursor: pointer;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   CONTROLES DA FOTO
+========================================================= */
+
+#area-controles,
+.controles-foto {
+
+    display: none;
+
+    flex: 1;
+
+    min-width: 320px;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   BOTÕES DA FOTO
+========================================================= */
+
+.botoes-foto-flex {
+
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   BOTÃO BASE FOTO
+========================================================= */
+
+.btn-foto-acao {
+
+    padding: 10px 20px;
+
+    border-radius: 100px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    background: transparent;
+
+    transition: 0.3s;
+}
+
+
+/* =========================================================
+   HOVER BOTÃO FOTO
+========================================================= */
+
+.btn-foto-acao:hover {
+
+    transform: scale(1.05);
+
+    filter: brightness(1.1);
+}
+
+
+/* =========================================================
+   BOTÃO TROCAR
+========================================================= */
+
+.btn-trocar,
+.btn-foto-trocar {
+
+    border: 1px solid var(--accent-color);
+
+    color: var(--accent-color);
+}
+
+
+/* =========================================================
+   BOTÃO REMOVER
+========================================================= */
+
+.btn-remover,
+.btn-foto-remover {
+
+    border: 1px solid #ff4b4b;
+
+    color: #ff4b4b;
+}
+
+
+/* =========================================================
+   LABEL DESCRIÇÃO IMAGEM
+========================================================= */
+
+.label-acessibilidade {
+
+    display: block;
+
+    margin-top: 15px;
+
+    margin-bottom: 12px;
+
+    color: #fff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TEXTAREA ACESSIBILIDADE
+========================================================= */
+
+.input-acessibilidade,
+.acessibilidade-texto {
+
+    width: 100%;
+
+    min-height: 170px;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background: rgba(255,255,255,0.04);
+
+    color: #fff;
+
+    font-size: 15px;
+
+    resize: vertical;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+
+/* =========================================================
+   PLACEHOLDER ACESSIBILIDADE
+========================================================= */
+
+.input-acessibilidade::placeholder {
+
+    color: #8b8b8b;
+}
+
+
+/* =========================================================
+   FOCUS ACESSIBILIDADE
+========================================================= */
+
+.input-acessibilidade:focus {
+
+    border-color: #00d4ff;
+
+    box-shadow:
+        0 0 15px rgba(0,212,255,0.25);
+}
+
+
+/* =========================================================
+   DATAS
+========================================================= */
+
+#datas-container {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 20px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   ITEM DATA
+========================================================= */
+
+.data-item {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr
+        60px;
+
+    gap: 15px;
+
+    align-items: end;
+
+    background: rgba(255,255,255,.02);
+
+    border: 1px solid rgba(255,255,255,.06);
+
+    padding: 20px;
+
+    border-radius: 16px;
+}
+
+
+/* =========================================================
+   BOTÃO ADICIONAR DATA
+========================================================= */
+
+.btn-add-data {
+
+    display: block;
+
+    margin: 20px auto 0 auto;
+
+    padding: 14px 22px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #f97316
+        );
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+
+/* =========================================================
+   HOVER BOTÃO DATA
+========================================================= */
+
+.btn-add-data:hover {
+
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   BOTÃO REMOVER DATA
+========================================================= */
+
+.btn-remover-data {
+
+    width: 44px;
+
+    height: 44px;
+
+    min-width: 44px;
+
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #ff4d4d;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition: 0.2s;
+}
+
+
+/* =========================================================
+   ÍCONE REMOVER
+========================================================= */
+
+.btn-remover-data i {
+
+    font-size: 18px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   INPUT COM ÍCONE
+========================================================= */
+
+.input-with-icon {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    background-color: var(--bg-color);
+
+    border: 1.5px solid var(--accent-color);
+
+    border-radius: 6px;
+
+    height: 48px;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+
+/* =========================================================
+   FOCUS INPUT COM ÍCONE
+========================================================= */
+
+.input-with-icon:focus-within {
+
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+
     border-color: #ffffff;
 }
 
-/* Customiza a barra de rolagem para não ficar branca */
-.description-textarea::-webkit-scrollbar {
-    width: 8px;
+
+/* =========================================================
+   CAIXA DO ÍCONE
+========================================================= */
+
+.icon-box {
+
+    width: 44px;
+
+    min-width: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0 12px;
+
+    background-color: rgba(0, 212, 255, 0.05);
+
+    border-right: 1.5px solid var(--accent-color);
+
+    color: var(--accent-color);
+
+    height: 100%;
 }
 
-.description-textarea::-webkit-scrollbar-thumb {
-    background: var(--accent-color);
-    border-radius: 10px;
+
+/* =========================================================
+   ÍCONES
+========================================================= */
+
+.icon-box i {
+
+    font-size: 18px;
+
+    line-height: 1;
+
+    display: block;
+
+    position: relative;
+
+    top: 6px;
 }
 
-.description-textarea::-webkit-scrollbar-track {
-    background: var(--bg-color);
+
+/* =========================================================
+   INPUT INTERNO
+========================================================= */
+
+.input-with-icon input {
+
+    flex: 1;
+
+    background: transparent !important;
+
+    border: none !important;
+
+    color: white !important;
+
+    padding: 0 10px;
+
+    outline: none;
+
+    height: 100%;
 }
 
-/* Seção 4: Endereço */
+
+/* =========================================================
+   REMOVE ÍCONE NATIVO
+========================================================= */
+
+input::-webkit-calendar-picker-indicator {
+
+    position: absolute;
+
+    right: 0;
+
+    top: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    margin: 0;
+
+    padding: 0;
+
+    opacity: 0;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   GRID ENDEREÇO
+========================================================= */
+
 .address-grid {
+
     display: grid;
+
     grid-template-columns: repeat(12, 1fr);
+
     gap: 15px;
 }
 
 .col-full { grid-column: span 12; }
+
 .col-large { grid-column: span 9; }
+
 .col-small { grid-column: span 3; }
+
 .col-medium { grid-column: span 6; }
 
-/* Seção 5: Responsabilidades e Botão */
-.checkbox-container {
+
+/* =========================================================
+   CLASSIFICAÇÃO INDICATIVA
+========================================================= */
+
+.card-classificacao {
+
+    background: linear-gradient(
+        145deg,
+        rgba(18,22,35,0.95),
+        rgba(10,12,20,0.98)
+    );
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    border-radius: 22px;
+
+    padding: 35px;
+
+    margin-top: 30px;
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,0.45);
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   LINHA TOPO CLASSIFICAÇÃO
+========================================================= */
+
+.card-classificacao::before {
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:3px;
+
+    background:linear-gradient(
+        90deg,
+        #7b2cff,
+        #00d4ff
+    );
+}
+
+
+/* =========================================================
+   TÍTULO CLASSIFICAÇÃO
+========================================================= */
+
+.card-classificacao h2 {
+
+    text-align:center;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    margin-bottom:35px;
+
+    letter-spacing:1px;
+
+    color:#fff;
+}
+
+
+/* =========================================================
+   CONTAINER CLASSIFICAÇÃO
+========================================================= */
+
+.classificacao-container {
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+}
+
+
+/* =========================================================
+   ESCONDE RADIO
+========================================================= */
+
+.classificacao-container input[type="radio"] {
+
+    display:none;
+}
+
+
+/* =========================================================
+   BOX CLASSIFICAÇÃO
+========================================================= */
+
+.classificacao-box {
+
+    width:82px;
+
+    height:82px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:34px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    border:3px solid transparent;
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,0.35);
+
+    position:relative;
+
+    color:#fff;
+}
+
+
+/* =========================================================
+   BRILHO CLASSIFICAÇÃO
+========================================================= */
+
+.classificacao-box::after {
+
+    content:"";
+
+    position:absolute;
+
+    top:8px;
+
+    left:8px;
+
+    right:8px;
+
+    height:12px;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,0.18);
+
+    filter:blur(2px);
+}
+
+
+/* =========================================================
+   CORES CLASSIFICAÇÃO
+========================================================= */
+
+.livre{ background:#35c759; }
+
+.c10{ background:#40a9ff; }
+
+.c12{
+    background:#f7c948;
+    color:#000;
+}
+
+.c14{ background:#ff922b; }
+
+.c16{ background:#ff4d4f; }
+
+.c18{ background:#111; }
+
+
+/* =========================================================
+   HOVER CLASSIFICAÇÃO
+========================================================= */
+
+.classificacao-box:hover {
+
+    transform:
+        translateY(-6px)
+        scale(1.06);
+}
+
+
+/* =========================================================
+   CLASSIFICAÇÃO SELECIONADA
+========================================================= */
+
+.classificacao-container
+input[type="radio"]:checked
++ .classificacao-box {
+
+    border-color:#00d4ff;
+
+    transform:scale(1.1);
+
+    box-shadow:
+        0 0 20px rgba(0,212,255,0.9),
+        0 0 45px rgba(0,212,255,0.35);
+}
+/* =========================================
+CLASSIFICAÇÃO INDICATIVA - ALINHAMENTO
+========================================= */
+
+.card-classificacao{
+    align-items: flex-start !important;
+    text-align: left !important;
+}
+
+.card-classificacao h2{
+    width: 100%;
+    text-align: left !important;
+}
+
+.card-classificacao .subtitle{
+    width: 100%;
+    text-align: left !important;
+}
+
+/* Container das classificações */
+
+.classificacao-container{
+    width: 100%;
+
+    justify-content: flex-start !important;
+}
+/* =========================================
+CLASSIFICAÇÃO - ESPAÇAMENTO PADRÃO
+========================================= */
+
+.card-classificacao h2{
+    margin-bottom: 10px !important;
+}
+
+.card-classificacao .subtitle{
+    margin-bottom: 35px !important;
+    margin-top: 0 !important;
+}
+/* =========================================
+CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
+========================================= */
+
+.card-classificacao .classificacao-container{
+    width: 100%;
+
     display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+}
+/* =========================================================
+   CHECKBOX TERMOS
+========================================================= */
+
+.checkbox-container {
+
+    display: flex;
+
     gap: 15px;
+
     color: #8b949e;
+
     font-size: 0.9rem;
 }
 
+
+/* =========================================================
+   CHECKBOX INPUT
+========================================================= */
+
 .checkbox-container input {
+
     width: 20px;
+
     height: 20px;
+
     accent-color: var(--accent-color);
 }
 
-.button-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
 
-.btn-send {
-    background-color: var(--accent-color);
-    color: #000;
-    border: none;
-    padding: 18px 80px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 6px;
-    cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-    transition: 0.3s;
-}
-
-.btn-send:hover {
-    box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
-    background-color: #fff;
-}
-
-/* Responsividade Mobile */
-@media (max-width: 850px) {
-    .datetime-grid { grid-template-columns: 1fr 1fr; }
-    .image-upload { grid-template-columns: 1fr; }
-    .col-large, .col-small, .col-medium { grid-column: span 12; }
-}
-/* Container que agrupa Ícone + Input */
-.input-with-icon {
-    display: flex;
-    align-items: center;
-    background-color: var(--bg-color);
-    border: 1.5px solid var(--accent-color); /* Borda única ao redor de tudo */
-    border-radius: 6px;
-    height: 48px;
-    overflow: hidden; /* Garante que o input não passe por cima do arredondamento */
-    transition: 0.3s;
-}
-
-/* Foco na caixa inteira ao clicar no input */
-.input-with-icon:focus-within {
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
-    border-color: #ffffff;
-}
-
-/* Caixa do Ícone (SVG) */
-.icon-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 12px;
-    background-color: rgba(0, 212, 255, 0.05); /* Fundo sutil */
-    border-right: 1.5px solid var(--accent-color); /* Linha divisória vertical */
-    color: var(--accent-color);
-    height: 100%;
-}
-
-/* O campo de data/hora real */
-.input-with-icon input {
-    flex: 1;
-    background: transparent !important; /* Remove o fundo padrão */
-    border: none !important;           /* Remove a borda padrão do input */
-    color: white !important;
-    padding: 0 10px;
-    font-family: 'Inter', sans-serif;
-    outline: none;
-    height: 100%;
-}
-
-/* Ajuste para o ícone de calendário nativo do navegador ficar visível no tema escuro */
-input::-webkit-calendar-picker-indicator {
-    filter: invert(1); 
-    cursor: pointer;
-    margin-right: 5px;
-}
-/* Oculta totalmente o ícone nativo da direita */
-input::-webkit-calendar-picker-indicator {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    opacity: 0; /* Fica invisível */
-    cursor: pointer;
-}
-
-/* Garante que o container permita o posicionamento do ícone invisível */
-.input-with-icon {
-    position: relative; 
-}
-
-/* --- ADIÇÃO: ESTILIZAÇÃO DOS NOVOS BOTÕES DE AÇÃO --- */
-
-/* --- BOTÕES DE AÇÃO (ESTILIZAÇÃO CITY FLOW) --- */
+/* =========================================================
+   BOTÕES FORMULÁRIO
+========================================================= */
 
 .form-actions {
+
     display: flex;
+
     gap: 20px;
+
     justify-content: center;
+
     margin-top: 40px;
+
     padding-bottom: 20px;
+
     flex-wrap: wrap;
 }
 
+
+/* =========================================================
+   BOTÕES GERAIS
+========================================================= */
+
 .form-actions button {
+
     padding: 14px 30px;
-    border-radius: 100px; /* Mantém o padrão arredondado do botão MAPA */
+
+    border-radius: 100px;
+
     cursor: pointer;
+
     font-weight: 700;
+
     font-family: 'Inter', sans-serif;
+
     text-transform: uppercase;
+
     font-size: 0.85rem;
+
     letter-spacing: 1px;
+
     transition: all 0.3s ease;
+
     border: none;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 }
 
-/* Botão Cancelar: Tom de cinza escuro para não brigar com as cores principais */
-.btn-cancel { 
-    background-color: #21262d; 
+
+/* =========================================================
+   BOTÃO CANCELAR
+========================================================= */
+
+.btn-cancel {
+
+    background-color: #21262d;
+
     color: #f0f6fc;
+
     border: 1px solid var(--border-color) !important;
 }
 
-/* Botão Pré-visualizar: Borda gradiente (estilo o botão ENTRAR) */
-.btn-preview { 
-    background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box, 
-                linear-gradient(45deg, #a8329e, #2dbac9) border-box;
+
+/* =========================================================
+   BOTÃO PREVIEW
+========================================================= */
+
+.btn-preview {
+
+    background:
+        linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
+        linear-gradient(45deg, #a8329e, #2dbac9) border-box;
+
     border: 2px solid transparent !important;
+
     color: white;
 }
 
-/* Botão Rascunho: Cor sólida do tema (Ciano) */
-.btn-draft { 
+
+/* =========================================================
+   BOTÃO RASCUNHO
+========================================================= */
+
+.btn-draft {
+
     background-color: rgba(0, 212, 255, 0.1);
+
     color: var(--accent-color);
+
     border: 1.5px solid var(--accent-color) !important;
 }
 
-/* Botão Publicar: Gradiente vibrante (estilo o botão MAPA) */
-.btn-send { 
+
+/* =========================================================
+   BOTÃO PUBLICAR
+========================================================= */
+
+.btn-send {
+
     background: linear-gradient(45deg, #2dbac9, #a8329e);
+
     color: white;
+
     box-shadow: 0px 4px 15px rgba(45, 185, 201, 0.3);
 }
 
-/* Efeitos de Hover unificados */
+
+/* =========================================================
+   HOVER BOTÕES
+========================================================= */
+
 .form-actions button:hover {
+
     transform: scale(1.05);
+
     filter: brightness(1.1);
 }
 
+
+/* =========================================================
+   HOVER PUBLICAR
+========================================================= */
+
 .btn-send:hover {
+
     box-shadow: 0px 0px 20px rgba(168, 50, 158, 0.5);
 }
 
+
+/* =========================================================
+   HOVER CANCELAR
+========================================================= */
+
 .btn-cancel:hover {
-    background-color: #f85149; /* Vermelho apenas no hover do cancelar */
+
+    background-color: #f85149;
+
     border-color: #f85149 !important;
 }
-/* Container que agrupa os botões e a acessibilidade ao lado da foto */
-.controles-foto-flex {
-    display: none; /* Inicia escondido, aparece via JS ao subir foto */
-    flex: 1;
-    margin-left: 20px;
-    min-width: 250px;
-    text-align: left; /* Garante que labels fiquem à esquerda */
-}
 
-/* Estilo para os botões Trocar e Remover (Seguindo o padrão do seu menu-container) */
-.btn-foto-acao {
-    padding: 10px 20px;
-    border-radius: 100px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 13px;
-    text-transform: uppercase;
-    transition: 0.3s;
-    background: var(--bg-color);
-    margin-bottom: 15px;
-}
 
-/* Cor específica: Trocar (Ciano/Neon) */
-.btn-foto-trocar {
-    border: 1.5px solid var(--accent-color);
-    color: var(--accent-color);
-}
-.btn-foto-trocar:hover {
-    background: rgba(0, 212, 255, 0.1);
-    transform: scale(1.05);
-}
+/* =========================================================
+   CAMPO CADASTRO EXTRA
+========================================================= */
 
-/* Cor específica: Remover (Vermelho/Alerta) */
-.btn-foto-remover {
-    border: 1.5px solid #f85149;
-    color: #f85149;
-}
-.btn-foto-remover:hover {
-    background: rgba(248, 81, 73, 0.1);
-    transform: scale(1.05);
-}
+.campo-cadastro {
 
-/* Ajuste no campo de texto de acessibilidade para combinar com seus inputs */
-.acessibilidade-texto {
     width: 100%;
-    height: 80px;
-    background-color: var(--bg-color);
-    border: 1.5px solid var(--border-color);
-    border-radius: 8px;
-    color: white;
-    padding: 10px;
-    resize: none;
-    outline: none;
-}
-.acessibilidade-texto:focus {
-    border-color: var(--accent-color);
-}
-#alt_text {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte padrão moderna */
-    font-size: 14px;
-    color: #e6edf3;
+
+    margin-top: 60px;
+
+    margin-bottom: 40px;
 }
 
-#alt_text::placeholder {
-    font-family: inherit; /* Garante que o texto de exemplo também mude */
-    color: #6e7681;
-}
-/* Container dos botões Trocar/Remover */
-.botoes-foto-flex {
-    display: flex;
-    gap: 10px;
-}
 
-/* Estilo base para os botões de ação da foto */
-.btn-foto-acao {
-    padding: 10px 20px;
-    border-radius: 100px; /* Seguindo o padrão arredondado do seu site */
-    font-weight: bold;
-    cursor: pointer;
-    background: transparent;
-    transition: transform 0.2s, opacity 0.2s;
-}
+/* =========================================================
+   LABEL CAMPO CADASTRO
+========================================================= */
 
-.btn-foto-acao:hover {
-    transform: scale(1.05);
-    filter: brightness(1.1);
-}
+.campo-cadastro label {
 
-/* Cores específicas dos botões */
-.btn-trocar {
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-}
-
-.btn-remover {
-    border: 1px solid #ff4b4b;
-    color: #ff4b4b;
-}
-
-/* Estilização da Label de Acessibilidade */
-.label-acessibilidade {
-    font-size: 0.85rem;
-    color: #8b949e;
     display: block;
-    margin-bottom: 5px;
-    margin-top: 15px; /* Espaço entre os botões e a label */
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    color: var(--label-color);
+
+    margin-bottom: 10px;
+
     text-align: left;
 }
 
-/* Estilização do Textarea de Acessibilidade */
-.input-acessibilidade {
+
+/* =========================================================
+   TEXTAREA CAMPO CADASTRO
+========================================================= */
+
+.campo-cadastro textarea {
+
     width: 100%;
-    height: 70px;
-    background: var(--bg-color); /* Usando sua variável de fundo escuro */
-    color: white;
-    border: 1px solid var(--border-color);
-    padding: 10px;
-    border-radius: 8px;
-    resize: none;
-    box-sizing: border-box; /* Garante que o padding não estoure a largura */
-}
 
-.input-acessibilidade:focus {
-    border-color: var(--accent-color);
-    outline: none;
-}
-html, body {
-    max-width: 100%;
-    overflow-x: hidden;
-}
+    min-height: 450px;
 
-* {
-    box-sizing: border-box;
-}
-.page-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 20px;
-    width: 100%;
+
+    border-radius: 10px;
+
+    background: var(--bg-color);
+
+    border: 1.5px solid var(--accent-color);
+
+    color: white;
+
+    font-size: 1rem;
+
+    line-height: 1.5;
+
+    resize: vertical;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media(max-width: 900px){
+
+    .data-item{
+
+        grid-template-columns: 1fr;
+    }
+
+    .btn-remover-data{
+
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVO MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .datetime-grid {
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .image-upload {
+
+        grid-template-columns: 1fr;
+    }
+
+    .col-large,
+    .col-small,
+    .col-medium {
+
+        grid-column: span 12;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVO CLASSIFICAÇÃO
+========================================================= */
+
+@media(max-width:700px){
+
+    .card-classificacao{
+
+        padding:25px 18px;
+    }
+
+    .classificacao-box{
+
+        width:68px;
+
+        height:68px;
+
+        font-size:28px;
+    }
+
+    .card-classificacao h2{
+
+        font-size:22px;
+    }
+
+    .classificacao-container{
+
+        justify-content:center;
+    }
 }

@@ -1,146 +1,261 @@
 <?php
+
 include 'Conexao.php';
+
 session_start();
 
-// Verificação de segurança
+/* =========================================================
+   SEGURANÇA
+========================================================= */
+
 if (!isset($_SESSION['usuario_id'])) {
-    die("Acesso negado. Você precisa estar logado.");
+
+    die("Você precisa estar logado.");
 }
+
+/* =========================================================
+   IMAGEM
+========================================================= */
 
 $nomeImagem = "";
 
-// Processamento da Imagem
-if(isset($_FILES['capa']) && $_FILES['capa']['error'] == 0){
+if (
+    isset($_FILES['capa']) &&
+    $_FILES['capa']['error'] == 0
+){
+
     $diretorio = "uploads/";
 
     if(!file_exists($diretorio)){
+
         mkdir($diretorio, 0777, true);
     }
 
-    $extensao = pathinfo($_FILES["capa"]["name"], PATHINFO_EXTENSION);
-    $nomeImagem = uniqid() . "." . $extensao;
+    $extensao = pathinfo(
+        $_FILES['capa']['name'],
+        PATHINFO_EXTENSION
+    );
 
-    move_uploaded_file($_FILES["capa"]["tmp_name"], $diretorio . $nomeImagem);
+    $nomeImagem =
+        uniqid() . "." . $extensao;
+
+    move_uploaded_file(
+        $_FILES['capa']['tmp_name'],
+        $diretorio . $nomeImagem
+    );
 }
 
-// Coleta de dados do formulário
-$idUsuario = $_SESSION['usuario_id'];
+/* =========================================================
+   DADOS
+========================================================= */
 
-// 1. Título do evento (O nome que aparece nos cards)
-$tituloEvento = mysqli_real_escape_string($conexao, $_POST['nome']); 
+$idUsuario =
+    $_SESSION['usuario_id'];
 
-// 2. Descrição detalhada (O texto longo da seção 3)
-$descricaoDetalhada = mysqli_real_escape_string($conexao, $_POST['descricao']);
+$tituloEvento =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['nome']
+    );
 
-// 3. Dados de localização
-$rua = mysqli_real_escape_string($conexao, $_POST['rua']);
-$bairro = mysqli_real_escape_string($conexao, $_POST['bairro']);
-$numero = (int)$_POST['numero'];
-$cidade = mysqli_real_escape_string($conexao, $_POST['cidade']);
+$descricao =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['descricao']
+    );
 
-// ----------------------
-// CONVERSÃO DE ENDEREÇO
-// ----------------------
+$rua =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['rua']
+    );
 
-// Trata número inválido
-$numero = trim($numero);
+$bairro =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['bairro']
+    );
 
-if($numero == "Não consta" || $numero == "S/N" || empty($numero)){
-    $endereco = "$rua, $bairro, $cidade, Brasil";
-}else{
-    $endereco = "$rua $numero, $bairro, $cidade, Brazil";
-}
+$numero =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['numero']
+    );
 
-// Monta URL
-$enderecoFormatado = urlencode($endereco);
+$cidade =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['cidade']
+    );
 
-$url = "https://nominatim.openstreetmap.org/search?q=".$enderecoFormatado."&format=json&limit=1";
+$cep =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['cep']
+    );
 
-// Configuração obrigatória
-$options = [
-    "http" => [
-        "method" => "GET",
-        "header" => "User-Agent: CityFlowApp/1.0\r\n"
-    ]
-];
+$pontoReferencia =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['ponto_referencia']
+    );
 
-$context = stream_context_create($options);
+$categoriaId =
+    (int)$_POST['categorias'];
 
-// Faz requisição
-$resposta = file_get_contents($url, false, $context);
+/* =========================================================
+   CLASSIFICAÇÃO INDICATIVA
+========================================================= */
 
-$dados = json_decode($resposta, true);
+$classificacaoIndicativa =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['classificacao']
+    );
 
-// Validação forte (resolve seu erro DEFINITIVAMENTE)
-if(empty($dados) || !isset($dados[0]['lat']) || !isset($dados[0]['lon'])){
-    echo "Erro: endereço não encontrado. Verifique os dados.";
-    exit();
-}
+/* =========================================================
+   LATITUDE E LONGITUDE
+========================================================= */
 
-// Agora SEMPRE terá valor
-$latitude = $dados[0]['lat'];
-$longitude = $dados[0]['lon'];
+$latitude = 0;
+$longitude = 0;
 
-// 4. Ponto de Referência (Agora salvo de forma limpa, sem o título junto)
-$pontoReferencia = mysqli_real_escape_string($conexao, $_POST['ponto_referencia']);
+/* =========================================================
+   INSERT EVENTO
+========================================================= */
 
-// 5. Datas, Horários e Categoria
-$dataInicioEvento = $_POST['data_inicio_evento'];
-$dataFimEvento = $_POST['data_fim_evento'];
-$horarioInicioEvento = $_POST['horario_inicio_evento'];
-$horarioFimEvento = $_POST['horario_fim_evento'];
-$categoriaId = $_POST['categorias'];
+$sql = "
+INSERT INTO eventos_cadastrados (
 
-// SQL ORGANIZADO: Cada informação na sua respectiva coluna
-$sql = "INSERT INTO Eventos_Cadastrados(
-    id_usuarios, 
-    titulo, 
-    descricao, 
-    rua, 
-    bairro, 
-    numero, 
-    cidade, 
-    ponto_referencia, 
+    id_usuarios,
+    id_categoria,
+
+    titulo,
+    descricao,
+
+    classificacao_indicativa,
+
+    rua,
+    bairro,
+    numero,
+    cidade,
+    CEP,
+    ponto_referencia,
+
     latitude,
     longitude,
-    data_inicio_evento, 
-    data_fim_evento, 
-    horario_inicio_evento, 
-    horario_fim_evento, 
-    id_categoria, 
+
     Imagem
+
 )
 
-VALUES(
-    '$idUsuario', 
-    '$tituloEvento', 
-    '$descricaoDetalhada', 
-    '$rua', 
-    '$bairro', 
-    $numero, 
-    '$cidade', 
-    '$pontoReferencia', 
-    $latitude,
-    $longitude,
-    '$dataInicioEvento', 
-    '$dataFimEvento', 
-    '$horarioInicioEvento', 
-    '$horarioFimEvento', 
-    '$categoriaId', 
+VALUES (
+
+    '$idUsuario',
+    '$categoriaId',
+
+    '$tituloEvento',
+    '$descricao',
+
+    '$classificacaoIndicativa',
+
+    '$rua',
+    '$bairro',
+    '$numero',
+    '$cidade',
+    '$cep',
+    '$pontoReferencia',
+
+    '$latitude',
+    '$longitude',
+
     '$nomeImagem'
-)";
 
-if ($conexao->query($sql) === TRUE) {
+)
+";
 
-    echo "<script>
-            window.location.href = 'index.php';
-          </script>";
+if($conexao->query($sql)){
 
-} else {
+    $idEvento =
+        $conexao->insert_id;
 
-    echo "Erro ao cadastrar evento: " . $conexao->error;
+    /* =====================================================
+       DATAS
+    ===================================================== */
 
+    $datas =
+        $_POST['datas'];
+
+    $horasInicio =
+        $_POST['horas_inicio'];
+
+    $horasFim =
+        $_POST['horas_fim'];
+
+    for(
+        $i = 0;
+        $i < count($datas);
+        $i++
+    ){
+
+        $data =
+            mysqli_real_escape_string(
+                $conexao,
+                $datas[$i]
+            );
+
+        $horaInicio =
+            mysqli_real_escape_string(
+                $conexao,
+                $horasInicio[$i]
+            );
+
+        $horaFim =
+            mysqli_real_escape_string(
+                $conexao,
+                $horasFim[$i]
+            );
+
+        $sqlDatas = "
+        INSERT INTO datas_evento (
+
+            id_evento,
+            data_inicio,
+            data_fim,
+            horario_inicio,
+            horario_fim
+
+        )
+
+        VALUES (
+
+            '$idEvento',
+            '$data',
+            '$data',
+            '$horaInicio',
+            '$horaFim'
+
+        )
+        ";
+
+        $conexao->query($sqlDatas);
+    }
+
+    echo "
+    <script>
+
+        alert('Evento cadastrado com sucesso!');
+
+        window.location.href='index.php';
+
+    </script>
+    ";
+
+}else{
+
+    echo 'Erro: ' . $conexao->error;
 }
 
 $conexao->close();
+
 ?>

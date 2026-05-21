@@ -1,0 +1,1251 @@
+/* =========================================================
+RESET
+========================================================= */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+/* =========================================================
+BODY
+========================================================= */
+
+body{
+
+    background:#1E293B;
+    overflow-x:hidden;
+    color:#ffffff;
+}
+
+/* =========================================================
+TOPO DA CATEGORIA
+========================================================= */
+
+.categoria-topo{
+
+    width:100%;
+    max-width:1500px;
+
+    margin:10px auto 55px auto;
+
+    padding:0 45px;
+
+    position:relative;
+}
+
+/* =========================================================
+EFEITOS DE FUNDO
+========================================================= */
+
+.categoria-topo::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(59,130,246,0.22),
+        transparent 70%
+    );
+
+    top:-260px;
+    left:-220px;
+
+    filter:blur(30px);
+
+    z-index:-1;
+}
+
+.categoria-topo::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+    height:420px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(139,92,246,0.20),
+        transparent 70%
+    );
+
+    top:-220px;
+    right:-180px;
+
+    filter:blur(25px);
+
+    z-index:-1;
+}
+
+/* =========================================================
+FORMAS DECORATIVAS
+========================================================= */
+
+.forma-topo-1{
+
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    border:
+    2px solid rgba(255,255,255,0.07);
+
+    border-radius:32px;
+
+    top:-20px;
+    right:130px;
+
+    transform:rotate(18deg);
+
+    backdrop-filter:blur(8px);
+}
+
+.forma-topo-2{
+
+    position:absolute;
+
+    width:80px;
+    height:80px;
+
+    border-radius:24px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(59,130,246,0.20),
+        rgba(139,92,246,0.20)
+    );
+
+    top:120px;
+    right:60px;
+
+    transform:rotate(-14deg);
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.18);
+}
+
+.forma-topo-3{
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    border:
+    2px solid rgba(255,255,255,0.06);
+
+    border-radius:28px;
+
+    top:20px;
+    left:90px;
+
+    transform:rotate(-12deg);
+}
+
+.forma-topo-4{
+
+    position:absolute;
+
+    width:65px;
+    height:65px;
+
+    border-radius:20px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(56,189,248,0.22),
+        rgba(168,85,247,0.22)
+    );
+
+    bottom:-10px;
+    left:220px;
+
+    transform:rotate(14deg);
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.18);
+}
+
+/* =========================================================
+BADGE
+========================================================= */
+
+.badge-categoria{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:12px 22px;
+
+    border-radius:50px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(14px);
+
+    margin-bottom:28px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+}
+
+.badge-categoria i{
+
+    color:#38bdf8;
+    font-size:15px;
+}
+
+.badge-categoria span{
+
+    color:#cbd5e1;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+}
+
+/* =========================================================
+TÍTULO
+========================================================= */
+
+.categoria-topo h1{
+
+    font-size:78px;
+
+    font-weight:900;
+
+    line-height:1;
+
+    letter-spacing:-4px;
+
+    color:#ffffff;
+
+    position:relative;
+
+    display:inline-block;
+
+    text-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* =========================================================
+LINHA DECORATIVA
+========================================================= */
+
+.categoria-topo h1::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-18px;
+
+    width:160px;
+    height:7px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #38bdf8,
+        #8b5cf6
+    );
+
+    box-shadow:
+    0 0 25px rgba(56,189,248,0.45);
+}
+
+/* =========================================================
+SUBTÍTULO
+========================================================= */
+
+.categoria-topo p{
+
+    color:#cbd5e1;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    max-width:700px;
+
+    margin-top:38px;
+}
+
+/* =========================================================
+WRAPPER CARROSSEL
+========================================================= */
+
+.eventos-wrapper{
+
+    width:100%;
+    max-width:1600px;
+
+    margin:auto;
+
+    padding:0 45px 90px 45px;
+
+    position:relative;
+}
+
+/* =========================================================
+CARROSSEL
+========================================================= */
+
+.eventos-grid{
+
+    display:flex;
+
+    gap:30px;
+
+    overflow-x:auto;
+
+    scroll-behavior:smooth;
+
+    scrollbar-width:none;
+
+    padding:12px 6px 28px 6px;
+}
+
+.eventos-grid::-webkit-scrollbar{
+
+    display:none;
+}
+
+/* =========================================================
+CARD EVENTO
+========================================================= */
+
+.card-evento{
+
+    min-width:340px;
+    max-width:340px;
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,0.06),
+        rgba(255,255,255,0.03)
+    );
+
+    border-radius:34px;
+
+    overflow:hidden;
+
+    text-decoration:none;
+
+    position:relative;
+
+    transition:0.45s ease;
+
+    border:
+    1px solid rgba(255,255,255,0.07);
+
+    backdrop-filter:blur(14px);
+
+    flex-shrink:0;
+
+    box-shadow:
+    0 18px 45px rgba(0,0,0,0.20);
+}
+
+/* =========================================================
+BORDA ILUMINADA
+========================================================= */
+
+.card-evento::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:34px;
+
+    padding:1px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(56,189,248,0.45),
+        rgba(139,92,246,0.35),
+        rgba(255,255,255,0.05)
+    );
+
+    -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+    mask-composite:exclude;
+
+    pointer-events:none;
+}
+
+/* =========================================================
+HOVER CARD
+========================================================= */
+
+.card-evento:hover{
+
+    transform:
+    translateY(-12px)
+    scale(1.02);
+
+    box-shadow:
+    0 25px 65px rgba(0,0,0,0.30);
+}
+
+/* =========================================================
+IMAGEM
+========================================================= */
+
+.img-evento{
+
+    width:100%;
+    height:240px;
+
+    overflow:hidden;
+
+    position:relative;
+}
+
+/* OVERLAY */
+
+.img-evento::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.65),
+        rgba(0,0,0,0.08)
+    );
+}
+
+/* IMAGEM */
+
+.img-evento img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:0.7s ease;
+}
+
+/* ZOOM */
+
+.card-evento:hover .img-evento img{
+
+    transform:scale(1.08);
+}
+
+/* =========================================================
+INFO
+========================================================= */
+
+.info-evento{
+
+    padding:24px;
+}
+
+/* =========================================================
+TÍTULO EVENTO
+========================================================= */
+
+.info-evento h3{
+
+    color:#ffffff;
+
+    font-size:24px;
+
+    font-weight:800;
+
+    line-height:1.4;
+
+    margin-bottom:14px;
+
+    overflow:hidden;
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:2;
+
+    -webkit-box-orient:vertical;
+
+    transition:0.3s ease;
+}
+
+.card-evento:hover h3{
+
+    color:#dbeafe;
+}
+
+/* =========================================================
+LOCALIZAÇÃO
+========================================================= */
+
+.local-evento{
+
+    color:#cbd5e1;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    margin-bottom:24px;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+}
+
+.local-evento i{
+
+    color:#38bdf8;
+
+    margin-right:8px;
+}
+
+/* =========================================================
+BOTÃO
+========================================================= */
+
+.btn-ver{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:13px 24px;
+
+    border-radius:14px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #3b82f6,
+        #6366f1
+    );
+
+    color:#ffffff;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+    transition:0.35s ease;
+
+    box-shadow:
+    0 10px 25px rgba(59,130,246,0.25);
+}
+
+.card-evento:hover .btn-ver{
+
+    transform:scale(1.05);
+
+    box-shadow:
+    0 14px 32px rgba(99,102,241,0.35);
+}
+
+/* =========================================================
+BOTÕES CARROSSEL
+========================================================= */
+
+.btn-carrossel{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:64px;
+    height:64px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    z-index:20;
+
+    color:#ffffff;
+
+    font-size:18px;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(14px);
+
+    transition:0.35s ease;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.22);
+}
+
+.btn-carrossel:hover{
+
+    transform:
+    translateY(-50%)
+    scale(1.08);
+
+    background:
+    linear-gradient(
+        135deg,
+        #3b82f6,
+        #8b5cf6
+    );
+}
+
+.btn-prev{
+
+    left:6px;
+}
+
+.btn-next{
+
+    right:6px;
+}
+
+/* =========================================================
+SEM EVENTOS
+========================================================= */
+
+.nenhum-evento{
+
+    width:100%;
+
+    text-align:center;
+
+    color:#ffffff;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    padding:80px 0;
+}
+
+/* =========================================================
+RESPONSIVO
+========================================================= */
+
+@media(max-width:900px){
+
+    .categoria-topo{
+
+        margin:5px auto 40px auto;
+
+        padding:0 22px;
+    }
+
+    .categoria-topo h1{
+
+        font-size:48px;
+
+        letter-spacing:-2px;
+    }
+
+    .categoria-topo h1::after{
+
+        width:100px;
+        height:5px;
+    }
+
+    .categoria-topo p{
+
+        font-size:16px;
+    }
+
+    .forma-topo-1,
+    .forma-topo-2,
+    .forma-topo-3,
+    .forma-topo-4{
+
+        display:none;
+    }
+
+    .eventos-wrapper{
+
+        padding:0 22px 70px 22px;
+    }
+
+    .card-evento{
+
+        min-width:290px;
+        max-width:290px;
+    }
+
+    .img-evento{
+
+        height:210px;
+    }
+
+    .info-evento h3{
+
+        font-size:21px;
+    }
+
+    .btn-carrossel{
+
+        display:none;
+    }
+}
+/* =========================================================
+SUBTÍTULO
+========================================================= */
+
+.categoria-topo p{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    margin-top:38px;
+
+    padding:18px 30px 18px 34px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    border-radius:18px;
+
+    backdrop-filter:blur(12px);
+
+    color:#e2e8f0;
+
+    font-size:16px;
+
+    line-height:1.5;
+
+    width:fit-content;
+
+    max-width:100%;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* DETALHE LATERAL */
+
+.categoria-topo p::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:5px;
+
+    height:100%;
+
+    background:
+    linear-gradient(
+        180deg,
+        #38bdf8,
+        #8b5cf6
+    );
+}
+/* =========================================================
+TOPO DA CATEGORIA
+========================================================= */
+
+.categoria-topo{
+
+    width:100%;
+    max-width:1500px;
+
+    margin:10px auto 45px auto;
+
+    padding:0 45px;
+
+    position:relative;
+}
+
+/* =========================================================
+BADGE CATEGORIA
+========================================================= */
+
+.badge-categoria{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 24px;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(56,189,248,0.12),
+        rgba(139,92,246,0.12)
+    );
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(12px);
+
+    margin-bottom:18px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* BRILHO */
+
+.badge-categoria::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,255,255,0.10),
+        transparent 70%
+    );
+
+    top:-60px;
+    left:-20px;
+}
+
+/* ÍCONE */
+
+.badge-categoria i{
+
+    color:#38bdf8;
+
+    font-size:15px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* TEXTO DA CATEGORIA */
+
+.badge-categoria span{
+
+    color:#ffffff;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* =========================================================
+TÍTULO
+========================================================= */
+
+.categoria-topo h1{
+
+    font-size:78px;
+
+    font-weight:900;
+
+    line-height:1;
+
+    letter-spacing:-4px;
+
+    color:#ffffff;
+
+    position:relative;
+
+    display:block;
+
+    margin-bottom:18px;
+
+    text-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* LINHA */
+
+.categoria-topo h1::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-14px;
+
+    width:150px;
+    height:7px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #38bdf8,
+        #8b5cf6
+    );
+
+    box-shadow:
+    0 0 25px rgba(56,189,248,0.35);
+}
+
+/* =========================================================
+SUBTÍTULO
+========================================================= */
+
+.categoria-topo p{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    margin-top:18px;
+
+    padding:18px 30px 18px 34px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    border-radius:18px;
+
+    backdrop-filter:blur(12px);
+
+    color:#e2e8f0;
+
+    font-size:16px;
+
+    line-height:1.5;
+
+    width:fit-content;
+
+    max-width:100%;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* DETALHE LATERAL */
+
+.categoria-topo p::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:5px;
+    height:100%;
+
+    background:
+    linear-gradient(
+        180deg,
+        #38bdf8,
+        #8b5cf6
+    );
+}
+/* =========================================================
+CORES CITYFLOW
+========================================================= */
+
+/* Roxo principal: #7B2CFF */
+/* Azul neon: #00D4FF */
+
+/* =========================================================
+BADGE CATEGORIA
+========================================================= */
+
+.badge-categoria{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:12px 24px;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(123,44,255,0.18),
+        rgba(0,212,255,0.12)
+    );
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(12px);
+
+    margin-bottom:18px;
+
+    box-shadow:
+    0 10px 35px rgba(123,44,255,0.15);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* BRILHO */
+
+.badge-categoria::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:130px;
+    height:130px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(255,255,255,0.10),
+        transparent 70%
+    );
+
+    top:-60px;
+    left:-20px;
+}
+
+/* ÍCONE */
+
+.badge-categoria i{
+
+    color:#00D4FF;
+
+    font-size:15px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* TEXTO */
+
+.badge-categoria span{
+
+    color:#ffffff;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+
+    position:relative;
+
+    z-index:2;
+}
+
+/* =========================================================
+TÍTULO
+========================================================= */
+
+.categoria-topo h1{
+
+    font-size:78px;
+
+    font-weight:900;
+
+    line-height:1;
+
+    letter-spacing:-4px;
+
+    color:#ffffff;
+
+    position:relative;
+
+    display:block;
+
+    margin-bottom:18px;
+
+    text-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* LINHA DECORATIVA */
+
+.categoria-topo h1::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-14px;
+
+    width:160px;
+    height:7px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #7B2CFF,
+        #00D4FF
+    );
+
+    box-shadow:
+    0 0 25px rgba(123,44,255,0.45);
+}
+
+/* =========================================================
+SUBTÍTULO
+========================================================= */
+
+.categoria-topo p{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    margin-top:18px;
+
+    padding:18px 30px 18px 34px;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    border-radius:18px;
+
+    backdrop-filter:blur(12px);
+
+    color:#e2e8f0;
+
+    font-size:16px;
+
+    line-height:1.5;
+
+    width:fit-content;
+
+    max-width:100%;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* DETALHE LATERAL */
+
+.categoria-topo p::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:5px;
+    height:100%;
+
+    background:
+    linear-gradient(
+        180deg,
+        #7B2CFF,
+        #00D4FF
+    );
+}
