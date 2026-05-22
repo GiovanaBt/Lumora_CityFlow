@@ -27,6 +27,69 @@ $sql = "SELECT id_evento, titulo, Imagem, bairro, cidade
         ORDER BY id_evento DESC 
         LIMIT 5";
 $resultado = $conn->query($sql);
+
+$hoje = date('Y-m-d');
+
+/* =========================================================
+   CARROSSEL: HOJE
+========================================================= */
+$sqlHoje = "
+SELECT DISTINCT
+    e.id_evento,
+    e.titulo,
+    e.Imagem,
+    e.bairro,
+    e.cidade,
+    d.data_inicio
+
+FROM eventos_cadastrados e
+
+JOIN datas_evento d 
+ON e.id_evento = d.id_evento
+
+WHERE 
+    '$hoje' BETWEEN d.data_inicio AND d.data_fim
+
+ORDER BY d.data_inicio ASC
+
+LIMIT 10
+";
+$resultHoje = $conn->query($sqlHoje);
+
+/* =========================================================
+   CARROSSEL: INFANTIL
+========================================================= */
+/* =========================================================
+   CARROSSEL: INFANTIL
+   PUXA EVENTOS LIVRE E +10
+========================================================= */
+
+$sqlKids = "
+SELECT 
+    id_evento, 
+    titulo, 
+    Imagem, 
+    bairro, 
+    cidade
+FROM eventos_cadastrados
+WHERE classificacao_indicativa IN ('L', '10')
+ORDER BY id_evento DESC
+LIMIT 10
+";
+
+$resultKids = $conn->query($sqlKids);
+/* =========================================================
+   CARROSSEL: PRÓXIMOS EVENTOS
+========================================================= */
+$sqlUltima = "
+SELECT e.id_evento, e.titulo, e.Imagem, e.bairro, e.cidade
+FROM eventos_cadastrados e
+JOIN datas_evento d ON e.id_evento = d.id_evento
+WHERE d.data_inicio BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 2 DAY)
+ORDER BY e.id_evento DESC
+LIMIT 10
+";
+$resultUltima = $conn->query($sqlUltima);
 ?>
 
 <!DOCTYPE html>
@@ -40,8 +103,12 @@ $resultado = $conn->query($sql);
     <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
 
+<!-- =========================================================
+   HEADER
+========================================================= -->
 <header>
     <div class="logo">
         <a href="index.php"><img src="imgs/cityFlow.webp"></a>
@@ -83,6 +150,9 @@ $resultado = $conn->query($sql);
     </nav>
 </header>
 
+<!-- =========================================================
+   MODAL LOGIN
+========================================================= -->
 <div id="modal" class="modal">
     <div class="modal-conteudo">
         <span class="fechar">&times;</span>
@@ -107,19 +177,21 @@ $resultado = $conn->query($sql);
         <h4>Não possui uma conta?</h4>
         <a href="cadastroUsuario.php">Cadastre-se</a>
     </div>
-</div> 
+</div>
+
+<!-- =========================================================
+   SCRIPT MODAL
+========================================================= -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
     const logado = <?php echo isset($_SESSION['usuario_id']) ? 'true' : 'false'; ?>;
     const modal = document.getElementById("modal");
 
-    // SE ESTIVER LOGADO → ESCONDE O MODAL
     if (logado && modal) {
         modal.style.display = "none";
     }
 
-    // BOTÃO ABRIR MODAL
     const abrir = document.getElementById("abrirModal");
     if (abrir) {
         abrir.addEventListener("click", () => {
@@ -127,7 +199,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // BOTÃO FECHAR
     const fechar = document.querySelector(".fechar");
     if (fechar) {
         fechar.addEventListener("click", () => {
@@ -138,60 +209,38 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+<!-- =========================================================
+   CARROSSEL PRINCIPAL
+========================================================= -->
 <section class="carousel-section">
-
     <div class="carousel-container">
 
         <?php if($resultado && $resultado->num_rows > 0): ?>
-
             <?php 
             $i = 0;
-
             while($evento = $resultado->fetch_assoc()): 
-
                 $activeClass = ($i == 0) ? "active" : "";
             ?>
 
-                <div 
-                    class="carousel-slide <?php echo $activeClass; ?>"
-
+                <div class="carousel-slide <?php echo $activeClass; ?>"
                     style="
                         background-image:
-                        linear-gradient(
-                            rgba(0,0,0,0.25),
-                            rgba(0,0,0,0.65)
-                        ),
+                        linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.65)),
                         url('uploads/<?php echo htmlspecialchars($evento['Imagem']); ?>');
-                    "
-                >
+                    ">
 
                     <div class="overlay">
-
-                        <h1>
-                            <?php echo htmlspecialchars($evento['titulo']); ?>
-                        </h1>
+                        <h1><?php echo htmlspecialchars($evento['titulo']); ?></h1>
 
                         <p>
                             <i class="fa-solid fa-location-dot"></i>
-
-                            <?php 
-                            echo htmlspecialchars($evento['bairro']); 
-                            ?>
-
-                            -
-
-                            <?php 
-                            echo htmlspecialchars($evento['cidade']); 
-                            ?>
+                            <?php echo htmlspecialchars($evento['bairro']); ?> -
+                            <?php echo htmlspecialchars($evento['cidade']); ?>
                         </p>
 
-                        <a 
-                            href="eventos.php?id=<?php echo $evento['id_evento']; ?>" 
-                            class="btn-saiba"
-                        >
+                        <a href="eventos.php?id=<?php echo $evento['id_evento']; ?>" class="btn-saiba">
                             Saiba mais
                         </a>
-
                     </div>
 
                 </div>
@@ -200,319 +249,163 @@ document.addEventListener("DOMContentLoaded", function() {
                 $i++;
             endwhile; 
             ?>
-
         <?php endif; ?>
 
-        <!-- SETA ESQUERDA -->
-        <button class="carousel-arrow prev">
-
-            <i class="fa-solid fa-chevron-left"></i>
-
-        </button>
-
-        <!-- SETA DIREITA -->
-        <button class="carousel-arrow next">
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </button>
+        <button class="carousel-arrow prev"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="carousel-arrow next"><i class="fa-solid fa-chevron-right"></i></button>
 
     </div>
-
 </section>
 
+<!-- =========================================================
+   SCRIPT CARROSSEL PRINCIPAL
+========================================================= -->
 <script>
-
 const slides = document.querySelectorAll('.carousel-slide');
-
 const prevBtn = document.querySelector('.carousel-arrow.prev');
-
 const nextBtn = document.querySelector('.carousel-arrow.next');
 
 let current = 0;
 
-/* =====================================
-   ATUALIZA CARROSSEL
-===================================== */
-
 function updateCarousel(){
 
     slides.forEach(slide => {
-
-        slide.classList.remove(
-            'active',
-            'prev',
-            'next'
-        );
-
+        slide.classList.remove('active','prev','next');
     });
 
     slides[current].classList.add('active');
 
-    const prev =
-        (current - 1 + slides.length)
-        % slides.length;
-
-    const next =
-        (current + 1)
-        % slides.length;
+    const prev = (current - 1 + slides.length) % slides.length;
+    const next = (current + 1) % slides.length;
 
     slides[prev].classList.add('prev');
-
     slides[next].classList.add('next');
 }
 
-/* =====================================
-   PRÓXIMO SLIDE
-===================================== */
-
 function nextSlide(){
-
     current++;
-
-    if(current >= slides.length){
-
-        current = 0;
-    }
-
+    if(current >= slides.length) current = 0;
     updateCarousel();
 }
-
-/* =====================================
-   SLIDE ANTERIOR
-===================================== */
 
 function prevSlide(){
-
     current--;
-
-    if(current < 0){
-
-        current = slides.length - 1;
-    }
-
+    if(current < 0) current = slides.length - 1;
     updateCarousel();
 }
 
-/* =====================================
-   EVENTOS DOS BOTÕES
-===================================== */
+nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
 
-nextBtn.addEventListener('click', () => {
-
-    nextSlide();
-
-    resetAutoSlide();
-
-});
-
-prevBtn.addEventListener('click', () => {
-
-    prevSlide();
-
-    resetAutoSlide();
-
-});
-
-/* =====================================
-   AUTO SLIDE
-===================================== */
-
-let autoSlide = setInterval(() => {
-
-    nextSlide();
-
-}, 5000);
-
-/* =====================================
-   RESETA O TEMPO
-===================================== */
+let autoSlide = setInterval(() => { nextSlide(); }, 5000);
 
 function resetAutoSlide(){
-
     clearInterval(autoSlide);
-
-    autoSlide = setInterval(() => {
-
-        nextSlide();
-
-    }, 5000);
+    autoSlide = setInterval(() => { nextSlide(); }, 5000);
 }
 
-/* =====================================
-   INICIA
-===================================== */
-
 updateCarousel();
-
 </script>
 
-<?php if($erroLogin != ""): ?>
-<script>
-    document.addEventListener("DOMContentLoaded", function(){
-        const modalLogin = document.getElementById("modal");
-        if(modalLogin) {
-            modalLogin.style.display = "block";
-        }
-    });
-</script>
-<?php endif; ?>
+<!-- =========================================================
+   COLEÇÕES
+========================================================= -->
 <?php
-/* =========================================================
-   COLEÇÕES COM ID DAS CATEGORIAS DO BANCO
-========================================================= */
-
 $colecoes = [
-
-    [
-        'id' => 1,
-        'label' => 'MÚSICA',
-        'icone' => 'fa-solid fa-music'
-    ],
-
-    [
-        'id' => 2,
-        'label' => 'DANÇA',
-        'icone' => 'fa-solid fa-person-dress'
-    ],
-
-    [
-        'id' => 3,
-        'label' => 'LEITURA',
-        'icone' => 'fa-solid fa-book-open'
-    ],
-
-    [
-        'id' => 4,
-        'label' => 'GASTRONOMIA',
-        'icone' => 'fa-solid fa-utensils'
-    ],
-
-    [
-        'id' => 5,
-        'label' => 'ESPORTE',
-        'icone' => 'fa-solid fa-football'
-    ],
-
-    [
-        'id' => 6,
-        'label' => 'CINEMA',
-        'icone' => 'fa-solid fa-film'
-    ],
-
-    [
-        'id' => 7,
-        'label' => 'TEATRO',
-        'icone' => 'fa-solid fa-masks-theater'
-    ],
-
-    [
-        'id' => 8,
-        'label' => 'PERFORMANCE',
-        'icone' => 'fa-solid fa-star'
-    ],
-
-    [
-        'id' => 9,
-        'label' => 'PINTURA/ARTE',
-        'icone' => 'fa-solid fa-palette'
-    ],
-
-    [
-        'id' => 10,
-        'label' => 'EDUCAÇÃO',
-        'icone' => 'fa-solid fa-graduation-cap'
-    ],
-
-    [
-        'id' => 11,
-        'label' => 'STANDUPS',
-        'icone' => 'fa-solid fa-microphone'
-    ],
-
-    [
-        'id' => 12,
-        'label' => 'CONGRESSOS/PALESTRAS',
-        'icone' => 'fa-solid fa-users'
-    ],
-
-    [
-        'id' => 13,
-        'label' => 'CURSOS/WORKSHOPS',
-        'icone' => 'fa-solid fa-laptop'
-    ],
-
-    [
-        'id' => 14,
-        'label' => 'PRIDE',
-        'icone' => 'fa-solid fa-rainbow'
-    ],
-
-    [
-        'id' => 15,
-        'label' => 'RELIGIÃO/ESPIRITUALIDADE',
-        'icone' => 'fa-solid fa-dove'
-    ],
-
-    [
-        'id' => 16,
-        'label' => 'RECITAR',
-        'icone' => 'fa-solid fa-pen-nib'
-    ],
-
-    [
-        'id' => 17,
-        'label' => 'ESCRITA/POEMAS',
-        'icone' => 'fa-solid fa-feather'
-    ]
-
+    ['id'=>1,'label'=>'MÚSICA','icone'=>'fa-solid fa-music'],
+    ['id'=>2,'label'=>'DANÇA','icone'=>'fa-solid fa-person-dress'],
+    ['id'=>3,'label'=>'LEITURA','icone'=>'fa-solid fa-book-open'],
+    ['id'=>4,'label'=>'GASTRONOMIA','icone'=>'fa-solid fa-utensils'],
+    ['id'=>5,'label'=>'ESPORTE','icone'=>'fa-solid fa-football'],
+    ['id'=>6,'label'=>'CINEMA','icone'=>'fa-solid fa-film'],
+    ['id'=>7,'label'=>'TEATRO','icone'=>'fa-solid fa-masks-theater'],
+    ['id'=>8,'label'=>'PERFORMANCE','icone'=>'fa-solid fa-star'],
+    ['id'=>9,'label'=>'PINTURA/ARTE','icone'=>'fa-solid fa-palette'],
+    ['id'=>10,'label'=>'EDUCAÇÃO','icone'=>'fa-solid fa-graduation-cap'],
+    ['id'=>11,'label'=>'STANDUPS','icone'=>'fa-solid fa-microphone'],
+    ['id'=>12,'label'=>'CONGRESSOS/PALESTRAS','icone'=>'fa-solid fa-users'],
+    ['id'=>13,'label'=>'CURSOS/WORKSHOPS','icone'=>'fa-solid fa-laptop'],
+    ['id'=>14,'label'=>'PRIDE','icone'=>'fa-solid fa-rainbow'],
+    ['id'=>15,'label'=>'RELIGIÃO/ESPIRITUALIDADE','icone'=>'fa-solid fa-dove'],
+    ['id'=>16,'label'=>'RECITAR','icone'=>'fa-solid fa-pen-nib'],
+    ['id'=>17,'label'=>'ESCRITA/POEMAS','icone'=>'fa-solid fa-feather']
 ];
 ?>
 
 <section class="container-carrossel">
-
     <h3>EXPLORE NOSSAS COLEÇÕES</h3>
 
     <div class="track" id="carrossel-track">
-
         <?php foreach ($colecoes as $colecao): ?>
-
-           <a href="categoria.php?id=<?php echo $colecao['id']; ?>" class="card">
+            <a href="categoria.php?id=<?php echo $colecao['id']; ?>" class="card">
                 <div class="icon-box">
-
                     <i class="<?php echo $colecao['icone']; ?>"></i>
-
                 </div>
-
                 <span><?php echo $colecao['label']; ?></span>
-
             </a>
-
         <?php endforeach; ?>
-
     </div>
 
     <div class="btn-next">
-
         <button class="arrow prev" onclick="rolarEsquerda()">&#10094;</button>
-
         <button class="arrow next" onclick="rolarDireita()">&#10095;</button>
-
     </div>
-
 </section>
+
 <script>
 const track = document.getElementById('carrossel-track');
 
-function rolarDireita() {
-    // Rola uma quantidade baseada na largura do card + gap
+function rolarDireita(){
     track.scrollBy({ left: 320, behavior: 'smooth' });
 }
 
-function rolarEsquerda() {
+function rolarEsquerda(){
     track.scrollBy({ left: -320, behavior: 'smooth' });
 }
 </script>
+
+<!-- =========================================================
+   MINI CARROSSEIS
+========================================================= -->
+
+<section class="mini-carousel">
+<h2>Eventos de Hoje</h2>
+<div class="track">
+<?php if($resultHoje && $resultHoje->num_rows > 0): ?>
+<?php while($e = $resultHoje->fetch_assoc()): ?>
+<div class="card">
+<img src="uploads/<?php echo $e['Imagem']; ?>">
+<h3><?php echo $e['titulo']; ?></h3>
+</div>
+<?php endwhile; endif; ?>
+</div>
+</section>
+
+<section class="mini-carousel">
+<h2>Eventos Infantis</h2>
+<div class="track">
+<?php if($resultKids && $resultKids->num_rows > 0): ?>
+<?php while($e = $resultKids->fetch_assoc()): ?>
+<div class="card">
+<img src="uploads/<?php echo $e['Imagem']; ?>">
+<h3><?php echo $e['titulo']; ?></h3>
+</div>
+<?php endwhile; endif; ?>
+</div>
+</section>
+
+<section class="mini-carousel">
+<h2>Próximos Eventos</h2>
+<div class="track">
+<?php if($resultUltima && $resultUltima->num_rows > 0): ?>
+<?php while($e = $resultUltima->fetch_assoc()): ?>
+<div class="card">
+<img src="uploads/<?php echo $e['Imagem']; ?>">
+<h3><?php echo $e['titulo']; ?></h3>
+</div>
+<?php endwhile; endif; ?>
+</div>
+</section>
 
 </body>
 </html>
