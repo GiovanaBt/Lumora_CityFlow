@@ -3,18 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>City Flow - Cadastro</title>
+    <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="cadastroUsuario.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
     <header>
-        <div class='logo'>
-            <a href="index.php">
-                <img src="imgs/cityFlow.webp" alt="logo">
-            </a>
-        </div>
-    </header>
+    <div class="logo">
+        <a href="index.php"><img src="imgs/cityFlow.webp" alt="Logo CityFlow"></a>
+    </div>
+
+    <a href="mapa.php" target="_blank">
+        <button class="botaoMapa">MAPA</button>
+    </a>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="index.php">INÍCIO</a></li>
+
+            <li><a href="informacoes.php">INFORMAÇÕES</a></li>
+            <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
+
+            
+            <?php if (isset($_SESSION['usuario_id'])): ?>
+                <li class="perfil">
+                    <a href="#"><i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?></a>
+                    <ul class="submenu">
+                        <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
+                        <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
+                        <li><a href="ajuda.php"><i class="fa-solid fa-circle-question"></i> Central de ajuda</a></li>
+                        <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
+                    </ul>
+                </li>
+
+                <?php endif; ?>
+</header>
 
     <form action="enviarCadastroUsuario.php" method="POST">
         <a href="javascript:history.back()" class="btn-voltar">&lt;</a>
@@ -27,6 +51,12 @@
 
         <label>DATA DE NASCIMENTO:</label>
         <input type="date" name="dataNascimento" required>
+
+        <label>CPF:</label>
+        <input type="number" name="CPF" placeholder="Digite aqui o seu CPF" required>
+
+        <label>TELEFONE:</label>
+        <input type="tel" name="telefone" placeholder="Digite aqui o seu telefone" required>
 
         <label>E-MAIL:</label>
         <input type="email" name="email" placeholder="Digite aqui o seu E-mail" required>
