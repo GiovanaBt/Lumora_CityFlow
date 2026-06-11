@@ -3,8 +3,16 @@ session_start();
 include 'Conexao.php';
 
 // Busca eventos para o mapa
-$sql = "SELECT id_evento, descricao, latitude, longitude, rua, bairro, numero 
-        FROM Eventos_Cadastrados";
+$sql = "SELECT
+            id_evento,
+            titulo,
+            descricao,
+            latitude,
+            longitude,
+            rua,
+            bairro,
+            numero
+        FROM eventos_cadastrados";
 $result = $conexao->query($sql);
 
 $eventos = [];
@@ -125,14 +133,34 @@ var iconeEvento = L.icon({
 });
 
 // Marcadores de Eventos
+// Marcadores de Eventos
 var eventos = <?php echo json_encode($eventos); ?>;
+
+console.log(eventos);
+
 var grupoEventos = [];
 
 eventos.forEach(function(evento){
-    if(evento.latitude && evento.longitude){
-        var marker = L.marker([evento.latitude,evento.longitude], {icon:iconeEvento})
-            .addTo(map)
-            .bindPopup("<b>"+evento.descricao+"</b><br>📍 "+evento.rua+", "+evento.numero+"<br>"+evento.bairro);
+
+    if(
+        evento.latitude &&
+        evento.longitude &&
+        evento.latitude != 0 &&
+        evento.longitude != 0
+    ){
+
+        var marker = L.marker(
+            [evento.latitude, evento.longitude],
+            {icon: iconeEvento}
+        )
+        .addTo(map)
+        .bindPopup(
+            "<b>" + evento.titulo + "</b><br>" +
+            evento.descricao + "<br>" +
+            "📍 " + evento.rua + ", " + evento.numero +
+            "<br>" + evento.bairro
+        );
+
         grupoEventos.push(marker);
     }
 });

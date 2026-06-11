@@ -117,8 +117,13 @@ $classificacaoIndicativa =
    LATITUDE E LONGITUDE
 ========================================================= */
 
-$latitude = 0;
-$longitude = 0;
+$latitude = isset($_POST['latitude'])
+    ? mysqli_real_escape_string($conexao, $_POST['latitude'])
+    : null;
+
+$longitude = isset($_POST['longitude'])
+    ? mysqli_real_escape_string($conexao, $_POST['longitude'])
+    : null;
 
 /* =========================================================
    INSERT EVENTO

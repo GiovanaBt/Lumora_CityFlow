@@ -224,14 +224,17 @@ $categorias = mysqli_query(
 <!-- =========================================================
      FORMULÁRIO
 ========================================================= -->
-
 <form
     action="enviarCadastroEvento.php"
     method="POST"
     enctype="multipart/form-data"
 >
 
+    <input type="hidden" name="latitude" id="latitude">
+    <input type="hidden" name="longitude" id="longitude">
+
 <div class="main-container">
+
 
     <!-- =====================================================
          INFORMAÇÕES BÁSICAS
@@ -1064,6 +1067,56 @@ document.addEventListener('click', e => {
 
         }
     }
+});
+
+/*=========================================*/
+document.querySelector("form").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const rua = document.getElementById("rua").value;
+    const numero = document.getElementById("numero").value;
+    const bairro = document.getElementById("bairro").value;
+    const cidade = document.getElementById("cidade").value;
+
+    const endereco =
+        `${rua}, ${numero}, ${bairro}, ${cidade}, Brasil`;
+
+    try{
+
+        const resposta = await fetch(
+            "https://nominatim.openstreetmap.org/search?format=json&q="
+            + encodeURIComponent(endereco)
+        );
+
+        const dados = await resposta.json();
+
+        if(dados.length > 0){
+
+            document.getElementById("latitude").value =
+                dados[0].lat;
+
+            document.getElementById("longitude").value =
+                dados[0].lon;
+
+            this.submit();
+
+        }else{
+
+            alert(
+                "Não foi possível localizar esse endereço."
+            );
+        }
+
+    }catch(erro){
+
+        console.error(erro);
+
+        alert(
+            "Erro ao obter localização do endereço."
+        );
+    }
+
 });
 
 </script>
