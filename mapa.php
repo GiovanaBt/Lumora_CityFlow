@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include 'Conexao.php';
 
 // Busca eventos para o mapa
@@ -13,7 +14,14 @@ $sql = "SELECT
             bairro,
             numero
         FROM eventos_cadastrados";
+
 $result = $conexao->query($sql);
+
+if(!$result){
+    die("Erro SQL: " . $conexao->error);
+}
+
+
 
 $eventos = [];
 while($row = $result->fetch_assoc()){
@@ -35,6 +43,7 @@ if(!empty($_SESSION['erro_login'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Flow - Mapa de Eventos</title>
 
+    <link rel="stylesheet" href="index.css"> <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="index.css"> <link rel="stylesheet" href="mapa.css">
     <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
 
@@ -86,26 +95,32 @@ if(!empty($_SESSION['erro_login'])){
     </nav>
 </header>
 
-<div id="modal" class="modal">
+
+<div id="modal" class="modal" style="display:none;">
     <div class="modal-conteudo">
         <span class="fechar">&times;</span>
+
         <h1>QUE BOM TER VOCÊ AQUI!</h1>
         <h3>FAÇA SEU LOGIN</h3>
+
         <?php if($erroLogin != ""): ?>
             <p class="erro-login"><?php echo $erroLogin; ?></p>
         <?php endif; ?>
+
         <form action="fazerLogin.php" method="POST">
             <label>E-MAIL:</label>
             <input type="email" name="emailLogin" required>
+
             <label>SENHA:</label>
             <input type="password" name="senhaLogin" required>
+
             <button type="submit">ENTRAR</button>
         </form>
+
         <h4>Não possui uma conta?</h4>
         <a href="cadastroUsuario.php">Cadastre-se</a>
     </div>
 </div>
-
 <div id="map"></div>
 
 <button id="btnLocalizacao">📍 Minha localização</button>
