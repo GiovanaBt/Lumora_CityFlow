@@ -1,0 +1,110 @@
+:root {
+    --primary: #00f2ff; /* Ciano Neon */
+    --secondary: #bc00ff; /* Roxo Neon */
+    --text-light: #f4f4f4;
+    --transition: all 0.3s ease;
+}
+
+.footer-main {
+    /* Caminho atualizado para a sua imagem */
+    background-image: url("imgs/footer.png");
+    background-size: cover;
+    position: relative;
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Efeito de Glassmorphism (vidro fosco) sobre o graffiti */
+.footer-overlay {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(2px);
+    padding: 20px 0 5px 0;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.footer-title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    color: var(--primary);
+    border-left: 3px solid var(--secondary);
+    padding-left: 10px;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: #bbb;
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+    padding-left: 8px;
+}
+
+/* Logo Estilizada */
+.logo-wrapper {
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.logo-city { color: var(--primary); }
+.logo-flow { color: var(--secondary); text-shadow: 0 0 15px var(--secondary); }
+
+.brand-text {
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* Ícones Sociais Funcionais */
+.social-icons a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-right: 10px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid transparent;
+}
+
+.social-icons a:hover {
+    background: var(--secondary);
+    border-color: var(--primary);
+    transform: translateY(-5px);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 60px;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+    color: #777;
+}
