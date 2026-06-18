@@ -1,3 +1,4 @@
+CADASTRO USUARIO CSS
 /* CONFIGURAÇÕES GERAIS */
 * {
     margin: 0;
@@ -114,4 +115,34 @@ button {
 
 button:hover {
     transform: scale(1.05);
+}
+
+
+.campo-senha{
+    position: relative;
+    width: 100%;
+}
+
+.campo-senha input{
+    width: 100%;
+    padding-right: 45px;
+}
+
+.campo-senha i{
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+    z-index: 10;
+}
+
+.erro-senha{
+    color: #ff0000;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: -8px;
+    margin-bottom: 15px;
+    display: none;
 }

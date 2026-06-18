@@ -1,3 +1,4 @@
+CADASTRO USUARIO
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -40,7 +41,7 @@
                 <?php endif; ?>
 </header>
 
-    <form action="enviarCadastroUsuario.php" method="POST">
+    <form action="enviarCadastroUsuario.php" method="POST" id="formCadastro">
         <a href="javascript:history.back()" class="btn-voltar">&lt;</a>
         
         <h1>CRIE SUA CONTA</h1>
@@ -62,13 +63,83 @@
         <input type="email" name="email" placeholder="Digite aqui o seu E-mail" required>
 
         <label>SENHA:</label>
-        <input type="password" name="senha" placeholder="Digite aqui a sua senha" required>
+<div class="campo-senha">
+    <input type="password" id="senha" name="senha" placeholder="Digite aqui a sua senha" required>
+    <i class="fa-solid fa-eye" id="olhoSenha"></i>
+</div>
 
+<label>CONFIRMAR SENHA:</label>
+<div class="campo-senha">
+    <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite novamente a sua senha" required>
+    <i class="fa-solid fa-eye" id="olhoConfirmarSenha"></i>
+</div>
+
+<p id="erroSenha" class="erro-senha"></p>
+    
         <label>NOME DE USUÁRIO:</label>
         <input type="text" name="nomeUsuario" placeholder="Digite aqui o seu nome de usuário" required>
 
         <button type="submit">ENVIAR</button>
     </form>
+
+<script>
+const olhoSenha = document.getElementById("olhoSenha");
+const senha = document.getElementById("senha");
+
+const olhoConfirmar = document.getElementById("olhoConfirmarSenha");
+const confirmarSenha = document.getElementById("confirmarSenha");
+
+const erroSenha = document.getElementById("erroSenha");
+
+olhoSenha.addEventListener("click", function() {
+    if (senha.type === "password") {
+        senha.type = "text";
+        this.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        senha.type = "password";
+        this.classList.replace("fa-eye-slash", "fa-eye");
+    }
+});
+
+olhoConfirmar.addEventListener("click", function() {
+    if (confirmarSenha.type === "password") {
+        confirmarSenha.type = "text";
+        this.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        confirmarSenha.type = "password";
+        this.classList.replace("fa-eye-slash", "fa-eye");
+    }
+});
+
+function verificarSenhas() {
+
+    if (confirmarSenha.value === "") {
+        erroSenha.style.display = "none";
+        return;
+    }
+
+    if (senha.value !== confirmarSenha.value) {
+        erroSenha.textContent = "As senhas não coincidem.";
+        erroSenha.style.display = "block";
+    } else {
+        erroSenha.style.display = "none";
+    }
+}
+
+senha.addEventListener("input", verificarSenhas);
+confirmarSenha.addEventListener("input", verificarSenhas);
+
+document.getElementById("formCadastro").addEventListener("submit", function(e) {
+
+    if (senha.value !== confirmarSenha.value) {
+
+        erroSenha.textContent = "As senhas não coincidem.";
+        erroSenha.style.display = "block";
+
+        e.preventDefault();
+    }
+});
+</script>
 
 </body>
 </html>
@@ -81,7 +152,7 @@
     <link rel="stylesheet" href="footer.css">
 </head>
 <body>
-   <?php
+    <?php
 // Configurações do Rodapé
 $ano_atual = date('Y');
 $footer_data = [
@@ -129,9 +200,9 @@ $footer_data = [
                     Conectando a essência das ruas e a cultura urbana. Descubra eventos, arte e movimento em um só lugar.
                 </p>
                 <div class="social-icons">
-                    <a href="https://www.instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-                    <a href="https://twitter.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Twitter">TW</a>
-                    <a href="https://www.facebook.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Twitter">TW</a>
+                    <a href="#" aria-label="Facebook">FB</a>
                 </div>
             </div>
         </div>
