@@ -2,18 +2,18 @@
    MODAL
 ========================= */
 /* ===== MODAL (FUNDO) ===== */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
+.modal{
+    display:none;
 
-    background-color: rgba(0, 0, 0, 0.6);
+    position:fixed;
+    inset:0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content:center;
+    align-items:center;
 
-    z-index: 9999;
+    background:rgba(0,0,0,.6);
+
+    z-index:9999;
 }
 
 /* ===== CONTEÚDO DO MODAL (MAIS LARGO) ===== */
@@ -398,11 +398,9 @@ nav .submenu li a.btn-sair:hover {
 
     letter-spacing: 1px;
 
-    border:
-        #00d4ff;
+    border: 2px solid #00d4ff;
 
-    box-shadow:
-         #00d4ff;
+    box-shadow: 0 0 15px rgba(0,212,255,.5);
     transition: .25s ease;
 }
 
@@ -553,21 +551,6 @@ nav .submenu li a.btn-sair:hover {
 /* =========================
    CARROSSEL DE COLEÇÕES
 ========================= */
-
-.container-carrossel {
-    background: linear-gradient(135deg, #3d1a42 0%, #1a3a4a 100%);
-
-    padding: 40px 20px;
-
-    border-radius: 25px;
-
-    margin: 60px auto;
-
-    width: 90%;
-
-    overflow: hidden;
-}
-
 .container-carrossel h3 {
     font-size: 14px;
     font-weight: 700;
@@ -874,122 +857,314 @@ PÁGINA CATEGORIA
    MINI CARROSSEIS
 ========================================================= */
 
-.mini-carousel{
-    width: 100%;
-    padding: 40px 5%;
-    position: relative;
+.mini-carousel-container{
+
+    position:relative;
+
+    width:92%;
+
+    margin:80px auto;
 }
+.placa-data{
+    display:inline-flex;
 
-.mini-carousel h2{
-    color: #fff;
-    font-size: 2rem;
-    margin-bottom: 25px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    align-items:center;
+    justify-content:center;
+
+    padding:8px 18px;
+
+    background:#D97CFF;
+
+    color:#fff;
+
+    font-size:1.5rem;
+    font-weight:900;
+
+    border-radius:10px;
+
+    transform:rotate(-4deg);
+
+    box-shadow:4px 4px 0 #A8329E;
+
+    -webkit-text-fill-color:#fff;
 }
+/* TÍTULO */
 
-/* =========================================================
-   TRACK DOS CARDS
-========================================================= */
+.titulo-carrossel{
+    display:flex;
+    align-items:center;
+    gap:20px;
 
-.mini-carousel .track{
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding-bottom: 10px;
-}
+    font-size:3rem;
+    font-weight:900;
+    text-transform:uppercase;
 
-/* REMOVE BARRA */
-.mini-carousel .track::-webkit-scrollbar{
-    display: none;
-}
+    margin-bottom:35px;
 
-/* =========================================================
-   CARD DOS EVENTOS
-========================================================= */
-
-.mini-carousel .card{
-    min-width: 260px;
-    max-width: 260px;
-    background: #111;
-    border-radius: 18px;
-    overflow: hidden;
-    transition: 0.35s;
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.08);
-    position: relative;
-}
-
-/* HOVER */
-.mini-carousel .card:hover{
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.45);
-}
-
-/* =========================================================
-   IMAGEM
-========================================================= */
-
-.mini-carousel .card img{
-    width: 100%;
-    height: 330px;
-    object-fit: cover;
-    display: block;
-}
-
-/* =========================================================
-   TÍTULO
-========================================================= */
-
-.mini-carousel .card h3{
-    color: #fff;
-    font-size: 1rem;
-    padding: 16px;
-    line-height: 1.4;
-    font-weight: 600;
-}
-
-/* =========================================================
-   EFEITO DEGRADE
-========================================================= */
-
-.mini-carousel .card::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 120px;
-    background: linear-gradient(
-        to top,
-        rgba(0,0,0,0.9),
-        transparent
+    background:linear-gradient(
+        90deg,
+        #2DBAC9,
+        #A8329E
     );
-    pointer-events: none;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-/* =========================================================
-   RESPONSIVIDADE
-========================================================= */
+/* TRACK */
 
-@media(max-width: 768px){
+.mini-carousel-track{
 
-    .mini-carousel{
-        padding: 30px 4%;
+    display:flex;
+
+    gap:35px;
+
+    overflow-x:auto;
+
+    scroll-behavior:smooth;
+
+    scrollbar-width:none;
+
+    padding:10px 0;
+}
+
+.mini-carousel-track::-webkit-scrollbar{
+    display:none;
+}
+
+/* CARD */
+
+.mini-card{
+
+    min-width:460px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+    transition:.3s;
+}
+
+.mini-card:hover{
+
+    transform:
+    translateY(-8px);
+}
+
+/* IMAGEM */
+
+.mini-img{
+
+    width:230px;
+
+    height:165px;
+
+    background:#fff;
+
+    padding:8px;
+
+    border-radius:8px;
+
+    transform:rotate(-2deg);
+
+    border:3px solid #2DBAC9;
+
+    box-shadow:
+    0 0 25px rgba(45,186,201,.25);
+}
+
+.mini-img img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:4px;
+}
+
+/* INFO */
+
+.mini-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+}
+
+/* DATA */
+
+.mini-data{
+
+    color:#FFFFFF;
+
+    font-size:2rem;
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+    border-top:3px solid #A8329E;
+
+    padding-top:10px;
+
+    width:max-content;
+}
+
+/* TÍTULO EVENTO */
+
+.mini-info h3{
+
+    color:#FFFFFF;
+
+    font-size:1.5rem;
+
+    width:240px;
+
+    line-height:1.2;
+
+    margin-bottom:20px;
+}
+
+/* BOTÃO */
+
+.mini-info a{
+
+    text-decoration:none;
+
+    color:#FFFFFF;
+
+    font-weight:800;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #A8329E,
+        #2DBAC9
+    );
+
+    width:max-content;
+
+    transition:.3s;
+}
+
+.mini-info a:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 20px rgba(45,186,201,.6);
+}
+
+/* SETAS */
+
+.mini-arrow{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+    border:2px solid #2DBAC9;
+
+    background:#111111;
+
+    color:#FFFFFF;
+
+    cursor:pointer;
+
+    z-index:20;
+
+    transition:.3s;
+}
+
+.mini-arrow:hover{
+
+    background:#2DBAC9;
+
+    color:#000000;
+
+    box-shadow:
+    0 0 25px rgba(45,186,201,.7);
+
+    transform:
+    translateY(-50%)
+    scale(1.08);
+}
+
+.mini-arrow.left{
+    left:-30px;
+}
+
+.mini-arrow.right{
+    right:-30px;
+}
+
+.mini-arrow i{
+
+    font-size:1.3rem;
+}
+
+/* RESPONSIVO */
+
+@media(max-width:900px){
+
+    .mini-card{
+
+        min-width:320px;
+
+        flex-direction:column;
+
+        align-items:flex-start;
     }
 
-    .mini-carousel h2{
-        font-size: 1.5rem;
+    .mini-img{
+
+        width:100%;
+
+        height:220px;
     }
 
-    .mini-carousel .card{
-        min-width: 210px;
-        max-width: 210px;
+    .mini-info h3{
+
+        width:100%;
     }
 
-    .mini-carousel .card img{
-        height: 270px;
-    }
+}
+.mini-local,
+.mini-hora{
 
+    color:#d8d8d8;
+
+    font-size:14px;
+
+    margin-bottom:8px;
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.mini-local i{
+    color:#2dbac9;
+}
+
+.mini-hora i{
+    color:#a8329e;
 }

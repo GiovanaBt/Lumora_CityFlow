@@ -33,6 +33,7 @@ $hoje = date('Y-m-d');
 /* =========================================================
    CARROSSEL: HOJE
 ========================================================= */
+
 $sqlHoje = "
 SELECT DISTINCT
     e.id_evento,
@@ -40,40 +41,46 @@ SELECT DISTINCT
     e.Imagem,
     e.bairro,
     e.cidade,
-    d.data_inicio
+    d.data_inicio,
+    d.horario_inicio
 
 FROM eventos_cadastrados e
 
-JOIN datas_evento d 
+INNER JOIN datas_evento d
 ON e.id_evento = d.id_evento
 
-WHERE 
-    '$hoje' BETWEEN d.data_inicio AND d.data_fim
+WHERE CURDATE() BETWEEN d.data_inicio AND d.data_fim
 
 ORDER BY d.data_inicio ASC
 
 LIMIT 10
 ";
+
 $resultHoje = $conn->query($sqlHoje);
 
 /* =========================================================
    CARROSSEL: INFANTIL
 ========================================================= */
-/* =========================================================
-   CARROSSEL: INFANTIL
-   PUXA EVENTOS LIVRE E +10
-========================================================= */
 
 $sqlKids = "
-SELECT 
-    id_evento, 
-    titulo, 
-    Imagem, 
-    bairro, 
-    cidade
-FROM eventos_cadastrados
-WHERE classificacao_indicativa IN ('L', '10')
-ORDER BY id_evento DESC
+SELECT DISTINCT
+    e.id_evento,
+    e.titulo,
+    e.Imagem,
+    e.bairro,
+    e.cidade,
+    d.data_inicio,
+    d.horario_inicio
+
+FROM eventos_cadastrados e
+
+INNER JOIN datas_evento d
+ON e.id_evento = d.id_evento
+
+WHERE e.classificacao_indicativa IN ('L', '10')
+
+ORDER BY d.data_inicio ASC
+
 LIMIT 10
 ";
 
@@ -367,47 +374,147 @@ function rolarEsquerda(){
 <!-- =========================================================
    MINI CARROSSEIS
 ========================================================= -->
+<section class="mini-carousel-container">
 
-<section class="mini-carousel">
-<h2>Eventos de Hoje</h2>
-<div class="track">
-<?php if($resultHoje && $resultHoje->num_rows > 0): ?>
-<?php while($e = $resultHoje->fetch_assoc()): ?>
-<div class="card">
-<img src="uploads/<?php echo $e['Imagem']; ?>">
-<h3><?php echo $e['titulo']; ?></h3>
+   <div class="titulo-carrossel">
+    <span>EVENTOS HOJE</span>
+
+    <div class="placa-data" id="dataHoje"></div>
 </div>
-<?php endwhile; endif; ?>
+
+    <button class="mini-arrow left"
+            onclick="scrollMini('hoje', -1)">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <div class="mini-carousel-track" id="hoje">
+
+        <?php while($e = $resultHoje->fetch_assoc()): ?>
+
+          <div class="mini-card">
+
+    <div class="mini-img">
+        <img src="uploads/<?php echo $e['Imagem']; ?>" alt="">
+    </div>
+
+    <div class="mini-info">
+
+        <span class="mini-data">
+            <?php echo date('d/m', strtotime($e['data_inicio'])); ?>
+        </span>
+
+        <h3><?php echo $e['titulo']; ?></h3>
+
+        <p class="mini-local">
+            <i class="fa-solid fa-location-dot"></i>
+            <?php echo $e['bairro']; ?> - <?php echo $e['cidade']; ?>
+        </p>
+
+        <p class="mini-hora">
+            <i class="fa-solid fa-clock"></i>
+            <?php echo substr($e['horario_inicio'],0,5); ?>
+        </p>
+
+        <a href="eventos.php?id=<?php echo $e['id_evento']; ?>">
+            Saiba Mais
+        </a>
+
 </div>
+
+            </div>
+
+        <?php endwhile; ?>
+
+    </div>
+
+    <button class="mini-arrow right"
+            onclick="scrollMini('hoje', 1)">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
 </section>
 
-<section class="mini-carousel">
-<h2>Eventos Infantis</h2>
-<div class="track">
-<?php if($resultKids && $resultKids->num_rows > 0): ?>
-<?php while($e = $resultKids->fetch_assoc()): ?>
-<div class="card">
-<img src="uploads/<?php echo $e['Imagem']; ?>">
-<h3><?php echo $e['titulo']; ?></h3>
+<section class="mini-carousel-container">
+
+    <h2 class="titulo-carrossel">EVENTOS INFANTIS</h2>
+
+    <button class="mini-arrow left"
+            onclick="scrollMini('kids', -1)">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <div class="mini-carousel-track" id="kids">
+
+        <?php if($resultKids && $resultKids->num_rows > 0): ?>
+            <?php while($e = $resultKids->fetch_assoc()): ?>
+<div class="mini-card">
+
+    <div class="mini-img">
+        <img src="uploads/<?php echo $e['Imagem']; ?>" alt="">
+    </div>
+
+    <div class="mini-info">
+
+        <span class="mini-data">
+            <?php echo date('d/m', strtotime($e['data_inicio'])); ?>
+        </span>
+
+        <h3><?php echo $e['titulo']; ?></h3>
+
+        <p class="mini-local">
+            <i class="fa-solid fa-location-dot"></i>
+            <?php echo $e['bairro']; ?> - <?php echo $e['cidade']; ?>
+        </p>
+
+        <p class="mini-hora">
+            <i class="fa-solid fa-clock"></i>
+            <?php echo substr($e['horario_inicio'],0,5); ?>
+        </p>
+
+        <a href="eventos.php?id=<?php echo $e['id_evento']; ?>">
+            Saiba Mais
+        </a>
+
 </div>
-<?php endwhile; endif; ?>
-</div>
+                </div>
+
+            <?php endwhile; ?>
+        <?php endif; ?>
+
+    </div>
+
+    <button class="mini-arrow right"
+            onclick="scrollMini('kids', 1)">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
 </section>
 
-<section class="mini-carousel">
-<h2>Próximos Eventos</h2>
-<div class="track">
-<?php if($resultUltima && $resultUltima->num_rows > 0): ?>
-<?php while($e = $resultUltima->fetch_assoc()): ?>
-<div class="card">
-<img src="uploads/<?php echo $e['Imagem']; ?>">
-<h3><?php echo $e['titulo']; ?></h3>
-</div>
-<?php endwhile; endif; ?>
-</div>
-</section>
+<script>
+function scrollMini(id, direction){
 
-<!-- footer -->
+    const track = document.getElementById(id);
+
+    track.scrollBy({
+        left: direction * 600,
+        behavior: "smooth"
+    });
+}
+</script>
+
+<script>
+const hoje = new Date();
+
+const dia = String(hoje.getDate()).padStart(2,'0');
+const mes = String(hoje.getMonth() + 1).padStart(2,'0');
+
+document.getElementById('dataHoje').textContent = `${dia}/${mes}`;
+</script>
+
+<!-- =========================================================
+   FOOTER
+========================================================= -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -417,7 +524,7 @@ function rolarEsquerda(){
     <link rel="stylesheet" href="footer.css">
 </head>
 <body>
-   <?php
+    <?php
 // Configurações do Rodapé
 $ano_atual = date('Y');
 $footer_data = [
@@ -465,9 +572,9 @@ $footer_data = [
                     Conectando a essência das ruas e a cultura urbana. Descubra eventos, arte e movimento em um só lugar.
                 </p>
                 <div class="social-icons">
-                    <a href="https://www.instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-                    <a href="https://twitter.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Twitter">TW</a>
-                    <a href="https://www.facebook.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Twitter">TW</a>
+                    <a href="#" aria-label="Facebook">FB</a>
                 </div>
             </div>
         </div>
