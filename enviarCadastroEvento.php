@@ -274,7 +274,7 @@ $conexao->close();
     <link rel="stylesheet" href="footer.css">
 </head>
 <body>
-    <?php
+   <?php
 // Configurações do Rodapé
 $ano_atual = date('Y');
 $footer_data = [
@@ -322,9 +322,9 @@ $footer_data = [
                     Conectando a essência das ruas e a cultura urbana. Descubra eventos, arte e movimento em um só lugar.
                 </p>
                 <div class="social-icons">
-                    <a href="#" aria-label="Instagram">IG</a>
-                    <a href="#" aria-label="Twitter">TW</a>
-                    <a href="#" aria-label="Facebook">FB</a>
+                    <a href="https://www.instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+                    <a href="https://twitter.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Twitter">TW</a>
+                    <a href="https://www.facebook.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
                 </div>
             </div>
         </div>

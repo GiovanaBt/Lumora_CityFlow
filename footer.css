@@ -16,7 +16,7 @@
 
 /* Efeito de Glassmorphism (vidro fosco) sobre o graffiti */
 .footer-overlay {
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.0);
     backdrop-filter: blur(2px);
     padding: 20px 0 5px 0;
 }
