@@ -7,9 +7,26 @@ $dataNascimento = $_POST['dataNascimento'];
 $email = $_POST['email'];
 $senha = $_POST['senha'];
 $nomeUsuario = $_POST['nomeUsuario'];
+$cpf = $_POST['cpf'];
+$telefone = $_POST['telefone'];
 
-$sql = "INSERT INTO Usuarios (nome_completo, data_nascimento, email, senha, nome_usuario) VALUES 
-        ('$nomeCompleto', '$dataNascimento', '$email', '$senha', '$nomeUsuario')";
+$sql = "INSERT INTO usuarios (
+    nome_completo,
+    data_nascimento,
+    cpf,
+    telefone,
+    email,
+    senha,
+    nome_usuario
+) VALUES (
+    '$nomeCompleto',
+    '$dataNascimento',
+    '$cpf',
+    '$telefone',
+    '$email',
+    '$senha',
+    '$nomeUsuario'
+)";
 
 if ($conexao->query($sql) === TRUE) {
     $idUsuario = $conexao->insert_id;

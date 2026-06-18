@@ -53,7 +53,7 @@
         <input type="date" name="dataNascimento" required>
 
         <label>CPF:</label>
-        <input type="number" name="CPF" placeholder="Digite aqui o seu CPF" required>
+        <input type="number" name="cpf" placeholder="Digite aqui o seu CPF" required>
 
         <label>TELEFONE:</label>
         <input type="tel" name="telefone" placeholder="Digite aqui o seu telefone" required>
