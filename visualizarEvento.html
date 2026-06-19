@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CityFlow - Pré-visualização do Evento</title>
+    
+    <link rel="stylesheet" href="visualizarEvento.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="main-container">
+
+    <div class="content-grid">
+        
+        <div class="left-column">
+            <div class="card-preview">
+                <span class="badge-categoria" id="preview-categoria">GASTRONOMIA</span>
+                <h1 class="evento-titulo" id="preview-titulo">Carregando título...</h1>
+                
+                <div class="meta-badges">
+                    <div class="badge-meta">
+                        <i class="fa-solid fa-user-shield"></i> Classificação: <strong id="preview-classificacao">L</strong>
+                    </div>
+                    <div class="badge-meta">
+                        <i class="fa-solid fa-location-dot"></i> CEP: <strong id="preview-cep">00000000</strong>
+                    </div>
+                </div>
+
+                <div class="datas-flex" id="preview-datas">
+                    </div>
+
+                <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px;">
+                    <h3 class="local-titulo"><i class="fa-solid fa-location-crosshairs"></i> Localização</h3>
+                    <p class="local-texto" id="preview-endereco">Nenhum endereço informado.</p>
+                    <div class="local-referencia" id="preview-ref-box" style="display: none;">
+                        <i class="fa-solid fa-route"></i> <span id="preview-referencia"></span>
+                    </div>
+                    
+                    <button class="btn-mapa"><i class="fa-solid fa-map-location-dot"></i> Ver no Mapa</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="banner-container">
+                <img id="preview-imagem" class="banner-img" src="imgs/cityFlow.webp" alt="Capa do Evento">
+            </div>
+
+            <div class="card-preview">
+                <h3 class="acoes-titulo">Ações</h3>
+                <button class="btn-participar"><i class="fa-regular fa-star"></i> Participar</button>
+                <button class="btn-favoritar"><i class="fa-regular fa-heart"></i> Favoritar</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card-preview">
+        <h3 class="sobre-titulo">Sobre o Evento</h3>
+        <p class="sobre-texto" id="preview-descricao">Carregando a descrição...</p>
+    </div>
+
+</div>
+
+<script>
+window.onload = function() {
+    const dados = JSON.parse(sessionStorage.getItem('dados_preview_evento'));
+    
+    if (!dados) {
+        document.body.innerHTML = "<h2 style='text-align:center; margin-top:50px;'>Nenhum dado de pré-visualização encontrado. Volte ao formulário.</h2>";
+        return;
+    }
+
+    document.getElementById('preview-titulo').innerText = dados.nome;
+    document.getElementById('preview-descricao').innerText = dados.descricao;
+    document.getElementById('preview-cep').innerText = dados.cep.replace(/\D/g, '');
+    document.getElementById('preview-classificacao').innerText = dados.classificacao;
+
+    if (dados.imagem && dados.imagem.startsWith('data:image')) {
+        document.getElementById('preview-imagem').src = dados.imagem;
+    }
+
+    if (dados.rua) {
+        document.getElementById('preview-endereco').innerText = 
+            `${dados.rua}, ${dados.numero} - ${dados.bairro} - ${dados.cidade}`;
+        
+        if (dados.ponto_referencia) {
+            document.getElementById('preview-referencia').innerText = dados.ponto_referencia;
+            document.getElementById('preview-ref-box').style.display = 'flex';
+        }
+    }
+
+    const containerDatas = document.getElementById('preview-datas');
+    containerDatas.innerHTML = '';
+
+    if (dados.datas && dados.datas.length > 0) {
+        dados.datas.forEach((data, index) => {
+            if (data) {
+                const dataFormatada = data.split('-').reverse().join('/');
+                const horaInicio = dados.horasInicio[index] || '00:00';
+                const horaFim = dados.horasFim[index] || '00:00';
+
+                const box = document.createElement('div');
+                box.className = 'box-data';
+                box.innerHTML = `
+                    <span class="tipo-data"><i class="fa-regular fa-calendar"></i> Evento</span>
+                    <div class="dia">${dataFormatada}</div>
+                    <div class="horario"><i class="fa-regular fa-clock"></i> ${horaInicio} - ${horaFim}</div>
+                `;
+                containerDatas.appendChild(box);
+            }
+        });
+    }
+};
+</script>
+
+</body>
+</html>

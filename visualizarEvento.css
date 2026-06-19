@@ -1,0 +1,272 @@
+/* =========================================================
+   RESET E CORES BASE (DESIGN ESCURO CITYFLOW)
+========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b071e; /* Fundo roxo bem escuro */
+    color: #ffffff;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Layout dividido em duas colunas na parte superior */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 24px;
+}
+
+@media (max-width: 768px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilo padrão dos blocos / cards de conteúdo */
+.card-preview {
+    background-color: #161129; /* Roxo escuro interno */
+    border: 1px solid #231b3d;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+/* =========================================================
+   COLUNA DA ESQUERDA (DADOS PRINCIPAIS)
+========================================================= */
+.badge-categoria {
+    background: #ab229e;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 900;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    display: inline-block;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.evento-titulo {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    letter-spacing: -0.5px;
+}
+
+.meta-badges {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.badge-meta {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #b3b0cb;
+}
+
+.badge-meta i {
+    color: #2cc4f3;
+}
+
+.badge-meta strong {
+    color: #fff;
+}
+
+/* Lista de caixas de datas */
+.datas-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.box-data {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 16px 20px;
+    min-width: 160px;
+    flex: 1;
+}
+
+.box-data .tipo-data {
+    font-size: 11px;
+    font-weight: bold;
+    color: #797493;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.box-data .dia {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.box-data .horario {
+    font-size: 13px;
+    color: #a4a0c0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Seção de Localização */
+.local-titulo {
+    color: #9c42f5;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.local-texto {
+    font-size: 14px;
+    color: #c4c0de;
+    line-height: 1.6;
+}
+
+.local-referencia {
+    font-size: 14px;
+    color: #2cc4f3;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-mapa {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #a4a0c0;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 14px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-mapa:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   COLUNA DA DIREITA (BANNER & AÇÕES)
+========================================================= */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.banner-container {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #231b3d;
+    height: 340px;
+}
+
+.banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.acoes-titulo {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2cc4f3;
+    margin-bottom: 20px;
+}
+
+.btn-participar {
+    width: 100%;
+    background: linear-gradient(90deg, #b82ca4, #2bbfe6);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.btn-favoritar {
+    width: 100%;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-favoritar:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* =========================================================
+   BLOCO INFERIOR (SOBRE O EVENTO)
+========================================================= */
+.sobre-titulo {
+    color: #2cc4f3;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.sobre-texto {
+    font-size: 15px;
+    color: #aeb8ce;
+    line-height: 1.7;
+    white-space: pre-line;
+}
