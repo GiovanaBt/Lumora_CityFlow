@@ -33,15 +33,16 @@ header {
 }
 
 /* FORMULÁRIO (QUADRADO BRANCO) */
+/* FORMULÁRIO (QUADRADO BRANCO) */
 form {
-    background-color: #ffffff; /* Branco sólido, como você fez */
+    background-color: #ffffff; 
     padding: 40px 30px 30px 30px;
     border-radius: 15px;
     width: 90%;
-    max-width: 350px; /* Reduzido o tamanho horizontal */
+    max-width: 650px; /* <--- Aumentei para 550px (mude o valor se quiser ainda mais largo) */
     box-shadow: 0px 0px 25px #2dbac9;
     position: relative;
-    text-align: left; /* Alinhamento do texto interno */
+    text-align: left; 
 }
 
 /* BOTÃO VOLTAR */
@@ -63,14 +64,14 @@ form {
 /* TEXTOS */
 h1 {
     text-align: center;
-    font-size: 24px;
+    font-size: 34px;
     color: #333;
     margin-bottom: 5px;
 }
 
 h2 {
     text-align: center;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: normal;
     color: #666;
     margin-bottom: 25px;

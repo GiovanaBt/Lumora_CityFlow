@@ -54,10 +54,10 @@ CADASTRO USUARIO
         <input type="date" name="dataNascimento" required>
 
         <label>CPF:</label>
-        <input type="number" name="cpf" placeholder="Digite aqui o seu CPF" required>
+        <input type="text" name="cpf" id="cpf" placeholder="Digite aqui o seu CPF" maxlength="14" required>
 
         <label>TELEFONE:</label>
-        <input type="tel" name="telefone" placeholder="Digite aqui o seu telefone" required>
+        <input type="tel" name="telefone" id="telefone" placeholder="Digite aqui o seu telefone" maxlength="15" required>
 
         <label>E-MAIL:</label>
         <input type="email" name="email" placeholder="Digite aqui o seu E-mail" required>
@@ -65,13 +65,13 @@ CADASTRO USUARIO
         <label>SENHA:</label>
 <div class="campo-senha">
     <input type="password" id="senha" name="senha" placeholder="Digite aqui a sua senha" required>
-    <i class="fa-solid fa-eye" id="olhoSenha"></i>
+    <i class="fa-solid fa-eye-slash" id="olhoSenha"></i> 
 </div>
 
 <label>CONFIRMAR SENHA:</label>
 <div class="campo-senha">
     <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Digite novamente a sua senha" required>
-    <i class="fa-solid fa-eye" id="olhoConfirmarSenha"></i>
+    <i class="fa-solid fa-eye-slash" id="olhoConfirmarSenha"></i> 
 </div>
 
 <p id="erroSenha" class="erro-senha"></p>
@@ -94,20 +94,24 @@ const erroSenha = document.getElementById("erroSenha");
 olhoSenha.addEventListener("click", function() {
     if (senha.type === "password") {
         senha.type = "text";
-        this.classList.replace("fa-eye", "fa-eye-slash");
+        // Quando mostra o texto, o olho fica ABERTO
+        this.classList.replace("fa-eye-slash", "fa-eye");
     } else {
         senha.type = "password";
-        this.classList.replace("fa-eye-slash", "fa-eye");
+        // Quando esconde (bolinhas), o olho fica FECHADO
+        this.classList.replace("fa-eye", "fa-eye-slash");
     }
 });
 
 olhoConfirmar.addEventListener("click", function() {
     if (confirmarSenha.type === "password") {
         confirmarSenha.type = "text";
-        this.classList.replace("fa-eye", "fa-eye-slash");
+        // Quando mostra o texto, o olho fica ABERTO
+        this.classList.replace("fa-eye-slash", "fa-eye");
     } else {
         confirmarSenha.type = "password";
-        this.classList.replace("fa-eye-slash", "fa-eye");
+        // Quando esconde (bolinhas), o olho fica FECHADO
+        this.classList.replace("fa-eye", "fa-eye-slash");
     }
 });
 
@@ -138,6 +142,43 @@ document.getElementById("formCadastro").addEventListener("submit", function(e) {
 
         e.preventDefault();
     }
+});
+
+const inputTelefone = document.querySelector('input[name="telefone"]');
+const inputCpf = document.getElementById('cpf');
+
+// Máscara do Telefone: (00) 00000-0000
+inputTelefone.addEventListener('input', function(e) {
+    let valor = e.target.value.replace(/\D/g, ""); // Remove tudo o que não é número
+    
+    if (valor.length > 0) {
+        valor = "(" + valor;
+    }
+    if (valor.length > 3) {
+        valor = valor.slice(0, 3) + ") " + valor.slice(3);
+    }
+    if (valor.length > 10) {
+        valor = valor.slice(0, 10) + "-" + valor.slice(10, 14);
+    }
+    
+    e.target.value = valor;
+});
+
+// Máscara do CPF: 000.000.000-00
+inputCpf.addEventListener('input', function(e) {
+    let valor = e.target.value.replace(/\D/g, ""); // Remove tudo o que não é número
+    
+    if (valor.length > 3) {
+        valor = valor.slice(0, 3) + "." + valor.slice(3);
+    }
+    if (valor.length > 7) {
+        valor = valor.slice(0, 7) + "." + valor.slice(7);
+    }
+    if (valor.length > 11) {
+        valor = valor.slice(0, 11) + "-" + valor.slice(11, 13);
+    }
+    
+    e.target.value = valor;
 });
 </script>
 
