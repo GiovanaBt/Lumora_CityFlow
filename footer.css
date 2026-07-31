@@ -1,35 +1,42 @@
-:root {
-    --primary: #00f2ff; /* Ciano Neon */
-    --secondary: #bc00ff; /* Roxo Neon */
-    --text-light: #f4f4f4;
-    --transition: all 0.3s ease;
+:root{
+    --primary:#00f2ff;
+    --secondary:#bc00ff;
+    --text-light:#f4f4f4;
+    --transition:.3s;
 }
 
-.footer-main {
-    /* Caminho atualizado para a sua imagem */
-    background-image: url("imgs/footer.png");
-    background-size: cover;
-    position: relative;
-    color: var(--text-light);
-    font-family: 'Inter', sans-serif;
+.footer-main{
+    position:relative;
+    background: url("imgs/footer.png") center center/cover no-repeat;
+    overflow:hidden;
+    color:white;
 }
 
-/* Efeito de Glassmorphism (vidro fosco) sobre o graffiti */
-.footer-overlay {
-    background: rgba(0, 0, 0, 0.0);
-    backdrop-filter: blur(2px);
-    padding: 20px 0 5px 0;
+.footer-main::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.65);
 }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
-    padding: 0 20px;
+.footer-overlay{
+    position:relative;
+    z-index:2;
+    padding:40px 0 15px;
 }
+.footer-container{
+    max-width:1200px;
+    margin:auto;
 
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+
+    gap:50px;
+
+    align-items:start;
+
+    padding:50px 30px;
+}
 .footer-title {
     font-size: 1.2rem;
     text-transform: uppercase;
@@ -40,9 +47,15 @@
     padding-left: 10px;
 }
 
-.footer-links {
-    list-style: none;
-    padding: 0;
+.footer-links a{
+    color:#ececec;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.footer-links a:hover{
+    color:var(--primary);
+    padding-left:10px;
 }
 
 .footer-links li {
@@ -56,10 +69,6 @@
     font-size: 0.95rem;
 }
 
-.footer-links a:hover {
-    color: var(--primary);
-    padding-left: 8px;
-}
 
 /* Logo Estilizada */
 .logo-wrapper {
@@ -107,4 +116,18 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.8rem;
     color: #777;
+}
+
+.footer-main{
+    position: relative;
+    background: url("imgs/footer.png") center center/cover no-repeat;
+    overflow: hidden;
+    color: white;
+    min-height: 330px;
+}
+
+.footer-brand{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }

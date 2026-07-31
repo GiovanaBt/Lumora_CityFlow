@@ -227,41 +227,9 @@ $footer_data = [
     ]
 ];
 ?>
-
-<footer class="footer-main">
-    <div class="footer-overlay">
-        <div class="footer-container">
-            
-            <?php foreach ($footer_data as $coluna): ?>
-            <div class="footer-col">
-                <h4 class="footer-title"><?php echo $coluna['titulo']; ?></h4>
-                <ul class="footer-links">
-                    <?php foreach ($coluna['links'] as $link): ?>
-                        <li><a href="<?php echo $link['url']; ?>"><?php echo $link['txt']; ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <?php endforeach; ?>
-
-            <div class="footer-brand">
-                <div class="logo-wrapper">
-                    <span class="logo-city">CITY</span><span class="logo-flow">FLOW</span>
-                </div>
-                <p class="brand-text">
-                    Conectando a essência das ruas e a cultura urbana. Descubra eventos, arte e movimento em um só lugar.
-                </p>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-                    <a href="https://twitter.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Twitter">TW</a>
-                    <a href="https://www.facebook.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; <?php echo $ano_atual; ?> CityFlow - Todos os direitos reservados.</p>
-        </div>
-    </div>
-</footer>
+<!-- =========================================================
+   FOOTER
+========================================================= -->
+<?php include 'footer.php'; ?>
 </body>
 </html>
