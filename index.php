@@ -516,5 +516,6 @@ document.getElementById('dataHoje').textContent = `${dia}/${mes}`;
    FOOTER
 ========================================================= -->
 <?php include 'footer.php'; ?>
+
 </body>
 </html>

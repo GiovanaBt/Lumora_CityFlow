@@ -40,6 +40,7 @@ $resultEventos = $conexao->query($sqlEventos);
 <title>City Flow - Minha Conta</title>
 
 <link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="submenu.css">
 <link rel="stylesheet" href="minhaConta.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -73,11 +74,10 @@ $resultEventos = $conexao->query($sqlEventos);
                 <li class="perfil">
                     <a href="#"><i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?></a>
                     <ul class="submenu">
-                        <li><a href="minhaConta.php">Minha Conta</a></li>
-                        <li><a href="minhaConta.php#favoritos">Favoritos</a></li>
-                        <li><a href="ajuda.php">Ajuda</a></li>
-                        <hr>
-                        <li><a href="logout.php" class="btn-sair">Sair</a></li>
+                        <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
+                        <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
+                        <li><a href="ajuda.php"><i class="fa-solid fa-circle-question"></i> Central de ajuda</a></li>
+                        <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
                     </ul>
                 </li>
             <?php endif; ?>

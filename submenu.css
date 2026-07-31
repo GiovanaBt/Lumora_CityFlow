@@ -1,0 +1,56 @@
+/* ===== BOTÃO FECHAR ===== */
+.fechar {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    font-size: 22px;
+    cursor: pointer;
+
+    color: #a8329e;
+}
+
+.fechar:hover {
+    color: #fff;
+}
+/* ===== BOTÃO SAIR (SUBMENU) ===== */
+.submenu .btn-sair {
+    color: #e74c3c !important; /* vermelho */
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* HOVER */
+.submenu .btn-sair:hover {
+    background-color: #e74c3c;
+    color: #fff !important;
+    border-radius: 6px;
+}
+/* LINKS DO SUBMENU */
+.submenu li a {
+    display: block;          /* 🔥 ocupa toda a linha */
+    width: 100%;
+    padding: 10px 15px;      /* cria área clicável */
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+/* HOVER PADRÃO */
+.submenu li a:hover {
+    background-color: rgba(45, 186, 201, 0.1); /* verde bem leve */
+    color: #2dbac9; /* texto verde */
+    border-radius: 6px;
+}
+/* BOTÃO SAIR */
+nav .submenu li a.btn-sair {
+    color: #e74c3c;
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+}
+
+/* HOVER COMPLETO */
+nav .submenu li a.btn-sair:hover {
+    background-color: #e74c3c;
+    color: white;
+}
