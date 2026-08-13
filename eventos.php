@@ -35,7 +35,7 @@ $evento = mysqli_fetch_assoc($result);
    EVENTO NÃO ENCONTRADO
 ========================================= */
 
-if(!$evento){
+if (!$evento) {
 
     die("Evento não encontrado!");
 
@@ -61,7 +61,7 @@ $resultDatas = mysqli_query($conexao, $sqlDatas);
 $jaParticipou = false;
 $jaFavoritou = false;
 
-if(isset($_SESSION['usuario_id'])){
+if (isset($_SESSION['usuario_id'])) {
 
     $id_usuario = $_SESSION['usuario_id'];
 
@@ -128,6 +128,7 @@ if(isset($_SESSION['usuario_id'])){
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="style_evento.css">
     <link rel="stylesheet" href="footer.css">
+    <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
 
 </head>
 
@@ -196,7 +197,7 @@ if(isset($_SESSION['usuario_id'])){
             </li>
 
             <!-- PERFIL -->
-            <?php if(isset($_SESSION['usuario_id'])): ?>
+            <?php if (isset($_SESSION['usuario_id'])): ?>
 
                 <li class="perfil">
 
@@ -341,7 +342,7 @@ if(isset($_SESSION['usuario_id'])){
 
                 <div class="datas-evento">
 
-                    <?php while($data = mysqli_fetch_assoc($resultDatas)): ?>
+                    <?php while ($data = mysqli_fetch_assoc($resultDatas)): ?>
 
                         <div class="data-box">
 
@@ -423,15 +424,15 @@ if(isset($_SESSION['usuario_id'])){
                     </div>
 
                     <!-- REFERÊNCIA -->
-                    <?php if(!empty($evento['ponto_referencia'])): ?>
+                    <?php if (!empty($evento['ponto_referencia'])): ?>
 
-                    <div class="referencia-local">
+                        <div class="referencia-local">
 
-                        <i class="fa-solid fa-route"></i>
+                            <i class="fa-solid fa-route"></i>
 
-                        <?= htmlspecialchars($evento['ponto_referencia']); ?>
+                            <?= htmlspecialchars($evento['ponto_referencia']); ?>
 
-                    </div>
+                        </div>
 
                     <?php endif; ?>
 
@@ -477,15 +478,15 @@ if(isset($_SESSION['usuario_id'])){
                 </div>
 
                 <!-- DESCRIÇÃO IMAGEM -->
-                <?php if(!empty($evento['descIMG'])): ?>
+                <?php if (!empty($evento['descIMG'])): ?>
 
-                <div class="descricao-imagem">
+                    <div class="descricao-imagem">
 
-                    <i class="fa-solid fa-image"></i>
+                        <i class="fa-solid fa-image"></i>
 
-                    <?= htmlspecialchars($evento['descIMG']); ?>
+                        <?= htmlspecialchars($evento['descIMG']); ?>
 
-                </div>
+                    </div>
 
                 <?php endif; ?>
 
@@ -503,13 +504,13 @@ if(isset($_SESSION['usuario_id'])){
 
                         <!-- PARTICIPAR -->
                         <button
+                            type="button"
                             class="btn-acao"
                             id="btnParticipar"
-                            data-id="<?= $evento['id_evento']; ?>"
-                            <?= $jaParticipou ? 'disabled' : ''; ?>
+                            data-id="<?= htmlspecialchars($evento['id_evento']); ?>"
                         >
 
-                            <?php if($jaParticipou): ?>
+                            <?php if ($jaParticipou): ?>
 
                                 <i class="fa-solid fa-star"></i>
 
@@ -525,14 +526,16 @@ if(isset($_SESSION['usuario_id'])){
 
                         </button>
 
+
                         <!-- FAVORITAR -->
                         <button
+                            type="button"
                             class="btn-secundario"
                             id="btnFavoritar"
-                            data-id="<?= $evento['id_evento']; ?>"
+                            data-id="<?= htmlspecialchars($evento['id_evento']); ?>"
                         >
 
-                            <?php if($jaFavoritou): ?>
+                            <?php if ($jaFavoritou): ?>
 
                                 <i class="fa-solid fa-heart"></i>
 
@@ -552,92 +555,271 @@ if(isset($_SESSION['usuario_id'])){
 
                 </div>
 
+                <!-- =====================================
+                     DESCRIÇÃO
+                ====================================== -->
+
+                <div class="card">
+
+                    <h3>
+                        Sobre o Evento
+                    </h3>
+
+                    <p>
+
+                        <?= nl2br(
+                            htmlspecialchars($evento['descricao'])
+                        ); ?>
+
+                    </p>
+
+                </div>
+
             </div>
 
         </section>
-
-        <!-- =====================================
-             DESCRIÇÃO
-        ====================================== -->
-
-        <div class="card">
-
-            <h3>
-                Sobre o Evento
-            </h3>
-
-            <p>
-
-                <?= nl2br(
-                    htmlspecialchars($evento['descricao'])
-                ); ?>
-
-            </p>
-
-        </div>
 
     </div>
 
 </div>
 
-<!-- =========================================
-     FAVORITAR
-========================================= -->
-
 <script>
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 
-    const btnFav =
-        document.getElementById("btnFavoritar");
+    /* =====================================================
+       PARTICIPAR / DESPARTICIPAR
+    ===================================================== */
 
-    if(!btnFav) return;
+    const btnParticipar =
+        document.getElementById("btnParticipar");
 
-    btnFav.addEventListener("click", function(){
+    if (btnParticipar) {
 
-        let id = this.dataset.id;
+        btnParticipar.addEventListener("click", function () {
 
-        fetch("favoritar.php", {
+            const botao = this;
 
-            method:"POST",
+            const idEvento = botao.dataset.id;
 
-            headers:{
-                "Content-Type":
-                "application/x-www-form-urlencoded"
-            },
-
-            body:"id_evento=" + id
-
-        })
-
-        .then(res => res.text())
-
-        .then(res => {
-
-            if(res === "login"){
-
-                alert("Faça login primeiro!");
-
+            // Evita clique duplo
+            if (botao.dataset.processando === "true") {
                 return;
             }
 
-            if(res === "ok"){
+            botao.dataset.processando = "true";
 
-                this.innerHTML =
-                '<i class="fa-solid fa-heart"></i> Favoritado';
+            fetch("participar.php", {
 
-            }
+                method: "POST",
 
-            if(res === "removido"){
+                headers: {
+                    "Content-Type":
+                        "application/x-www-form-urlencoded"
+                },
 
-                this.innerHTML =
-                '<i class="fa-regular fa-heart"></i> Favoritar';
+                body:
+                    "id_evento=" +
+                    encodeURIComponent(idEvento)
 
-            }
+            })
+
+            .then(response => response.text())
+
+            .then(resposta => {
+
+                resposta = resposta.trim();
+
+                console.log(
+                    "Resposta do participar.php:",
+                    resposta
+                );
+
+                // Usuário não está logado
+                if (resposta === "login") {
+
+                    alert("Faça login primeiro!");
+
+                    return;
+                }
+
+                // PARTICIPOU
+                if (resposta === "ok") {
+
+                    botao.innerHTML =
+                        '<i class="fa-solid fa-star"></i> Participando';
+
+                    botao.classList.add("participando");
+
+                    return;
+                }
+
+                // DESPARTICIPOU
+                if (resposta === "desparticipou") {
+
+                    botao.innerHTML =
+                        '<i class="fa-regular fa-star"></i> Participar';
+
+                    botao.classList.remove("participando");
+
+                    return;
+                }
+
+                // Evento não encontrado
+                if (resposta === "evento_inexistente") {
+
+                    alert("Evento não encontrado!");
+
+                    return;
+                }
+
+                // Qualquer outro erro
+                console.error(
+                    "Resposta inesperada:",
+                    resposta
+                );
+
+                alert(
+                    "Não foi possível alterar sua participação."
+                );
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Erro no participar.php:",
+                    error
+                );
+
+                alert(
+                    "Erro de conexão com o servidor."
+                );
+
+            })
+
+            .finally(() => {
+
+                botao.dataset.processando = "false";
+
+            });
 
         });
 
-    });
+    }
+
+
+    /* =====================================================
+       FAVORITAR / DESFAVORITAR
+    ===================================================== */
+
+    const btnFavoritar =
+        document.getElementById("btnFavoritar");
+
+    if (btnFavoritar) {
+
+        btnFavoritar.addEventListener("click", function () {
+
+            const botao = this;
+
+            const idEvento = botao.dataset.id;
+
+            // Evita clique duplo
+            if (botao.dataset.processando === "true") {
+                return;
+            }
+
+            botao.dataset.processando = "true";
+
+            fetch("favoritar.php", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/x-www-form-urlencoded"
+                },
+
+                body:
+                    "id_evento=" +
+                    encodeURIComponent(idEvento)
+
+            })
+
+            .then(response => response.text())
+
+            .then(resposta => {
+
+                resposta = resposta.trim();
+
+                console.log(
+                    "Resposta do favoritar.php:",
+                    resposta
+                );
+
+                // Usuário não está logado
+                if (resposta === "login") {
+
+                    alert("Faça login primeiro!");
+
+                    return;
+                }
+
+                // FAVORITOU
+                if (resposta === "ok") {
+
+                    botao.innerHTML =
+                        '<i class="fa-solid fa-heart"></i> Favoritado';
+
+                    botao.classList.add("favoritado");
+
+                    return;
+                }
+
+                // DESFAVORITOU
+                if (resposta === "removido") {
+
+                    botao.innerHTML =
+                        '<i class="fa-regular fa-heart"></i> Favoritar';
+
+                    botao.classList.remove("favoritado");
+
+                    return;
+                }
+
+                console.error(
+                    "Resposta inesperada:",
+                    resposta
+                );
+
+                alert(
+                    "Não foi possível alterar o favorito."
+                );
+
+            })
+
+            .catch(error => {
+
+                console.error(
+                    "Erro no favoritar.php:",
+                    error
+                );
+
+                alert(
+                    "Erro de conexão com o servidor."
+                );
+
+            })
+
+            .finally(() => {
+
+                botao.dataset.processando = "false";
+
+            });
+
+        });
+
+    }
 
 });
 
@@ -646,6 +828,9 @@ document.addEventListener("DOMContentLoaded", function(){
 <!-- =========================================================
    FOOTER
 ========================================================= -->
+
 <?php include 'footer.php'; ?>
+
 </body>
+
 </html>
