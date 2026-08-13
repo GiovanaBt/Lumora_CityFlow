@@ -432,6 +432,11 @@ $resultEventos = $conexao->query($sqlEventos);
 
 
         <!-- EVENTOS -->
+
+        <a href="editarMeusEventos.php" class="btn-meus-eventos">
+    <i class="fa-solid fa-ticket"></i>
+    Editar meus eventos
+</a>
         <section id="meusEventos">
             
 
