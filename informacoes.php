@@ -18,6 +18,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="informacoes.css">
+     <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 </html>

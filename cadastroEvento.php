@@ -53,6 +53,7 @@ $categorias = mysqli_query(
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="cadastroEvento.css">
     <link rel="stylesheet" href="footer.css">
+     <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
