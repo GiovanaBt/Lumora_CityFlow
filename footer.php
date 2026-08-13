@@ -5,10 +5,10 @@ $footer_data = [
     'ajuda' => [
         'titulo' => 'Ajuda',
         'links' => [
-            ['txt'=>'Central de Ajuda','url'=>'#'],
-            ['txt'=>'FAQ','url'=>'#'],
-            ['txt'=>'Contato e Suporte','url'=>'#'],
-            ['txt'=>'Reportar Problema','url'=>'#']
+            ['txt'=>'Central de Ajuda','url'=>'ajuda.php'],
+            ['txt'=>'FAQ','url'=>'informacoes.php'],
+            ['txt'=>'Contato e Suporte','url'=>'ajuda.php'],
+            ['txt'=>'Reportar Problema','url'=>'ajuda.php']
         ]
     ],
 
@@ -25,10 +25,10 @@ $footer_data = [
     'institucional' => [
         'titulo' => 'Institucional',
         'links' => [
-            ['txt'=>'Sobre o CityFlow','url'=>'#'],
-            ['txt'=>'Missão e Valores','url'=>'#'],
-            ['txt'=>'Privacidade','url'=>'#'],
-            ['txt'=>'Termos de Uso','url'=>'#']
+            ['txt'=>'Sobre o CityFlow','url'=>'informacoes.php'],
+            ['txt'=>'Missão e Valores','url'=>'informacoes.php'],
+            ['txt'=>'Privacidade','url'=>'informacoes.php'],
+            ['txt'=>'Termos de Uso','url'=>'informacoes.php']
         ]
     ]
 ];
