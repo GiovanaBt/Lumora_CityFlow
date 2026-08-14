@@ -96,15 +96,17 @@ $resultado = mysqli_stmt_get_result($stmt);
 <main class="meus-eventos">
 
     <div class="titulo-pagina">
-        <h1>
-            <i class="fa-solid fa-ticket"></i>
-            Meus eventos
-        </h1>
-
-        <p>
-            Aqui estão os eventos que você cadastrou no CityFlow.
-        </p>
+    <!-- Ícone solto em uma div -->
+    <div class="icone-titulo">
+        <i class="fa-solid fa-ticket"></i>
     </div>
+
+    <!-- Título + Subtítulo juntos -->
+    <div class="texto-titulo">
+        <h1>MEUS EVENTOS</h1>
+        <p>Aqui estão os eventos que você cadastrou no CityFlow.</p>
+    </div>
+</div>
 
     <?php if (mysqli_num_rows($resultado) > 0): ?>
 

@@ -63,7 +63,6 @@ $resultEventos = $conexao->query($sqlEventos);
 </head>
 
 <body>
-
 <!-- HEADER (NÃO ALTERADO) -->
 <header>
 
@@ -433,8 +432,8 @@ $resultEventos = $conexao->query($sqlEventos);
 
         <!-- EVENTOS -->
 
-        <a href="editarMeusEventos.php" class="btn-meus-eventos">
-    <i class="fa-solid fa-ticket"></i>
+       <a href="editarMeusEventos.php" class="btn-editar-eventos">
+    <i class="fa-solid fa-pen-to-square"></i>
     Editar meus eventos
 </a>
         <section id="meusEventos">

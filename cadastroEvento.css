@@ -2,7 +2,7 @@
    IMPORTAÇÃO DE FONTE
 ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 
 
 /* =========================================================
@@ -28,14 +28,15 @@
    RESET E CONFIGURAÇÕES GERAIS
 ========================================================= */
 
-*{
+* {
     box-sizing: border-box;
 }
 
 html,
-body{
+body {
 
     max-width: 100%;
+
     overflow-x: hidden;
 }
 
@@ -72,27 +73,117 @@ body {
 
 
 /* =========================================================
-   TÍTULO PRINCIPAL
+   TÍTULO DA PÁGINA (Padrão Cadastro de Evento)
 ========================================================= */
 
-.main-title{
+.page-title {
+    position: relative;
+    width: 92%;
+    max-width: 1250px;
+    margin: 90px auto 35px; /* Define 115px de distância do topo */
+    padding: 0 0 28px 0;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-bottom: 2px solid transparent;
+    border-image:
+        linear-gradient(
+            90deg,
+            #a8329e,
+            #7b2cff,
+            #2dbac9,
+            transparent
+        ) 1;
+}
 
-    margin-top: 120px;
+/* =========================================================
+   ÍCONE DO TÍTULO
+========================================================= */
 
-    margin-bottom: 35px;
+.page-title-icon {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: rgba(0, 212, 255, 0.04);
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    color: #00d4ff;
+    font-size: 34px;
+    transition: 0.3s ease;
+}
 
-    text-align: center;
+.page-title-icon:hover {
+    transform: translateY(-3px);
+    border-color: #00d4ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+}
 
-    font-size: 42px;
+/* =========================================================
+   CONTEÚDO E TEXTOS
+========================================================= */
 
-    font-weight: 900;
+.page-title-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
 
-    color: #fff;
-
-    letter-spacing: 2px;
-
+.page-title h1 {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 38px;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
     text-transform: uppercase;
 }
+
+.page-title p {
+    margin: 10px 0 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #8b949e;
+}
+
+/* =========================================================
+   RESPONSIVO DO TÍTULO (MÓVEL)
+========================================================= */
+
+@media (max-width: 700px) {
+    .page-title {
+        width: 92%;
+        margin-top: 115px;
+        padding-bottom: 22px;
+        gap: 14px;
+    }
+
+    .page-title-icon {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        font-size: 26px;
+        border-radius: 16px;
+    }
+
+    .page-title h1 {
+        font-size: 27px;
+    }
+
+    .page-title p {
+        font-size: 15px;
+        margin-top: 7px;
+    }
+}
+
 
 
 /* =========================================================
@@ -137,7 +228,11 @@ body {
 
     background-image:
         linear-gradient(var(--card-bg), var(--card-bg)),
-        linear-gradient(to bottom, #9333ea, var(--accent-color));
+        linear-gradient(
+            to bottom,
+            #9333ea,
+            var(--accent-color)
+        );
 
     background-origin: border-box;
 
@@ -275,7 +370,8 @@ input:focus,
 textarea:focus,
 select:focus {
 
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+    box-shadow:
+        0 0 12px rgba(0, 212, 255, 0.4);
 
     border-color: #fff;
 }
@@ -769,7 +865,8 @@ textarea::placeholder {
 
 .input-with-icon:focus-within {
 
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+    box-shadow:
+        0 0 12px rgba(0, 212, 255, 0.4);
 
     border-color: #ffffff;
 }
@@ -882,13 +979,21 @@ input::-webkit-calendar-picker-indicator {
     gap: 15px;
 }
 
-.col-full { grid-column: span 12; }
+.col-full {
+    grid-column: span 12;
+}
 
-.col-large { grid-column: span 9; }
+.col-large {
+    grid-column: span 9;
+}
 
-.col-small { grid-column: span 3; }
+.col-small {
+    grid-column: span 3;
+}
 
-.col-medium { grid-column: span 6; }
+.col-medium {
+    grid-column: span 6;
+}
 
 
 /* =========================================================
@@ -897,11 +1002,12 @@ input::-webkit-calendar-picker-indicator {
 
 .card-classificacao {
 
-    background: linear-gradient(
-        145deg,
-        rgba(18,22,35,0.95),
-        rgba(10,12,20,0.98)
-    );
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,22,35,0.95),
+            rgba(10,12,20,0.98)
+        );
 
     border: 1px solid rgba(255,255,255,0.08);
 
@@ -926,21 +1032,24 @@ input::-webkit-calendar-picker-indicator {
 
 .card-classificacao::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    top:0;
-    left:0;
+    top: 0;
 
-    width:100%;
-    height:3px;
+    left: 0;
 
-    background:linear-gradient(
-        90deg,
-        #7b2cff,
-        #00d4ff
-    );
+    width: 100%;
+
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7b2cff,
+            #00d4ff
+        );
 }
 
 
@@ -950,17 +1059,17 @@ input::-webkit-calendar-picker-indicator {
 
 .card-classificacao h2 {
 
-    text-align:center;
+    text-align: center;
 
-    font-size:30px;
+    font-size: 30px;
 
-    font-weight:900;
+    font-weight: 900;
 
-    margin-bottom:35px;
+    margin-bottom: 35px;
 
-    letter-spacing:1px;
+    letter-spacing: 1px;
 
-    color:#fff;
+    color: #fff;
 }
 
 
@@ -970,15 +1079,15 @@ input::-webkit-calendar-picker-indicator {
 
 .classificacao-container {
 
-    display:flex;
+    display: flex;
 
-    justify-content:center;
+    justify-content: center;
 
-    gap:20px;
+    gap: 20px;
 
-    flex-wrap:wrap;
+    flex-wrap: wrap;
 
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 
@@ -988,7 +1097,7 @@ input::-webkit-calendar-picker-indicator {
 
 .classificacao-container input[type="radio"] {
 
-    display:none;
+    display: none;
 }
 
 
@@ -998,34 +1107,34 @@ input::-webkit-calendar-picker-indicator {
 
 .classificacao-box {
 
-    width:82px;
+    width: 82px;
 
-    height:82px;
+    height: 82px;
 
-    border-radius:18px;
+    border-radius: 18px;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:center;
+    justify-content: center;
 
-    font-size:34px;
+    font-size: 34px;
 
-    font-weight:900;
+    font-weight: 900;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:0.3s;
+    transition: 0.3s;
 
-    border:3px solid transparent;
+    border: 3px solid transparent;
 
     box-shadow:
         0 8px 18px rgba(0,0,0,0.35);
 
-    position:relative;
+    position: relative;
 
-    color:#fff;
+    color: #fff;
 }
 
 
@@ -1035,23 +1144,23 @@ input::-webkit-calendar-picker-indicator {
 
 .classificacao-box::after {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    top:8px;
+    top: 8px;
 
-    left:8px;
+    left: 8px;
 
-    right:8px;
+    right: 8px;
 
-    height:12px;
+    height: 12px;
 
-    border-radius:10px;
+    border-radius: 10px;
 
-    background:rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.18);
 
-    filter:blur(2px);
+    filter: blur(2px);
 }
 
 
@@ -1059,20 +1168,32 @@ input::-webkit-calendar-picker-indicator {
    CORES CLASSIFICAÇÃO
 ========================================================= */
 
-.livre{ background:#35c759; }
-
-.c10{ background:#40a9ff; }
-
-.c12{
-    background:#f7c948;
-    color:#000;
+.livre {
+    background: #35c759;
 }
 
-.c14{ background:#ff922b; }
+.c10 {
+    background: #40a9ff;
+}
 
-.c16{ background:#ff4d4f; }
+.c12 {
 
-.c18{ background:#111; }
+    background: #f7c948;
+
+    color: #000;
+}
+
+.c14 {
+    background: #ff922b;
+}
+
+.c16 {
+    background: #ff4d4f;
+}
+
+.c18 {
+    background: #111;
+}
 
 
 /* =========================================================
@@ -1095,57 +1216,77 @@ input::-webkit-calendar-picker-indicator {
 input[type="radio"]:checked
 + .classificacao-box {
 
-    border-color:#00d4ff;
+    border-color: #00d4ff;
 
-    transform:scale(1.1);
+    transform: scale(1.1);
 
     box-shadow:
         0 0 20px rgba(0,212,255,0.9),
         0 0 45px rgba(0,212,255,0.35);
 }
-/* =========================================
-CLASSIFICAÇÃO INDICATIVA - ALINHAMENTO
-========================================= */
 
-.card-classificacao{
+
+/* =========================================================
+   CLASSIFICAÇÃO - ALINHAMENTO
+========================================================= */
+
+.card-classificacao {
+
     align-items: flex-start !important;
+
     text-align: left !important;
 }
 
-.card-classificacao h2{
+.card-classificacao h2 {
+
     width: 100%;
+
     text-align: left !important;
 }
 
-.card-classificacao .subtitle{
+.card-classificacao .subtitle {
+
     width: 100%;
+
     text-align: left !important;
 }
 
-/* Container das classificações */
 
-.classificacao-container{
+/* =========================================================
+   CONTAINER DAS CLASSIFICAÇÕES
+========================================================= */
+
+.classificacao-container {
+
     width: 100%;
 
     justify-content: flex-start !important;
 }
-/* =========================================
-CLASSIFICAÇÃO - ESPAÇAMENTO PADRÃO
-========================================= */
 
-.card-classificacao h2{
+
+/* =========================================================
+   CLASSIFICAÇÃO - ESPAÇAMENTO
+========================================================= */
+
+.card-classificacao h2 {
+
     margin-bottom: 10px !important;
 }
 
-.card-classificacao .subtitle{
+.card-classificacao .subtitle {
+
     margin-bottom: 35px !important;
+
     margin-top: 0 !important;
 }
-/* =========================================
-CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
-========================================= */
 
-.card-classificacao .classificacao-container{
+
+/* =========================================================
+   CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
+========================================================= */
+
+.card-classificacao .classificacao-container {
+
     width: 100%;
 
     display: flex;
@@ -1158,6 +1299,8 @@ CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
 
     gap: 20px;
 }
+
+
 /* =========================================================
    CHECKBOX TERMOS
 ========================================================= */
@@ -1263,8 +1406,16 @@ CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
 .btn-preview {
 
     background:
-        linear-gradient(var(--bg-color), var(--bg-color)) padding-box,
-        linear-gradient(45deg, #a8329e, #2dbac9) border-box;
+        linear-gradient(
+            var(--bg-color),
+            var(--bg-color)
+        ) padding-box,
+
+        linear-gradient(
+            45deg,
+            #a8329e,
+            #2dbac9
+        ) border-box;
 
     border: 2px solid transparent !important;
 
@@ -1292,11 +1443,17 @@ CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
 
 .btn-send {
 
-    background: linear-gradient(45deg, #2dbac9, #a8329e);
+    background:
+        linear-gradient(
+            45deg,
+            #2dbac9,
+            #a8329e
+        );
 
     color: white;
 
-    box-shadow: 0px 4px 15px rgba(45, 185, 201, 0.3);
+    box-shadow:
+        0px 4px 15px rgba(45, 185, 201, 0.3);
 }
 
 
@@ -1318,7 +1475,8 @@ CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
 
 .btn-send:hover {
 
-    box-shadow: 0px 0px 20px rgba(168, 50, 158, 0.5);
+    box-shadow:
+        0px 0px 20px rgba(168, 50, 158, 0.5);
 }
 
 
@@ -1400,14 +1558,14 @@ CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
    RESPONSIVO
 ========================================================= */
 
-@media(max-width: 900px){
+@media (max-width: 900px) {
 
-    .data-item{
+    .data-item {
 
         grid-template-columns: 1fr;
     }
 
-    .btn-remover-data{
+    .btn-remover-data {
 
         width: 100%;
     }
@@ -1440,32 +1598,69 @@ CENTRALIZAR BOTÕES DA CLASSIFICAÇÃO
 
 
 /* =========================================================
-   RESPONSIVO CLASSIFICAÇÃO
+   RESPONSIVO DO TÍTULO
 ========================================================= */
 
-@media(max-width:700px){
+@media (max-width: 700px) {
 
-    .card-classificacao{
+    .page-title {
 
-        padding:25px 18px;
+        width: 92%;
+
+        margin-top: 115px;
+
+        padding-bottom: 22px;
+
+        gap: 14px;
+        margin: 25px auto 35px;
     }
 
-    .classificacao-box{
+    .page-title-icon {
 
-        width:68px;
+        width: 60px;
 
-        height:68px;
+        height: 60px;
 
-        font-size:28px;
+        min-width: 60px;
+
+        font-size: 26px;
+
+        border-radius: 16px;
     }
 
-    .card-classificacao h2{
+    .page-title h1 {
 
-        font-size:22px;
+        font-size: 27px;
     }
 
-    .classificacao-container{
+    .page-title p {
 
-        justify-content:center;
+        font-size: 15px;
+
+        margin-top: 7px;
+    }
+
+    .card-classificacao {
+
+        padding: 25px 18px;
+    }
+
+    .classificacao-box {
+
+        width: 68px;
+
+        height: 68px;
+
+        font-size: 28px;
+    }
+
+    .card-classificacao h2 {
+
+        font-size: 22px;
+    }
+
+    .classificacao-container {
+
+        justify-content: center;
     }
 }

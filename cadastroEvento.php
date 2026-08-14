@@ -99,7 +99,16 @@ $categorias = mysqli_query(
     </nav>
 </header>
 
-<h1 class="main-title">CADASTRO DE EVENTO</h1>
+<<div class="page-title">
+    <div class="page-title-icon">
+        <i class="fa-solid fa-calendar-plus"></i>
+    </div>
+
+    <div class="page-title-content">
+        <h1>CADASTRO DE EVENTO</h1>
+        <p>Divulgue seu evento e faça parte do CityFlow.</p>
+    </div>
+</div>
 
 <form action="enviarCadastroEvento.php" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="latitude" id="latitude">
