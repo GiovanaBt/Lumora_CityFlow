@@ -110,14 +110,7 @@ if (isset($_SESSION['usuario_id'])) {
     >
 
     <!-- TÍTULO -->
-    <title>
-
-        <?= htmlspecialchars($evento['titulo']); ?>
-
-        | CityFlow
-
-    </title>
-
+   
     <!-- FONT AWESOME -->
     <link
         rel="stylesheet"
@@ -292,13 +285,23 @@ if (isset($_SESSION['usuario_id'])) {
                     <?= htmlspecialchars($evento['categoria_evento']); ?>
 
                 </span>
+<!-- TÍTULO -->
+<h1>
 
-                <!-- TÍTULO -->
-                <h1>
+    <?= htmlspecialchars($evento['titulo']); ?>
 
-                    <?= htmlspecialchars($evento['titulo']); ?>
+</h1>
 
-                </h1>
+<!-- SUBTÍTULO -->
+<?php if (!empty($evento['subtitulo'])): ?>
+
+    <p class="subtitulo-evento">
+
+        <?= htmlspecialchars($evento['subtitulo']); ?>
+
+    </p>
+
+<?php endif; ?>
 
                 <!-- =================================
                      INFORMAÇÕES EXTRAS

@@ -431,62 +431,55 @@ $resultEventos = $conexao->query($sqlEventos);
 
 
         <!-- EVENTOS -->
+    <section id="meusEventos">
 
-       <a href="editarMeusEventos.php" class="btn-editar-eventos">
-    <i class="fa-solid fa-pen-to-square"></i>
-    Editar meus eventos
-</a>
-        <section id="meusEventos">
-            
+    <h2 class="secao">
+        <i class="fa-solid fa-ticket icone-eventos"></i>
+        Meus Eventos
+    </h2>
 
-            <h2 class="secao">
-                <i class="fa-solid fa-ticket icone-eventos"></i>
-                Meus Eventos
-            </h2>
+    <a href="editarMeusEventos.php" class="btn-editar-eventos">
+        <i class="fa-solid fa-pen-to-square"></i>
+        Editar meus eventos
+    </a>
 
+    <div class="container">
 
-            <div class="container">
+        <?php if ($resultEventos->num_rows > 0): ?>
 
-                <?php if ($resultEventos->num_rows > 0): ?>
+            <?php while ($row = $resultEventos->fetch_assoc()): ?>
 
-                    <?php while ($row = $resultEventos->fetch_assoc()): ?>
+                <a href="eventos.php?id=<?= $row['id_evento']; ?>">
 
-                        <a href="eventos.php?id=<?= $row['id_evento']; ?>">
+                    <div class="card">
 
-                            <div class="card">
+                        <img
+                            src="uploads/<?= $row['Imagem']; ?>"
+                        >
 
-                                <img
-                                    src="uploads/<?= $row['Imagem']; ?>"
-                                >
+                        <div class="descricao">
+                            <?= htmlspecialchars($row['titulo']); ?>
+                        </div>
 
-                                <div class="descricao">
-                                    <?= $row['titulo']; ?>
-                                </div>
+                        <div class="local">
+                            <?= htmlspecialchars($row['bairro']); ?>
+                        </div>
 
-                                <div class="local">
-                                    <?= $row['bairro']; ?>
-                                </div>
+                    </div>
 
-                            </div>
+                </a>
 
-                        </a>
+            <?php endwhile; ?>
 
-                    <?php endwhile; ?>
+        <?php else: ?>
 
-                <?php else: ?>
+            <p>Você não criou eventos</p>
 
-                    <p>Você não criou eventos</p>
-
-                <?php endif; ?>
-
-            </div>
-
-        </section>
+        <?php endif; ?>
 
     </div>
 
-</div>
-
+</section>
 
 <!-- FOOTER -->
 <?php include 'footer.php'; ?>

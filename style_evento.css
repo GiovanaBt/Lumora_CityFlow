@@ -1,651 +1,1043 @@
-/* =========================================================
-   RESET
-========================================================= */
+ /* =========================================================
+    EVENTO - CITYFLOW
+    ESTILO URBANO / NEON / CLARO
+ ========================================================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI','Inter',sans-serif;
-}
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
 
-/* =========================================================
-   BODY
-========================================================= */
+ body {
+     background:
+         radial-gradient(
+             circle at 8% 10%,
+             rgba(168, 50, 158, 0.18),
+             transparent 30%
+         ),
+         radial-gradient(
+             circle at 92% 35%,
+             rgba(45, 186, 201, 0.14),
+             transparent 32%
+         ),
+         #101010;
 
-body{
-    background:#050505;
-    color:#fff;
-    overflow-x:hidden;
-}
+     color: #fff;
 
-/* =========================================================
-   CONTAINER PRINCIPAL
-========================================================= */
+     font-family: 'Inter', 'Segoe UI', sans-serif;
 
-.main-container{
-    width:100%;
-    max-width:1250px;
+     overflow-x: hidden;
+ }
 
-    margin:140px auto 80px auto;
 
-    padding:0 20px;
-}
+ /* =========================================================
+    EFEITOS DE FUNDO
+ ========================================================= */
 
-/* =========================================================
-   BOTÃO VOLTAR
-========================================================= */
+ body::before {
+     content: "";
 
-.btn-voltar{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
+     position: fixed;
 
-    margin-bottom:25px;
+     width: 500px;
+     height: 500px;
 
-    color:#b983ff;
+     top: 100px;
+     left: -250px;
 
-    text-decoration:none;
+     border-radius: 50%;
 
-    font-size:15px;
-    font-weight:700;
+     background: rgba(123, 44, 255, 0.10);
 
-    transition:0.3s;
-}
+     filter: blur(110px);
 
-.btn-voltar:hover{
-    color:#fff;
-}
+     pointer-events: none;
 
-.btn-voltar i{
-    transition:0.3s;
-}
+     z-index: -1;
+ }
 
-.btn-voltar:hover i{
-    transform:translateX(-5px);
-}
+ body::after {
+     content: "";
 
-/* =========================================================
-   GRID PRINCIPAL
-========================================================= */
+     position: fixed;
 
-.grid-evento{
-    width:100%;
+     width: 450px;
+     height: 450px;
 
-    padding:35px;
+     right: -230px;
+     bottom: 0;
 
-    border-radius:30px;
+     border-radius: 50%;
 
-    background:
-    linear-gradient(
-        180deg,
-        #2a1036,
-        #14182e
-    );
+     background: rgba(45, 186, 201, 0.09);
 
-    border:1px solid rgba(255,255,255,0.08);
+     filter: blur(110px);
 
-    box-shadow:
-        0 0 40px rgba(0,0,0,0.7),
-        0 0 60px rgba(123,44,255,0.08);
-}
+     pointer-events: none;
 
-/* =========================================================
-   HEADER
-========================================================= */
+     z-index: -1;
+ }
 
-.header-evento{
-    display:grid;
 
-    grid-template-columns:
-        1.2fr
-        0.9fr;
+ /* =========================================================
+    CONTAINER
+ ========================================================= */
 
-    gap:35px;
+ .main-container {
+     width: 92%;
 
-    align-items:start;
-}
+     max-width: 1280px;
 
-/* =========================================================
-   INFO EVENTO
-========================================================= */
+     margin: 0 auto;
 
-.info-evento{
-    display:flex;
-    flex-direction:column;
-}
+     padding: 125px 0 90px;
 
-/* =========================================================
-   CATEGORIA
-========================================================= */
+     animation: entradaEvento 0.7s ease;
+ }
 
-.badge-categoria{
-    width:max-content;
+ @keyframes entradaEvento {
 
-    padding:9px 18px;
+     from {
+         opacity: 0;
+         transform: translateY(25px);
+     }
 
-    border-radius:30px;
+     to {
+         opacity: 1;
+         transform: translateY(0);
+     }
+ }
 
-    background:
-    linear-gradient(
-        135deg,
-        #ff007a,
-        #7b2cff
-    );
 
-    color:#fff;
+ /* =========================================================
+    BOTÃO VOLTAR
+ ========================================================= */
 
-    font-size:11px;
-    font-weight:900;
+ .btn-voltar {
+     display: inline-flex;
 
-    letter-spacing:1.5px;
-    text-transform:uppercase;
+     align-items: center;
 
-    margin-bottom:20px;
+     gap: 9px;
 
-    box-shadow:
-        0 0 20px rgba(255,0,122,0.3);
-}
+     margin-bottom: 25px;
 
-/* =========================================================
-   TITULO
-========================================================= */
+     padding: 11px 18px;
 
-.info-evento h1{
-    font-size:52px;
-    line-height:1.1;
+     border: 1px solid #454545;
 
-    font-weight:900;
+     border-radius: 10px;
 
-    margin-bottom:25px;
+     background: #1b1b1b;
 
-    word-break:break-word;
-}
+     color: #d0d0d0;
 
-/* =========================================================
-   INFORMAÇÕES TOPO
-========================================================= */
+     text-decoration: none;
 
-.top-infos-evento{
-    display:flex;
-    flex-wrap:wrap;
+     font-size: 13px;
 
-    gap:15px;
+     font-weight: 700;
 
-    margin-bottom:30px;
-}
+     transition: all 0.25s ease;
+ }
 
-/* =========================================================
-   CLASSIFICAÇÃO
-========================================================= */
+ .btn-voltar:hover {
+     color: #fff;
 
-.classificacao,
-.info-extra{
-    display:flex;
-    align-items:center;
-    gap:10px;
+     border-color: #a8329e;
 
-    padding:14px 18px;
+     background: #252525;
 
-    border-radius:16px;
+     transform: translateX(-3px);
+ }
 
-    background:rgba(255,255,255,0.05);
 
-    border:1px solid rgba(255,255,255,0.08);
+ /* =========================================================
+    GRID
+ ========================================================= */
 
-    color:#fff;
+ .grid-evento {
+     width: 100%;
+ }
 
-    font-size:14px;
-    font-weight:600;
-}
 
-.classificacao i,
-.info-extra i{
-    color:#00d4ff;
-}
+ .header-evento {
+     display: grid;
 
-.classificacao strong{
-    color:#00d4ff;
-}
+     grid-template-columns:
+         minmax(0, 1.15fr)
+         minmax(380px, 0.85fr);
 
-/* =========================================================
-   DATAS EVENTO
-========================================================= */
+     gap: 35px;
 
-.datas-evento{
-    display:flex;
-    flex-wrap:wrap;
+     align-items: start;
+ }
 
-    gap:18px;
 
-    margin-bottom:35px;
-}
+ /* =========================================================
+    BLOCO PRINCIPAL
+ ========================================================= */
 
-/* =========================================================
-   CARD DATA
-========================================================= */
+ .info-evento {
+     position: relative;
 
-.data-box{
-    min-width:180px;
+     padding: 38px;
 
-    padding:22px;
+     background:
+         linear-gradient(
+             145deg,
+             #252525,
+             #1b1b1b
+         );
 
-    border-radius:22px;
+     border: 1px solid #404040;
 
-    background:rgba(255,255,255,0.05);
+     border-radius: 24px;
 
-    border:1px solid rgba(255,255,255,0.08);
+     box-shadow:
+         0 18px 45px rgba(0, 0, 0, 0.45);
 
-    transition:0.3s;
-}
+     overflow: hidden;
+ }
 
-.data-box:hover{
-    transform:translateY(-5px);
 
-    border-color:#7b2cff;
+ .info-evento::before {
+     content: "";
 
-    box-shadow:
-        0 0 20px rgba(123,44,255,0.2);
-}
+     position: absolute;
 
-/* TOPO DATA */
+     width: 250px;
+     height: 250px;
 
-.data-topo{
-    display:flex;
-    align-items:center;
-    gap:8px;
+     top: -160px;
+     right: -100px;
 
-    margin-bottom:15px;
+     border-radius: 50%;
 
-    color:#b6b6b6;
+     background: rgba(168, 50, 158, 0.18);
 
-    font-size:12px;
-    font-weight:700;
+     filter: blur(55px);
 
-    letter-spacing:1px;
-}
+     pointer-events: none;
+ }
 
-.data-topo i{
-    color:#00d4ff;
-}
 
-/* DATA */
+ /* =========================================================
+    CATEGORIA
+ ========================================================= */
 
-.data-box strong{
-    display:block;
+ .badge-categoria {
+     display: inline-flex;
 
-    font-size:24px;
-    font-weight:900;
+     align-items: center;
 
-    margin-bottom:12px;
-}
+     padding: 9px 16px;
 
-/* HORÁRIO */
+     margin-bottom: 19px;
 
-.horario-evento{
-    display:flex;
-    align-items:center;
-    gap:8px;
+     border-radius: 30px;
 
-    color:#d8d8d8;
+     border: 1px solid rgba(209, 138, 255, 0.55);
 
-    font-size:14px;
-}
+     background:
+         linear-gradient(
+             100deg,
+             rgba(168, 50, 158, 0.30),
+             rgba(123, 44, 255, 0.22)
+         );
 
-.horario-evento i{
-    color:#00d4ff;
-}
+     color: #e3b5ff;
 
-/* =========================================================
-   LOCALIZAÇÃO
-========================================================= */
+     font-size: 11px;
 
-.localizacao-topo{
-    width:100%;
+     font-weight: 800;
 
-    padding:30px;
+     letter-spacing: 1px;
 
-    border-radius:24px;
+     text-transform: uppercase;
+ }
 
-    background:rgba(255,255,255,0.05);
 
-    border:1px solid rgba(255,255,255,0.06);
-}
+ /* =========================================================
+    TÍTULO
+ ========================================================= */
 
-/* TITULO */
+ .info-evento h1 {
+     position: relative;
 
-.localizacao-topo h2{
-    display:flex;
-    align-items:center;
-    gap:10px;
+     margin-bottom: 10px;
 
-    color:#b983ff;
+     font-family: 'Inter', sans-serif;
 
-    font-size:22px;
-    font-weight:800;
+     font-size: clamp(34px, 4vw, 54px);
 
-    margin-bottom:22px;
-}
+     font-weight: 900;
 
-.localizacao-topo h2 i{
-    color:#00d4ff;
-}
+     line-height: 1.05;
 
-/* ENDEREÇO */
+     letter-spacing: -1.8px;
 
-.endereco-completo{
-    color:#fff;
+     text-transform: uppercase;
 
-    font-size:16px;
-    line-height:1.7;
+     color: #ffffff;
 
-    margin-bottom:18px;
-}
+     z-index: 2;
+ }
 
-/* REFERÊNCIA */
 
-.referencia-local{
-    display:flex;
-    align-items:center;
-    gap:10px;
+ /* =========================================================
+    SUBTÍTULO
+ ========================================================= */
 
-    margin-bottom:18px;
+ .subtitulo-evento {
+     max-width: 850px;
 
-    color:#d7d7d7;
+     margin: 0 0 30px;
 
-    font-size:15px;
-}
+     color: #d4d4d4;
 
-.referencia-local i{
-    color:#00d4ff;
-}
+     font-size: 20px;
 
-/* CEP */
+     font-weight: 500;
 
-.cep-local{
-    color:#9e9e9e;
+     line-height: 1.5;
 
-    font-size:14px;
+     letter-spacing: 0.1px;
+ }
 
-    margin-bottom:25px;
-}
 
-/* =========================================================
-   BOTÃO MAPA
-========================================================= */
+ /* =========================================================
+    INFORMAÇÕES EXTRAS
+ ========================================================= */
 
-.btn-mapa-local{
-    width:100%;
+ .top-infos-evento {
+     display: flex;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
+     flex-wrap: wrap;
 
-    padding:16px;
+     gap: 12px;
 
-    border-radius:18px;
+     margin-bottom: 28px;
+ }
 
-    text-decoration:none;
 
-    background:
-    rgba(123,44,255,0.1);
+ .classificacao,
+ .info-extra {
+     display: flex;
 
-    border:1px solid rgba(123,44,255,0.35);
+     align-items: center;
 
-    color:#b983ff;
+     gap: 8px;
 
-    font-size:13px;
-    font-weight:800;
+     min-height: 44px;
 
-    letter-spacing:1px;
-    text-transform:uppercase;
+     padding: 10px 15px;
 
-    transition:0.3s;
-}
+     border-radius: 10px;
 
-.btn-mapa-local:hover{
-    background:#7b2cff;
+     background: #202020;
 
-    color:#fff;
+     border: 1px solid #454545;
 
-    transform:translateY(-3px);
-}
+     color: #c9c9c9;
 
-/* =========================================================
-   LADO DIREITO
-========================================================= */
+     font-size: 12px;
 
-.lado-direito{
-    display:flex;
-    flex-direction:column;
+     font-weight: 600;
+ }
 
-    gap:25px;
-}
 
-/* =========================================================
-   IMAGEM
-========================================================= */
+ .classificacao i,
+ .info-extra i {
+     color: #d18aff;
 
-.container-imagem{
-    width:100%;
-}
+     font-size: 14px;
+ }
 
-.container-imagem img{
-    width:100%;
-    height:420px;
 
-    object-fit:cover;
+ .classificacao strong {
+     color: #fff;
 
-    border-radius:24px;
+     font-weight: 800;
+ }
 
-    border:1px solid rgba(255,255,255,0.08);
-}
 
-/* =========================================================
-   DESCRIÇÃO IMAGEM
-========================================================= */
+ /* =========================================================
+    DATAS
+ ========================================================= */
 
-.descricao-imagem{
-    display:flex;
-    align-items:flex-start;
-    gap:12px;
+ .datas-evento {
+     display: grid;
 
-    padding:18px;
+     grid-template-columns:
+         repeat(auto-fit, minmax(190px, 1fr));
 
-    border-radius:18px;
+     gap: 13px;
 
-    background:rgba(255,255,255,0.04);
+     margin-bottom: 32px;
+ }
 
-    border:1px solid rgba(255,255,255,0.06);
 
-    color:#d5d5d5;
+ .data-box {
+     position: relative;
 
-    font-size:14px;
-    line-height:1.7;
-}
+     padding: 19px;
 
-.descricao-imagem i{
-    color:#00d4ff;
+     min-height: 150px;
 
-    margin-top:3px;
-}
+     background:
+         linear-gradient(
+             145deg,
+             #292929,
+             #202020
+         );
 
-/* =========================================================
-   CARDS
-========================================================= */
+     border: 1px solid #464646;
 
-.card{
-    background:rgba(255,255,255,0.05);
+     border-radius: 15px;
 
-    border-radius:24px;
+     overflow: hidden;
 
-    padding:28px;
+     transition: all 0.25s ease;
+ }
 
-    border:1px solid rgba(255,255,255,0.06);
-}
 
-/* TITULO CARD */
+ .data-box::before {
+     content: "";
 
-.card h3{
-    color:#00d4ff;
+     position: absolute;
 
-    font-size:22px;
-    font-weight:800;
+     left: 0;
+     top: 0;
+     bottom: 0;
 
-    margin-bottom:22px;
-}
+     width: 4px;
 
-/* TEXTO CARD */
+     background:
+         linear-gradient(
+             180deg,
+             #a8329e,
+             #7b2cff,
+             #2dbac9
+         );
+ }
 
-.card p{
-    color:#d7d7d7;
 
-    font-size:15px;
+ .data-box:hover {
+     transform: translateY(-3px);
 
-    line-height:1.9;
-}
+     border-color: rgba(209, 138, 255, 0.55);
 
-/* =========================================================
-   AÇÕES
-========================================================= */
+     box-shadow:
+         0 12px 30px rgba(0, 0, 0, 0.35);
+ }
 
-.acoes-evento{
-    display:flex;
-    flex-direction:column;
 
-    gap:15px;
-}
+ .data-topo {
+     display: flex;
 
-/* =========================================================
-   BOTÕES
-========================================================= */
+     align-items: center;
 
-.btn-acao,
-.btn-secundario{
-    width:100%;
+     gap: 8px;
 
-    padding:16px;
+     margin-bottom: 15px;
 
-    border:none;
+     color: #bdbdbd;
 
-    border-radius:18px;
+     font-size: 10px;
 
-    cursor:pointer;
+     font-weight: 800;
 
-    font-size:14px;
-    font-weight:800;
+     letter-spacing: 1px;
+ }
 
-    letter-spacing:1px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
+ .data-topo i {
+     color: #d18aff;
 
-    transition:0.3s;
-}
+     font-size: 14px;
+ }
 
-/* PARTICIPAR */
 
-.btn-acao{
-    background:
-    linear-gradient(
-        135deg,
-        #ff007a,
-        #00d4ff
-    );
+ .data-box > strong {
+     display: block;
 
-    color:#fff;
+     margin-bottom: 12px;
 
-    box-shadow:
-        0 0 20px rgba(0,212,255,0.15);
-}
+     color: #fff;
 
-/* FAVORITAR */
+     font-size: 25px;
 
-.btn-secundario{
-    background:transparent;
+     font-weight: 900;
+ }
 
-    border:1px solid rgba(255,255,255,0.12);
 
-    color:#fff;
-}
+ .horario-evento {
+     display: flex;
 
-/* HOVER */
+     align-items: center;
 
-.btn-acao:hover,
-.btn-secundario:hover{
-    transform:translateY(-3px);
-}
+     gap: 7px;
 
-/* ÍCONE FAVORITO */
+     color: #d0d0d0;
 
-.btn-secundario i.fa-solid{
-    color:#ff3d8d;
-}
+     font-size: 13px;
 
-/* DESABILITADO */
+     font-weight: 600;
+ }
 
-.btn-acao:disabled{
-    opacity:0.8;
-    cursor:default;
-}
 
-/* =========================================================
-   CARD DESCRIÇÃO
-========================================================= */
+ .horario-evento i {
+     color: #4dd7e6;
 
-.grid-evento > .card{
-    margin-top:35px;
-}
+     font-size: 14px;
+ }
 
-/* =========================================================
-   RESPONSIVO
-========================================================= */
 
-@media(max-width:1000px){
+ /* =========================================================
+    LOCALIZAÇÃO
+ ========================================================= */
 
-    .header-evento{
-        grid-template-columns:1fr;
-    }
+ .localizacao-topo {
+     position: relative;
 
-    .info-evento h1{
-        font-size:40px;
-    }
+     padding-top: 27px;
 
-    .container-imagem img{
-        height:350px;
-    }
-}
+     border-top: 1px solid #404040;
+ }
 
-@media(max-width:700px){
 
-    .grid-evento{
-        padding:22px;
-    }
+ .localizacao-topo h2 {
+     display: flex;
 
-    .main-container{
-        margin-top:120px;
-    }
+     align-items: center;
 
-    .info-evento h1{
-        font-size:32px;
-    }
+     gap: 10px;
 
-    .datas-evento{
-        flex-direction:column;
-    }
+     margin-bottom: 17px;
 
-    .data-box{
-        width:100%;
-    }
+     color: #fff;
 
-    .container-imagem img{
-        height:260px;
-    }
+     font-size: 20px;
 
-    .top-infos-evento{
-        flex-direction:column;
-    }
-}
+     font-weight: 800;
+ }
+
+
+ .localizacao-topo h2 i {
+     color: #4dd7e6;
+ }
+
+
+ .endereco-completo {
+     margin-bottom: 13px;
+
+     color: #e0e0e0;
+
+     font-size: 14px;
+
+     line-height: 1.7;
+ }
+
+
+ .referencia-local {
+     display: flex;
+
+     align-items: flex-start;
+
+     gap: 9px;
+
+     margin-bottom: 10px;
+
+     color: #c2c2c2;
+
+     font-size: 13px;
+
+     line-height: 1.5;
+ }
+
+
+ .referencia-local i {
+     margin-top: 3px;
+
+     color: #c878ff;
+ }
+
+
+ .cep-local {
+     margin-bottom: 18px;
+
+     color: #a8a8a8;
+
+     font-size: 12px;
+ }
+
+
+ /* =========================================================
+    MAPA
+ ========================================================= */
+
+ .btn-mapa-local {
+     display: inline-flex;
+
+     align-items: center;
+
+     justify-content: center;
+
+     gap: 8px;
+
+     padding: 12px 18px;
+
+     border-radius: 9px;
+
+     border: 1px solid rgba(45, 186, 201, 0.5);
+
+     background: rgba(45, 186, 201, 0.12);
+
+     color: #71e3ef;
+
+     text-decoration: none;
+
+     font-size: 12px;
+
+     font-weight: 800;
+
+     transition: all 0.25s ease;
+ }
+
+
+ .btn-mapa-local:hover {
+     background: rgba(45, 186, 201, 0.20);
+
+     border-color: #4dd7e6;
+
+     transform: translateY(-2px);
+ }
+
+
+ /* =========================================================
+    LADO DIREITO
+ ========================================================= */
+
+ .lado-direito {
+     display: flex;
+
+     flex-direction: column;
+
+     gap: 20px;
+
+     position: sticky;
+
+     top: 100px;
+ }
+
+
+ /* =========================================================
+    IMAGEM
+ ========================================================= */
+
+ .container-imagem {
+     position: relative;
+
+     width: 100%;
+
+     border-radius: 24px;
+
+     overflow: hidden;
+
+     border: 1px solid #454545;
+
+     background: #202020;
+
+     box-shadow:
+         0 20px 50px rgba(0, 0, 0, 0.5);
+ }
+
+
+ .container-imagem img {
+     display: block;
+
+     width: 100%;
+
+     height: 430px;
+
+     object-fit: cover;
+
+     transition: transform 0.6s ease;
+ }
+
+
+ .container-imagem:hover img {
+     transform: scale(1.025);
+ }
+
+
+ /* =========================================================
+    DESCRIÇÃO DA IMAGEM
+ ========================================================= */
+
+ .descricao-imagem {
+     display: flex;
+
+     align-items: flex-start;
+
+     gap: 9px;
+
+     padding: 13px 15px;
+
+     border-radius: 11px;
+
+     border: 1px solid #3d3d3d;
+
+     background: #1c1c1c;
+
+     color: #a9a9a9;
+
+     font-size: 11px;
+
+     line-height: 1.5;
+ }
+
+
+ .descricao-imagem i {
+     margin-top: 2px;
+
+     color: #c878ff;
+ }
+
+
+ /* =========================================================
+    CARDS
+ ========================================================= */
+
+ .card {
+     position: relative;
+
+     padding: 27px;
+
+     background:
+         linear-gradient(
+             145deg,
+             #262626,
+             #1d1d1d
+         );
+
+     border: 1px solid #414141;
+
+     border-radius: 18px;
+
+     box-shadow:
+         0 12px 35px rgba(0, 0, 0, 0.35);
+
+     overflow: hidden;
+ }
+
+
+ .card::before {
+     content: "";
+
+     position: absolute;
+
+     top: 0;
+     left: 25px;
+
+     width: 80px;
+     height: 3px;
+
+     border-radius: 10px;
+
+     background:
+         linear-gradient(
+             90deg,
+             #a8329e,
+             #2dbac9
+         );
+ }
+
+
+ .card h3 {
+     margin-bottom: 20px;
+
+     padding-bottom: 14px;
+
+     border-bottom: 1px solid #414141;
+
+     color: #fff;
+
+     font-size: 19px;
+
+     font-weight: 800;
+ }
+
+
+ /* =========================================================
+    BOTÕES
+ ========================================================= */
+
+ .acoes-evento {
+     display: grid;
+
+     grid-template-columns: 1fr 1fr;
+
+     gap: 12px;
+ }
+
+
+ .btn-acao,
+ .btn-secundario {
+     display: flex;
+
+     align-items: center;
+
+     justify-content: center;
+
+     gap: 8px;
+
+     min-height: 50px;
+
+     padding: 12px 15px;
+
+     border-radius: 10px;
+
+     font-family: 'Inter', sans-serif;
+
+     font-size: 12px;
+
+     font-weight: 800;
+
+     cursor: pointer;
+
+     transition: all 0.25s ease;
+ }
+
+
+ /* PARTICIPAR */
+
+ .btn-acao {
+     border: none;
+
+     background:
+         linear-gradient(
+             100deg,
+             #a8329e,
+             #7b2cff
+         );
+
+     color: #fff;
+
+     box-shadow:
+         0 7px 22px rgba(123, 44, 255, 0.25);
+ }
+
+
+ .btn-acao:hover {
+     transform: translateY(-2px);
+
+     box-shadow:
+         0 10px 30px rgba(123, 44, 255, 0.35);
+ }
+
+
+ /* FAVORITAR */
+
+ .btn-secundario {
+     border: 1px solid #505050;
+
+     background: #202020;
+
+     color: #ddd;
+ }
+
+
+ .btn-secundario:hover {
+     transform: translateY(-2px);
+
+     border-color: #c05bdd;
+
+     color: #fff;
+
+     background: #292929;
+ }
+
+
+ .btn-secundario.favoritado {
+     border-color: #c05bdd;
+
+     color: #e5b1ff;
+
+     background: rgba(168, 50, 158, 0.15);
+ }
+
+
+ .btn-acao.participando {
+     background:
+         linear-gradient(
+             100deg,
+             #7b2cff,
+             #a8329e
+         );
+ }
+
+
+ /* =========================================================
+    SOBRE O EVENTO
+ ========================================================= */
+
+ .card p {
+     color: #d0d0d0;
+
+     font-size: 14px;
+
+     line-height: 1.85;
+
+     word-break: break-word;
+ }
+
+
+ /* =========================================================
+    RESPONSIVIDADE
+ ========================================================= */
+
+ @media (max-width: 1050px) {
+
+     .header-evento {
+         grid-template-columns: 1fr;
+     }
+
+     .lado-direito {
+         position: static;
+     }
+
+     .container-imagem img {
+         height: 450px;
+     }
+ }
+
+
+ /* =========================================================
+    TABLET
+ ========================================================= */
+
+ @media (max-width: 750px) {
+
+     .main-container {
+         width: 92%;
+
+         padding-top: 115px;
+     }
+
+     .info-evento {
+         padding: 28px;
+     }
+
+     .info-evento h1 {
+         font-size: 38px;
+     }
+
+     .subtitulo-evento {
+         font-size: 18px;
+     }
+
+     .datas-evento {
+         grid-template-columns: 1fr 1fr;
+     }
+
+     .container-imagem img {
+         height: 400px;
+     }
+ }
+
+
+ /* =========================================================
+    CELULAR
+ ========================================================= */
+
+ @media (max-width: 550px) {
+
+     .main-container {
+         width: 94%;
+
+         padding-top: 105px;
+
+         padding-bottom: 60px;
+     }
+
+     .info-evento {
+         padding: 23px 18px;
+
+         border-radius: 18px;
+     }
+
+     .info-evento h1 {
+         font-size: 30px;
+
+         line-height: 1.1;
+     }
+
+     .subtitulo-evento {
+         font-size: 16px;
+
+         margin-bottom: 23px;
+     }
+
+     .top-infos-evento {
+         flex-direction: column;
+     }
+
+     .classificacao,
+     .info-extra {
+         width: 100%;
+     }
+
+     .datas-evento {
+         grid-template-columns: 1fr;
+     }
+
+     .container-imagem {
+         border-radius: 18px;
+     }
+
+     .container-imagem img {
+         height: 300px;
+     }
+
+     .card {
+         padding: 20px;
+
+         border-radius: 16px;
+     }
+
+     .acoes-evento {
+         grid-template-columns: 1fr;
+     }
+
+     .btn-acao,
+     .btn-secundario {
+         width: 100%;
+     }
+ }
+
+
+ /* =========================================================
+    CELULAR PEQUENO
+ ========================================================= */
+
+ @media (max-width: 380px) {
+
+     .info-evento h1 {
+         font-size: 27px;
+     }
+
+     .subtitulo-evento {
+         font-size: 15px;
+     }
+
+     .info-evento {
+         padding: 20px 15px;
+     }
+
+     .card {
+         padding: 18px;
+     }
+ }
