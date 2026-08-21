@@ -127,6 +127,20 @@ $categorias = mysqli_query(
                     <input type="text" id="nome" name="nome" placeholder="Ex: Festival Cultural" required>
                 </div>
 
+                <div class="campo">
+    <label for="subtitulo">Subtítulo</label>
+    <input
+        type="text"
+        id="subtitulo"
+        name="subtitulo"
+        value="<?= htmlspecialchars($evento['subtitulo'] ?? ''); ?>"
+        placeholder="Digite um subtítulo para o evento"
+    >
+</div>
+
+<br>
+
+
                 <div class="input-group image-upload">
                     <label>Capa do Evento <span class="required">*</span></label>
                     <div class="upload-flex">

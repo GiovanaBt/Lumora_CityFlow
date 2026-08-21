@@ -1,8 +1,7 @@
 <?php
 
-include 'Conexao.php';
-
 session_start();
+include 'Conexao.php';
 
 
 /* =========================================================
@@ -14,7 +13,7 @@ if (!isset($_SESSION['usuario_id'])) {
     die("Você precisa estar logado.");
 }
 
-$idUsuario = $_SESSION['usuario_id'];
+$idUsuario = (int) $_SESSION['usuario_id'];
 
 
 /* =========================================================
@@ -29,7 +28,7 @@ if (
     die("Evento inválido.");
 }
 
-$idEvento = (int)$_POST['id_evento'];
+$idEvento = (int) $_POST['id_evento'];
 
 
 /* =========================================================
@@ -57,12 +56,13 @@ mysqli_stmt_bind_param(
 
 mysqli_stmt_execute($stmtVerifica);
 
-$resultadoVerifica =
-    mysqli_stmt_get_result($stmtVerifica);
+$resultadoVerifica = mysqli_stmt_get_result(
+    $stmtVerifica
+);
 
-$eventoAtual =
-    mysqli_fetch_assoc($resultadoVerifica);
-
+$eventoAtual = mysqli_fetch_assoc(
+    $resultadoVerifica
+);
 
 if (!$eventoAtual) {
 
@@ -71,89 +71,141 @@ if (!$eventoAtual) {
 
 
 /* =========================================================
-   DADOS DO EVENTO
+   RECEBE OS DADOS DO FORMULÁRIO
 ========================================================= */
 
-$tituloEvento =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['nome']
-    );
+$tituloEvento = mysqli_real_escape_string(
+    $conexao,
+    $_POST['titulo'] ?? ''
+);
 
-$descricao =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['descricao']
-    );
+$subtitulo = mysqli_real_escape_string(
+    $conexao,
+    $_POST['subtitulo'] ?? ''
+);
 
-$rua =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['rua']
-    );
+$descricao = mysqli_real_escape_string(
+    $conexao,
+    $_POST['descricao'] ?? ''
+);
 
-$bairro =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['bairro']
-    );
+$rua = mysqli_real_escape_string(
+    $conexao,
+    $_POST['rua'] ?? ''
+);
 
-$numero =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['numero']
-    );
+$bairro = mysqli_real_escape_string(
+    $conexao,
+    $_POST['bairro'] ?? ''
+);
 
-$cidade =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['cidade']
-    );
+$numero = mysqli_real_escape_string(
+    $conexao,
+    $_POST['numero'] ?? ''
+);
 
-$cep =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['cep']
-    );
+$cidade = mysqli_real_escape_string(
+    $conexao,
+    $_POST['cidade'] ?? ''
+);
 
-$pontoReferencia =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['ponto_referencia']
-    );
+$cep = mysqli_real_escape_string(
+    $conexao,
+    $_POST['CEP'] ?? ''
+);
 
-$categoriaId =
-    (int)$_POST['categorias'];
+$pontoReferencia = mysqli_real_escape_string(
+    $conexao,
+    $_POST['ponto_referencia'] ?? ''
+);
+
+
+/* =========================================================
+   CATEGORIA
+========================================================= */
+
+if (
+    !isset($_POST['id_categoria']) ||
+    !is_numeric($_POST['id_categoria'])
+) {
+
+    die("Categoria inválida.");
+}
+
+$categoriaId = (int) $_POST['id_categoria'];
+
+
+/*
+   Confirma que a categoria realmente existe
+*/
+
+$sqlCategoria = "
+SELECT id_categoria
+FROM categoria
+WHERE id_categoria = ?
+";
+
+$stmtCategoria = mysqli_prepare(
+    $conexao,
+    $sqlCategoria
+);
+
+mysqli_stmt_bind_param(
+    $stmtCategoria,
+    "i",
+    $categoriaId
+);
+
+mysqli_stmt_execute($stmtCategoria);
+
+$resultCategoria = mysqli_stmt_get_result(
+    $stmtCategoria
+);
+
+if (mysqli_num_rows($resultCategoria) === 0) {
+
+    die("A categoria selecionada não existe.");
+}
 
 
 /* =========================================================
    CLASSIFICAÇÃO INDICATIVA
 ========================================================= */
 
-$classificacaoIndicativa =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['classificacao']
-    );
+$classificacaoIndicativa = mysqli_real_escape_string(
+    $conexao,
+    $_POST['classificacao_indicativa'] ?? 'Livre'
+);
 
 
 /* =========================================================
    LATITUDE E LONGITUDE
 ========================================================= */
 
-$latitude = isset($_POST['latitude'])
-    ? mysqli_real_escape_string(
+$latitude = null;
+$longitude = null;
+
+if (
+    isset($_POST['latitude']) &&
+    $_POST['latitude'] !== ''
+) {
+
+    $latitude = mysqli_real_escape_string(
         $conexao,
         $_POST['latitude']
-    )
-    : null;
+    );
+}
 
-$longitude = isset($_POST['longitude'])
-    ? mysqli_real_escape_string(
+if (
+    isset($_POST['longitude']) &&
+    $_POST['longitude'] !== ''
+) {
+
+    $longitude = mysqli_real_escape_string(
         $conexao,
         $_POST['longitude']
-    )
-    : null;
+    );
+}
 
 
 /* =========================================================
@@ -164,13 +216,13 @@ $nomeImagem = $eventoAtual['Imagem'];
 
 
 /*
-   Se o usuário escolher uma nova imagem,
+   Se uma nova imagem foi enviada,
    substitui a imagem anterior.
 */
 
 if (
-    isset($_FILES['capa']) &&
-    $_FILES['capa']['error'] == 0
+    isset($_FILES['Imagem']) &&
+    $_FILES['Imagem']['error'] === UPLOAD_ERR_OK
 ) {
 
     $diretorio = "uploads/";
@@ -185,181 +237,281 @@ if (
     }
 
 
-    $extensao = pathinfo(
-        $_FILES['capa']['name'],
-        PATHINFO_EXTENSION
+    $extensao = strtolower(
+        pathinfo(
+            $_FILES['Imagem']['name'],
+            PATHINFO_EXTENSION
+        )
     );
 
 
-    $nomeImagem =
+    $extensoesPermitidas = [
+        'jpg',
+        'jpeg',
+        'png',
+        'webp'
+    ];
+
+
+    if (
+        !in_array(
+            $extensao,
+            $extensoesPermitidas
+        )
+    ) {
+
+        die("Formato de imagem inválido.");
+    }
+
+
+    $novoNomeImagem =
         uniqid() . "." . $extensao;
 
 
-    move_uploaded_file(
-        $_FILES['capa']['tmp_name'],
-        $diretorio . $nomeImagem
-    );
+    $caminhoNovaImagem =
+        $diretorio . $novoNomeImagem;
 
-
-    /*
-       Apaga a imagem antiga,
-       se existir.
-    */
 
     if (
-        !empty($eventoAtual['Imagem']) &&
-        file_exists($eventoAtual['Imagem'])
+        move_uploaded_file(
+            $_FILES['Imagem']['tmp_name'],
+            $caminhoNovaImagem
+        )
     ) {
 
-        unlink($eventoAtual['Imagem']);
+        /*
+           Apaga a imagem antiga somente
+           depois que a nova foi salva.
+        */
+
+        if (!empty($eventoAtual['Imagem'])) {
+
+            $imagemAntiga =
+                $eventoAtual['Imagem'];
+
+            /*
+               Caso o banco tenha apenas
+               o nome do arquivo.
+            */
+
+            if (
+                file_exists(
+                    $diretorio . $imagemAntiga
+                )
+            ) {
+
+                unlink(
+                    $diretorio . $imagemAntiga
+                );
+            }
+
+            /*
+               Caso o banco tenha o caminho completo.
+            */
+
+            elseif (
+                file_exists($imagemAntiga)
+            ) {
+
+                unlink($imagemAntiga);
+            }
+        }
+
+
+        $nomeImagem =
+            $novoNomeImagem;
     }
 }
 
 
 /* =========================================================
-   ATUALIZA EVENTO
+   ATUALIZA O EVENTO
 ========================================================= */
 
 $sql = "
 UPDATE eventos_cadastrados
 SET
 
-    id_categoria = '$categoriaId',
+    id_categoria = ?,
 
-    titulo = '$tituloEvento',
+    titulo = ?,
 
-    descricao = '$descricao',
+    subtitulo = ?,
 
-    classificacao_indicativa =
-        '$classificacaoIndicativa',
+    descricao = ?,
 
-    rua = '$rua',
+    classificacao_indicativa = ?,
 
-    bairro = '$bairro',
+    rua = ?,
 
-    numero = '$numero',
+    bairro = ?,
 
-    cidade = '$cidade',
+    numero = ?,
 
-    CEP = '$cep',
+    cidade = ?,
 
-    ponto_referencia =
-        '$pontoReferencia',
+    CEP = ?,
 
-    latitude = " .
-    ($latitude !== null
-        ? "'$latitude'"
-        : "NULL"
-    ) . ",
+    ponto_referencia = ?,
 
-    longitude = " .
-    ($longitude !== null
-        ? "'$longitude'"
-        : "NULL"
-    ) . ",
+    latitude = ?,
 
-    Imagem = '$nomeImagem'
+    longitude = ?,
 
-WHERE id_evento = '$idEvento'
-AND id_usuarios = '$idUsuario'
+    Imagem = ?
+
+WHERE id_evento = ?
+AND id_usuarios = ?
 ";
+
+
+$stmt = mysqli_prepare(
+    $conexao,
+    $sql
+);
+
+
+mysqli_stmt_bind_param(
+    $stmt,
+    "isssssssssssssii",
+    $categoriaId,
+    $tituloEvento,
+    $subtitulo,
+    $descricao,
+    $classificacaoIndicativa,
+    $rua,
+    $bairro,
+    $numero,
+    $cidade,
+    $cep,
+    $pontoReferencia,
+    $latitude,
+    $longitude,
+    $nomeImagem,
+    $idEvento,
+    $idUsuario
+);
 
 
 /* =========================================================
    EXECUTA ATUALIZAÇÃO
 ========================================================= */
 
-if ($conexao->query($sql)) {
+if (mysqli_stmt_execute($stmt)) {
 
 
     /* =====================================================
-       ATUALIZA DATAS
+       DATAS DO EVENTO
     ===================================================== */
 
     if (
-        isset($_POST['datas']) &&
-        isset($_POST['horas_inicio']) &&
-        isset($_POST['horas_fim'])
+        isset($_POST['data_inicio']) &&
+        is_array($_POST['data_inicio'])
     ) {
 
-        $datas =
-            $_POST['datas'];
+        $datasInicio =
+            $_POST['data_inicio'];
 
-        $horasInicio =
-            $_POST['horas_inicio'];
+        $datasFim =
+            $_POST['data_fim'] ?? [];
 
-        $horasFim =
-            $_POST['horas_fim'];
+        $horariosInicio =
+            $_POST['horario_inicio'] ?? [];
+
+        $horariosFim =
+            $_POST['horario_fim'] ?? [];
 
 
         /*
-           Remove as datas antigas
+           Remove as datas antigas.
         */
 
         $sqlExcluirDatas = "
         DELETE FROM datas_evento
-        WHERE id_evento = '$idEvento'
+        WHERE id_evento = ?
         ";
 
-        $conexao->query(
+        $stmtExcluirDatas = mysqli_prepare(
+            $conexao,
             $sqlExcluirDatas
+        );
+
+        mysqli_stmt_bind_param(
+            $stmtExcluirDatas,
+            "i",
+            $idEvento
+        );
+
+        mysqli_stmt_execute(
+            $stmtExcluirDatas
         );
 
 
         /*
-           Insere novamente as datas
+           Insere novamente as datas.
         */
 
         for (
             $i = 0;
-            $i < count($datas);
+            $i < count($datasInicio);
             $i++
         ) {
 
-            $data =
-                mysqli_real_escape_string(
-                    $conexao,
-                    $datas[$i]
-                );
+            if (
+                empty($datasInicio[$i]) ||
+                empty($horariosInicio[$i]) ||
+                empty($horariosFim[$i])
+            ) {
 
-            $horaInicio =
-                mysqli_real_escape_string(
-                    $conexao,
-                    $horasInicio[$i]
-                );
+                continue;
+            }
 
-            $horaFim =
-                mysqli_real_escape_string(
-                    $conexao,
-                    $horasFim[$i]
-                );
+
+            $dataInicio = $datasInicio[$i];
+
+            $dataFim =
+                !empty($datasFim[$i])
+                ? $datasFim[$i]
+                : $dataInicio;
+
+            $horarioInicio =
+                $horariosInicio[$i];
+
+            $horarioFim =
+                $horariosFim[$i];
 
 
             $sqlData = "
             INSERT INTO datas_evento (
-
                 id_evento,
                 data_inicio,
                 data_fim,
                 horario_inicio,
                 horario_fim
-
             )
-
-            VALUES (
-
-                '$idEvento',
-                '$data',
-                '$data',
-                '$horaInicio',
-                '$horaFim'
-
-            )
+            VALUES (?, ?, ?, ?, ?)
             ";
 
 
-            $conexao->query(
+            $stmtData = mysqli_prepare(
+                $conexao,
                 $sqlData
+            );
+
+
+            mysqli_stmt_bind_param(
+                $stmtData,
+                "issss",
+                $idEvento,
+                $dataInicio,
+                $dataFim,
+                $horarioInicio,
+                $horarioFim
+            );
+
+
+            mysqli_stmt_execute(
+                $stmtData
             );
         }
     }
@@ -386,6 +538,7 @@ if ($conexao->query($sql)) {
 } else {
 
     echo "
+
     <script>
 
         alert('Erro ao atualizar o evento.');
@@ -393,13 +546,14 @@ if ($conexao->query($sql)) {
         window.history.back();
 
     </script>
+
     ";
 
     echo "<br>Erro: " .
-        $conexao->error;
+        mysqli_error($conexao);
 }
 
 
-$conexao->close();
+mysqli_close($conexao);
 
 ?>

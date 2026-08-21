@@ -1,3 +1,4 @@
+
 /* =========================================================
    IMPORTAÇÃO DE FONTE
 ========================================================= */
@@ -121,6 +122,53 @@ body {
     transform: translateY(-3px);
     border-color: #00d4ff;
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+}
+
+/* =========================================================
+   CAMPO SUBTÍTULO DO EVENTO
+========================================================= */
+
+/* Mantém o subtítulo com exatamente a mesma largura
+   dos demais campos do formulário. */
+.campo {
+    width: 100%;
+    min-width: 0;
+}
+
+.campo #subtitulo {
+    display: block;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    min-height: 0px;
+
+    padding: 14px 15px;
+
+    background-color: var(--bg-color);
+    border: 1.5px solid var(--accent-color);
+    border-radius: 6px;
+
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+}
+
+.campo #subtitulo::placeholder {
+    color: var(--placeholder-color);
+}
+
+.campo #subtitulo:hover {
+    border-color: #00d4ff;
+}
+
+.campo #subtitulo:focus {
+    border-color: #fff;
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
 }
 
 /* =========================================================

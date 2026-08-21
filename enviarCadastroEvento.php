@@ -59,6 +59,12 @@ $tituloEvento =
         $_POST['nome']
     );
 
+   $subtitulo =
+    mysqli_real_escape_string(
+        $conexao,
+        $_POST['subtitulo'] ?? ''
+    );
+
 $descricao =
     mysqli_real_escape_string(
         $conexao,
@@ -118,11 +124,11 @@ $classificacaoIndicativa =
    LATITUDE E LONGITUDE
 ========================================================= */
 
-$latitude = isset($_POST['latitude'])
+$latitude = !empty($_POST['latitude'])
     ? mysqli_real_escape_string($conexao, $_POST['latitude'])
     : null;
 
-$longitude = isset($_POST['longitude'])
+$longitude = !empty($_POST['longitude'])
     ? mysqli_real_escape_string($conexao, $_POST['longitude'])
     : null;
 
@@ -137,6 +143,7 @@ INSERT INTO eventos_cadastrados (
     id_categoria,
 
     titulo,
+    subtitulo,
     descricao,
 
     classificacao_indicativa,
@@ -161,6 +168,7 @@ VALUES (
     '$categoriaId',
 
     '$tituloEvento',
+    '$subtitulo',
     '$descricao',
 
     '$classificacaoIndicativa',
@@ -172,8 +180,8 @@ VALUES (
     '$cep',
     '$pontoReferencia',
 
-    '$latitude',
-    '$longitude',
+" . ($latitude !== null ? "'$latitude'" : "NULL") . ",
+" . ($longitude !== null ? "'$longitude'" : "NULL") . ",
 
     '$nomeImagem'
 

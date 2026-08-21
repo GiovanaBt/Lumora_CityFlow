@@ -1,5 +1,6 @@
 /* =========================================================
    EDITAR EVENTO - CITYFLOW
+   ESTILO URBANO / NEON / DINÂMICO
 ========================================================= */
 
 * {
@@ -9,21 +10,104 @@
 }
 
 body {
-    background: #000;
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            rgba(168, 50, 158, 0.12),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 45%,
+            rgba(45, 186, 201, 0.08),
+            transparent 28%
+        ),
+        #050505;
+
     color: #fff;
-    font-family: 'Segoe UI', sans-serif;
+
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+
+    overflow-x: hidden;
 }
 
 
 /* =========================================================
-   CONTAINER PRINCIPAL
+   EFEITOS DE FUNDO
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    width: 450px;
+    height: 450px;
+
+    top: 120px;
+    left: -250px;
+
+    border-radius: 50%;
+
+    background: rgba(123, 44, 255, 0.08);
+
+    filter: blur(100px);
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+body::after {
+    content: "";
+
+    position: fixed;
+
+    width: 400px;
+    height: 400px;
+
+    right: -220px;
+    bottom: 50px;
+
+    border-radius: 50%;
+
+    background: rgba(45, 186, 201, 0.06);
+
+    filter: blur(100px);
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   CONTAINER
 ========================================================= */
 
 .editar-container {
+
     width: 90%;
-    max-width: 1050px;
+
+    max-width: 1180px;
+
     margin: 0 auto;
-    padding: 130px 0 80px;
+
+    padding: 125px 0 90px;
+
+    animation: entradaPagina 0.7s ease;
+}
+
+@keyframes entradaPagina {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -32,58 +116,229 @@ body {
 ========================================================= */
 
 .titulo-editar {
-    text-align: center;
-    margin-bottom: 40px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    margin-bottom: 45px;
+
+    padding: 15px 0 25px;
 }
+
+
+/* LINHA COLORIDA */
+
+.titulo-editar::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a8329e 0%,
+            #7b2cff 35%,
+            #2dbac9 65%,
+            transparent 100%
+        );
+}
+
+
+/* BLOCO DO ÍCONE */
 
 .titulo-editar h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 42px;
+
+    font-weight: 900;
+
+    letter-spacing: -1px;
+
     text-transform: uppercase;
 
-    background: linear-gradient(
-        90deg,
-        #a8329e,
-        #2dbac9
-    );
-
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    margin-bottom: 10px;
+    color: #fff;
 }
+
+
+.titulo-editar h1::before {
+
+    content: "";
+
+    width: 68px;
+    height: 68px;
+
+    display: block;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(168, 50, 158, 0.25),
+            rgba(123, 44, 255, 0.15)
+        );
+
+    border: 1px solid rgba(168, 50, 158, 0.5);
+
+    box-shadow:
+        inset 0 0 25px rgba(168, 50, 158, 0.08),
+        0 0 30px rgba(168, 50, 158, 0.08);
+
+    flex-shrink: 0;
+}
+
+
+/* ÍCONE ORIGINAL */
 
 .titulo-editar h1 i {
-    color: #a8329e;
-    -webkit-text-fill-color: #a8329e;
 
-    margin-right: 10px;
+    position: absolute;
+
+    left: 21px;
+
+    color: #d18aff;
+
+    font-size: 27px;
+
+    -webkit-text-fill-color: #d18aff;
+
+    z-index: 2;
 }
 
+
+/* SUBTÍTULO */
+
 .titulo-editar p {
-    color: #999;
-    font-size: 16px;
+
+    position: absolute;
+
+    left: 86px;
+
+    bottom: 7px;
+
+    color: #777;
+
+    font-size: 14px;
+
+    letter-spacing: 0.2px;
 }
 
 
 /* =========================================================
-   SEÇÕES DO FORMULÁRIO
+   SEÇÕES
 ========================================================= */
 
 .form-section {
-    background: #111;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #0d0d0d
+        );
 
     border: 1px solid #292929;
 
-    border-radius: 18px;
+    border-radius: 22px;
 
-    padding: 30px;
+    padding: 32px;
 
     margin-bottom: 25px;
 
     box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.25);
+        0 12px 35px rgba(0, 0, 0, 0.4);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* LUZ NO CANTO */
+
+.form-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    top: -100px;
+    right: -70px;
+
+    border-radius: 50%;
+
+    background: rgba(168, 50, 158, 0.15);
+
+    filter: blur(45px);
+
+    pointer-events: none;
+}
+
+
+/* LINHA COLORIDA */
+
+.form-section::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 40px;
+
+    width: 90px;
+    height: 3px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a8329e,
+            #2dbac9
+        );
+}
+
+
+.form-section:hover {
+
+    transform: translateY(-3px);
+
+    border-color: #383838;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.5),
+        0 0 25px rgba(168, 50, 158, 0.04);
 }
 
 
@@ -92,27 +347,62 @@ body {
 ========================================================= */
 
 .form-section h2 {
+
+    position: relative;
+
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 13px;
 
-    font-family: 'Poppins', sans-serif;
+    margin-bottom: 28px;
 
-    font-size: 21px;
-
-    margin-bottom: 25px;
-
-    color: #fff;
+    padding-bottom: 17px;
 
     border-bottom: 1px solid #292929;
 
-    padding-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    color: #fff;
+
+    z-index: 2;
 }
 
+
+/* ÍCONE */
+
 .form-section h2 i {
-    color: #a8329e;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(168, 50, 158, 0.2),
+            rgba(123, 44, 255, 0.1)
+        );
+
+    border: 1px solid rgba(168, 50, 158, 0.35);
+
+    color: #d18aff;
+
+    font-size: 15px;
+
+    box-shadow:
+        0 0 15px rgba(168, 50, 158, 0.08);
 }
 
 
@@ -121,25 +411,33 @@ body {
 ========================================================= */
 
 .campo {
+
     display: flex;
 
     flex-direction: column;
 
-    margin-bottom: 20px;
+    margin-bottom: 21px;
 }
+
 
 .campo:last-child {
     margin-bottom: 0;
 }
 
+
 .campo label {
-    color: #ddd;
-
-    font-size: 14px;
-
-    font-weight: 600;
 
     margin-bottom: 8px;
+
+    color: #cfcfcf;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
 }
 
 
@@ -150,41 +448,67 @@ body {
 .campo input,
 .campo select,
 .campo textarea {
+
     width: 100%;
 
-    background: #181818;
+    padding: 14px 16px;
 
-    border: 1px solid #333;
+    border-radius: 11px;
 
-    border-radius: 9px;
+    border: 1px solid #303030;
 
-    padding: 13px 15px;
+    background: #101010;
 
     color: #fff;
 
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     font-size: 14px;
 
     outline: none;
 
     transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        transform 0.2s ease;
 }
 
 
-/* =========================================================
-   FOCUS
-========================================================= */
+.campo input::placeholder,
+.campo textarea::placeholder {
+
+    color: #555;
+}
+
+
+/* HOVER */
+
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover {
+
+    background: #141414;
+
+    border-color: #414141;
+}
+
+
+/* FOCUS */
 
 .campo input:focus,
 .campo select:focus,
 .campo textarea:focus {
+
+    background: #151515;
+
     border-color: #a8329e;
 
     box-shadow:
-        0 0 0 2px rgba(168, 50, 158, 0.15);
+        0 0 0 3px rgba(168, 50, 158, 0.09),
+        0 0 20px rgba(168, 50, 158, 0.07);
+
+    transform: translateY(-1px);
 }
 
 
@@ -193,11 +517,12 @@ body {
 ========================================================= */
 
 .campo textarea {
-    min-height: 140px;
+
+    min-height: 150px;
 
     resize: vertical;
 
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 
@@ -206,11 +531,14 @@ body {
 ========================================================= */
 
 .campo select {
+
     cursor: pointer;
 }
 
 .campo select option {
-    background: #181818;
+
+    background: #151515;
+
     color: #fff;
 }
 
@@ -220,6 +548,7 @@ body {
 ========================================================= */
 
 .linha {
+
     display: grid;
 
     grid-template-columns: 1fr 1fr;
@@ -229,101 +558,203 @@ body {
     margin-bottom: 20px;
 }
 
+
 .linha:last-child {
+
     margin-bottom: 0;
 }
 
 
 /* =========================================================
-   DATAS DO EVENTO
+   DATAS
 ========================================================= */
 
 .data-evento {
+
+    position: relative;
+
     display: grid;
 
     grid-template-columns:
-        1fr 1fr 1fr 1fr;
+        repeat(4, 1fr);
 
     gap: 15px;
 
-    padding: 20px;
-
-    background: #181818;
-
-    border: 1px solid #292929;
-
-    border-radius: 12px;
+    padding: 23px;
 
     margin-bottom: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #181818,
+            #101010
+        );
+
+    border: 1px solid #303030;
+
+    border-radius: 16px;
+
+    transition:
+        border-color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
+
+/* MARCADOR LATERAL */
+
+.data-evento::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 18px;
+    bottom: 18px;
+
+    width: 3px;
+
+    border-radius: 5px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #a8329e,
+            #2dbac9
+        );
+}
+
+
+.data-evento:hover {
+
+    transform: translateX(4px);
+
+    border-color: rgba(168, 50, 158, 0.45);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+
 .data-evento:last-child {
+
     margin-bottom: 0;
 }
 
 
 /* =========================================================
-   IMAGEM ATUAL
+   IMAGEM
 ========================================================= */
 
 .imagem-atual {
+
     display: block;
 
     width: 100%;
 
-    max-width: 500px;
+    max-width: 620px;
 
-    height: 250px;
+    height: 310px;
 
     object-fit: cover;
 
-    border-radius: 12px;
+    border-radius: 17px;
 
     border: 1px solid #333;
 
     margin-bottom: 20px;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.45);
+
+    transition:
+        transform 0.4s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.imagem-atual:hover {
+
+    transform: scale(1.015);
+
+    border-color: #a8329e;
+
+    box-shadow:
+        0 18px 45px rgba(168, 50, 158, 0.15);
 }
 
 
 /* =========================================================
-   INPUT DE ARQUIVO
+   UPLOAD
 ========================================================= */
 
 .campo input[type="file"] {
-    padding: 10px;
+
+    padding: 9px;
 
     cursor: pointer;
+
+    background: #111;
 }
 
-.campo input[type="file"]::file-selector-button {
-    background: #a8329e;
 
-    color: #fff;
+.campo input[type="file"]::file-selector-button {
+
+    padding: 10px 17px;
+
+    margin-right: 12px;
 
     border: none;
 
-    padding: 8px 14px;
+    border-radius: 8px;
 
-    border-radius: 7px;
+    background:
+        linear-gradient(
+            90deg,
+            #a8329e,
+            #7b2cff
+        );
 
-    margin-right: 10px;
+    color: #fff;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
 
     cursor: pointer;
 
-    font-weight: 600;
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.campo input[type="file"]::file-selector-button:hover {
+
+    transform: translateY(-1px);
+
+    filter: brightness(1.15);
 }
 
 
 /* =========================================================
-   TEXTO DE AJUDA
+   AJUDA
 ========================================================= */
 
 .ajuda-imagem {
-    color: #777;
-
-    font-size: 13px;
 
     margin-top: 10px;
+
+    color: #666;
+
+    font-size: 12px;
+
+    line-height: 1.5;
 }
 
 
@@ -332,62 +763,25 @@ body {
 ========================================================= */
 
 .botoes {
+
     display: flex;
 
     justify-content: flex-end;
 
     align-items: center;
 
-    gap: 15px;
+    gap: 13px;
 
-    margin-top: 30px;
+    margin-top: 35px;
 }
 
 
 /* =========================================================
-   BOTÃO VOLTAR
+   VOLTAR
 ========================================================= */
 
 .btn-voltar {
-    display: inline-flex;
 
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 13px 25px;
-
-    border-radius: 10px;
-
-    border: 1px solid #444;
-
-    background: #151515;
-
-    color: #ccc;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    transition: 0.3s ease;
-}
-
-.btn-voltar:hover {
-    background: #222;
-
-    border-color: #666;
-
-    color: #fff;
-}
-
-
-/* =========================================================
-   BOTÃO SALVAR
-========================================================= */
-
-.btn-salvar {
     display: inline-flex;
 
     align-items: center;
@@ -396,41 +790,117 @@ body {
 
     gap: 8px;
 
-    padding: 13px 25px;
+    min-width: 135px;
 
-    border: none;
+    padding: 13px 23px;
 
-    border-radius: 10px;
+    border-radius: 11px;
 
-    background: linear-gradient(
-        90deg,
-        #a8329e,
-        #7b2cff
-    );
+    border: 1px solid #363636;
 
-    color: #fff;
+    background: #121212;
 
-    font-family: 'Segoe UI', sans-serif;
+    color: #aaa;
 
-    font-size: 14px;
+    text-decoration: none;
+
+    font-size: 13px;
 
     font-weight: 700;
 
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
+}
+
+
+.btn-voltar:hover {
+
+    transform: translateY(-3px);
+
+    background: #1b1b1b;
+
+    border-color: #555;
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   SALVAR
+========================================================= */
+
+.btn-salvar {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    min-width: 190px;
+
+    padding: 14px 27px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #a8329e,
+            #7b2cff,
+            #2dbac9
+        );
+
+    background-size: 200% 100%;
+
+    color: #fff;
+
+    font-family: 'Inter', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
     cursor: pointer;
 
+    box-shadow:
+        0 8px 25px rgba(123, 44, 255, 0.20);
+
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-position 0.4s ease;
 }
+
 
 .btn-salvar:hover {
-    transform: translateY(-2px);
+
+    transform: translateY(-3px);
+
+    background-position: 100% 0;
 
     box-shadow:
-        0 6px 20px rgba(123, 44, 255, 0.35);
+        0 12px 35px rgba(123, 44, 255, 0.35);
 }
 
+
+.btn-salvar:active {
+
+    transform: translateY(0);
+}
+
+
 .btn-salvar i {
+
     font-size: 14px;
 }
 
@@ -439,39 +909,95 @@ body {
    RESPONSIVIDADE
 ========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
     .editar-container {
+
         width: 92%;
 
-        padding-top: 110px;
+        padding-top: 115px;
     }
 
-    .titulo-editar h1 {
-        font-size: 30px;
-    }
 
     .data-evento {
-        grid-template-columns: 1fr 1fr;
+
+        grid-template-columns:
+            1fr 1fr;
     }
 }
 
 
-@media (max-width: 600px) {
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 650px) {
 
     .editar-container {
+
         width: 94%;
+
+        padding-top: 105px;
     }
+
+
+    .titulo-editar {
+
+        margin-bottom: 35px;
+    }
+
 
     .titulo-editar h1 {
-        font-size: 25px;
+
+        font-size: 30px;
+
+        gap: 14px;
     }
+
+
+    .titulo-editar h1::before {
+
+        width: 55px;
+        height: 55px;
+    }
+
+
+    .titulo-editar h1 i {
+
+        left: 16px;
+
+        font-size: 22px;
+    }
+
+
+    .titulo-editar p {
+
+        position: static;
+
+        margin-left: 69px;
+
+        margin-top: -10px;
+
+        font-size: 12px;
+    }
+
 
     .form-section {
-        padding: 20px;
+
+        padding: 23px 18px;
+
+        border-radius: 17px;
     }
 
+
+    .form-section h2 {
+
+        font-size: 17px;
+    }
+
+
     .linha {
+
         grid-template-columns: 1fr;
 
         gap: 0;
@@ -479,22 +1005,70 @@ body {
         margin-bottom: 0;
     }
 
+
     .data-evento {
+
         grid-template-columns: 1fr;
+
+        padding: 20px;
+
+        gap: 0;
     }
 
+
+    .imagem-atual {
+
+        height: 220px;
+    }
+
+
     .botoes {
+
         flex-direction: column-reverse;
 
         width: 100%;
     }
 
+
     .btn-voltar,
     .btn-salvar {
+
         width: 100%;
+
+        min-width: 0;
+    }
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .titulo-editar h1 {
+
+        font-size: 25px;
     }
 
-    .imagem-atual {
-        height: 200px;
+
+    .titulo-editar h1::before {
+
+        width: 50px;
+        height: 50px;
+    }
+
+
+    .titulo-editar h1 i {
+
+        left: 15px;
+
+        font-size: 20px;
+    }
+
+
+    .form-section {
+
+        padding: 20px 15px;
     }
 }
