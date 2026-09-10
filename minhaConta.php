@@ -10,6 +10,12 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $idUsuario = $_SESSION['usuario_id'];
 
+$sucessoUsuario = $_SESSION['sucesso_usuario'] ?? '';
+$erroUsuario = $_SESSION['erro_usuario'] ?? '';
+
+unset($_SESSION['sucesso_usuario']);
+unset($_SESSION['erro_usuario']);
+
 /* DADOS DO USUÁRIO */
 $sqlUsuario = "SELECT * FROM usuarios WHERE id_usuarios = $idUsuario";
 $resultUsuario = mysqli_query($conexao, $sqlUsuario);
@@ -63,6 +69,18 @@ $resultEventos = $conexao->query($sqlEventos);
 </head>
 
 <body>
+
+<?php if ($sucessoUsuario): ?>
+    <div class="mensagem sucesso">
+        <?= htmlspecialchars($sucessoUsuario) ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($erroUsuario): ?>
+    <div class="mensagem erro">
+        <?= htmlspecialchars($erroUsuario) ?>
+    </div>
+<?php endif; ?>
 <!-- HEADER (NÃO ALTERADO) -->
 <header>
 
@@ -70,10 +88,6 @@ $resultEventos = $conexao->query($sqlEventos);
         <a href="index.php">
             <img src="imgs/cityFlow.webp">
         </a>
-    </div>
-
-    <div class="hamburguer" id="hamburguer">
-        <i class="fa-solid fa-bars"></i>
     </div>
 
     <a href="mapa.php" target="_blank">
@@ -159,104 +173,169 @@ $resultEventos = $conexao->query($sqlEventos);
 
         <h2 class="subtitulo">Dados da Conta</h2>
 
-        <form action="atualizarUsuario.php" method="POST" class="dados">
+       <form action="atualizarUsuario.php" method="POST" class="dados">
 
-            <div class="campo">
+    <!-- NOME COMPLETO -->
+    <div class="campo">
+        <label>Nome completo</label>
 
-                <label>Nome</label>
+        <input
+            type="text"
+            name="nome_completo"
+            value="<?= htmlspecialchars($usuario['nome_completo'] ?? ''); ?>"
+            id="nome_completo"
+            disabled
+        >
 
-                <input
-                    type="text"
-                    name="nome"
-                    value="<?= $usuario['nome_usuario']; ?>"
-                    id="nome"
-                    disabled
-                >
-
-                <i
-                    class="fa fa-pen"
-                    onclick="habilitarEdicao('nome')"
-                ></i>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>Email</label>
-
-                <input
-                    type="email"
-                    name="email"
-                    value="<?= $usuario['email']; ?>"
-                    id="email"
-                    disabled
-                >
-
-                <i
-                    class="fa fa-pen"
-                    onclick="habilitarEdicao('email')"
-                ></i>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>Telefone</label>
-
-                <input
-                    type="text"
-                    name="telefone"
-                    value="<?= $usuario['telefone'] ?? ''; ?>"
-                    id="telefone"
-                    disabled
-                >
-
-                <i
-                    class="fa fa-pen"
-                    onclick="habilitarEdicao('telefone')"
-                ></i>
-
-            </div>
-
-
-            <div class="campo">
-
-                <label>CPF</label>
-
-                <input
-                    type="text"
-                    name="cpf"
-                    value="<?= $usuario['cpf'] ?? ''; ?>"
-                    id="cpf"
-                    disabled
-                >
-
-                <i
-                    class="fa fa-pen"
-                    onclick="habilitarEdicao('cpf')"
-                ></i>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="btn-salvar"
-                id="btnSalvar"
-            >
-                Salvar Alterações
-            </button>
-
-        </form>
-
+        <i
+            class="fa fa-pen"
+            onclick="habilitarEdicao('nome_completo')"
+        ></i>
     </div>
 
 
-    <!-- DIREITA (PARTICIPANDO + FAVORITOS + EVENTOS) -->
-    <div class="lado-direito">
+    <!-- NOME DE USUÁRIO -->
+    <div class="campo">
+        <label>Nome de usuário</label>
 
+        <input
+            type="text"
+            name="nome_usuario"
+            value="<?= htmlspecialchars($usuario['nome_usuario'] ?? ''); ?>"
+            id="nome_usuario"
+            disabled
+        >
+
+        <i
+            class="fa fa-pen"
+            onclick="habilitarEdicao('nome_usuario')"
+        ></i>
+    </div>
+
+
+    <!-- DATA DE NASCIMENTO -->
+    <div class="campo">
+        <label>Data de nascimento</label>
+
+        <input
+            type="date"
+            name="data_nascimento"
+            value="<?= htmlspecialchars($usuario['data_nascimento'] ?? ''); ?>"
+            id="data_nascimento"
+            disabled
+        >
+
+        <i
+            class="fa fa-pen"
+            onclick="habilitarEdicao('data_nascimento')"
+        ></i>
+    </div>
+
+
+    <!-- CPF -->
+    <div class="campo">
+        <label>CPF</label>
+
+        <input
+            type="text"
+            name="cpf"
+            value="<?= htmlspecialchars($usuario['cpf'] ?? ''); ?>"
+            id="cpf"
+            disabled
+        >
+
+        <i
+            class="fa fa-pen"
+            onclick="habilitarEdicao('cpf')"
+        ></i>
+    </div>
+
+
+    <!-- TELEFONE -->
+    <div class="campo">
+        <label>Telefone</label>
+
+        <input
+            type="text"
+            name="telefone"
+            value="<?= htmlspecialchars($usuario['telefone'] ?? ''); ?>"
+            id="telefone"
+            disabled
+        >
+
+        <i
+            class="fa fa-pen"
+            onclick="habilitarEdicao('telefone')"
+        ></i>
+    </div>
+
+
+    <!-- E-MAIL -->
+    <div class="campo">
+        <label>E-mail</label>
+
+        <input
+            type="email"
+            name="email"
+            value="<?= htmlspecialchars($usuario['email'] ?? ''); ?>"
+            id="email"
+            disabled
+        >
+
+        <i
+            class="fa fa-pen"
+            onclick="habilitarEdicao('email')"
+        ></i>
+    </div>
+
+
+    <!-- SENHA -->
+    <div class="campo">
+        <label>Nova senha</label>
+
+        <input
+            type="password"
+            name="senha"
+            value=""
+            placeholder="Digite uma nova senha"
+            id="senha"
+            disabled
+        >
+
+        <i
+            class="fa fa-pen"
+            onclick="habilitarEdicao('senha')"
+        ></i>
+    </div>
+
+<div class="botoes-edicao" id="botoesEdicao">
+
+    <button
+        type="submit"
+        class="btn-salvar"
+        id="btnSalvar"
+    >
+        Salvar Alterações
+    </button>
+
+    <button
+        type="button"
+        class="btn-cancelar"
+        id="btnCancelar"
+        onclick="cancelarEdicao()"
+    >
+        Cancelar Alterações
+    </button>
+
+</div>
+
+</form>
+
+</div> <!-- FIM DO LADO ESQUERDO -->
+
+
+<!-- DIREITA (PARTICIPANDO + FAVORITOS + EVENTOS) -->
+<div class="lado-direito">
 
         <!-- PARTICIPANDO -->
         <section id="participando">
@@ -481,25 +560,77 @@ $resultEventos = $conexao->query($sqlEventos);
 
 </section>
 
+    </section>
+
+</div> <!-- FIM DO LADO DIREITO -->
+
+</div> <!-- FIM DO LAYOUT CONTA -->
+
+
 <!-- FOOTER -->
 <?php include 'footer.php'; ?>
-
 
 <!-- JS -->
 <script>
 
 function habilitarEdicao(id) {
 
-    document
-        .getElementById(id)
-        .removeAttribute("disabled");
+    const campo = document.getElementById(id);
 
-    document
-        .getElementById("btnSalvar")
-        .style.display = "block";
+    campo.disabled = false;
+    campo.focus();
 
+    document.getElementById("botoesEdicao").style.display = "flex";
 }
 
+function cancelarEdicao() {
+    window.location.reload();
+}
+
+
+document
+    .querySelector(".dados")
+    .addEventListener("submit", function () {
+
+        /*
+        IMPORTANTE:
+
+        Campos disabled não são enviados
+        pelo formulário.
+
+        Por isso, antes de salvar,
+        todos são habilitados.
+        */
+
+        document
+            .getElementById("nome_completo")
+            .disabled = false;
+
+        document
+            .getElementById("nome_usuario")
+            .disabled = false;
+
+        document
+            .getElementById("data_nascimento")
+            .disabled = false;
+
+        document
+            .getElementById("cpf")
+            .disabled = false;
+
+        document
+            .getElementById("telefone")
+            .disabled = false;
+
+        document
+            .getElementById("email")
+            .disabled = false;
+
+        document
+            .getElementById("senha")
+            .disabled = false;
+
+    });
 
 function rolarCarrossel(id, distancia) {
 

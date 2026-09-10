@@ -1,0 +1,61 @@
+Listagem de caminhos de pasta
+O número de série do volume é 0000005A A248:FE90
+C:.
+¦   .gitattributes
+¦   ajuda.css
+¦   ajuda.php
+¦   cadastroEvento.css
+¦   cadastroEvento.php
+¦   cadastroUsuario.css
+¦   cadastroUsuario.php
+¦   categoria.css
+¦   categoria.php
+¦   CityFlowDB.sql
+¦   Conexao.php
+¦   editarEvento.css
+¦   editarEvento.php
+¦   editarMeusEventos.css
+¦   editarMeusEventos.php
+¦   enviarCadastroEvento.php
+¦   enviarCadastroUsuario.php
+¦   estrutura_arquivos.txt
+¦   estrutura_visual.txt
+¦   eventos.php
+¦   favoritar.php
+¦   fazerLogin.php
+¦   footer.css
+¦   footer.php
+¦   gerador.html
+¦   header.css
+¦   index.css
+¦   index.php
+¦   informacoes.css
+¦   informacoes.php
+¦   latLongEvento.php
+¦   logout.php
+¦   mapa.css
+¦   mapa.php
+¦   minhaConta.css
+¦   minhaConta.php
+¦   participar.php
+¦   salvarEdicaoEvento.php
+¦   script.js
+¦   style_evento.css
+¦   submenu.css
+¦   teste.php
+¦   testeForm.php
+¦   visualizarEvento.css
+¦   visualizarEvento.html
+¦   
++---imgs
+¦       cityFlow.webp
+¦       footer.png
+¦       neurociencia.jpg
+¦       
++---uploads
+        6a873e6a70d71.jpg
+        6a873fb5cf539.jpg
+        6a87404574355.jpg
+        6a87404e94c10.jpg
+        6a87413f9da62.jpg
+        
