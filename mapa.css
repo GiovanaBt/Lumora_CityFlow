@@ -68,3 +68,71 @@ border-radius:8px;
 cursor:pointer;
 font-weight:bold;
 }
+
+/* ==================================================
+   NOME DO EVENTO NO MAPA
+   ================================================== */
+
+.evento-tooltip {
+    background: rgba(20, 10, 35, 0.95);
+    color: #ffffff;
+
+    /* Borda neon */
+    border: 2px solid #00d4ff;
+    border-radius: 20px;
+
+    /* Texto */
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+
+    /* Espaçamento */
+    padding: 8px 15px;
+
+    /* Não quebra o nome do evento */
+    white-space: nowrap;
+
+    /* Efeito neon */
+    box-shadow:
+        0 0 6px #7b2cff,
+        0 0 12px #7b2cff,
+        0 0 20px rgba(0, 212, 255, 0.6);
+
+    /* Transição */
+    transition: all 0.2s ease;
+}
+
+
+/* ==================================================
+   SETA ABAIXO DO NOME
+   ================================================== */
+
+.evento-tooltip::before {
+    border-top-color: #00d4ff !important;
+}
+
+
+/* ==================================================
+   EFEITO AO PASSAR O MOUSE
+   ================================================== */
+
+.evento-tooltip:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 0 8px #7b2cff,
+        0 0 18px #7b2cff,
+        0 0 25px rgba(0, 212, 255, 0.8);
+}
+/* Título do evento clicável */
+.evento-link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+/* Quando passar o mouse */
+.evento-link:hover {
+    color: #00d4ff !important;
+}

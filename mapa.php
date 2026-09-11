@@ -44,11 +44,12 @@ if(!empty($_SESSION['erro_login'])){
     <title>City Flow - Mapa de Eventos</title>
 
     <link rel="stylesheet" href="index.css"> <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="index.css"> <link rel="stylesheet" href="mapa.css">
     <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <link rel="stylesheet" href="mapa.css">
 </head>
 <body>
 
@@ -164,19 +165,24 @@ eventos.forEach(function(evento){
         evento.longitude != 0
     ){
 
-        var marker = L.marker(
-            [evento.latitude, evento.longitude],
-            {icon: iconeEvento}
-        )
-        .addTo(map)
-        .bindPopup(
-            "<b>" + evento.titulo + "</b><br>" +
-            evento.descricao + "<br>" +
-            "📍 " + evento.rua + ", " + evento.numero +
-            "<br>" + evento.bairro
-        );
+     var marker = L.marker([evento.latitude, evento.longitude], {
+    icon: iconeEvento
+})
+.addTo(map)
+.bindTooltip(
+    '<a href="eventos.php?id=' + evento.id_evento + '" class="evento-link">' +
+    evento.titulo +
+    '</a>',
+    {
+        permanent: true,
+        direction: "top",
+        offset: [0, -32],
+        className: "evento-tooltip",
+        interactive: true
+    }
+);
 
-        grupoEventos.push(marker);
+grupoEventos.push(marker);
     }
 });
 

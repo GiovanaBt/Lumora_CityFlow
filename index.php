@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+include 'arquivarEventosPassados.php';
 
 /* 1. CONEXÃO COM BANCO */
 $host = "localhost";

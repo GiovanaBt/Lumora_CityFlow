@@ -52,6 +52,19 @@ $resultado = mysqli_stmt_get_result($stmt);
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
+<script>
+
+function confirmarExclusao() {
+
+    return confirm(
+        "Tem certeza que deseja excluir este evento?\n\n" +
+        "O evento será removido do site e enviado para o histórico."
+    );
+
+}
+
+</script>
+
 <body>
     <header>
     <div class="logo">
@@ -114,9 +127,22 @@ $resultado = mysqli_stmt_get_result($stmt);
 
             <?php while ($evento = mysqli_fetch_assoc($resultado)): ?>
 
-                <div class="evento-card">
+              <div class="evento-card">
+
+    <a
+        href="excluirEvento.php?id=<?= $evento['id_evento']; ?>"
+        class="btn-excluir"
+        title="Excluir evento"
+        onclick="return confirmarExclusao();"
+    >
+        <i class="fa-solid fa-trash"></i>
+    </a>
 
                     <div class="evento-imagem">
+
+                    
+
+                    
 
                         <?php if (!empty($evento['Imagem'])): ?>
 

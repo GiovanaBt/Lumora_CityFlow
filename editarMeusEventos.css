@@ -406,3 +406,89 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* =========================
+   BOTÃO EXCLUIR - LIXEIRA
+========================= */
+
+/* Mantém a lixeira presa ao card */
+.evento-card {
+    position: relative;
+}
+
+/* Botão da lixeira */
+.btn-excluir {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 999;
+
+    background: rgba(5, 5, 5, 0.88);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    border-radius: 8px;
+
+    color: #d8d8d8;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.7);
+
+    backdrop-filter: blur(6px);
+
+    cursor: pointer;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+/* Ícone */
+.btn-excluir i {
+    font-size: 11px;
+
+    color: #d8d8d8;
+
+    pointer-events: none;
+
+    transition: color 0.25s ease;
+}
+
+/* Hover */
+.btn-excluir:hover {
+    background: rgba(168, 50, 158, 0.95);
+
+    border-color: #a8329e;
+
+    color: #fff;
+
+    transform: scale(1.08);
+
+    box-shadow:
+        0 0 10px rgba(168, 50, 158, 0.55);
+}
+
+.btn-excluir:hover i {
+    color: #fff;
+}
+
+/* Clique */
+.btn-excluir:active {
+    transform: scale(0.95);
+}

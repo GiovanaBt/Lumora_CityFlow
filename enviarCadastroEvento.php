@@ -1,8 +1,7 @@
 <?php
 
-include 'Conexao.php';
-
 session_start();
+include 'Conexao.php';
 
 
 /* =========================================================
@@ -12,7 +11,69 @@ session_start();
 if (!isset($_SESSION['usuario_id'])) {
 
     die("Você precisa estar logado.");
+
 }
+
+$idUsuario = $_SESSION['usuario_id'];
+
+
+/* =========================================================
+   VERIFICAR DATAS DO EVENTO
+========================================================= */
+
+$datas = $_POST['datas'] ?? [];
+$horasInicio = $_POST['horas_inicio'] ?? [];
+$horasFim = $_POST['horas_fim'] ?? [];
+
+$hoje = date('Y-m-d');
+
+
+/*
+   Verifica se existe pelo menos uma data
+*/
+
+if (empty($datas)) {
+
+    die("É necessário informar pelo menos uma data para o evento.");
+
+}
+
+
+/*
+   Verifica todas as datas cadastradas
+*/
+
+foreach ($datas as $data) {
+
+    if (empty($data)) {
+
+        die("Uma das datas do evento não foi preenchida.");
+
+    }
+
+
+    /*
+       NÃO PERMITE DATA ANTERIOR A HOJE
+    */
+
+    if ($data < $hoje) {
+
+        echo "
+        <script>
+
+            alert('Não é permitido cadastrar eventos com datas anteriores ao dia atual.');
+
+            window.history.back();
+
+        </script>
+        ";
+
+        exit();
+
+    }
+
+}
+
 
 /* =========================================================
    IMAGEM
@@ -23,117 +84,156 @@ $nomeImagem = "";
 if (
     isset($_FILES['capa']) &&
     $_FILES['capa']['error'] == 0
-){
+) {
 
     $diretorio = "uploads/";
 
-    if(!file_exists($diretorio)){
+
+    if (!file_exists($diretorio)) {
 
         mkdir($diretorio, 0777, true);
+
     }
+
 
     $extensao = pathinfo(
         $_FILES['capa']['name'],
         PATHINFO_EXTENSION
     );
 
-    $nomeImagem =
-        uniqid() . "." . $extensao;
+
+    $nomeImagem = uniqid() . "." . $extensao;
+
 
     move_uploaded_file(
         $_FILES['capa']['tmp_name'],
         $diretorio . $nomeImagem
     );
+
 }
 
+
 /* =========================================================
-   DADOS
+   DADOS DO EVENTO
 ========================================================= */
 
-$idUsuario =
-    $_SESSION['usuario_id'];
+$tituloEvento = mysqli_real_escape_string(
+    $conexao,
+    $_POST['nome'] ?? ''
+);
 
-$tituloEvento =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['nome']
-    );
 
-   $subtitulo =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['subtitulo'] ?? ''
-    );
+$subtitulo = mysqli_real_escape_string(
+    $conexao,
+    $_POST['subtitulo'] ?? ''
+);
 
-$descricao =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['descricao']
-    );
 
-$rua =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['rua']
-    );
+$descricao = mysqli_real_escape_string(
+    $conexao,
+    $_POST['descricao'] ?? ''
+);
 
-$bairro =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['bairro']
-    );
 
-$numero =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['numero']
-    );
+$rua = mysqli_real_escape_string(
+    $conexao,
+    $_POST['rua'] ?? ''
+);
 
-$cidade =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['cidade']
-    );
 
-$cep =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['cep']
-    );
+$bairro = mysqli_real_escape_string(
+    $conexao,
+    $_POST['bairro'] ?? ''
+);
 
-$pontoReferencia =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['ponto_referencia']
-    );
 
-$categoriaId =
-    (int)$_POST['categorias'];
+$numero = mysqli_real_escape_string(
+    $conexao,
+    $_POST['numero'] ?? ''
+);
+
+
+$cidade = mysqli_real_escape_string(
+    $conexao,
+    $_POST['cidade'] ?? ''
+);
+
+
+$cep = mysqli_real_escape_string(
+    $conexao,
+    $_POST['cep'] ?? ''
+);
+
+
+$pontoReferencia = mysqli_real_escape_string(
+    $conexao,
+    $_POST['ponto_referencia'] ?? ''
+);
+
+
+$categoriaId = (int)($_POST['categorias'] ?? 0);
+
 
 /* =========================================================
    CLASSIFICAÇÃO INDICATIVA
 ========================================================= */
 
-$classificacaoIndicativa =
-    mysqli_real_escape_string(
-        $conexao,
-        $_POST['classificacao']
-    );
+$classificacaoIndicativa = mysqli_real_escape_string(
+    $conexao,
+    $_POST['classificacao'] ?? ''
+);
+
 
 /* =========================================================
    LATITUDE E LONGITUDE
 ========================================================= */
 
-$latitude = !empty($_POST['latitude'])
-    ? mysqli_real_escape_string($conexao, $_POST['latitude'])
-    : null;
+// Monta o endereço completo do evento
+$enderecoCompleto = $rua . ', ' .
+                    $numero . ', ' .
+                    $bairro . ', ' .
+                    $cidade . ', ' .
+                    $cep . ', Brasil';
 
-$longitude = !empty($_POST['longitude'])
-    ? mysqli_real_escape_string($conexao, $_POST['longitude'])
-    : null;
+// Converte o endereço em coordenadas
+$urlGeocodificacao = 'https://nominatim.openstreetmap.org/search?' . http_build_query([
+    'q' => $enderecoCompleto,
+    'format' => 'json',
+    'limit' => 1,
+    'countrycodes' => 'br'
+]);
+
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_URL, $urlGeocodificacao);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'User-Agent: CityFlow/1.0'
+]);
+
+$resposta = curl_exec($ch);
+
+curl_close($ch);
+
+$dadosLocalizacao = json_decode($resposta, true);
+
+// Verifica se encontrou a localização
+if (!empty($dadosLocalizacao) && isset($dadosLocalizacao[0])) {
+
+    $latitude = $dadosLocalizacao[0]['lat'];
+    $longitude = $dadosLocalizacao[0]['lon'];
+
+} else {
+
+    $latitude = null;
+    $longitude = null;
+
+}
+
 
 /* =========================================================
-   INSERT EVENTO
+   CADASTRAR EVENTO
 ========================================================= */
 
 $sql = "
@@ -180,55 +280,59 @@ VALUES (
     '$cep',
     '$pontoReferencia',
 
-" . ($latitude !== null ? "'$latitude'" : "NULL") . ",
-" . ($longitude !== null ? "'$longitude'" : "NULL") . ",
+    " . ($latitude !== null ? "'$latitude'" : "NULL") . ",
+    " . ($longitude !== null ? "'$longitude'" : "NULL") . ",
 
     '$nomeImagem'
 
 )
 ";
 
-if($conexao->query($sql)){
 
-    $idEvento =
-        $conexao->insert_id;
+/* =========================================================
+   EXECUTAR CADASTRO
+========================================================= */
+
+if ($conexao->query($sql)) {
+
+
+    $idEvento = $conexao->insert_id;
+
 
     /* =====================================================
-       DATAS
+       CADASTRAR DATAS
     ===================================================== */
 
-    $datas =
-        $_POST['datas'];
-
-    $horasInicio =
-        $_POST['horas_inicio'];
-
-    $horasFim =
-        $_POST['horas_fim'];
-
-    for(
+    for (
         $i = 0;
         $i < count($datas);
         $i++
-    ){
+    ) {
 
-        $data =
-            mysqli_real_escape_string(
-                $conexao,
-                $datas[$i]
-            );
 
-        $horaInicio =
-            mysqli_real_escape_string(
-                $conexao,
-                $horasInicio[$i]
-            );
+        $data = mysqli_real_escape_string(
+            $conexao,
+            $datas[$i]
+        );
 
-        $horaFim =
-            mysqli_real_escape_string(
-                $conexao,
-                $horasFim[$i]
-            );
+
+        $horaInicio = mysqli_real_escape_string(
+            $conexao,
+            $horasInicio[$i] ?? ''
+        );
+
+
+        $horaFim = mysqli_real_escape_string(
+            $conexao,
+            $horasFim[$i] ?? ''
+        );
+
+
+        /*
+           Como o seu formulário atual trabalha com
+           uma data por ocorrência, a data inicial
+           e final recebem a mesma data.
+        */
 
         $sqlDatas = "
         INSERT INTO datas_evento (
@@ -252,95 +356,65 @@ if($conexao->query($sql)){
         )
         ";
 
-        $conexao->query($sqlDatas);
+
+        if (!$conexao->query($sqlDatas)) {
+
+            /*
+               Se der erro ao cadastrar a data,
+               remove o evento que acabou de ser criado.
+            */
+
+            $conexao->query("
+                DELETE FROM eventos_cadastrados
+                WHERE id_evento = $idEvento
+            ");
+
+
+            die(
+                "Erro ao cadastrar a data do evento: "
+                . $conexao->error
+            );
+
+        }
+
     }
+
+
+    /* =====================================================
+       SUCESSO
+    ===================================================== */
 
     echo "
     <script>
 
         alert('Evento cadastrado com sucesso!');
 
-        window.location.href='index.php';
+        window.location.href = 'index.php';
 
     </script>
     ";
 
-}else{
 
-    echo 'Erro: ' . $conexao->error;
+} else {
+
+
+    /* =====================================================
+       ERRO
+    ===================================================== */
+
+    echo "
+    <script>
+
+        alert('Erro ao cadastrar o evento.');
+
+        window.history.back();
+
+    </script>
+    ";
+
 }
 
-$conexao->close();
+
+$conexao->close();x
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer</title>
-    <link rel="stylesheet" href="footer.css">
-</head>
-<body>
-   <?php
-// Configurações do Rodapé
-$ano_atual = date('Y');
-$footer_data = [
-    'ajuda' => [
-        'titulo' => 'Ajuda',
-        'links'  => [
-            ['txt' => 'Central de Ajuda', 'url' => '#'],
-            ['txt' => 'FAQ', 'url' => '#'],
-            ['txt' => 'Contato e Suporte', 'url' => '#'],
-            ['txt' => 'Reportar Problema', 'url' => '#']
-        ]
-    ],
-    'institucional' => [
-        'titulo' => 'Institucional',
-        'links'  => [
-            ['txt' => 'Sobre o CityFlow', 'url' => '#'],
-            ['txt' => 'Missão e Valores', 'url' => '#'],
-            ['txt' => 'Privacidade', 'url' => '#'],
-            ['txt' => 'Termos de Uso', 'url' => '#']
-        ]
-    ]
-];
-?>
-
-<footer class="footer-main">
-    <div class="footer-overlay">
-        <div class="footer-container">
-            
-            <?php foreach ($footer_data as $coluna): ?>
-            <div class="footer-col">
-                <h4 class="footer-title"><?php echo $coluna['titulo']; ?></h4>
-                <ul class="footer-links">
-                    <?php foreach ($coluna['links'] as $link): ?>
-                        <li><a href="<?php echo $link['url']; ?>"><?php echo $link['txt']; ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <?php endforeach; ?>
-
-            <div class="footer-brand">
-                <div class="logo-wrapper">
-                    <span class="logo-city">CITY</span><span class="logo-flow">FLOW</span>
-                </div>
-                <p class="brand-text">
-                    Conectando a essência das ruas e a cultura urbana. Descubra eventos, arte e movimento em um só lugar.
-                </p>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-                    <a href="https://twitter.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Twitter">TW</a>
-                    <a href="https://www.facebook.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; <?php echo $ano_atual; ?> CityFlow - Todos os direitos reservados.</p>
-        </div>
-    </div>
-</footer>
-</body>
-</html>
