@@ -5,62 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CityFlow - Pré-visualização do Evento</title>
     
-    <link rel="stylesheet" href="visualizarEvento.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Usa os mesmos estilos da pagina oficial -->
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="style_evento.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
 </head>
 <body>
 
 <div class="main-container">
 
-    <div class="content-grid">
-        
-        <div class="left-column">
-            <div class="card-preview">
-                <span class="badge-categoria" id="preview-categoria">GASTRONOMIA</span>
-                <h1 class="evento-titulo" id="preview-titulo">Carregando título...</h1>
-                
-                <div class="meta-badges">
-                    <div class="badge-meta">
-                        <i class="fa-solid fa-user-shield"></i> Classificação: <strong id="preview-classificacao">L</strong>
+    <!-- BOTÃO VOLTAR -->
+    <a href="javascript:history.back()" class="btn-voltar">
+        <i class="fa-solid fa-arrow-left"></i> Voltar
+    </a>
+
+    <!-- GRID -->
+    <div class="grid-evento">
+
+        <section class="header-evento">
+
+            <!-- ESQUERDA -->
+            <div class="info-evento">
+
+                <!-- CATEGORIA -->
+                <span class="badge-categoria" id="preview-categoria">CATEGORIA</span>
+
+                <!-- TÍTULO -->
+                <h1 id="preview-titulo">Carregando título...</h1>
+
+                <!-- SUBTÍTULO -->
+                <p class="subtitulo-evento" id="preview-subtitulo" style="display: none;"></p>
+
+                <!-- INFORMAÇÕES EXTRAS -->
+                <div class="top-infos-evento">
+                    <div class="classificacao">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <span>Classificação:</span>
+                        <strong id="preview-classificacao">L</strong>
                     </div>
-                    <div class="badge-meta">
-                        <i class="fa-solid fa-location-dot"></i> CEP: <strong id="preview-cep">00000000</strong>
+
+                    <div class="info-extra">
+                        <i class="fa-solid fa-location-dot"></i>
+                        CEP: <span id="preview-cep">00000-000</span>
                     </div>
                 </div>
 
-                <div class="datas-flex" id="preview-datas">
-                    </div>
+                <!-- DATAS -->
+                <div class="datas-evento" id="preview-datas"></div>
 
-                <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px;">
-                    <h3 class="local-titulo"><i class="fa-solid fa-location-crosshairs"></i> Localização</h3>
-                    <p class="local-texto" id="preview-endereco">Nenhum endereço informado.</p>
-                    <div class="local-referencia" id="preview-ref-box" style="display: none;">
+                <!-- LOCALIZAÇÃO -->
+                <div class="localizacao-topo">
+                    <h2><i class="fa-solid fa-location-dot"></i> Localização</h2>
+
+                    <div class="endereco-completo" id="preview-endereco">Nenhum endereço informado.</div>
+
+                    <div class="referencia-local" id="preview-ref-box" style="display: none;">
                         <i class="fa-solid fa-route"></i> <span id="preview-referencia"></span>
                     </div>
-                    
-                    <button class="btn-mapa"><i class="fa-solid fa-map-location-dot"></i> Ver no Mapa</button>
+
+                    <div class="cep-local">
+                        CEP: <span id="preview-cep-local">00000-000</span>
+                    </div>
+
+                    <a href="#" class="btn-mapa-local" onclick="return false;">
+                        <i class="fa-solid fa-map-location-dot"></i> Ver no mapa
+                    </a>
                 </div>
-            </div>
-        </div>
 
-        <div class="right-column">
-            <div class="banner-container">
-                <img id="preview-imagem" class="banner-img" src="imgs/cityFlow.webp" alt="Capa do Evento">
             </div>
 
-            <div class="card-preview">
-                <h3 class="acoes-titulo">Ações</h3>
-                <button class="btn-participar"><i class="fa-regular fa-star"></i> Participar</button>
-                <button class="btn-favoritar"><i class="fa-regular fa-heart"></i> Favoritar</button>
+            <!-- DIREITA -->
+            <div class="lado-direito">
+
+                <!-- IMAGEM -->
+                <div class="container-imagem">
+                    <img id="preview-imagem" src="imgs/cityFlow.webp" alt="Capa do Evento">
+                </div>
+
+                <div class="descricao-imagem" id="preview-desc-img-box" style="display: none;">
+                    <i class="fa-solid fa-image"></i> <span id="preview-desc-img"></span>
+                </div>
+
+                <!-- AÇÕES -->
+                <div class="card">
+                    <h3>Ações</h3>
+                    <div class="acoes-evento">
+                        <button type="button" class="btn-acao">
+                            <i class="fa-regular fa-star"></i> Participar
+                        </button>
+                        <button type="button" class="btn-secundario">
+                            <i class="fa-regular fa-heart"></i> Favoritar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DESCRIÇÃO -->
+                <div class="card">
+                    <h3>Sobre o Evento</h3>
+                    <p id="preview-descricao">Carregando a descrição...</p>
+                </div>
+
             </div>
-        </div>
 
-    </div>
+        </section>
 
-    <div class="card-preview">
-        <h3 class="sobre-titulo">Sobre o Evento</h3>
-        <p class="sobre-texto" id="preview-descricao">Carregando a descrição...</p>
     </div>
 
 </div>
@@ -70,26 +121,45 @@ window.onload = function() {
     const dados = JSON.parse(sessionStorage.getItem('dados_preview_evento'));
     
     if (!dados) {
-        document.body.innerHTML = "<h2 style='text-align:center; margin-top:50px;'>Nenhum dado de pré-visualização encontrado. Volte ao formulário.</h2>";
+        document.body.innerHTML = "<h2 style='text-align:center; margin-top:50px; color:#fff;'>Nenhum dado de pré-visualização encontrado. Volte ao formulário.</h2>";
         return;
     }
 
-    document.getElementById('preview-titulo').innerText = dados.nome;
-    document.getElementById('preview-descricao').innerText = dados.descricao;
-    document.getElementById('preview-cep').innerText = dados.cep.replace(/\D/g, '');
-    document.getElementById('preview-classificacao').innerText = dados.classificacao;
+    if (dados.categoria) {
+        document.getElementById('preview-categoria').innerText = dados.categoria;
+    }
+
+    document.getElementById('preview-titulo').innerText = dados.nome || 'Sem título';
+    
+    if (dados.subtitulo) {
+        const sub = document.getElementById('preview-subtitulo');
+        sub.innerText = dados.subtitulo;
+        sub.style.display = 'block';
+    }
+
+    document.getElementById('preview-descricao').innerText = dados.descricao || '';
+    
+    const cepFormatado = dados.cep ? dados.cep.replace(/\D/g, '') : '';
+    document.getElementById('preview-cep').innerText = cepFormatado;
+    document.getElementById('preview-cep-local').innerText = cepFormatado;
+    document.getElementById('preview-classificacao').innerText = dados.classificacao || 'Livre';
 
     if (dados.imagem && dados.imagem.startsWith('data:image')) {
         document.getElementById('preview-imagem').src = dados.imagem;
     }
 
+    if (dados.descIMG) {
+        document.getElementById('preview-desc-img').innerText = dados.descIMG;
+        document.getElementById('preview-desc-img-box').style.display = 'block';
+    }
+
     if (dados.rua) {
         document.getElementById('preview-endereco').innerText = 
-            `${dados.rua}, ${dados.numero} - ${dados.bairro} - ${dados.cidade}`;
+            `${dados.rua}, ${dados.numero || 'S/N'} - ${dados.bairro || ''} - ${dados.cidade || ''}`;
         
         if (dados.ponto_referencia) {
             document.getElementById('preview-referencia').innerText = dados.ponto_referencia;
-            document.getElementById('preview-ref-box').style.display = 'flex';
+            document.getElementById('preview-ref-box').style.display = 'block';
         }
     }
 
@@ -100,15 +170,20 @@ window.onload = function() {
         dados.datas.forEach((data, index) => {
             if (data) {
                 const dataFormatada = data.split('-').reverse().join('/');
-                const horaInicio = dados.horasInicio[index] || '00:00';
-                const horaFim = dados.horasFim[index] || '00:00';
+                const horaInicio = dados.horasInicio ? (dados.horasInicio[index] || '00:00') : '00:00';
+                const horaFim = dados.horasFim ? (dados.horasFim[index] || '00:00') : '00:00';
 
                 const box = document.createElement('div');
-                box.className = 'box-data';
+                box.className = 'data-box';
                 box.innerHTML = `
-                    <span class="tipo-data"><i class="fa-regular fa-calendar"></i> Evento</span>
-                    <div class="dia">${dataFormatada}</div>
-                    <div class="horario"><i class="fa-regular fa-clock"></i> ${horaInicio} - ${horaFim}</div>
+                    <div class="data-topo">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>EVENTO</span>
+                    </div>
+                    <strong>${dataFormatada}</strong>
+                    <div class="horario-evento">
+                        <i class="fa-regular fa-clock"></i> ${horaInicio} - ${horaFim}
+                    </div>
                 `;
                 containerDatas.appendChild(box);
             }
