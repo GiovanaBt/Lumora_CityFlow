@@ -1,0 +1,264 @@
+-- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: cityflow
+-- ------------------------------------------------------
+-- Server version	8.0.41
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `atividade`
+--
+
+DROP TABLE IF EXISTS `atividade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `atividade` (
+  `id_atividade` int NOT NULL AUTO_INCREMENT,
+  `id_usuarios` int NOT NULL,
+  `id_evento` int NOT NULL,
+  `id_categoria` int NOT NULL,
+  `feedback` text,
+  PRIMARY KEY (`id_atividade`),
+  KEY `id_usuarios` (`id_usuarios`),
+  KEY `id_evento` (`id_evento`),
+  KEY `id_categoria` (`id_categoria`),
+  CONSTRAINT `atividade_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE CASCADE,
+  CONSTRAINT `atividade_ibfk_2` FOREIGN KEY (`id_evento`) REFERENCES `eventos_cadastrados` (`id_evento`) ON DELETE CASCADE,
+  CONSTRAINT `atividade_ibfk_3` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `atividade`
+--
+
+LOCK TABLES `atividade` WRITE;
+/*!40000 ALTER TABLE `atividade` DISABLE KEYS */;
+INSERT INTO `atividade` VALUES (1,1,10,11,NULL);
+/*!40000 ALTER TABLE `atividade` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categoria` (
+  `id_categoria` int NOT NULL AUTO_INCREMENT,
+  `categoria_evento` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_categoria`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES (1,'Música'),(2,'Dança'),(3,'Leitura'),(4,'Gastronomia'),(5,'Esporte'),(6,'Cinema'),(7,'Teatro'),(8,'Performance'),(9,'Pintura/Arte'),(10,'Educação'),(11,'Standups'),(12,'Congressos/Paletras'),(13,'Cursos/Workshops'),(14,'Pride'),(15,'Religião/Espiritualidade'),(16,'Recitar'),(17,'Escrita/poemas');
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `datas_evento`
+--
+
+DROP TABLE IF EXISTS `datas_evento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `datas_evento` (
+  `id_data` int NOT NULL AUTO_INCREMENT,
+  `id_evento` int NOT NULL,
+  `data_inicio` date NOT NULL,
+  `data_fim` date DEFAULT NULL,
+  `horario_inicio` time NOT NULL,
+  `horario_fim` time NOT NULL,
+  PRIMARY KEY (`id_data`),
+  KEY `id_evento` (`id_evento`),
+  CONSTRAINT `datas_evento_ibfk_1` FOREIGN KEY (`id_evento`) REFERENCES `eventos_cadastrados` (`id_evento`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `datas_evento`
+--
+
+LOCK TABLES `datas_evento` WRITE;
+/*!40000 ALTER TABLE `datas_evento` DISABLE KEYS */;
+INSERT INTO `datas_evento` VALUES (1,1,'2026-11-27','2026-11-27','16:00:00','22:00:00'),(2,2,'2026-12-05','2026-12-05','14:00:00','20:00:00'),(3,3,'2026-11-29','2026-11-29','09:30:00','12:30:00'),(4,4,'2026-12-11','2026-12-11','12:00:00','22:00:00'),(5,4,'2026-12-12','2026-12-12','12:00:00','22:00:00'),(6,5,'2026-12-12','2026-12-12','19:30:00','22:30:00'),(7,6,'2026-11-19','2026-11-19','19:00:00','22:00:00'),(8,7,'2026-12-13','2026-12-13','17:00:00','18:30:00'),(9,8,'2026-12-19','2026-12-19','10:00:00','18:00:00'),(10,8,'2026-12-20','2026-12-20','10:00:00','18:00:00'),(11,9,'2026-11-27','2026-11-27','09:00:00','17:00:00'),(12,10,'2026-11-20','2026-11-20','21:00:00','23:00:00'),(13,11,'2026-12-02','2026-12-02','08:30:00','18:00:00'),(14,11,'2026-12-03','2026-12-03','08:30:00','18:00:00'),(15,12,'2026-11-21','2026-11-21','14:00:00','17:30:00'),(16,13,'2026-11-29','2026-11-29','13:00:00','21:00:00'),(17,14,'2027-01-16','2027-01-16','08:30:00','11:00:00');
+/*!40000 ALTER TABLE `datas_evento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `eventos_cadastrados`
+--
+
+DROP TABLE IF EXISTS `eventos_cadastrados`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `eventos_cadastrados` (
+  `id_evento` int NOT NULL AUTO_INCREMENT,
+  `id_usuarios` int NOT NULL,
+  `id_categoria` int NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtitulo` varchar(255) DEFAULT NULL,
+  `descricao` text,
+  `descIMG` varchar(255) DEFAULT NULL,
+  `Imagem` varchar(255) DEFAULT NULL,
+  `rua` varchar(100) DEFAULT NULL,
+  `bairro` varchar(100) DEFAULT NULL,
+  `numero` int DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `CEP` varchar(11) DEFAULT NULL,
+  `ponto_referencia` varchar(255) DEFAULT NULL,
+  `latitude` decimal(10,8) DEFAULT NULL,
+  `longitude` decimal(11,8) DEFAULT NULL,
+  `classificacao_indicativa` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_evento`),
+  KEY `id_usuarios` (`id_usuarios`),
+  KEY `id_categoria` (`id_categoria`),
+  CONSTRAINT `eventos_cadastrados_ibfk_1` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE CASCADE,
+  CONSTRAINT `eventos_cadastrados_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `eventos_cadastrados`
+--
+
+LOCK TABLES `eventos_cadastrados` WRITE;
+/*!40000 ALTER TABLE `eventos_cadastrados` DISABLE KEYS */;
+INSERT INTO `eventos_cadastrados` VALUES (1,1,1,'Festival Vale Som Independente','Bandas autorais e músicas boas ao ar livre.','Uma tarde e noite dedicadas às bandas independentes do Vale do Paraíba, com muito rock, MPB e pop autoral, além de praça de food trucks.',NULL,'6aff271b2b83c.jpg','Rua Barão de Jacareí','Centro',3595,'Jacareí','12308000','Próximo ao Pátio dos Trilhos',-23.30210970,-45.95969290,'12'),(2,1,2,'Batalha do Vale: Street Dance & Breaking','O encontro dos melhores dançarinos urbanos da região.','Competição aberta de danças urbanas, apresentações de grupos locais e cyphers livres comandadas por DJs de hip-hop e funk.',NULL,'6aff27e3e996e.jpg','Rua Doutor Pompílio Mercadante','Centro',205,'Jacareí','12308510','Em frente à Igreja Matriz.',-23.30578210,-45.96255140,'L'),(3,1,3,'Clube do Livro: Páginas do Paraíba','Troca de livros e roda de leitura na praça.',' Encontro mensal para leitores discutirem obras contemporâneas, realizarem troca gratuita de exemplares e participarem de leitura coletiva.',NULL,'6aff28a3dec4b.jpg','Praça Barão do Rio Branco','Centro',620,'Jacareí','12327350','Praça do Rosário',NULL,NULL,'12'),(4,1,4,'Sabores da Serra e Vale','Festival de comida caipira, artesanais e doces típicos.','Dois dias celebrando a culinária do interior paulista com pratos típicos, bolinho caipira tradicional, cervejas artesanais e música ao vivo.\r\n',NULL,'6aff296a3a1ed.jpg','Avenida Nicolau Mercadante','Centro',1900,'Jacareí','12327680','Shooping',NULL,NULL,'L'),(5,1,5,'Corrida Noturna das Pontes','Percursos de 5 Km e 10Km iluminados pela cidade.','Prova de corrida de rua noturna com largada e chegada no EducaMais, contando com hidratação, medalha para todos os concluintes e premiação por faixa etária.',NULL,'6aff2a1da1355.jpg','Rua Olímpio Catão','Centro',263,'Jacareí','12308050','EducaMais',-23.30098920,-45.96377210,'16'),(6,1,6,'Mostra CineVale: Curtas da Terra','Exibição gratuita de produções audiovisuais regionais.','Sessão especial exibindo curtas-metragens de ficção e documentários produzidos por cineastas de Jacareí e região, seguida de bate-papo com os diretores.',NULL,'6aff2ac156b5d.jpg','Rua Olímpio Catão','Centro',263,'Jacareí','12308050','EducaMais',-23.30098920,-45.96377210,'14'),(7,1,8,'Corpo Urbano em Movimento','Intervenção artística contemporânea em espaço público.','Performance multidisciplinar que combina expressão corporal, artes visuais e paisagem sonora para provocar reflexões sobre o ritmo acelerado das cidades.\r\n',NULL,'6aff2b639d54f.jpg','Rua Barão de Jacareí','Centro',73,'Jacareí','12308000','Prefeitura',NULL,NULL,'12'),(8,1,9,'Galeria Aberta: Grafite e Tela Viva','Exposição coletiva e pintura ao vivo.','Artistas plásticos e muralistas transformam painéis em obras de arte ao vivo enquanto o público visita a exposição de telas, aquarelas e esculturas.',NULL,'6aff2c2f21ef4.jpg','Rua Barão de Jacareí','Centro',122,'Jacareí','12308-000','Pátio dos Trilhos',-23.30210970,-45.95969290,'L'),(9,1,10,'Feira de Ciência e Inovação Jovem','Experimentos, Robótica e Tecnologia para estudantes.','Mostra interativa com projetos de robótica, sustentabilidade e ciências desenvolvidos por estudantes do ensino médio e técnico da região.\r\n',NULL,'6aff2cce33a45.jpg','Rua dos Ibiscos','Parque Santo Antônio',1036,'Jacareí','12309410','EducaMais PSA',-23.31034140,-45.95731650,'L'),(10,1,11,'Noite de Comédia no Vale','Os melhores comediantes de stand-up reunidos em um só palco.','Show de humor com quatro comediantes convidados trazendo observações ácidas e engraçadas sobre o cotidiano, relacionamentos e a vida no interior.',NULL,'6aff2d917cb45.jpg','Avenida das Letras','Loteamento Villa Branca',450,'Jacareí','12301330','Centro Comercial Vila Branca',NULL,NULL,'16'),(11,1,12,'Fórum Vale Sustentável 2026','Debates sobre meio ambiente, tecnologia e futuro urbano.','Ciclo de palestras e painéis com especialistas, pesquisadores e gestores discutindo soluções ecológicas e desenvolvimento sustentável para o Vale do Paraíba.',NULL,'6aff2e3e2ef58.jpg','Avenida Cidade Jardim','Jardim Portugal',4389,'São José dos Campos','12232000','Teatro Sesi',-23.26278970,-45.89113690,'14'),(12,1,13,'Workshop de Fotografia com smartphone','Aprenda enquadramento, luz e edição na prática.',' Oficina prática para quem deseja melhorar suas fotos usando apenas o celular, explorando iluminação natural, composição e aplicativos gratuitos de edição.\r\n',NULL,'6aff2ed53f0c5.jpg','Rua General Carneiro','Centro',143,'Jacareí','12308060','Museu de Antropologia',-23.30029050,-45.96297750,'12'),(13,1,14,'Parada e Festival Cultural Orgulho Jacareí','Celebração da diversidade, respeito e arte LGBTQIA+','Evento cultural celebrando o orgulho e a inclusão com apresentações de drag queens, DJs, feira de empreendedores locais e ações de conscientização.',NULL,'6aff2fa121571.jpg','Rua Avelino Esmerio da Silva','Jardim do Portal',359,'Jacareí','12324260','Parque do Eucaliptos',-23.31140910,-46.00382520,'L'),(14,1,15,'Encontro de Meditação e Paz Interior','Práticas guiadas de Mindfulness e Conexão Espiritual.','Manhã dedicada ao bem-estar espiritual com meditação guiada, técnicas de respiração e roda de conversa ecumênica sobre gratidão e propósito em meio à natureza.',NULL,'6aff30e1bde51.jpg','Rua José Vicente de Paula','Parque Santos Dumont',654,'São José dos Campos','12227810','Parque Santos Dumont',NULL,NULL,'L');
+/*!40000 ALTER TABLE `eventos_cadastrados` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `favoritos`
+--
+
+DROP TABLE IF EXISTS `favoritos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `favoritos` (
+  `id_favorito` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `id_evento` int NOT NULL,
+  `data_favorito` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_favorito`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_evento` (`id_evento`),
+  CONSTRAINT `favoritos_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE CASCADE,
+  CONSTRAINT `favoritos_ibfk_2` FOREIGN KEY (`id_evento`) REFERENCES `eventos_cadastrados` (`id_evento`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `favoritos`
+--
+
+LOCK TABLES `favoritos` WRITE;
+/*!40000 ALTER TABLE `favoritos` DISABLE KEYS */;
+INSERT INTO `favoritos` VALUES (1,1,10,'2026-11-19 17:29:19');
+/*!40000 ALTER TABLE `favoritos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `historico_eventos`
+--
+
+DROP TABLE IF EXISTS `historico_eventos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `historico_eventos` (
+  `id_historico` int NOT NULL AUTO_INCREMENT,
+  `id_evento_original` int NOT NULL,
+  `id_usuarios` int NOT NULL,
+  `id_categoria` int DEFAULT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `subtitulo` varchar(255) DEFAULT NULL,
+  `descricao` text,
+  `descIMG` varchar(255) DEFAULT NULL,
+  `Imagem` varchar(255) DEFAULT NULL,
+  `rua` varchar(100) DEFAULT NULL,
+  `bairro` varchar(100) DEFAULT NULL,
+  `numero` int DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `CEP` varchar(11) DEFAULT NULL,
+  `ponto_referencia` varchar(255) DEFAULT NULL,
+  `latitude` decimal(10,8) DEFAULT NULL,
+  `longitude` decimal(11,8) DEFAULT NULL,
+  `classificacao_indicativa` varchar(20) DEFAULT NULL,
+  `datas_evento` json DEFAULT NULL,
+  `data_exclusao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `motivo` varchar(30) NOT NULL DEFAULT 'excluido',
+  PRIMARY KEY (`id_historico`),
+  KEY `fk_historico_usuario` (`id_usuarios`),
+  KEY `fk_historico_categoria` (`id_categoria`),
+  CONSTRAINT `fk_historico_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE SET NULL,
+  CONSTRAINT `fk_historico_usuario` FOREIGN KEY (`id_usuarios`) REFERENCES `usuarios` (`id_usuarios`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `historico_eventos`
+--
+
+LOCK TABLES `historico_eventos` WRITE;
+/*!40000 ALTER TABLE `historico_eventos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historico_eventos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id_usuarios` int NOT NULL AUTO_INCREMENT,
+  `nome_completo` varchar(100) DEFAULT NULL,
+  `data_nascimento` date DEFAULT NULL,
+  `cpf` varchar(14) NOT NULL,
+  `telefone` varchar(15) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `senha` varchar(100) DEFAULT NULL,
+  `nome_usuario` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_usuarios`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Rafaela Teles Simões de Freitas','2009-03-05','44834310809','12991915894','rafaela.teles@gmail.com','123456','Rafa_tsf');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-11-19 14:35:54

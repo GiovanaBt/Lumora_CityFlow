@@ -53,24 +53,22 @@ body {
 .titulo-pagina {
     position: relative;
     width: 100%;
-    
+
     /* MUDANÇA AQUI: Reduzido de 40px para 10px no topo */
     margin: 10px 0 35px;
-    
+
     padding-bottom: 25px;
-    
+
     display: flex;
     align-items: center;
     gap: 20px;
-    
+
     border-bottom: 2px solid transparent;
-    border-image: linear-gradient(
-        90deg,
-        #a8329e,
-        #7b2cff,
-        #2dbac9,
-        transparent
-    ) 1;
+    border-image: linear-gradient(90deg,
+            #a8329e,
+            #7b2cff,
+            #2dbac9,
+            transparent) 1;
 }
 
 /* ÍCONE QUADRADO COM BORDA AZUL */
@@ -92,7 +90,7 @@ body {
 }
 
 .titulo-pagina:hover .icone-titulo {
- transform: translateY(-3px);
+    transform: translateY(-3px);
     border-color: #00d4ff;
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
 }
@@ -133,7 +131,7 @@ body {
 
 .eventos-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
     gap: 28px;
 }
 
@@ -260,7 +258,7 @@ body {
     -webkit-box-orient: vertical;
 }
 
-.evento-info > p:not(.local) {
+.evento-info>p:not(.local) {
     color: #888;
     font-size: 14px;
     line-height: 1.5;
@@ -329,7 +327,7 @@ body {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-.nenhum-evento > i {
+.nenhum-evento>i {
     display: block;
     font-size: 52px;
     margin-bottom: 20px;
@@ -404,6 +402,43 @@ body {
 
     .eventos-container {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .meus-eventos {
+        width: 95%;
+        padding: 5px 0 60px;
+    }
+
+    .titulo-pagina {
+        gap: 14px;
+        margin-bottom: 25px;
+    }
+
+    .titulo-pagina .icone-titulo {
+        width: 55px;
+        height: 55px;
+        min-width: 55px;
+        min-height: 55px;
+        font-size: 22px;
+        border-radius: 15px;
+    }
+
+    .titulo-pagina h1 {
+        font-size: clamp(20px, 6vw, 25px);
+    }
+
+    .evento-imagem {
+        height: 180px;
+    }
+
+    .evento-info {
+        padding: 18px 16px 20px;
+    }
+
+    .evento-info h2 {
+        font-size: 19px;
     }
 }
 

@@ -1,42 +1,55 @@
-:root{
-    --primary:#00f2ff;
-    --secondary:#bc00ff;
-    --text-light:#f4f4f4;
-    --transition:.3s;
+:root {
+    --primary: #00f2ff;
+    --secondary: #bc00ff;
+    --text-light: #f4f4f4;
+    --transition: .3s;
 }
 
-.footer-main{
-    position:relative;
+.footer-main {
+    position: relative;
     background: url("imgs/footer.png") center center/cover no-repeat;
-    overflow:hidden;
-    color:white;
+    overflow: hidden;
+    color: white;
+    min-height: 330px;
+    width: 100%;
 }
 
-.footer-main::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.65);
+.footer-main::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .65);
 }
 
-.footer-overlay{
-    position:relative;
-    z-index:2;
-    padding:40px 0 15px;
+.footer-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 40px 0 15px;
+    width: 100%;
 }
-.footer-container{
-    max-width:1200px;
-    margin:auto;
 
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
 
-    gap:50px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
 
-    align-items:start;
+    gap: 50px;
 
-    padding:50px 30px;
+    align-items: start;
+
+    padding: 50px 30px;
+    width: 100%;
+    box-sizing: border-box;
 }
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .footer-title {
     font-size: 1.2rem;
     text-transform: uppercase;
@@ -47,15 +60,10 @@
     padding-left: 10px;
 }
 
-.footer-links a{
-    color:#ececec;
-    text-decoration:none;
-    transition:.3s;
-}
-
-.footer-links a:hover{
-    color:var(--primary);
-    padding-left:10px;
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .footer-links li {
@@ -67,8 +75,13 @@
     text-decoration: none;
     transition: var(--transition);
     font-size: 0.95rem;
+    display: inline-block;
 }
 
+.footer-links a:hover {
+    color: var(--primary);
+    padding-left: 10px;
+}
 
 /* Logo Estilizada */
 .logo-wrapper {
@@ -78,13 +91,20 @@
     margin-bottom: 15px;
 }
 
-.logo-city { color: var(--primary); }
-.logo-flow { color: var(--secondary); text-shadow: 0 0 15px var(--secondary); }
+.logo-city {
+    color: var(--primary);
+}
+
+.logo-flow {
+    color: var(--secondary);
+    text-shadow: 0 0 15px var(--secondary);
+}
 
 .brand-text {
     line-height: 1.6;
     color: #ccc;
     margin-bottom: 20px;
+    max-width: 450px;
 }
 
 /* Ícones Sociais Funcionais */
@@ -116,18 +136,60 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.8rem;
     color: #777;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.footer-main{
-    position: relative;
-    background: url("imgs/footer.png") center center/cover no-repeat;
-    overflow: hidden;
-    color: white;
-    min-height: 330px;
+/* =========================================================
+   RESPONSIVIDADE (TABLETS E SMARTPHONES)
+========================================================= */
+
+@media (max-width: 1024px) {
+    .footer-container {
+        gap: 35px 25px;
+        padding: 40px 25px;
+    }
 }
 
-.footer-brand{
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
+@media (max-width: 850px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 35px 25px;
+        padding: 35px 20px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+        margin-bottom: 10px;
+    }
+
+    .brand-text {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 30px 15px;
+    }
+
+    .logo-wrapper {
+        font-size: 2rem;
+    }
+
+    .brand-text {
+        font-size: 0.9rem;
+    }
+
+    .footer-title {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .footer-bottom {
+        margin-top: 30px;
+        padding: 15px 10px;
+    }
 }

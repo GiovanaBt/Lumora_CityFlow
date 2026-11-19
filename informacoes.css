@@ -1,95 +1,45 @@
-/* Container Principal */
-.info-container {
-    background-color: #1E293B; /* Fundo preto conforme as fotos */
-    color: white;
-    font-family: 'Arial', sans-serif;
-    padding: 40px 20px;
-    text-align: left;
-    min-height: 100vh;
-    /* Localize a classe do seu container azul e adicione isso: */
-border: 4px solid transparent;
-background-image: linear-gradient(#1a2433, #1a2433), 
-                  linear-gradient(to bottom, #9333ea, #00d4ff);
-background-origin: border-box;
-background-clip: padding-box, border-box;
-border-radius: 12px; /* Para as pontas ficarem arredondadas como na sua foto */
-}
-
-.info-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    /* Se o seu título for um h1, use: */
-    color: #ffffff;       /* Define a cor branca */
-    text-align: left;   /* Centraliza o texto horizontalmente */
-    width: 100%;          /* Garante que ele ocupe a largura total para centralizar */
-}
-
-.info-subtitle {
-border-radius: 12px; /* Para as pontas ficarem arredondadas como na sua foto */
-    text-align: center;
-}
-
-.accordion-item summary {
-    color: #7a23cb;
-}
-
-
-.accordion-header {
-    padding: 15px 20px;
-    cursor: pointer;
-}
-
-.content {
-    padding: 0 25px 10px 25px;
-    color: #1E293B;
-    color: #000000;
-    line-height: 1.6;
-    font-size: 0.95rem;
-}
-
-.content p {
-    color: #9333ea;
-}
-
-
-
-
-
-/* Estilo do container */
-.accordion-item {
-  border: 1px solid #ddd;
-  border-top: 1px solid #eee;
-  background-color: #fafafa;
-}
-
-
-
-
 /* =========================
    CONTAINER PRINCIPAL
 ========================= */
-
 .info-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    text-align: left;
-
     background-color: #1E293B;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    padding: 40px 25px;
+    text-align: left;
+    min-height: 100vh;
+    border: 4px solid transparent;
+    background-image: linear-gradient(#1a2433, #1a2433),
+        linear-gradient(to bottom, #9333ea, #00d4ff);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
     border-radius: 12px;
+    max-width: 1000px;
+    width: 92%;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 /* =========================
    TÍTULOS
 ========================= */
-
 .main-title {
     color: white;
     font-size: 2.2rem;
     text-align: left;
     margin: 50px 0 40px;
     text-transform: uppercase;
+    word-break: break-word;
+}
+
+.info-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: left;
+    width: 100%;
+    word-break: break-word;
 }
 
 .info-subtitle {
@@ -98,39 +48,51 @@ border-radius: 12px; /* Para as pontas ficarem arredondadas como na sua foto */
     text-decoration: underline;
     margin-bottom: 30px;
     text-transform: uppercase;
+    text-align: center;
+    border-radius: 12px;
 }
 
 /* =========================
    ACORDION
 ========================= */
-
 .accordion-group {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%;
 }
 
 .accordion-item {
     background: white;
     border-radius: 8px;
     overflow: hidden;
+    border: 1px solid #ddd;
+    border-top: 1px solid #eee;
 }
 
 summary {
     list-style: none;
     padding: 20px;
     cursor: pointer;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     font-weight: bold;
     color: black;
+    gap: 12px;
 }
 
 summary::-webkit-details-marker {
     display: none;
+}
+
+.accordion-item summary {
+    color: #7a23cb;
+}
+
+.accordion-header {
+    padding: 15px 20px;
+    cursor: pointer;
 }
 
 .arrow {
@@ -140,6 +102,7 @@ summary::-webkit-details-marker {
     border-bottom: 2px solid black;
     transform: rotate(45deg);
     transition: 0.3s;
+    flex-shrink: 0;
 }
 
 details[open] .arrow {
@@ -147,7 +110,64 @@ details[open] .arrow {
 }
 
 .content {
-    padding: 20px;
-    color: #000;
+    padding: 0 25px 15px 25px;
+    color: #000000;
     line-height: 1.6;
+    font-size: 0.95rem;
+    word-break: break-word;
+}
+
+.content p {
+    color: #9333ea;
+}
+
+/* =========================
+   RESPONSIVIDADE (MOBILE)
+========================= */
+@media (max-width: 768px) {
+    .info-container {
+        padding: 30px 18px;
+        width: 95%;
+    }
+
+    .main-title {
+        font-size: clamp(1.4rem, 5vw, 1.9rem);
+        margin: 30px 0 25px;
+    }
+
+    .info-title {
+        font-size: clamp(1.6rem, 5vw, 2.1rem);
+    }
+
+    .info-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
+
+    summary {
+        padding: 16px 14px;
+        font-size: 14px;
+    }
+
+    .content {
+        padding: 0 16px 14px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .info-container {
+        padding: 22px 14px;
+        width: 96%;
+        border-width: 2px;
+    }
+
+    summary {
+        padding: 14px 12px;
+        font-size: 13px;
+    }
+
+    .content {
+        padding: 0 12px 12px;
+    }
 }

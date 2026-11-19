@@ -1,63 +1,75 @@
-/* =========================
-   RESET GLOBAL (EVITA BUGS ENTRE PÁGINAS)
-========================= */
-* {
+/* =========================================================
+   CITYFLOW - HEADER RESPONSIVO (PADRÃO PÁGINA PRINCIPAL)
+   Desktop | Tablet | Celular
+========================================================= */
+
+
+/* =========================================================
+1. RESET
+========================================================= */
+
+html {
     box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
 }
 
-/* =========================
-   BODY (ESPAÇO CORRETO DO HEADER FIXO)
-========================= */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
 body {
     margin: 0;
-    padding-top: 90px; /* ALTURA REAL DO HEADER */
+    padding-top: 80px;
     font-family: Arial, sans-serif;
     background-color: #000;
+    overflow-x: hidden;
+    width: 100%;
 }
 
-/* =========================
-   HEADER FIXO PADRONIZADO
-========================= */
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+
+/* =========================================================
+2. HEADER
+========================================================= */
+
 header {
     position: fixed;
     top: 0;
     left: 0;
+
     width: 100%;
     height: 80px;
-    z-index: 1000;
 
     display: flex;
     align-items: center;
-
-    background-color: #000;
-    box-shadow: 0px 4px 10px rgba(45, 185, 201, 0.4);
+    justify-content: space-between;
 
     padding: 0 40px;
-    box-sizing: border-box;
-     gap: 35px; /* aumenta aqui */
+    gap: 30px;
+
+    background: #000;
+    box-shadow: 0 4px 10px rgba(45, 185, 201, .4);
+
+    z-index: 10000;
 }
 
-/* LADO ESQUERDO (LOGO + MAPA) */
-.left-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-/* empurra menu para direita */
-nav {
-    margin-left: auto;
-}
-
-/* links sem padrão quebrado */
 header a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 
-/* =========================
-   LOGO
-========================= */
+
+/* =========================================================
+3. LOGO
+========================================================= */
+
 .logo {
     display: flex;
     align-items: center;
@@ -65,168 +77,129 @@ header a {
 }
 
 .logo img {
+    display: block;
+    width: auto;
     height: 60px;
-    transition: transform 0.2s;
+    object-fit: contain;
+    transition: transform .2s ease;
 }
 
 .logo img:hover {
     transform: scale(1.05);
 }
 
-/* =========================
-   BOTÃO MAPA
-========================= */
-.botaoMapa {
-    background: linear-gradient(45deg, #2dbac9, #a8329e);
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 100px;
+
+/* =========================================================
+4. MENU DESKTOP
+========================================================= */
+
+header nav,
+#menuPrincipal {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 25px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+    white-space: nowrap;
+}
+
+.menu > li {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.menu > li > a:not(.botaoMapa) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    color: #fff;
+    font-size: 14px;
     font-weight: bold;
 
-    flex-shrink: 0;
+    transition: color .2s ease;
+}
+
+.menu > li > a:not(.botaoMapa):hover {
+    color: #2dbac9;
+}
+
+.fa-circle-plus {
+    color: #16cee2;
+    font-size: 1.2em;
+}
+
+
+/* =========================================================
+5. BOTÃO MAPA
+========================================================= */
+
+.botaoMapa {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 10px 25px;
+
+    color: #fff !important;
+    background: linear-gradient(45deg, #2dbac9, #a8329e);
+
+    border: none;
+    border-radius: 100px;
+
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
     cursor: pointer;
-    transition: transform 0.2s;
+
+    transition: transform .2s ease;
 }
 
 .botaoMapa:hover {
     transform: scale(1.05);
 }
 
-/* =========================
-   MENU PRINCIPAL
-========================= */
-.menu {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 25px;
 
-    margin: 0;
-    padding: 0;
+/* =========================================================
+6. BOTÃO ENTRAR
+========================================================= */
 
-    white-space: nowrap; /* EVITA QUEBRA E SUMIÇO DO NOME */
-}
-
-.menu li {
-    display: flex;
-    align-items: center;
-}
-
-.menu a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.menu a:hover {
-    color: #2dbac9;
-}
-
-/* =========================
-   ÍCONE +
-========================= */
-.fa-circle-plus {
-    color: #16cee2;
-    font-size: 1.2em;
-}
-
-/* =========================
-   PERFIL
-========================= */
-.perfil {
-    position: relative;
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-
-.perfil:hover .submenu {
-    display: block;
-}
-
-/* =========================
-   SUBMENU
-========================= */
-.submenu {
-    display: none;
-    position: absolute;
-    top: 120%;
-    right: 0;
-
-    min-width: 220px;
-
-    background: rgba(13, 13, 13, 0.95);
-    backdrop-filter: blur(10px);
-
-    border: 1px solid #2dbac9;
-    border-radius: 10px;
-
-    padding: 5px 0;
-    list-style: none;
-
-    z-index: 9999;
-
-    box-shadow: 0px 10px 30px rgba(0,0,0,0.8);
-}
-
-.submenu::before {
-    content: "PERFIL";
-    display: block;
-    padding: 12px 20px;
-    font-size: 13px;
-    color: #2dbac9;
-    font-weight: bold;
-    opacity: 0.7;
-}
-
-.submenu li a {
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    color: #fff;
-    font-size: 14px;
-    transition: all 0.2s;
-}
-
-.submenu li a:hover {
-    background: rgba(45,185,201,0.1);
-    color: #2dbac9;
-    padding-left: 25px;
-}
-
-/* SAIR */
-.submenu li a[href="logout.php"] {
-    color: #ff4d4d;
-}
-
-/* =========================
-   BOTÃO ENTRAR
-========================= */
 .menu-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
 
-    padding: 8px 20px;
+    padding: 9px 20px;
+
+    color: #fff;
+
+    background:
+        linear-gradient(#000, #000) padding-box,
+        linear-gradient(45deg, #a8329e, #2dbac9) border-box;
+
+    border: 2px solid transparent;
     border-radius: 100px;
 
-    background: #000;
-    border: 2px solid transparent;
-    background-image: linear-gradient(#000,#000),
-        linear-gradient(45deg,#a8329e,#2dbac9);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-
+    font-size: 14px;
     font-weight: bold;
+
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform .2s ease;
 }
 
 .menu-container:hover {
@@ -236,27 +209,608 @@ header a {
 .menu-container i,
 .menu-container span {
     color: #fff;
-    font-weight: bold;
-    pointer-events: none;
 }
 
-/* =========================
-   MODAL
-========================= */
+
+/* =========================================================
+7. PERFIL DO USUÁRIO - DESKTOP
+========================================================= */
+
+.perfil {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Ponte invisível entre o botão do perfil e o submenu para não fechar ao mover o mouse */
+.perfil::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 15px;
+}
+
+.perfil-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.seta-submenu {
+    font-size: 11px;
+    transition: transform .2s ease;
+}
+
+.perfil:hover .seta-submenu,
+.perfil.submenu-aberto .seta-submenu {
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+8. SUBMENU DA CONTA - DESKTOP
+========================================================= */
+
+.submenu {
+    display: none;
+
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+
+    width: 230px;
+    min-width: 210px;
+
+    margin: 0;
+    padding: 8px;
+
+    list-style: none;
+
+    background: rgba(13, 13, 13, .97);
+
+    border: 1px solid #2dbac9;
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .8);
+
+    z-index: 10002;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.submenu::before {
+    content: "MINHA CONTA";
+    display: block;
+
+    padding: 10px 12px;
+
+    color: #2dbac9;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.submenu li {
+    display: block;
+    width: 100%;
+}
+
+.submenu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 12px;
+
+    color: #fff;
+    font-size: 14px;
+
+    border-radius: 7px;
+    transition: .2s ease;
+}
+
+.submenu li a:hover {
+    background: rgba(45, 185, 201, .12);
+    color: #2dbac9;
+    padding-left: 17px;
+}
+
+.submenu li a.btn-sair,
+.submenu li a[href="logout.php"] {
+    color: #ff4d4d;
+}
+
+.submenu li a.btn-sair:hover,
+.submenu li a[href="logout.php"]:hover {
+    background-color: #e74c3c;
+    color: #fff !important;
+}
+
+/* Exibição do submenu no computador */
+@media (min-width: 901px) {
+    .perfil:hover > .submenu,
+    .perfil:focus-within > .submenu,
+    .perfil.submenu-aberto > .submenu {
+        display: block;
+    }
+}
+
+
+/* =========================================================
+9. OPÇÕES EXTRAS DA CONTA
+========================================================= */
+
+.opcao-mobile {
+    display: none !important;
+}
+
+
+/* =========================================================
+10. BOTÃO HAMBÚRGUER
+========================================================= */
+
+.hamburguer {
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    padding: 8px;
+
+    color: #00d4ff;
+    background: transparent;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 26px;
+    cursor: pointer;
+
+    z-index: 10001;
+
+    transition: background .2s ease, color .2s ease;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hamburguer:hover {
+    color: #a8329e;
+    background: rgba(45, 185, 201, .1);
+}
+
+
+/* =========================================================
+11. MODAL DE LOGIN
+========================================================= */
+
 .modal {
     display: none;
+
     position: fixed;
     inset: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 999;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, .75);
+
+    z-index: 20000;
+    overflow-y: auto;
 }
 
 .modal-conteudo {
-    background: #fff;
+    position: relative;
+
     width: 400px;
-    margin: 10% auto;
-    padding: 20px;
+    max-width: 100%;
+    max-height: calc(100vh - 40px);
+
+    margin: auto;
+    padding: 30px;
+
+    overflow-y: auto;
+
+    background: #fff;
     border-radius: 15px;
+
     text-align: center;
+
     box-shadow: 0 0 25px #2dbac9;
+}
+
+.modal-conteudo input {
+    width: 100%;
+    max-width: 100%;
+}
+
+.fechar {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+
+    color: #a8329e;
+    font-size: 30px;
+
+    cursor: pointer;
+}
+
+.fechar:hover {
+    color: #2dbac9;
+}
+
+
+/* =========================================================
+12. TABLETS E CELULARES
+========================================================= */
+
+@media screen and (max-width: 900px) {
+
+    body {
+        padding-top: 80px;
+    }
+
+    header {
+        height: 80px;
+        padding: 0 20px;
+        gap: 10px;
+    }
+
+    .logo {
+        margin-right: auto;
+    }
+
+    .logo img {
+        height: 50px;
+    }
+
+
+    /* BOTÃO HAMBÚRGUER */
+    .hamburguer {
+        display: flex;
+        flex-shrink: 0;
+    }
+
+
+    /* PAINEL DO MENU */
+    header nav,
+    #menuPrincipal {
+        display: none;
+
+        position: fixed;
+        top: 80px;
+        left: 0;
+
+        width: 100%;
+        height: calc(100vh - 80px);
+        height: calc(100dvh - 80px);
+
+        margin: 0;
+        padding: 20px;
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        background: rgba(5, 5, 5, .98);
+
+        border-top: 1px solid rgba(45, 185, 201, .4);
+
+        z-index: 10005;
+
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+    }
+
+    /* Menu aberto */
+    header nav.ativo,
+    #menuPrincipal.ativo {
+        display: block;
+        animation: abrirMenu .25s ease;
+    }
+
+    @keyframes abrirMenu {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    /* LISTA DE LINKS */
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        width: 100%;
+
+        gap: 10px;
+
+        margin: 0;
+        padding: 0;
+
+        white-space: normal;
+    }
+
+    .menu > li {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        width: 100%;
+    }
+
+
+    /* LINKS PRINCIPAIS */
+    .menu > li > a:not(.botaoMapa) {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+
+        width: 100%;
+        min-height: 48px;
+
+        padding: 13px 16px;
+
+        color: #fff;
+
+        background: rgba(255, 255, 255, .04);
+
+        border: 1px solid rgba(255, 255, 255, .08);
+        border-radius: 9px;
+
+        font-size: 14px;
+    }
+
+    .menu > li > a:not(.botaoMapa):hover {
+        color: #00d4ff;
+        background: rgba(45, 185, 201, .12);
+        border-color: #2dbac9;
+    }
+
+
+    /* BOTÃO ENTRAR */
+    .menu-container {
+        width: 100%;
+        min-height: 48px;
+
+        justify-content: flex-start;
+        padding: 13px 16px;
+    }
+
+
+    /* BOTÃO MAPA */
+    .botaoMapa {
+        width: 100%;
+        min-height: 48px;
+
+        justify-content: flex-start;
+
+        padding: 13px 16px;
+
+        border-radius: 9px;
+    }
+
+
+    /* ESCONDE O PERFIL TRADICIONAL QUANDO HOUVER .opcao-mobile */
+    header nav:has(.opcao-mobile) .perfil,
+    #menuPrincipal .perfil {
+        display: none !important;
+    }
+
+
+    /* MOSTRA AS OPÇÕES DA CONTA DIRETAMENTE NO MENU */
+    header nav .menu > li.opcao-mobile,
+    #menuPrincipal .menu > li.opcao-mobile {
+        display: flex !important;
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    header nav .opcao-mobile > a,
+    #menuPrincipal .opcao-mobile > a {
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 12px;
+
+        width: 100%;
+        min-height: 48px;
+
+        padding: 13px 16px;
+
+        color: #fff;
+
+        background: rgba(255, 255, 255, .04);
+
+        border: 1px solid rgba(255, 255, 255, .08);
+        border-radius: 9px;
+
+        font-size: 14px;
+        text-decoration: none;
+
+        transition: .3s ease;
+    }
+
+    /* Ícones das opções da conta */
+    header nav .opcao-mobile > a i,
+    #menuPrincipal .opcao-mobile > a i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 20px;
+
+        color: #00d4ff;
+        text-align: center;
+    }
+
+    /* Hover das opções */
+    header nav .opcao-mobile > a:hover,
+    #menuPrincipal .opcao-mobile > a:hover {
+        color: #00d4ff;
+        background: rgba(45, 186, 201, .12);
+        border-color: #2dbac9;
+    }
+
+    /* Botão sair */
+    header nav .opcao-mobile > a.btn-sair,
+    #menuPrincipal .opcao-mobile > a.btn-sair {
+        color: #ff4d4d;
+    }
+
+    header nav .opcao-mobile > a.btn-sair i,
+    #menuPrincipal .opcao-mobile > a.btn-sair i {
+        color: #ff4d4d;
+    }
+
+    header nav .opcao-mobile > a.btn-sair:hover,
+    #menuPrincipal .opcao-mobile > a.btn-sair:hover {
+        background-color: #e74c3c;
+        color: #fff !important;
+    }
+
+    header nav .opcao-mobile > a.btn-sair:hover i,
+    #menuPrincipal .opcao-mobile > a.btn-sair:hover i {
+        color: #fff !important;
+    }
+
+    /* FALLBACK PARA PÁGINAS SEM .opcao-mobile */
+    header nav:not(:has(.opcao-mobile)) .perfil > .submenu {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        position: static;
+        width: 100%;
+        margin-top: 8px;
+        padding: 10px;
+
+        background: rgba(255, 255, 255, .02);
+        border: 1px solid rgba(45, 185, 201, .3);
+        box-shadow: none;
+    }
+
+}
+
+
+/* =========================================================
+13. CELULARES
+========================================================= */
+
+@media screen and (max-width: 480px) {
+
+    body {
+        padding-top: 70px;
+    }
+
+    header {
+        height: 70px;
+        padding: 0 14px;
+    }
+
+    .logo img {
+        height: 43px;
+    }
+
+    .hamburguer {
+        width: 42px;
+        height: 42px;
+        font-size: 24px;
+    }
+
+    header nav,
+    #menuPrincipal {
+        top: 70px;
+
+        height: calc(100vh - 70px);
+        height: calc(100dvh - 70px);
+
+        padding: 18px 14px;
+    }
+
+    .menu {
+        gap: 9px;
+    }
+
+    .menu > li > a,
+    .menu-container,
+    header nav .opcao-mobile > a,
+    #menuPrincipal .opcao-mobile > a {
+        font-size: 13px;
+    }
+
+    .modal {
+        padding: 12px;
+    }
+
+    .modal-conteudo {
+        width: 100%;
+        padding: 30px 20px;
+    }
+
+    .modal-conteudo h1 {
+        font-size: 22px;
+    }
+
+}
+
+
+/* =========================================================
+14. CELULARES MUITO PEQUENOS
+========================================================= */
+
+@media screen and (max-width: 350px) {
+
+    header {
+        padding: 0 10px;
+    }
+
+    .logo img {
+        height: 38px;
+    }
+
+    .hamburguer {
+        font-size: 22px;
+    }
+
+    header nav,
+    #menuPrincipal {
+        padding: 15px 10px;
+    }
+
+}
+
+
+/* =========================================================
+15. ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+
 }

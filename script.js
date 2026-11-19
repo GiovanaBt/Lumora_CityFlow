@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Abrir modal
     if (btnAbrir && modal) {
-        btnAbrir.onclick = function() {
-            modal.style.display = "block";
+        btnAbrir.onclick = function () {
+            modal.style.display = "flex";
         }
     }
 
@@ -29,10 +29,71 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fechar clicando fora da área branca do modal
-    window.onclick = function(event) {
+    window.addEventListener("click", function (event) {
         if (modal && event.target == modal) {
             fecharModal();
         }
+    });
+
+    /* ========================================
+       MENU MOBILE RESPONSIVO (HAMBURGUER)
+    ======================================== */
+    const hamburguer = document.getElementById("hamburguer");
+    const nav = document.querySelector("header nav");
+
+    if (hamburguer && nav) {
+        hamburguer.addEventListener("click", (e) => {
+            e.stopPropagation();
+            nav.classList.toggle("ativo");
+            const icon = hamburguer.querySelector("i");
+            if (icon) {
+                if (nav.classList.contains("ativo")) {
+                    icon.classList.remove("fa-bars");
+                    icon.classList.add("fa-xmark");
+                } else {
+                    icon.classList.remove("fa-xmark");
+                    icon.classList.add("fa-bars");
+                }
+            }
+        });
+
+        // Fechar ao clicar fora do nav no mobile
+        document.addEventListener("click", (e) => {
+            if (nav.classList.contains("ativo") && !nav.contains(e.target) && !hamburguer.contains(e.target)) {
+                nav.classList.remove("ativo");
+                const icon = hamburguer.querySelector("i");
+                if (icon) {
+                    icon.classList.remove("fa-xmark");
+                    icon.classList.add("fa-bars");
+                }
+            }
+        });
+
+        // Fechar ao clicar em algum link interno
+        nav.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                if (window.innerWidth <= 900) {
+                    nav.classList.remove("ativo");
+                    const icon = hamburguer.querySelector("i");
+                    if (icon) {
+                        icon.classList.remove("fa-xmark");
+                        icon.classList.add("fa-bars");
+                    }
+                }
+            });
+        });
+
+        // Fechar se redimensionar a tela para Desktop
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 900 && nav.classList.contains("ativo")) {
+                nav.classList.remove("ativo");
+                const icon = hamburguer.querySelector("i");
+                if (icon) {
+                    icon.classList.remove("fa-xmark");
+                    icon.classList.add("fa-bars");
+                }
+            }
+        });
     }
 
     /* ========================================
@@ -42,8 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextBtn = document.querySelector(".next");
     const prevBtn = document.querySelector(".prev");
 
-    // O código do carrossel só roda se os elementos existirem na página (ex: index.php)
-    if (slides.length > 0 && nextBtn && prevBtn) {
+    // O código do carrossel só roda se os elementos existirem e não tiver sido iniciado por script inline
+    if (!window.indexCarouselLoaded && slides.length > 0 && nextBtn && prevBtn) {
         let index = 0;
 
         function atualizarCarousel() {
@@ -85,31 +146,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
- function preVisualizar() {
-    // Pega os dados do formulário
-    const nome = document.getElementById('nome').value;
-    const desc = document.querySelector('.description-textarea').value;
-    const cidade = document.getElementById('cidade').value;
-    const data = document.querySelector('input[name="data_inicio_evento"]').value;
 
-    // Cria um alerta simples ou um Modal personalizado
-    // Aqui um exemplo rápido via alert, mas o ideal é popular um Modal HTML
+function preVisualizar() {
+    // Pega os dados do formulário
+    const nomeEl = document.getElementById('nome');
+    const nome = nomeEl ? nomeEl.value : '';
+    const descEl = document.querySelector('.description-textarea');
+    const desc = descEl ? descEl.value : '';
+    const cidadeEl = document.getElementById('cidade');
+    const cidade = cidadeEl ? cidadeEl.value : '';
+    const dataEl = document.querySelector('input[name="data_inicio_evento"]');
+    const data = dataEl ? dataEl.value : '';
+
     alert(`PRÉ-VISUALIZAÇÃO DO EVENTO:\n\nNome: ${nome}\nCidade: ${cidade}\nData: ${data}\nDescrição: ${desc}`);
-    
-    // Se quiser algo mais avançado, você pode fazer o seguinte:
-    // window.open('previa.php?nome='+nome+'&cidade='+cidade, '_blank');
 }
+
 function mostrarPrevia(input) {
     const preview = document.getElementById('image-preview');
     const texto = document.getElementById('upload-text');
-    
+
     if (input.files && input.files[0]) {
         const reader = new FileReader();
 
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-            preview.style.display = 'block'; // Mostra a imagem selecionada
-            texto.style.display = 'none';    // Esconde a frase "Clique ou arraste"
+        reader.onload = function (e) {
+            if (preview) {
+                preview.src = e.target.result;
+                preview.style.display = 'block'; // Mostra a imagem selecionada
+            }
+            if (texto) {
+                texto.style.display = 'none'; // Esconde a frase "Clique ou arraste"
+            }
         }
 
         reader.readAsDataURL(input.files[0]);

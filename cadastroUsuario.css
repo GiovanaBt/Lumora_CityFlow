@@ -1,4 +1,4 @@
-CADASTRO USUARIO CSS
+/* CADASTRO USUARIO CSS */
 /* CONFIGURAÇÕES GERAIS */
 * {
     margin: 0;
@@ -8,11 +8,14 @@ CADASTRO USUARIO CSS
 
 body {
     font-family: Arial, sans-serif;
+    padding-top: 80px;
     background-color: #000000;
     display: flex;
     flex-direction: column;
     align-items: center; /* Centraliza o formulário horizontalmente */
     min-height: 100vh;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* HEADER */
@@ -33,16 +36,16 @@ header {
 }
 
 /* FORMULÁRIO (QUADRADO BRANCO) */
-/* FORMULÁRIO (QUADRADO BRANCO) */
 form {
     background-color: #ffffff; 
     padding: 40px 30px 30px 30px;
     border-radius: 15px;
     width: 90%;
-    max-width: 650px; /* <--- Aumentei para 550px (mude o valor se quiser ainda mais largo) */
+    max-width: 650px;
     box-shadow: 0px 0px 25px #2dbac9;
     position: relative;
     text-align: left; 
+    margin-bottom: 40px;
 }
 
 /* BOTÃO VOLTAR */
@@ -55,6 +58,7 @@ form {
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
+    transition: color 0.2s;
 }
 
 .btn-voltar:hover {
@@ -93,6 +97,7 @@ input {
     border: 1.5px solid #a8329e;
     border-radius: 8px;
     outline: none;
+    box-sizing: border-box;
 }
 
 input:focus {
@@ -117,7 +122,6 @@ button {
 button:hover {
     transform: scale(1.05);
 }
-
 
 .campo-senha{
     position: relative;
@@ -146,4 +150,45 @@ button:hover {
     margin-top: -8px;
     margin-bottom: 15px;
     display: none;
+}
+
+/* =========================================================
+   RESPONSIVIDADE (MOBILE)
+========================================================= */
+@media (max-width: 600px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    form {
+        width: 94%;
+        padding: 35px 20px 25px;
+    }
+
+    h1 {
+        font-size: clamp(22px, 6vw, 28px);
+        margin-top: 10px;
+    }
+
+    h2 {
+        font-size: clamp(13px, 4vw, 15px);
+        margin-bottom: 20px;
+    }
+
+    button {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    form {
+        width: 96%;
+        padding: 30px 14px 20px;
+    }
+
+    input {
+        padding: 12px 8px;
+    }
 }

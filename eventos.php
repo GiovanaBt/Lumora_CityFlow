@@ -147,6 +147,10 @@ if (isset($_SESSION['usuario_id'])) {
 
     </div>
 
+    <div class="hamburguer" id="hamburguer">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
     <!-- MAPA -->
     <a href="mapa.php" target="_blank">
 
@@ -833,6 +837,8 @@ document.addEventListener("DOMContentLoaded", function () {
 ========================================================= -->
 
 <?php include 'footer.php'; ?>
+
+<script src="script.js"></script>
 
 </body>
 

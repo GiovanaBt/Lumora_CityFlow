@@ -1,72 +1,55 @@
 /* CORPO DO SITE */
 
 body {
-
     background-color: #000000;
-
     margin: 0;
-
-    margin-bottom: 20px;
-
     font-family: Arial, sans-serif;
-
+    overflow: hidden;
+    width: 100%;
 }
 
 /* AJUSTES PARA A TELA DO MAPA */
 
 #map {
-
-    height: calc(100vh - 80px); /* Altura total da tela menos o header */
-
+    height: calc(100vh - 80px);
+    /* Altura total da tela menos o header */
     width: 100%;
-
-    z-index: 1; /* Mapa fica no fundo */
-
+    z-index: 1;
+    /* Mapa fica no fundo */
 }
 
 header {
-
     position: relative;
-
-    z-index: 1000; /* Header e menus ficam na frente do mapa */
-
+    z-index: 1000;
+    /* Header e menus ficam na frente do mapa */
 }
 
 .submenu {
-
-    z-index: 1100; /* Submenu fica na frente de tudo */
-
-}
-body{
-margin:0;
-padding:0;
-overflow:hidden;
-}
-
-header{
-position:relative;
-z-index:1000;
-}
-
-#map{
-height:calc(100vh - 80px);
-width:100%;
+    z-index: 1100;
+    /* Submenu fica na frente de tudo */
 }
 
 /* botão localização */
 
-#btnLocalizacao{
-position:absolute;
-top:100px;
-right:20px;
-z-index:1000;
-background:#0078ff;
-color:white;
-border:none;
-padding:10px 15px;
-border-radius:8px;
-cursor:pointer;
-font-weight:bold;
+#btnLocalizacao {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    z-index: 1000;
+    background: #0078ff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#btnLocalizacao:hover {
+    background: #005fcc;
+    transform: scale(1.04);
 }
 
 /* ==================================================
@@ -90,7 +73,7 @@ font-weight:bold;
     /* Espaçamento */
     padding: 8px 15px;
 
-    /* Não quebra o nome do evento */
+    /* Não quebra o nome do evento em telas normais */
     white-space: nowrap;
 
     /* Efeito neon */
@@ -103,7 +86,6 @@ font-weight:bold;
     transition: all 0.2s ease;
 }
 
-
 /* ==================================================
    SETA ABAIXO DO NOME
    ================================================== */
@@ -111,7 +93,6 @@ font-weight:bold;
 .evento-tooltip::before {
     border-top-color: #00d4ff !important;
 }
-
 
 /* ==================================================
    EFEITO AO PASSAR O MOUSE
@@ -125,6 +106,7 @@ font-weight:bold;
         0 0 18px #7b2cff,
         0 0 25px rgba(0, 212, 255, 0.8);
 }
+
 /* Título do evento clicável */
 .evento-link {
     color: #ffffff !important;
@@ -135,4 +117,27 @@ font-weight:bold;
 /* Quando passar o mouse */
 .evento-link:hover {
     color: #00d4ff !important;
+}
+
+/* ==================================================
+   RESPONSIVIDADE (MOBILE)
+   ================================================== */
+@media (max-width: 480px) {
+    #map {
+        height: calc(100vh - 70px);
+    }
+
+    #btnLocalizacao {
+        top: 80px;
+        right: 12px;
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .evento-tooltip {
+        white-space: normal;
+        max-width: 180px;
+        font-size: 12px;
+        padding: 6px 12px;
+    }
 }

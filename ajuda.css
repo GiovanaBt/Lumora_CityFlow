@@ -1,9 +1,10 @@
 /* ==========================================================
    CONFIGURAÇÃO GLOBAL DE FONTE (Arial)
    ========================================================== */
-.central-container, 
+.central-container,
 .central-container * {
     font-family: Arial, sans-serif !important;
+    box-sizing: border-box;
 }
 
 .central-container {
@@ -11,6 +12,7 @@
     max-width: 1200px;
     margin: 0 auto;
     background-color: transparent;
+    width: 100%;
 }
 
 /* TÍTULOS DA PÁGINA */
@@ -38,11 +40,12 @@ h2.subtitulo-faq {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     align-items: start;
+    width: 100%;
 }
 
 /* O BLOCO (CARD) */
 .topic-header {
-    background-color: #4d4b4a !important; 
+    background-color: #4d4b4a !important;
     border-radius: 12px;
     padding: 25px 20px;
     width: 100%;
@@ -53,7 +56,7 @@ h2.subtitulo-faq {
     border: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s ease;
-    
+
     color: #00ced1 !important;
     font-size: 16px;
     font-weight: bold;
@@ -83,7 +86,7 @@ h2.subtitulo-faq {
     width: 100%;
     background: none;
     border: none;
-    color: #ff00ff !important; 
+    color: #ff00ff !important;
     padding: 12px 10px;
     text-align: left;
     font-size: 14px;
@@ -108,7 +111,7 @@ h2.subtitulo-faq {
    SEÇÃO ATENDIMENTO
    ========================================================== */
 .atendimento-section {
-    grid-column: 1 / -1; 
+    grid-column: 1 / -1;
     margin-top: 50px;
     background: #161616;
     padding: 30px;
@@ -118,7 +121,7 @@ h2.subtitulo-faq {
 }
 
 .titulo-atendimento {
-    color: #ffffff !important; 
+    color: #ffffff !important;
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -128,5 +131,59 @@ h2.subtitulo-faq {
     color: #00ced1;
     font-size: 15px;
     margin-top: 5px;
-   font-weight: bold;
+    font-weight: bold;
+}
+
+/* ==========================================================
+   RESPONSIVIDADE (TABLETS E SMARTPHONES)
+   ========================================================== */
+@media (max-width: 768px) {
+    .central-container {
+        padding: 30px 16px;
+    }
+
+    h1.titulo-central {
+        font-size: clamp(22px, 5.5vw, 26px);
+    }
+
+    h2.subtitulo-faq {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    .faq-container {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+        gap: 18px;
+    }
+
+    .topic-header {
+        padding: 18px 16px;
+        font-size: 15px;
+    }
+
+    .atendimento-section {
+        margin-top: 35px;
+        padding: 22px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .central-container {
+        padding: 20px 12px;
+    }
+
+    .topic-header {
+        padding: 15px 14px;
+        font-size: 14px;
+    }
+
+    .faq-question {
+        padding: 10px 6px;
+        font-size: 13px;
+    }
+
+    .faq-answer {
+        padding: 12px 6px;
+        font-size: 12px;
+    }
 }

@@ -475,9 +475,12 @@ textarea::placeholder {
 
     position: relative;
 
-    width: 320px;
+    width: 100%;
+    max-width: 320px;
 
-    height: 320px;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    min-height: 250px;
 
     border: 2px dashed rgba(255,255,255,0.18);
 
@@ -584,7 +587,8 @@ textarea::placeholder {
 
     flex: 1;
 
-    min-width: 320px;
+    min-width: 0;
+    width: 100%;
 
     text-align: left;
 }
@@ -1710,5 +1714,45 @@ input[type="radio"]:checked
     .classificacao-container {
 
         justify-content: center;
+    }
+}
+
+@media (max-width: 500px) {
+    .page-wrapper {
+        padding: 10px;
+    }
+
+    .page-title {
+        margin: 15px auto 25px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}
+/* =========================================================
+   CORREÇÃO DEFINITIVA DE ESPAÇAMENTO DO TOPO (HEADER FIXO)
+========================================================= */
+body {
+    padding-top: 90px !important;
+}
+
+.page-title {
+    margin-top: 40px !important;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding-top: 85px !important;
+    }
+
+    .page-title {
+        margin-top: 30px !important;
     }
 }

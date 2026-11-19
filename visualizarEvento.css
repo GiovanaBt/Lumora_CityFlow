@@ -32,8 +32,38 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding: 20px 12px;
+    }
+
     .content-grid {
         grid-template-columns: 1fr;
+    }
+
+    .evento-titulo {
+        font-size: clamp(22px, 6vw, 32px);
+    }
+
+    .card-preview {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+
+    .banner-container {
+        height: 240px;
+    }
+
+    .meta-badges {
+        flex-wrap: wrap;
+    }
+
+    .datas-flex {
+        flex-direction: column;
+    }
+
+    .box-data {
+        min-width: 0;
+        width: 100%;
     }
 }
 

@@ -73,6 +73,10 @@ function confirmarExclusao() {
         </a>
     </div>
 
+    <div class="hamburguer" id="hamburguer">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
     <a href="mapa.php" target="_blank">
         <button class="botaoMapa">MAPA</button>
     </a>
@@ -220,6 +224,8 @@ function confirmarExclusao() {
 </main>
 
 <?php include 'footer.php'; ?>
+
+<script src="script.js"></script>
 
 </body>
 </html>

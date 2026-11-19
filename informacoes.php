@@ -14,6 +14,7 @@ if (!isset($_SESSION['usuario_id'])) {
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CityFlow - Informações</title>
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="index.css">
@@ -21,7 +22,6 @@ if (!isset($_SESSION['usuario_id'])) {
      <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-</html>
 
 <body> 
 
@@ -30,6 +30,10 @@ if (!isset($_SESSION['usuario_id'])) {
 <header>
     <div class="logo">
         <a href="index.php"><img src="imgs/cityFlow.webp" alt="Logo CityFlow"></a>
+    </div>
+
+    <div class="hamburguer" id="hamburguer">
+        <i class="fa-solid fa-bars"></i>
     </div>
 
     <a href="mapa.php" target="_blank">
@@ -111,5 +115,6 @@ if (!isset($_SESSION['usuario_id'])) {
    FOOTER
 ========================================================= -->
 <?php include 'footer.php'; ?>
+<script src="script.js"></script>
 </body>
 </html>

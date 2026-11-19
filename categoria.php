@@ -92,6 +92,10 @@ HEADER
 
     </div>
 
+    <div class="hamburguer" id="hamburguer">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
     <!-- BOTÃO MAPA -->
 
     <a href="mapa.php" target="_blank">
@@ -398,6 +402,8 @@ function scrollEventos(direction){
 }
 
 </script>
+
+<script src="script.js"></script>
 
 </body>
 </html>

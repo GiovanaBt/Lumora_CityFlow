@@ -1,8 +1,9 @@
-CADASTRO USUARIO
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Flow - Cadastro</title>
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="cadastroUsuario.css">
@@ -13,6 +14,10 @@ CADASTRO USUARIO
     <header>
     <div class="logo">
         <a href="index.php"><img src="imgs/cityFlow.webp" alt="Logo CityFlow"></a>
+    </div>
+
+    <div class="hamburguer" id="hamburguer">
+        <i class="fa-solid fa-bars"></i>
     </div>
 
     <a href="mapa.php" target="_blank">
@@ -37,8 +42,9 @@ CADASTRO USUARIO
                         <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
                     </ul>
                 </li>
-
-                <?php endif; ?>
+<?php endif; ?>
+        </ul>
+    </nav>
 </header>
 
     <form action="enviarCadastroUsuario.php" method="POST" id="formCadastro">
@@ -182,17 +188,8 @@ inputCpf.addEventListener('input', function(e) {
 });
 </script>
 
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer</title>
-    <link rel="stylesheet" href="footer.css">
-</head>
-<body>
+<script src="script.js"></script>
+
 <!-- =========================================================
    FOOTER
 ========================================================= -->

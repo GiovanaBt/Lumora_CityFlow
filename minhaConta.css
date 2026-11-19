@@ -265,11 +265,9 @@ body {
 
     border: none;
 
-    background: linear-gradient(
-        90deg,
-        #a8329e,
-        #2dbac9
-    );
+    background: linear-gradient(90deg,
+            #a8329e,
+            #2dbac9);
 
     color: #fff;
 }
@@ -357,11 +355,9 @@ body {
 
     border-radius: 50%;
 
-    background: linear-gradient(
-        45deg,
-        #a8329e,
-        #2dbac9
-    );
+    background: linear-gradient(45deg,
+            #a8329e,
+            #2dbac9);
 
     color: #fff;
 
@@ -416,8 +412,8 @@ body {
    LINKS DOS CARDS
 ========================= */
 
-.carrossel-container > a,
-.container > a {
+.carrossel-container>a,
+.container>a {
     flex: 0 0 230px;
 
     width: 230px;
@@ -467,11 +463,9 @@ body {
 
     padding: 1px;
 
-    background: linear-gradient(
-        45deg,
-        #a8329e,
-        #2dbac9
-    );
+    background: linear-gradient(45deg,
+            #a8329e,
+            #2dbac9);
 
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
@@ -590,11 +584,9 @@ body {
 
     height: 2px;
 
-    background: linear-gradient(
-        90deg,
-        #a8329e,
-        #2dbac9
-    );
+    background: linear-gradient(90deg,
+            #a8329e,
+            #2dbac9);
 }
 
 /* =========================
@@ -617,8 +609,8 @@ body {
    MENSAGEM VAZIA
 ========================= */
 
-.carrossel-container > p,
-.container > p {
+.carrossel-container>p,
+.container>p {
     flex: 1;
 
     width: 100%;
@@ -668,11 +660,9 @@ body {
 
     border: 1px solid rgba(168, 50, 158, 0.45);
 
-    background: linear-gradient(
-        135deg,
-        rgba(168, 50, 158, 0.18),
-        rgba(123, 44, 255, 0.12)
-    );
+    background: linear-gradient(135deg,
+            rgba(168, 50, 158, 0.18),
+            rgba(123, 44, 255, 0.12));
 
     color: #d8a8ff;
 
@@ -692,11 +682,9 @@ body {
 .btn-editar-eventos:hover {
     transform: translateY(-2px);
 
-    background: linear-gradient(
-        135deg,
-        rgba(168, 50, 158, 0.30),
-        rgba(123, 44, 255, 0.22)
-    );
+    background: linear-gradient(135deg,
+            rgba(168, 50, 158, 0.30),
+            rgba(123, 44, 255, 0.22));
 
     border-color: #a8329e;
 
@@ -781,8 +769,8 @@ body {
         height: 35px;
     }
 
-    .carrossel-container > a,
-    .container > a {
+    .carrossel-container>a,
+    .container>a {
         flex: 0 0 210px;
 
         width: 210px;
@@ -813,15 +801,21 @@ body {
 @media (max-width: 500px) {
 
     .layout-conta {
-        padding: 15px;
+        padding: 10px;
+        gap: 20px;
     }
 
     .lado-esquerdo {
-        padding: 25px 20px 30px;
+        padding: 20px 15px 25px;
+        border-radius: 15px;
     }
 
     .titulo-principal {
-        font-size: 28px;
+        font-size: clamp(22px, 6vw, 28px);
+    }
+
+    .subtitulo {
+        font-size: clamp(18px, 5vw, 22px);
     }
 
     .botoes-edicao {
@@ -832,4 +826,24 @@ body {
     .btn-cancelar {
         width: 100%;
     }
+
+    .seta-carrossel {
+        display: none;
+    }
+}
+/* MEUS EVENTOS COM SETAS */
+
+#meusEventos .carrossel-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#meusEventos .container {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
 }

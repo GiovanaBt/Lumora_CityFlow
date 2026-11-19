@@ -54,6 +54,7 @@ $resultEventos = $conexao->query($sqlEventos);
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Flow - Minha Conta</title>
 
     <link rel="stylesheet" href="header.css">
@@ -82,29 +83,57 @@ $resultEventos = $conexao->query($sqlEventos);
     </div>
 <?php endif; ?>
 <!-- HEADER (NÃO ALTERADO) -->
+
+<!-- =========================================================
+     HEADER CITYFLOW - MINHA CONTA
+========================================================= -->
+
+<!-- =========================================================
+     HEADER CITYFLOW - MINHA CONTA
+========================================================= -->
+
+
+<!-- =========================================================
+     HEADER CITYFLOW - MINHA CONTA
+========================================================= -->
+
 <header>
 
+    <!-- LOGO -->
     <div class="logo">
         <a href="index.php">
-            <img src="imgs/cityFlow.webp">
+            <img src="imgs/cityFlow.webp" alt="CityFlow">
         </a>
     </div>
 
-    <a href="mapa.php" target="_blank">
-        <button class="botaoMapa">MAPA</button>
-    </a>
+    <!-- BOTÃO HAMBÚRGUER -->
+    <button
+        class="hamburguer"
+        id="hamburguer"
+        type="button"
+        aria-label="Abrir menu"
+        aria-expanded="false"
+        aria-controls="menuPrincipal"
+    >
+        <i class="fa-solid fa-bars"></i>
+    </button>
 
-    <nav>
+    <!-- MENU PRINCIPAL -->
+    <nav id="menuPrincipal">
+
         <ul class="menu">
 
+            <!-- INÍCIO -->
             <li>
                 <a href="index.php">INÍCIO</a>
             </li>
 
+            <!-- INFORMAÇÕES -->
             <li>
                 <a href="informacoes.php">INFORMAÇÕES</a>
             </li>
 
+            <!-- DIVULGAR EVENTOS -->
             <li>
                 <a href="cadastroEvento.php">
                     <i class="fa-solid fa-circle-plus"></i>
@@ -114,13 +143,18 @@ $resultEventos = $conexao->query($sqlEventos);
 
             <?php if (isset($_SESSION['usuario_id'])): ?>
 
+                <!-- PERFIL E SUBMENU -->
                 <li class="perfil">
 
-                    <a href="#">
+                    <a href="#" class="perfil-link">
                         <i class="fa-solid fa-circle-user"></i>
-                        <?php echo $_SESSION['nome_usuario']; ?>
+
+                        <?= htmlspecialchars($_SESSION['nome_usuario'] ?? 'Minha Conta'); ?>
+
+                        <i class="fa-solid fa-chevron-down seta-submenu"></i>
                     </a>
 
+                    <!-- OPÇÕES DA CONTA -->
                     <ul class="submenu">
 
                         <li>
@@ -157,10 +191,20 @@ $resultEventos = $conexao->query($sqlEventos);
 
             <?php endif; ?>
 
+            <!-- MAPA -->
+            <li>
+                <a href="mapa.php" class="botaoMapa">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    MAPA
+                </a>
+            </li>
+
         </ul>
+
     </nav>
 
 </header>
+
 
 
 <!-- LAYOUT NOVO -->
@@ -510,7 +554,12 @@ $resultEventos = $conexao->query($sqlEventos);
 
 
         <!-- EVENTOS -->
-    <section id="meusEventos">
+  
+<!-- =====================================================
+     MEUS EVENTOS
+===================================================== -->
+
+<section id="meusEventos">
 
     <h2 class="secao">
         <i class="fa-solid fa-ticket icone-eventos"></i>
@@ -522,39 +571,72 @@ $resultEventos = $conexao->query($sqlEventos);
         Editar meus eventos
     </a>
 
-    <div class="container">
+    <!-- CARROSSEL COM SETAS -->
+    <div class="carrossel-wrapper">
 
-        <?php if ($resultEventos->num_rows > 0): ?>
+        <!-- SETA ESQUERDA -->
+        <button
+            type="button"
+            class="seta-carrossel"
+            onclick="rolarCarrossel('carrosselMeusEventos', -250)"
+            aria-label="Ver eventos anteriores"
+        >
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
 
-            <?php while ($row = $resultEventos->fetch_assoc()): ?>
+        <!-- CONTAINER DOS EVENTOS -->
+        <div
+            class="container"
+            id="carrosselMeusEventos"
+        >
 
-                <a href="eventos.php?id=<?= $row['id_evento']; ?>">
+            <?php if ($resultEventos->num_rows > 0): ?>
 
-                    <div class="card">
+                <?php while ($row = $resultEventos->fetch_assoc()): ?>
 
-                        <img
-                            src="uploads/<?= $row['Imagem']; ?>"
-                        >
+                    <a
+                        href="eventos.php?id=<?= $row['id_evento']; ?>"
+                        class="card-link"
+                    >
 
-                        <div class="descricao">
-                            <?= htmlspecialchars($row['titulo']); ?>
+                        <div class="card">
+
+                            <img
+                                src="uploads/<?= htmlspecialchars($row['Imagem']); ?>"
+                                alt="<?= htmlspecialchars($row['titulo']); ?>"
+                            >
+
+                            <div class="descricao">
+                                <?= htmlspecialchars($row['titulo']); ?>
+                            </div>
+
+                            <div class="local">
+                                <?= htmlspecialchars($row['bairro']); ?>
+                            </div>
+
                         </div>
 
-                        <div class="local">
-                            <?= htmlspecialchars($row['bairro']); ?>
-                        </div>
+                    </a>
 
-                    </div>
+                <?php endwhile; ?>
 
-                </a>
+            <?php else: ?>
 
-            <?php endwhile; ?>
+                <p>Você não criou eventos.</p>
 
-        <?php else: ?>
+            <?php endif; ?>
 
-            <p>Você não criou eventos</p>
+        </div>
 
-        <?php endif; ?>
+        <!-- SETA DIREITA -->
+        <button
+            type="button"
+            class="seta-carrossel"
+            onclick="rolarCarrossel('carrosselMeusEventos', 250)"
+            aria-label="Ver próximos eventos"
+        >
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
 
     </div>
 
@@ -643,7 +725,142 @@ function rolarCarrossel(id, distancia) {
 
 }
 
+/* =========================================================
+   MENU HAMBÚRGUER - MINHA CONTA
+========================================================= */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const hamburguer = document.getElementById('hamburguer');
+    const menu = document.getElementById('menuPrincipal');
+
+    const perfil = document.querySelector('.perfil');
+    const perfilLink = document.querySelector('.perfil-link');
+
+
+    /* ABRIR E FECHAR MENU */
+
+    function fecharMenu() {
+
+        if (!menu || !hamburguer) return;
+
+        menu.classList.remove('ativo');
+
+        hamburguer.innerHTML = '<i class="fa-solid fa-bars"></i>';
+
+        hamburguer.setAttribute('aria-expanded', 'false');
+        hamburguer.setAttribute('aria-label', 'Abrir menu');
+
+        fecharSubmenu();
+    }
+
+
+    function fecharSubmenu() {
+
+        if (!perfil || !perfilLink) return;
+
+        perfil.classList.remove('submenu-aberto');
+
+        perfilLink.setAttribute('aria-expanded', 'false');
+    }
+
+
+    if (hamburguer && menu) {
+
+        hamburguer.addEventListener('click', function () {
+
+            const aberto = menu.classList.contains('ativo');
+
+            if (aberto) {
+
+                fecharMenu();
+
+            } else {
+
+                menu.classList.add('ativo');
+
+                hamburguer.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+
+                hamburguer.setAttribute('aria-expanded', 'true');
+                hamburguer.setAttribute('aria-label', 'Fechar menu');
+
+            }
+
+        });
+
+    }
+
+
+    /* FECHAR AO CLICAR EM UM LINK */
+
+    if (menu) {
+
+        menu.querySelectorAll('a').forEach(function (link) {
+
+            if (link.classList.contains('perfil-link')) return;
+
+            link.addEventListener('click', function () {
+
+                if (window.innerWidth <= 900) {
+                    fecharMenu();
+                }
+
+            });
+
+        });
+
+    }
+
+
+    /* FECHAR AO CLICAR FORA */
+
+    document.addEventListener('click', function (evento) {
+
+        if (!menu || !hamburguer) return;
+
+        if (
+            window.innerWidth <= 900 &&
+            menu.classList.contains('ativo') &&
+            !menu.contains(evento.target) &&
+            !hamburguer.contains(evento.target)
+        ) {
+
+            fecharMenu();
+
+        }
+
+    });
+
+
+    /* FECHAR COM ESC */
+
+    document.addEventListener('keydown', function (evento) {
+
+        if (evento.key === 'Escape') {
+            fecharMenu();
+        }
+
+    });
+
+
+    /* REDIMENSIONAMENTO */
+
+    window.addEventListener('resize', function () {
+
+        if (window.innerWidth > 900) {
+            fecharMenu();
+        }
+
+    });
+
+});
+
+
 </script>
+
+
+<script src="script.js"></script>
+
 
 </body>
 </html>

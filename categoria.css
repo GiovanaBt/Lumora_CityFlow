@@ -2,1036 +2,1042 @@
 RESET
 ========================================================= */
 
-*{
+* {
 
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* =========================================================
 BODY
 ========================================================= */
 
-body{
+body {
 
-    background:#1E293B;
-    overflow-x:hidden;
-    color:#ffffff;
+    background: #1E293B;
+    overflow-x: hidden;
+    color: #ffffff;
 }
 
 /* =========================================================
 TOPO DA CATEGORIA
 ========================================================= */
 
-.categoria-topo{
+.categoria-topo {
 
-    width:100%;
-    max-width:1500px;
+    width: 100%;
+    max-width: 1500px;
 
-    margin:10px auto 55px auto;
+    margin: 10px auto 55px auto;
 
-    padding:0 45px;
+    padding: 0 45px;
 
-    position:relative;
+    position: relative;
 }
 
 /* =========================================================
 EFEITOS DE FUNDO
 ========================================================= */
 
-.categoria-topo::before{
+.categoria-topo::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    width:500px;
-    height:500px;
+    width: 500px;
+    height: 500px;
 
-    border-radius:50%;
+    border-radius: 50%;
 
     background:
-    radial-gradient(
-        circle,
-        rgba(59,130,246,0.22),
-        transparent 70%
-    );
+        radial-gradient(circle,
+            rgba(59, 130, 246, 0.22),
+            transparent 70%);
 
-    top:-260px;
-    left:-220px;
+    top: -260px;
+    left: -220px;
 
-    filter:blur(30px);
+    filter: blur(30px);
 
-    z-index:-1;
+    z-index: -1;
 }
 
-.categoria-topo::after{
+.categoria-topo::after {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    width:420px;
-    height:420px;
+    width: 420px;
+    height: 420px;
 
-    border-radius:50%;
+    border-radius: 50%;
 
     background:
-    radial-gradient(
-        circle,
-        rgba(139,92,246,0.20),
-        transparent 70%
-    );
+        radial-gradient(circle,
+            rgba(139, 92, 246, 0.20),
+            transparent 70%);
 
-    top:-220px;
-    right:-180px;
+    top: -220px;
+    right: -180px;
 
-    filter:blur(25px);
+    filter: blur(25px);
 
-    z-index:-1;
+    z-index: -1;
 }
 
 /* =========================================================
 FORMAS DECORATIVAS
 ========================================================= */
 
-.forma-topo-1{
+.forma-topo-1 {
 
-    position:absolute;
+    position: absolute;
 
-    width:130px;
-    height:130px;
-
-    border:
-    2px solid rgba(255,255,255,0.07);
-
-    border-radius:32px;
-
-    top:-20px;
-    right:130px;
-
-    transform:rotate(18deg);
-
-    backdrop-filter:blur(8px);
-}
-
-.forma-topo-2{
-
-    position:absolute;
-
-    width:80px;
-    height:80px;
-
-    border-radius:24px;
-
-    background:
-    linear-gradient(
-        135deg,
-        rgba(59,130,246,0.20),
-        rgba(139,92,246,0.20)
-    );
-
-    top:120px;
-    right:60px;
-
-    transform:rotate(-14deg);
-
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-    0 10px 30px rgba(0,0,0,0.18);
-}
-
-.forma-topo-3{
-
-    position:absolute;
-
-    width:100px;
-    height:100px;
+    width: 130px;
+    height: 130px;
 
     border:
-    2px solid rgba(255,255,255,0.06);
+        2px solid rgba(255, 255, 255, 0.07);
 
-    border-radius:28px;
+    border-radius: 32px;
 
-    top:20px;
-    left:90px;
+    top: -20px;
+    right: 130px;
 
-    transform:rotate(-12deg);
+    transform: rotate(18deg);
+
+    backdrop-filter: blur(8px);
 }
 
-.forma-topo-4{
+.forma-topo-2 {
 
-    position:absolute;
+    position: absolute;
 
-    width:65px;
-    height:65px;
+    width: 80px;
+    height: 80px;
 
-    border-radius:20px;
+    border-radius: 24px;
 
     background:
-    linear-gradient(
-        135deg,
-        rgba(56,189,248,0.22),
-        rgba(168,85,247,0.22)
-    );
+        linear-gradient(135deg,
+            rgba(59, 130, 246, 0.20),
+            rgba(139, 92, 246, 0.20));
 
-    bottom:-10px;
-    left:220px;
+    top: 120px;
+    right: 60px;
 
-    transform:rotate(14deg);
+    transform: rotate(-14deg);
+
+    backdrop-filter: blur(10px);
 
     box-shadow:
-    0 10px 25px rgba(0,0,0,0.18);
+        0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.forma-topo-3 {
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    border:
+        2px solid rgba(255, 255, 255, 0.06);
+
+    border-radius: 28px;
+
+    top: 20px;
+    left: 90px;
+
+    transform: rotate(-12deg);
+}
+
+.forma-topo-4 {
+
+    position: absolute;
+
+    width: 65px;
+    height: 65px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(135deg,
+            rgba(56, 189, 248, 0.22),
+            rgba(168, 85, 247, 0.22));
+
+    bottom: -10px;
+    left: 220px;
+
+    transform: rotate(14deg);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.18);
 }
 
 /* =========================================================
 BADGE
 ========================================================= */
 
-.badge-categoria{
+.badge-categoria {
 
-    display:inline-flex;
+    display: inline-flex;
 
-    align-items:center;
+    align-items: center;
 
-    gap:10px;
+    gap: 10px;
 
-    padding:12px 22px;
+    padding: 12px 22px;
 
-    border-radius:50px;
+    border-radius: 50px;
 
     background:
-    rgba(255,255,255,0.05);
+        rgba(255, 255, 255, 0.05);
 
     border:
-    1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255, 255, 255, 0.08);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter: blur(14px);
 
-    margin-bottom:28px;
+    margin-bottom: 28px;
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.15);
+        0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.badge-categoria i{
+.badge-categoria i {
 
-    color:#38bdf8;
-    font-size:15px;
+    color: #38bdf8;
+    font-size: 15px;
 }
 
-.badge-categoria span{
+.badge-categoria span {
 
-    color:#cbd5e1;
+    color: #cbd5e1;
 
-    font-size:13px;
+    font-size: 13px;
 
-    font-weight:700;
+    font-weight: 700;
 
-    letter-spacing:2px;
+    letter-spacing: 2px;
 }
 
 /* =========================================================
 TÍTULO
 ========================================================= */
 
-.categoria-topo h1{
+.categoria-topo h1 {
 
-    font-size:78px;
+    font-size: 78px;
 
-    font-weight:900;
+    font-weight: 900;
 
-    line-height:1;
+    line-height: 1;
 
-    letter-spacing:-4px;
+    letter-spacing: -4px;
 
-    color:#ffffff;
+    color: #ffffff;
 
-    position:relative;
+    position: relative;
 
-    display:inline-block;
+    display: inline-block;
 
     text-shadow:
-    0 10px 30px rgba(0,0,0,0.25);
+        0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 /* =========================================================
 LINHA DECORATIVA
 ========================================================= */
 
-.categoria-topo h1::after{
+.categoria-topo h1::after {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    left:0;
-    bottom:-18px;
+    left: 0;
+    bottom: -18px;
 
-    width:160px;
-    height:7px;
+    width: 160px;
+    height: 7px;
 
-    border-radius:30px;
+    border-radius: 30px;
 
     background:
-    linear-gradient(
-        90deg,
-        #38bdf8,
-        #8b5cf6
-    );
+        linear-gradient(90deg,
+            #38bdf8,
+            #8b5cf6);
 
     box-shadow:
-    0 0 25px rgba(56,189,248,0.45);
+        0 0 25px rgba(56, 189, 248, 0.45);
 }
 
 /* =========================================================
 SUBTÍTULO
 ========================================================= */
 
-.categoria-topo p{
+.categoria-topo p {
 
-    color:#cbd5e1;
+    color: #cbd5e1;
 
-    font-size:18px;
+    font-size: 18px;
 
-    line-height:1.8;
+    line-height: 1.8;
 
-    max-width:700px;
+    max-width: 700px;
 
-    margin-top:38px;
+    margin-top: 38px;
 }
 
 /* =========================================================
 WRAPPER CARROSSEL
 ========================================================= */
 
-.eventos-wrapper{
+.eventos-wrapper {
 
-    width:100%;
-    max-width:1600px;
+    width: 100%;
+    max-width: 1600px;
 
-    margin:auto;
+    margin: auto;
 
-    padding:0 45px 90px 45px;
+    padding: 0 45px 90px 45px;
 
-    position:relative;
+    position: relative;
 }
 
 /* =========================================================
 CARROSSEL
 ========================================================= */
 
-.eventos-grid{
+.eventos-grid {
 
-    display:flex;
+    display: flex;
 
-    gap:30px;
+    gap: 30px;
 
-    overflow-x:auto;
+    overflow-x: auto;
 
-    scroll-behavior:smooth;
+    scroll-behavior: smooth;
 
-    scrollbar-width:none;
+    scrollbar-width: none;
 
-    padding:12px 6px 28px 6px;
+    padding: 12px 6px 28px 6px;
 }
 
-.eventos-grid::-webkit-scrollbar{
+.eventos-grid::-webkit-scrollbar {
 
-    display:none;
+    display: none;
 }
 
 /* =========================================================
 CARD EVENTO
 ========================================================= */
 
-.card-evento{
+.card-evento {
 
-    min-width:340px;
-    max-width:340px;
+    min-width: 340px;
+    max-width: 340px;
 
     background:
-    linear-gradient(
-        180deg,
-        rgba(255,255,255,0.06),
-        rgba(255,255,255,0.03)
-    );
+        linear-gradient(180deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.03));
 
-    border-radius:34px;
+    border-radius: 34px;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    text-decoration:none;
+    text-decoration: none;
 
-    position:relative;
+    position: relative;
 
-    transition:0.45s ease;
+    transition: 0.45s ease;
 
     border:
-    1px solid rgba(255,255,255,0.07);
+        1px solid rgba(255, 255, 255, 0.07);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter: blur(14px);
 
-    flex-shrink:0;
+    flex-shrink: 0;
 
     box-shadow:
-    0 18px 45px rgba(0,0,0,0.20);
+        0 18px 45px rgba(0, 0, 0, 0.20);
 }
 
 /* =========================================================
 BORDA ILUMINADA
 ========================================================= */
 
-.card-evento::before{
+.card-evento::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    inset:0;
+    inset: 0;
 
-    border-radius:34px;
+    border-radius: 34px;
 
-    padding:1px;
+    padding: 1px;
 
     background:
-    linear-gradient(
-        135deg,
-        rgba(56,189,248,0.45),
-        rgba(139,92,246,0.35),
-        rgba(255,255,255,0.05)
-    );
+        linear-gradient(135deg,
+            rgba(56, 189, 248, 0.45),
+            rgba(139, 92, 246, 0.35),
+            rgba(255, 255, 255, 0.05));
 
     -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
 
-    -webkit-mask-composite:xor;
+    -webkit-mask-composite: xor;
 
-    mask-composite:exclude;
+    mask-composite: exclude;
 
-    pointer-events:none;
+    pointer-events: none;
 }
 
 /* =========================================================
 HOVER CARD
 ========================================================= */
 
-.card-evento:hover{
+.card-evento:hover {
 
     transform:
-    translateY(-12px)
-    scale(1.02);
+        translateY(-12px) scale(1.02);
 
     box-shadow:
-    0 25px 65px rgba(0,0,0,0.30);
+        0 25px 65px rgba(0, 0, 0, 0.30);
 }
 
 /* =========================================================
 IMAGEM
 ========================================================= */
 
-.img-evento{
+.img-evento {
 
-    width:100%;
-    height:240px;
+    width: 100%;
+    height: 240px;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    position:relative;
+    position: relative;
 }
 
 /* OVERLAY */
 
-.img-evento::after{
+.img-evento::after {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    inset:0;
+    inset: 0;
 
     background:
-    linear-gradient(
-        to top,
-        rgba(0,0,0,0.65),
-        rgba(0,0,0,0.08)
-    );
+        linear-gradient(to top,
+            rgba(0, 0, 0, 0.65),
+            rgba(0, 0, 0, 0.08));
 }
 
 /* IMAGEM */
 
-.img-evento img{
+.img-evento img {
 
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
 
-    object-fit:cover;
+    object-fit: cover;
 
-    transition:0.7s ease;
+    transition: 0.7s ease;
 }
 
 /* ZOOM */
 
-.card-evento:hover .img-evento img{
+.card-evento:hover .img-evento img {
 
-    transform:scale(1.08);
+    transform: scale(1.08);
 }
 
 /* =========================================================
 INFO
 ========================================================= */
 
-.info-evento{
+.info-evento {
 
-    padding:24px;
+    padding: 24px;
 }
 
 /* =========================================================
 TÍTULO EVENTO
 ========================================================= */
 
-.info-evento h3{
+.info-evento h3 {
 
-    color:#ffffff;
+    color: #ffffff;
 
-    font-size:24px;
+    font-size: 24px;
 
-    font-weight:800;
+    font-weight: 800;
 
-    line-height:1.4;
+    line-height: 1.4;
 
-    margin-bottom:14px;
+    margin-bottom: 14px;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    display:-webkit-box;
+    display: -webkit-box;
 
-    -webkit-line-clamp:2;
+    -webkit-line-clamp: 2;
 
-    -webkit-box-orient:vertical;
+    -webkit-box-orient: vertical;
 
-    transition:0.3s ease;
+    transition: 0.3s ease;
 }
 
-.card-evento:hover h3{
+.card-evento:hover h3 {
 
-    color:#dbeafe;
+    color: #dbeafe;
 }
 
 /* =========================================================
 LOCALIZAÇÃO
 ========================================================= */
 
-.local-evento{
+.local-evento {
 
-    color:#cbd5e1;
+    color: #cbd5e1;
 
-    font-size:15px;
+    font-size: 15px;
 
-    line-height:1.7;
+    line-height: 1.7;
 
-    margin-bottom:24px;
+    margin-bottom: 24px;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    white-space:nowrap;
+    white-space: nowrap;
 
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
 }
 
-.local-evento i{
+.local-evento i {
 
-    color:#38bdf8;
+    color: #38bdf8;
 
-    margin-right:8px;
+    margin-right: 8px;
 }
 
 /* =========================================================
 BOTÃO
 ========================================================= */
 
-.btn-ver{
+.btn-ver {
 
-    display:inline-flex;
+    display: inline-flex;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:center;
+    justify-content: center;
 
-    padding:13px 24px;
+    padding: 13px 24px;
 
-    border-radius:14px;
+    border-radius: 14px;
 
     background:
-    linear-gradient(
-        135deg,
-        #3b82f6,
-        #6366f1
-    );
+        linear-gradient(135deg,
+            #3b82f6,
+            #6366f1);
 
-    color:#ffffff;
+    color: #ffffff;
 
-    font-size:13px;
+    font-size: 13px;
 
-    font-weight:700;
+    font-weight: 700;
 
-    letter-spacing:1px;
+    letter-spacing: 1px;
 
-    transition:0.35s ease;
+    transition: 0.35s ease;
 
     box-shadow:
-    0 10px 25px rgba(59,130,246,0.25);
+        0 10px 25px rgba(59, 130, 246, 0.25);
 }
 
-.card-evento:hover .btn-ver{
+.card-evento:hover .btn-ver {
 
-    transform:scale(1.05);
+    transform: scale(1.05);
 
     box-shadow:
-    0 14px 32px rgba(99,102,241,0.35);
+        0 14px 32px rgba(99, 102, 241, 0.35);
 }
 
 /* =========================================================
 BOTÕES CARROSSEL
 ========================================================= */
 
-.btn-carrossel{
+.btn-carrossel {
 
-    position:absolute;
+    position: absolute;
 
-    top:50%;
+    top: 50%;
 
-    transform:translateY(-50%);
+    transform: translateY(-50%);
 
-    width:64px;
-    height:64px;
+    width: 64px;
+    height: 64px;
 
-    border:none;
+    border: none;
 
-    border-radius:50%;
+    border-radius: 50%;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    z-index:20;
+    z-index: 20;
 
-    color:#ffffff;
+    color: #ffffff;
 
-    font-size:18px;
+    font-size: 18px;
 
     background:
-    rgba(255,255,255,0.08);
+        rgba(255, 255, 255, 0.08);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter: blur(14px);
 
-    transition:0.35s ease;
+    transition: 0.35s ease;
 
     box-shadow:
-    0 10px 25px rgba(0,0,0,0.22);
+        0 10px 25px rgba(0, 0, 0, 0.22);
 }
 
-.btn-carrossel:hover{
+.btn-carrossel:hover {
 
     transform:
-    translateY(-50%)
-    scale(1.08);
+        translateY(-50%) scale(1.08);
 
     background:
-    linear-gradient(
-        135deg,
-        #3b82f6,
-        #8b5cf6
-    );
+        linear-gradient(135deg,
+            #3b82f6,
+            #8b5cf6);
 }
 
-.btn-prev{
+.btn-prev {
 
-    left:6px;
+    left: 6px;
 }
 
-.btn-next{
+.btn-next {
 
-    right:6px;
+    right: 6px;
 }
 
 /* =========================================================
 SEM EVENTOS
 ========================================================= */
 
-.nenhum-evento{
+.nenhum-evento {
 
-    width:100%;
+    width: 100%;
 
-    text-align:center;
+    text-align: center;
 
-    color:#ffffff;
+    color: #ffffff;
 
-    font-size:24px;
+    font-size: 24px;
 
-    font-weight:700;
+    font-weight: 700;
 
-    padding:80px 0;
+    padding: 80px 0;
 }
 
 /* =========================================================
 RESPONSIVO
 ========================================================= */
 
-@media(max-width:900px){
+@media(max-width:900px) {
 
-    .categoria-topo{
+    .categoria-topo {
 
-        margin:5px auto 40px auto;
+        margin: 5px auto 40px auto;
 
-        padding:0 22px;
+        padding: 0 22px;
     }
 
-    .categoria-topo h1{
+    .categoria-topo h1 {
 
-        font-size:48px;
+        font-size: clamp(28px, 6vw, 42px);
 
-        letter-spacing:-2px;
+        letter-spacing: -1px;
     }
 
-    .categoria-topo h1::after{
+    .categoria-topo h1::after {
 
-        width:100px;
-        height:5px;
+        width: 100px;
+        height: 5px;
     }
 
-    .categoria-topo p{
+    .categoria-topo p {
 
-        font-size:16px;
+        font-size: 15px;
     }
 
     .forma-topo-1,
     .forma-topo-2,
     .forma-topo-3,
-    .forma-topo-4{
+    .forma-topo-4 {
 
-        display:none;
+        display: none;
     }
 
-    .eventos-wrapper{
+    .eventos-wrapper {
 
-        padding:0 22px 70px 22px;
+        padding: 0 22px 70px 22px;
     }
 
-    .card-evento{
+    .card-evento {
 
-        min-width:290px;
-        max-width:290px;
+        min-width: 280px;
+        max-width: 290px;
     }
 
-    .img-evento{
+    .img-evento {
 
-        height:210px;
+        height: 210px;
     }
 
-    .info-evento h3{
+    .info-evento h3 {
 
-        font-size:21px;
+        font-size: 20px;
     }
 
-    .btn-carrossel{
+    .btn-carrossel {
 
-        display:none;
+        display: none;
     }
 }
+
+@media(max-width:480px) {
+
+    .categoria-topo {
+        padding: 0 15px;
+        margin: 0 auto 25px auto;
+    }
+
+    .categoria-topo h1 {
+        font-size: clamp(22px, 6.5vw, 30px);
+    }
+
+    .categoria-topo p {
+        padding: 12px 18px;
+        font-size: 13px;
+        margin-top: 18px;
+    }
+
+    .eventos-wrapper {
+        padding: 0 15px 50px 15px;
+    }
+
+    .card-evento {
+        min-width: 250px;
+        max-width: 85vw;
+    }
+
+    .img-evento {
+        height: 180px;
+    }
+
+    .info-evento h3 {
+        font-size: 18px;
+    }
+}
+
 /* =========================================================
 SUBTÍTULO
 ========================================================= */
 
-.categoria-topo p{
+.categoria-topo p {
 
-    display:inline-flex;
+    display: inline-flex;
 
-    align-items:center;
+    align-items: center;
 
-    margin-top:38px;
+    margin-top: 38px;
 
-    padding:18px 30px 18px 34px;
+    padding: 18px 30px 18px 34px;
 
     background:
-    rgba(255,255,255,0.05);
+        rgba(255, 255, 255, 0.05);
 
     border:
-    1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255, 255, 255, 0.08);
 
-    border-radius:18px;
+    border-radius: 18px;
 
-    backdrop-filter:blur(12px);
+    backdrop-filter: blur(12px);
 
-    color:#e2e8f0;
+    color: #e2e8f0;
 
-    font-size:16px;
+    font-size: 16px;
 
-    line-height:1.5;
+    line-height: 1.5;
 
-    width:fit-content;
+    width: fit-content;
 
-    max-width:100%;
+    max-width: 100%;
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.15);
+        0 10px 30px rgba(0, 0, 0, 0.15);
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 }
 
 /* DETALHE LATERAL */
 
-.categoria-topo p::before{
+.categoria-topo p::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    left:0;
+    left: 0;
 
-    top:0;
+    top: 0;
 
-    width:5px;
+    width: 5px;
 
-    height:100%;
+    height: 100%;
 
     background:
-    linear-gradient(
-        180deg,
-        #38bdf8,
-        #8b5cf6
-    );
+        linear-gradient(180deg,
+            #38bdf8,
+            #8b5cf6);
 }
+
 /* =========================================================
 TOPO DA CATEGORIA
 ========================================================= */
 
-.categoria-topo{
+.categoria-topo {
 
-    width:100%;
-    max-width:1500px;
+    width: 100%;
+    max-width: 1500px;
 
-    margin:10px auto 45px auto;
+    margin: 10px auto 45px auto;
 
-    padding:0 45px;
+    padding: 0 45px;
 
-    position:relative;
+    position: relative;
 }
 
 /* =========================================================
 BADGE CATEGORIA
 ========================================================= */
 
-.badge-categoria{
+.badge-categoria {
 
-    display:inline-flex;
+    display: inline-flex;
 
-    align-items:center;
+    align-items: center;
 
-    gap:12px;
+    gap: 12px;
 
-    padding:12px 24px;
+    padding: 12px 24px;
 
-    border-radius:50px;
+    border-radius: 50px;
 
     background:
-    linear-gradient(
-        135deg,
-        rgba(56,189,248,0.12),
-        rgba(139,92,246,0.12)
-    );
+        linear-gradient(135deg,
+            rgba(56, 189, 248, 0.12),
+            rgba(139, 92, 246, 0.12));
 
     border:
-    1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255, 255, 255, 0.08);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter: blur(12px);
 
-    margin-bottom:18px;
+    margin-bottom: 18px;
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.15);
+        0 10px 30px rgba(0, 0, 0, 0.15);
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 }
 
 /* BRILHO */
 
-.badge-categoria::before{
+.badge-categoria::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    width:120px;
-    height:120px;
+    width: 120px;
+    height: 120px;
 
-    border-radius:50%;
+    border-radius: 50%;
 
     background:
-    radial-gradient(
-        circle,
-        rgba(255,255,255,0.10),
-        transparent 70%
-    );
+        radial-gradient(circle,
+            rgba(255, 255, 255, 0.10),
+            transparent 70%);
 
-    top:-60px;
-    left:-20px;
+    top: -60px;
+    left: -20px;
 }
 
 /* ÍCONE */
 
-.badge-categoria i{
+.badge-categoria i {
 
-    color:#38bdf8;
+    color: #38bdf8;
 
-    font-size:15px;
+    font-size: 15px;
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    z-index: 2;
 }
 
 /* TEXTO DA CATEGORIA */
 
-.badge-categoria span{
+.badge-categoria span {
 
-    color:#ffffff;
+    color: #ffffff;
 
-    font-size:12px;
+    font-size: 12px;
 
-    font-weight:800;
+    font-weight: 800;
 
-    letter-spacing:3px;
+    letter-spacing: 3px;
 
-    text-transform:uppercase;
+    text-transform: uppercase;
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    z-index: 2;
 }
 
 /* =========================================================
 TÍTULO
 ========================================================= */
 
-.categoria-topo h1{
+.categoria-topo h1 {
 
-    font-size:78px;
+    font-size: 78px;
 
-    font-weight:900;
+    font-weight: 900;
 
-    line-height:1;
+    line-height: 1;
 
-    letter-spacing:-4px;
+    letter-spacing: -4px;
 
-    color:#ffffff;
+    color: #ffffff;
 
-    position:relative;
+    position: relative;
 
-    display:block;
+    display: block;
 
-    margin-bottom:18px;
+    margin-bottom: 18px;
 
     text-shadow:
-    0 10px 30px rgba(0,0,0,0.25);
+        0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 /* LINHA */
 
-.categoria-topo h1::after{
+.categoria-topo h1::after {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    left:0;
-    bottom:-14px;
+    left: 0;
+    bottom: -14px;
 
-    width:150px;
-    height:7px;
+    width: 150px;
+    height: 7px;
 
-    border-radius:30px;
+    border-radius: 30px;
 
     background:
-    linear-gradient(
-        90deg,
-        #38bdf8,
-        #8b5cf6
-    );
+        linear-gradient(90deg,
+            #38bdf8,
+            #8b5cf6);
 
     box-shadow:
-    0 0 25px rgba(56,189,248,0.35);
+        0 0 25px rgba(56, 189, 248, 0.35);
 }
 
 /* =========================================================
 SUBTÍTULO
 ========================================================= */
 
-.categoria-topo p{
+.categoria-topo p {
 
-    display:inline-flex;
+    display: inline-flex;
 
-    align-items:center;
+    align-items: center;
 
-    margin-top:18px;
+    margin-top: 18px;
 
-    padding:18px 30px 18px 34px;
+    padding: 18px 30px 18px 34px;
 
     background:
-    rgba(255,255,255,0.05);
+        rgba(255, 255, 255, 0.05);
 
     border:
-    1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255, 255, 255, 0.08);
 
-    border-radius:18px;
+    border-radius: 18px;
 
-    backdrop-filter:blur(12px);
+    backdrop-filter: blur(12px);
 
-    color:#e2e8f0;
+    color: #e2e8f0;
 
-    font-size:16px;
+    font-size: 16px;
 
-    line-height:1.5;
+    line-height: 1.5;
 
-    width:fit-content;
+    width: fit-content;
 
-    max-width:100%;
+    max-width: 100%;
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.15);
+        0 10px 30px rgba(0, 0, 0, 0.15);
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 }
 
 /* DETALHE LATERAL */
 
-.categoria-topo p::before{
+.categoria-topo p::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    left:0;
-    top:0;
+    left: 0;
+    top: 0;
 
-    width:5px;
-    height:100%;
+    width: 5px;
+    height: 100%;
 
     background:
-    linear-gradient(
-        180deg,
-        #38bdf8,
-        #8b5cf6
-    );
+        linear-gradient(180deg,
+            #38bdf8,
+            #8b5cf6);
 }
+
 /* =========================================================
 CORES CITYFLOW
 ========================================================= */
@@ -1043,209 +1049,201 @@ CORES CITYFLOW
 BADGE CATEGORIA
 ========================================================= */
 
-.badge-categoria{
+.badge-categoria {
 
-    display:inline-flex;
+    display: inline-flex;
 
-    align-items:center;
+    align-items: center;
 
-    gap:12px;
+    gap: 12px;
 
-    padding:12px 24px;
+    padding: 12px 24px;
 
-    border-radius:50px;
+    border-radius: 50px;
 
     background:
-    linear-gradient(
-        135deg,
-        rgba(123,44,255,0.18),
-        rgba(0,212,255,0.12)
-    );
+        linear-gradient(135deg,
+            rgba(123, 44, 255, 0.18),
+            rgba(0, 212, 255, 0.12));
 
     border:
-    1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255, 255, 255, 0.08);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter: blur(12px);
 
-    margin-bottom:18px;
+    margin-bottom: 18px;
 
     box-shadow:
-    0 10px 35px rgba(123,44,255,0.15);
+        0 10px 35px rgba(123, 44, 255, 0.15);
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 }
 
 /* BRILHO */
 
-.badge-categoria::before{
+.badge-categoria::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    width:130px;
-    height:130px;
+    width: 130px;
+    height: 130px;
 
-    border-radius:50%;
+    border-radius: 50%;
 
     background:
-    radial-gradient(
-        circle,
-        rgba(255,255,255,0.10),
-        transparent 70%
-    );
+        radial-gradient(circle,
+            rgba(255, 255, 255, 0.10),
+            transparent 70%);
 
-    top:-60px;
-    left:-20px;
+    top: -60px;
+    left: -20px;
 }
 
 /* ÍCONE */
 
-.badge-categoria i{
+.badge-categoria i {
 
-    color:#00D4FF;
+    color: #00D4FF;
 
-    font-size:15px;
+    font-size: 15px;
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    z-index: 2;
 }
 
 /* TEXTO */
 
-.badge-categoria span{
+.badge-categoria span {
 
-    color:#ffffff;
+    color: #ffffff;
 
-    font-size:12px;
+    font-size: 12px;
 
-    font-weight:800;
+    font-weight: 800;
 
-    letter-spacing:3px;
+    letter-spacing: 3px;
 
-    text-transform:uppercase;
+    text-transform: uppercase;
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    z-index: 2;
 }
 
 /* =========================================================
 TÍTULO
 ========================================================= */
 
-.categoria-topo h1{
+.categoria-topo h1 {
 
-    font-size:78px;
+    font-size: 78px;
 
-    font-weight:900;
+    font-weight: 900;
 
-    line-height:1;
+    line-height: 1;
 
-    letter-spacing:-4px;
+    letter-spacing: -4px;
 
-    color:#ffffff;
+    color: #ffffff;
 
-    position:relative;
+    position: relative;
 
-    display:block;
+    display: block;
 
-    margin-bottom:18px;
+    margin-bottom: 18px;
 
     text-shadow:
-    0 10px 30px rgba(0,0,0,0.25);
+        0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 /* LINHA DECORATIVA */
 
-.categoria-topo h1::after{
+.categoria-topo h1::after {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    left:0;
-    bottom:-14px;
+    left: 0;
+    bottom: -14px;
 
-    width:160px;
-    height:7px;
+    width: 160px;
+    height: 7px;
 
-    border-radius:30px;
+    border-radius: 30px;
 
     background:
-    linear-gradient(
-        90deg,
-        #7B2CFF,
-        #00D4FF
-    );
+        linear-gradient(90deg,
+            #7B2CFF,
+            #00D4FF);
 
     box-shadow:
-    0 0 25px rgba(123,44,255,0.45);
+        0 0 25px rgba(123, 44, 255, 0.45);
 }
 
 /* =========================================================
 SUBTÍTULO
 ========================================================= */
 
-.categoria-topo p{
+.categoria-topo p {
 
-    display:inline-flex;
+    display: inline-flex;
 
-    align-items:center;
+    align-items: center;
 
-    margin-top:18px;
+    margin-top: 18px;
 
-    padding:18px 30px 18px 34px;
+    padding: 18px 30px 18px 34px;
 
     background:
-    rgba(255,255,255,0.05);
+        rgba(255, 255, 255, 0.05);
 
     border:
-    1px solid rgba(255,255,255,0.08);
+        1px solid rgba(255, 255, 255, 0.08);
 
-    border-radius:18px;
+    border-radius: 18px;
 
-    backdrop-filter:blur(12px);
+    backdrop-filter: blur(12px);
 
-    color:#e2e8f0;
+    color: #e2e8f0;
 
-    font-size:16px;
+    font-size: 16px;
 
-    line-height:1.5;
+    line-height: 1.5;
 
-    width:fit-content;
+    width: fit-content;
 
-    max-width:100%;
+    max-width: 100%;
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.15);
+        0 10px 30px rgba(0, 0, 0, 0.15);
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 }
 
 /* DETALHE LATERAL */
 
-.categoria-topo p::before{
+.categoria-topo p::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    left:0;
-    top:0;
+    left: 0;
+    top: 0;
 
-    width:5px;
-    height:100%;
+    width: 5px;
+    height: 100%;
 
     background:
-    linear-gradient(
-        180deg,
-        #7B2CFF,
-        #00D4FF
-    );
+        linear-gradient(180deg,
+            #7B2CFF,
+            #00D4FF);
 }

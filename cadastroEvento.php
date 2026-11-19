@@ -92,6 +92,10 @@ $categorias = mysqli_query(
 
     </div>
 
+    <div class="hamburguer" id="hamburguer">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+
 
     <a href="mapa.php" target="_blank">
 
@@ -1895,6 +1899,7 @@ function abrirPreVisualizacao(event) {
 
 <?php include 'footer.php'; ?>
 
+<script src="script.js"></script>
 
 </body>
 
