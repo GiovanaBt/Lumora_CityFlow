@@ -1,14 +1,34 @@
+
 <?php
 session_start();
+
+/* =========================================
+   VERIFICAÇÃO DE LOGIN
+========================================= */
+
+if (!isset($_SESSION['usuario_id'])) {
+
+    $_SESSION['erro_login'] = "Faça login para visualizar os detalhes dos eventos.";
+
+    header("Location: index.php");
+    exit;
+}
+
+/* =========================================
+   CONEXÃO
+========================================= */
+
 include 'Conexao.php';
 
 /* =========================================
    ID DO EVENTO
 ========================================= */
 
-$id = isset($_GET['id'])
-    ? mysqli_real_escape_string($conexao, $_GET['id'])
-    : 0;
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+
+if ($id <= 0) {
+    die("Evento não encontrado!");
+}
 
 /* =========================================
    BUSCA EVENTO
@@ -18,16 +38,17 @@ $sql = "
 SELECT 
     e.*,
     c.categoria_evento
-
 FROM eventos_cadastrados e
-
 INNER JOIN categoria c
-ON e.id_categoria = c.id_categoria
-
-WHERE e.id_evento = '$id'
+    ON e.id_categoria = c.id_categoria
+WHERE e.id_evento = $id
 ";
 
 $result = mysqli_query($conexao, $sql);
+
+if (!$result) {
+    die("Erro na consulta: " . mysqli_error($conexao));
+}
 
 $evento = mysqli_fetch_assoc($result);
 
@@ -36,9 +57,7 @@ $evento = mysqli_fetch_assoc($result);
 ========================================= */
 
 if (!$evento) {
-
     die("Evento não encontrado!");
-
 }
 
 /* =========================================
@@ -48,11 +67,15 @@ if (!$evento) {
 $sqlDatas = "
 SELECT *
 FROM datas_evento
-WHERE id_evento = '$id'
+WHERE id_evento = $id
 ORDER BY data_inicio ASC
 ";
 
 $resultDatas = mysqli_query($conexao, $sqlDatas);
+
+if (!$resultDatas) {
+    die("Erro ao buscar datas: " . mysqli_error($conexao));
+}
 
 /* =========================================
    STATUS USUÁRIO
@@ -61,38 +84,29 @@ $resultDatas = mysqli_query($conexao, $sqlDatas);
 $jaParticipou = false;
 $jaFavoritou = false;
 
-if (isset($_SESSION['usuario_id'])) {
+$id_usuario = (int) $_SESSION['usuario_id'];
 
-    $id_usuario = $_SESSION['usuario_id'];
+/* PARTICIPAÇÃO */
 
-    /* PARTICIPAÇÃO */
+$verificaParticipacao = mysqli_query($conexao, "
+    SELECT 1
+    FROM atividade
+    WHERE id_usuarios = $id_usuario
+    AND id_evento = $id
+");
 
-    $verificaParticipacao = mysqli_query($conexao, "
+$jaParticipou = mysqli_num_rows($verificaParticipacao) > 0;
 
-        SELECT 1
-        FROM atividade
-        WHERE id_usuarios = '$id_usuario'
-        AND id_evento = '$id'
+/* FAVORITO */
 
-    ");
+$verificaFavorito = mysqli_query($conexao, "
+    SELECT 1
+    FROM favoritos
+    WHERE id_usuario = $id_usuario
+    AND id_evento = $id
+");
 
-    $jaParticipou =
-        mysqli_num_rows($verificaParticipacao) > 0;
-
-    /* FAVORITO */
-
-    $verificaFavorito = mysqli_query($conexao, "
-
-        SELECT 1
-        FROM favoritos
-        WHERE id_usuario = '$id_usuario'
-        AND id_evento = '$id'
-
-    ");
-
-    $jaFavoritou =
-        mysqli_num_rows($verificaFavorito) > 0;
-}
+$jaFavoritou = mysqli_num_rows($verificaFavorito) > 0;
 ?>
 
 <!DOCTYPE html>
@@ -126,7 +140,7 @@ if (isset($_SESSION['usuario_id'])) {
 </head>
 
 <body>
-!-- CABEÇALHO PADRÃO DO CITYFLOW -->
+<!-- CABEÇALHO PADRÃO DO CITYFLOW -->
     <?php include 'header.php'; ?>
 
 <!-- =========================================
