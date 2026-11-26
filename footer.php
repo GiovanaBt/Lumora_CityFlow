@@ -1,5 +1,9 @@
+
 <?php
 $ano_atual = date('Y');
+
+$paginaAtual = basename($_SERVER['PHP_SELF']);
+$desativarLinks = ($paginaAtual === 'cadastroUsuario.php');
 
 $footer_data = [
     'ajuda' => [
@@ -35,9 +39,7 @@ $footer_data = [
 ?>
 
 <footer class="footer-main">
-
     <div class="footer-overlay">
-
         <div class="footer-container">
 
             <div class="footer-brand">
@@ -53,36 +55,46 @@ $footer_data = [
                 </p>
 
                 <div class="social-icons">
-                    <a href="#">IG</a>
-                    <a href="#">FB</a>
-                    <a href="#">X</a>
+                    <?php foreach (['IG', 'FB', 'X'] as $rede): ?>
+                        <?php if ($desativarLinks): ?>
+                            <span><?= $rede ?></span>
+                        <?php else: ?>
+                            <a href="#"><?= $rede ?></a>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
 
             </div>
 
-            <?php foreach($footer_data as $coluna): ?>
+            <?php foreach ($footer_data as $coluna): ?>
 
-            <div class="footer-col">
+                <div class="footer-col">
 
-                <h4 class="footer-title">
-                    <?= $coluna['titulo']; ?>
-                </h4>
+                    <h4 class="footer-title">
+                        <?= htmlspecialchars($coluna['titulo']); ?>
+                    </h4>
 
-                <ul class="footer-links">
+                    <ul class="footer-links">
 
-                    <?php foreach($coluna['links'] as $link): ?>
+                        <?php foreach ($coluna['links'] as $link): ?>
 
-                    <li>
-                        <a href="<?= $link['url']; ?>">
-                            <?= $link['txt']; ?>
-                        </a>
-                    </li>
+                            <li>
+                                <?php if ($desativarLinks): ?>
+                                    <span class="footer-link-desativado">
+                                        <?= htmlspecialchars($link['txt']); ?>
+                                    </span>
+                                <?php else: ?>
+                                    <a href="<?= htmlspecialchars($link['url']); ?>">
+                                        <?= htmlspecialchars($link['txt']); ?>
+                                    </a>
+                                <?php endif; ?>
+                            </li>
 
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
 
-                </ul>
+                    </ul>
 
-            </div>
+                </div>
 
             <?php endforeach; ?>
 
@@ -93,5 +105,4 @@ $footer_data = [
         </div>
 
     </div>
-
 </footer>

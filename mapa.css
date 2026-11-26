@@ -1,143 +1,272 @@
-/* CORPO DO SITE */
 
+/* =====================================================
+   CITYFLOW - MAPA DE EVENTOS
+   Identidade visual: preto, roxo e ciano
+===================================================== */
+
+/* =====================================================
+   1. CONFIGURAÇÕES GERAIS
+===================================================== */
+
+html,
 body {
-    background-color: #000000;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
     width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000;
+    font-family: Arial, sans-serif;
 }
 
-/* AJUSTES PARA A TELA DO MAPA */
+/*
+   Não estilizar o header aqui.
+   O cabeçalho é controlado pelo header.css.
+*/
+
+/* =====================================================
+   2. ÁREA DO MAPA
+===================================================== */
 
 #map {
-    height: calc(100vh - 80px);
-    /* Altura total da tela menos o header */
-    width: 100%;
-    z-index: 1;
-    /* Mapa fica no fundo */
-}
-
-header {
     position: relative;
-    z-index: 1000;
-    /* Header e menus ficam na frente do mapa */
+    width: 100%;
+    height: calc(100vh - 80px);
+    height: calc(100dvh - 80px);
+    z-index: 1;
+    background: #111;
 }
 
-.submenu {
-    z-index: 1100;
-    /* Submenu fica na frente de tudo */
+/* Aparência geral do Leaflet */
+
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+    background: #111;
+    font-family: Arial, sans-serif;
 }
 
-/* botão localização */
+/* =====================================================
+   3. BOTÃO MINHA LOCALIZAÇÃO
+===================================================== */
 
 #btnLocalizacao {
-    position: absolute;
-    top: 100px;
-    right: 20px;
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
     z-index: 1000;
-    background: #0078ff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 13px 20px;
+
+    background: linear-gradient(135deg, #7b2cff, #a8329e);
+    color: #fff;
+
+    border: 1px solid #00d4ff;
+    border-radius: 10px;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
     font-weight: bold;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    transition: transform 0.2s, background-color 0.2s;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.25);
+
+    transition: background 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
 }
 
 #btnLocalizacao:hover {
-    background: #005fcc;
-    transform: scale(1.04);
+    background: linear-gradient(135deg, #00a8cc, #7b2cff);
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(0, 212, 255, 0.5);
 }
 
-/* ==================================================
-   NOME DO EVENTO NO MAPA
-   ================================================== */
+#btnLocalizacao:active {
+    transform: scale(0.97);
+}
+
+/* =====================================================
+   4. MARCADORES E NOMES DOS EVENTOS
+===================================================== */
 
 .evento-tooltip {
-    background: rgba(20, 10, 35, 0.95);
-    color: #ffffff;
+    background: #111 !important;
+    color: #00d4ff !important;
 
-    /* Borda neon */
-    border: 2px solid #00d4ff;
-    border-radius: 20px;
+    border: 1px solid #7b2cff !important;
+    border-radius: 8px !important;
 
-    /* Texto */
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    text-align: center;
+    padding: 7px 10px !important;
 
-    /* Espaçamento */
-    padding: 8px 15px;
+    font-family: Arial, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
 
-    /* Não quebra o nome do evento em telas normais */
-    white-space: nowrap;
-
-    /* Efeito neon */
-    box-shadow:
-        0 0 6px #7b2cff,
-        0 0 12px #7b2cff,
-        0 0 20px rgba(0, 212, 255, 0.6);
-
-    /* Transição */
-    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(123, 44, 255, 0.35) !important;
 }
-
-/* ==================================================
-   SETA ABAIXO DO NOME
-   ================================================== */
 
 .evento-tooltip::before {
-    border-top-color: #00d4ff !important;
+    border-top-color: #7b2cff !important;
 }
 
-/* ==================================================
-   EFEITO AO PASSAR O MOUSE
-   ================================================== */
-
-.evento-tooltip:hover {
-    transform: scale(1.05);
-
-    box-shadow:
-        0 0 8px #7b2cff,
-        0 0 18px #7b2cff,
-        0 0 25px rgba(0, 212, 255, 0.8);
-}
-
-/* Título do evento clicável */
 .evento-link {
-    color: #ffffff !important;
+    color: #00d4ff !important;
     text-decoration: none !important;
-    cursor: pointer;
+    font-weight: bold;
+    transition: color 0.3s ease;
 }
 
-/* Quando passar o mouse */
 .evento-link:hover {
+    color: #a8329e !important;
+}
+
+/* =====================================================
+   5. POP-UP DA LOCALIZAÇÃO DO USUÁRIO
+===================================================== */
+
+.leaflet-popup-content-wrapper {
+    background: #111 !important;
+    color: #fff !important;
+
+    border: 1px solid #00d4ff;
+    border-radius: 10px;
+
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
+}
+
+.leaflet-popup-content {
+    margin: 12px 16px !important;
+
+    color: #fff !important;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.leaflet-popup-tip {
+    background: #111 !important;
+}
+
+.leaflet-popup-close-button {
     color: #00d4ff !important;
 }
 
-/* ==================================================
-   RESPONSIVIDADE (MOBILE)
-   ================================================== */
-@media (max-width: 480px) {
+.leaflet-popup-close-button:hover {
+    color: #a8329e !important;
+}
+
+/* =====================================================
+   6. CONTROLES DE ZOOM DO MAPA
+===================================================== */
+
+.leaflet-control-zoom {
+    border: 1px solid #7b2cff !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+
+.leaflet-control-zoom a {
+    background: #111 !important;
+    color: #00d4ff !important;
+
+    border-bottom: 1px solid #333 !important;
+
+    transition: 0.3s;
+}
+
+.leaflet-control-zoom a:hover {
+    background: #7b2cff !important;
+    color: #fff !important;
+}
+
+/* =====================================================
+   7. CRÉDITOS DO MAPA
+===================================================== */
+
+.leaflet-control-attribution {
+    background: rgba(0, 0, 0, 0.75) !important;
+    color: #ccc !important;
+
+    font-size: 10px !important;
+}
+
+.leaflet-control-attribution a {
+    color: #00d4ff !important;
+}
+
+/* =====================================================
+   8. RESPONSIVIDADE - TABLETS
+===================================================== */
+
+@media (max-width: 900px) {
+
     #map {
-        height: calc(100vh - 70px);
+        height: calc(100vh - 80px);
+        height: calc(100dvh - 80px);
     }
 
     #btnLocalizacao {
-        top: 80px;
+        right: 16px;
+        bottom: 18px;
+        padding: 12px 17px;
+        font-size: 13px;
+    }
+
+}
+
+/* =====================================================
+   9. RESPONSIVIDADE - CELULARES
+===================================================== */
+
+@media (max-width: 480px) {
+
+    #map {
+        height: calc(100vh - 70px);
+        height: calc(100dvh - 70px);
+    }
+
+    #btnLocalizacao {
         right: 12px;
-        padding: 8px 12px;
+        bottom: 15px;
+
+        padding: 11px 15px;
+
         font-size: 12px;
+        border-radius: 8px;
     }
 
     .evento-tooltip {
-        white-space: normal;
-        max-width: 180px;
-        font-size: 12px;
-        padding: 6px 12px;
+        font-size: 11px !important;
+        padding: 5px 7px !important;
     }
+
+    .leaflet-popup-content {
+        font-size: 12px;
+    }
+
+}
+
+/* =====================================================
+   10. CELULARES PEQUENOS
+===================================================== */
+
+@media (max-width: 350px) {
+
+    #btnLocalizacao {
+        right: 10px;
+        bottom: 12px;
+
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+
 }

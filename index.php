@@ -1,28 +1,37 @@
 <?php
-session_start();
+/* =========================================================
+1. INICIAR SESSÃO
+========================================================= */
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+/* =========================================================
+2. ARQUIVAR EVENTOS PASSADOS
+========================================================= */
 
 include 'arquivarEventosPassados.php';
 
 /* =========================================================
-1. CONEXÃO COM O BANCO DE DADOS
+3. CONEXÃO COM O BANCO DE DADOS
 ========================================================= */
 
 $host = "localhost";
 $usuario = "root";
 $senha = "Home@spSENAI2025!";
-$banco = "CityFlow";
+$banco = "cityflow";
 
 $conn = new mysqli($host, $usuario, $senha, $banco);
 
 if ($conn->connect_error) {
-    die("Erro de conexão: " . $conn->connect_error);
+    die("Erro de conexão com o banco de dados: " . $conn->connect_error);
 }
 
 $conn->set_charset("utf8mb4");
 
-
 /* =========================================================
-2. FUNÇÃO PARA PROTEGER TEXTOS
+4. FUNÇÃO PARA PROTEGER TEXTOS
 ========================================================= */
 
 function escapar($texto) {
@@ -33,25 +42,22 @@ function escapar($texto) {
     );
 }
 
-
 /* =========================================================
-3. CAPTURAR ERRO DE LOGIN
+5. CAPTURAR ERRO DE LOGIN
 ========================================================= */
 
 $erroLogin = $_SESSION['erro_login'] ?? '';
 
 unset($_SESSION['erro_login']);
 
-
 /* =========================================================
-4. VERIFICAR LOGIN
+6. VERIFICAR LOGIN
 ========================================================= */
 
 $logado = isset($_SESSION['usuario_id']);
 
-
 /* =========================================================
-5. CARROSSEL PRINCIPAL
+7. CARROSSEL PRINCIPAL
 ========================================================= */
 
 $sql = "
@@ -61,19 +67,15 @@ $sql = "
         Imagem,
         bairro,
         cidade
-
     FROM eventos_cadastrados
-
     ORDER BY id_evento DESC
-
     LIMIT 5
 ";
 
 $resultado = $conn->query($sql);
 
-
 /* =========================================================
-6. EVENTOS DE HOJE
+8. EVENTOS DE HOJE
 ========================================================= */
 
 $sqlHoje = "
@@ -85,34 +87,26 @@ $sqlHoje = "
         e.cidade,
         MIN(d.data_inicio) AS data_inicio,
         MIN(d.horario_inicio) AS horario_inicio
-
     FROM eventos_cadastrados e
-
     INNER JOIN datas_evento d
         ON e.id_evento = d.id_evento
-
-    WHERE
-        CURDATE() BETWEEN d.data_inicio AND d.data_fim
-
+    WHERE CURDATE() BETWEEN d.data_inicio AND d.data_fim
     GROUP BY
         e.id_evento,
         e.titulo,
         e.Imagem,
         e.bairro,
         e.cidade
-
     ORDER BY
         data_inicio ASC,
         horario_inicio ASC
-
     LIMIT 10
 ";
 
 $resultHoje = $conn->query($sqlHoje);
 
-
 /* =========================================================
-7. EVENTOS INFANTIS
+9. EVENTOS INFANTIS
 ========================================================= */
 
 $sqlKids = "
@@ -124,35 +118,28 @@ $sqlKids = "
         e.cidade,
         MIN(d.data_inicio) AS data_inicio,
         MIN(d.horario_inicio) AS horario_inicio
-
     FROM eventos_cadastrados e
-
     INNER JOIN datas_evento d
         ON e.id_evento = d.id_evento
-
     WHERE
         e.classificacao_indicativa IN ('L', '10')
         AND d.data_fim >= CURDATE()
-
     GROUP BY
         e.id_evento,
         e.titulo,
         e.Imagem,
         e.bairro,
         e.cidade
-
     ORDER BY
         data_inicio ASC,
         horario_inicio ASC
-
     LIMIT 10
 ";
 
 $resultKids = $conn->query($sqlKids);
 
-
 /* =========================================================
-8. PRÓXIMOS EVENTOS
+10. PRÓXIMOS EVENTOS
 ========================================================= */
 
 $sqlUltima = "
@@ -164,33 +151,26 @@ $sqlUltima = "
         e.cidade,
         MIN(d.data_inicio) AS data_inicio,
         MIN(d.horario_inicio) AS horario_inicio
-
     FROM eventos_cadastrados e
-
     INNER JOIN datas_evento d
         ON e.id_evento = d.id_evento
-
     WHERE
         d.data_inicio BETWEEN CURDATE()
         AND DATE_ADD(CURDATE(), INTERVAL 2 DAY)
-
     GROUP BY
         e.id_evento,
         e.titulo,
         e.Imagem,
         e.bairro,
         e.cidade
-
     ORDER BY data_inicio ASC
-
     LIMIT 10
 ";
 
 $resultUltima = $conn->query($sqlUltima);
 
-
 /* =========================================================
-9. COLEÇÕES
+11. COLEÇÕES
 ========================================================= */
 
 $colecoes = [
@@ -218,21 +198,14 @@ $colecoes = [
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Flow - O pulso da sua cidade</title>
+   <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="footer.css">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="footer.css">
+<link rel="shortcut icon" href="imgs/logoCityFlow.webp">
 
-    <!-- FAVICON -->
-    <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
-
-    <!-- FONT AWESOME -->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">css">
 </head>
 
 <body>
@@ -242,7 +215,7 @@ $colecoes = [
 10. HEADER RESPONSIVO
 ========================================================= -->
 
-<header>
+<header class="header-principal">
 
     <!-- LOGO -->
     <div class="logo">

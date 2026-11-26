@@ -35,66 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    /* ========================================
-       MENU MOBILE RESPONSIVO (HAMBURGUER)
-    ======================================== */
-    const hamburguer = document.getElementById("hamburguer");
-    const nav = document.querySelector("header nav");
-
-    if (hamburguer && nav) {
-        hamburguer.addEventListener("click", (e) => {
-            e.stopPropagation();
-            nav.classList.toggle("ativo");
-            const icon = hamburguer.querySelector("i");
-            if (icon) {
-                if (nav.classList.contains("ativo")) {
-                    icon.classList.remove("fa-bars");
-                    icon.classList.add("fa-xmark");
-                } else {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
-                }
-            }
-        });
-
-        // Fechar ao clicar fora do nav no mobile
-        document.addEventListener("click", (e) => {
-            if (nav.classList.contains("ativo") && !nav.contains(e.target) && !hamburguer.contains(e.target)) {
-                nav.classList.remove("ativo");
-                const icon = hamburguer.querySelector("i");
-                if (icon) {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
-                }
-            }
-        });
-
-        // Fechar ao clicar em algum link interno
-        nav.querySelectorAll("a").forEach(link => {
-            link.addEventListener("click", () => {
-                if (window.innerWidth <= 900) {
-                    nav.classList.remove("ativo");
-                    const icon = hamburguer.querySelector("i");
-                    if (icon) {
-                        icon.classList.remove("fa-xmark");
-                        icon.classList.add("fa-bars");
-                    }
-                }
-            });
-        });
-
-        // Fechar se redimensionar a tela para Desktop
-        window.addEventListener("resize", () => {
-            if (window.innerWidth > 900 && nav.classList.contains("ativo")) {
-                nav.classList.remove("ativo");
-                const icon = hamburguer.querySelector("i");
-                if (icon) {
-                    icon.classList.remove("fa-xmark");
-                    icon.classList.add("fa-bars");
-                }
-            }
-        });
-    }
 
     /* ========================================
        CAROUSEL (BANNER INICIAL)

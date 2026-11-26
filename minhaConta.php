@@ -57,10 +57,10 @@ $resultEventos = $conexao->query($sqlEventos);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Flow - Minha Conta</title>
 
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="submenu.css">
-    <link rel="stylesheet" href="minhaConta.css">
-    <link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="minhaConta.css">
+<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="submenu.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -68,6 +68,8 @@ $resultEventos = $conexao->query($sqlEventos);
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+<!-- CABEÇALHO PADRÃO CITYFLOW -->
+<?php include 'header.php'; ?>
 
 <body>
 
@@ -82,129 +84,6 @@ $resultEventos = $conexao->query($sqlEventos);
         <?= htmlspecialchars($erroUsuario) ?>
     </div>
 <?php endif; ?>
-<!-- HEADER (NÃO ALTERADO) -->
-
-<!-- =========================================================
-     HEADER CITYFLOW - MINHA CONTA
-========================================================= -->
-
-<!-- =========================================================
-     HEADER CITYFLOW - MINHA CONTA
-========================================================= -->
-
-
-<!-- =========================================================
-     HEADER CITYFLOW - MINHA CONTA
-========================================================= -->
-
-<header>
-
-    <!-- LOGO -->
-    <div class="logo">
-        <a href="index.php">
-            <img src="imgs/cityFlow.webp" alt="CityFlow">
-        </a>
-    </div>
-
-    <!-- BOTÃO HAMBÚRGUER -->
-    <button
-        class="hamburguer"
-        id="hamburguer"
-        type="button"
-        aria-label="Abrir menu"
-        aria-expanded="false"
-        aria-controls="menuPrincipal"
-    >
-        <i class="fa-solid fa-bars"></i>
-    </button>
-
-    <!-- MENU PRINCIPAL -->
-    <nav id="menuPrincipal">
-
-        <ul class="menu">
-
-            <!-- INÍCIO -->
-            <li>
-                <a href="index.php">INÍCIO</a>
-            </li>
-
-            <!-- INFORMAÇÕES -->
-            <li>
-                <a href="informacoes.php">INFORMAÇÕES</a>
-            </li>
-
-            <!-- DIVULGAR EVENTOS -->
-            <li>
-                <a href="cadastroEvento.php">
-                    <i class="fa-solid fa-circle-plus"></i>
-                    DIVULGAR EVENTOS
-                </a>
-            </li>
-
-            <?php if (isset($_SESSION['usuario_id'])): ?>
-
-                <!-- PERFIL E SUBMENU -->
-                <li class="perfil">
-
-                    <a href="#" class="perfil-link">
-                        <i class="fa-solid fa-circle-user"></i>
-
-                        <?= htmlspecialchars($_SESSION['nome_usuario'] ?? 'Minha Conta'); ?>
-
-                        <i class="fa-solid fa-chevron-down seta-submenu"></i>
-                    </a>
-
-                    <!-- OPÇÕES DA CONTA -->
-                    <ul class="submenu">
-
-                        <li>
-                            <a href="minhaConta.php">
-                                <i class="fa-solid fa-user-gear"></i>
-                                Minha Conta
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="minhaConta.php#favoritos">
-                                <i class="fa-solid fa-heart"></i>
-                                Favoritos
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="ajuda.php">
-                                <i class="fa-solid fa-circle-question"></i>
-                                Central de ajuda
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="logout.php" class="btn-sair">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                                Sair
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </li>
-
-            <?php endif; ?>
-
-            <!-- MAPA -->
-            <li>
-                <a href="mapa.php" class="botaoMapa">
-                    <i class="fa-solid fa-map-location-dot"></i>
-                    MAPA
-                </a>
-            </li>
-
-        </ul>
-
-    </nav>
-
-</header>
-
 
 
 <!-- LAYOUT NOVO -->
@@ -725,135 +604,6 @@ function rolarCarrossel(id, distancia) {
 
 }
 
-/* =========================================================
-   MENU HAMBÚRGUER - MINHA CONTA
-========================================================= */
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    const hamburguer = document.getElementById('hamburguer');
-    const menu = document.getElementById('menuPrincipal');
-
-    const perfil = document.querySelector('.perfil');
-    const perfilLink = document.querySelector('.perfil-link');
-
-
-    /* ABRIR E FECHAR MENU */
-
-    function fecharMenu() {
-
-        if (!menu || !hamburguer) return;
-
-        menu.classList.remove('ativo');
-
-        hamburguer.innerHTML = '<i class="fa-solid fa-bars"></i>';
-
-        hamburguer.setAttribute('aria-expanded', 'false');
-        hamburguer.setAttribute('aria-label', 'Abrir menu');
-
-        fecharSubmenu();
-    }
-
-
-    function fecharSubmenu() {
-
-        if (!perfil || !perfilLink) return;
-
-        perfil.classList.remove('submenu-aberto');
-
-        perfilLink.setAttribute('aria-expanded', 'false');
-    }
-
-
-    if (hamburguer && menu) {
-
-        hamburguer.addEventListener('click', function () {
-
-            const aberto = menu.classList.contains('ativo');
-
-            if (aberto) {
-
-                fecharMenu();
-
-            } else {
-
-                menu.classList.add('ativo');
-
-                hamburguer.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-
-                hamburguer.setAttribute('aria-expanded', 'true');
-                hamburguer.setAttribute('aria-label', 'Fechar menu');
-
-            }
-
-        });
-
-    }
-
-
-    /* FECHAR AO CLICAR EM UM LINK */
-
-    if (menu) {
-
-        menu.querySelectorAll('a').forEach(function (link) {
-
-            if (link.classList.contains('perfil-link')) return;
-
-            link.addEventListener('click', function () {
-
-                if (window.innerWidth <= 900) {
-                    fecharMenu();
-                }
-
-            });
-
-        });
-
-    }
-
-
-    /* FECHAR AO CLICAR FORA */
-
-    document.addEventListener('click', function (evento) {
-
-        if (!menu || !hamburguer) return;
-
-        if (
-            window.innerWidth <= 900 &&
-            menu.classList.contains('ativo') &&
-            !menu.contains(evento.target) &&
-            !hamburguer.contains(evento.target)
-        ) {
-
-            fecharMenu();
-
-        }
-
-    });
-
-
-    /* FECHAR COM ESC */
-
-    document.addEventListener('keydown', function (evento) {
-
-        if (evento.key === 'Escape') {
-            fecharMenu();
-        }
-
-    });
-
-
-    /* REDIMENSIONAMENTO */
-
-    window.addEventListener('resize', function () {
-
-        if (window.innerWidth > 900) {
-            fecharMenu();
-        }
-
-    });
-
-});
 
 
 </script>

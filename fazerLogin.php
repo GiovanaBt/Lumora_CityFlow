@@ -1,44 +1,107 @@
+
 <?php
 session_start();
 
-/* PROTEÇÃO */
-if (!isset($_POST['emailLogin']) || !isset($_POST['senhaLogin'])) {
+/* =========================================================
+1. PROTEÇÃO DO FORMULÁRIO
+========================================================= */
+
+if (
+    !isset($_POST['emailLogin']) ||
+    !isset($_POST['senhaLogin'])
+) {
     header("Location: index.php");
     exit();
 }
 
-/* CONEXÃO */
-$conn = new mysqli("localhost", "root", "Home@spSENAI2025!", "cityflow");
+/* =========================================================
+2. CONEXÃO COM O BANCO
+========================================================= */
 
-/* DADOS */
-$email = $_POST['emailLogin'];
+require_once 'Conexao.php';
+
+/* =========================================================
+3. RECEBER DADOS
+========================================================= */
+
+$email = trim($_POST['emailLogin']);
 $senhaLogin = $_POST['senhaLogin'];
 
-/* QUERY */
-$sql = "SELECT * FROM usuarios WHERE email = ? AND senha = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ss", $email, $senhaLogin);
+/* =========================================================
+4. BUSCAR USUÁRIO
+========================================================= */
+
+$sql = "
+    SELECT
+        id_usuarios,
+        nome_usuario,
+        senha
+    FROM usuarios
+    WHERE email = ?
+    LIMIT 1
+";
+
+$stmt = $conexao->prepare($sql);
+
+if (!$stmt) {
+    die("Erro ao preparar consulta: " . $conexao->error);
+}
+
+$stmt->bind_param("s", $email);
 $stmt->execute();
 
 $resultado = $stmt->get_result();
 
-if ($resultado->num_rows == 1) {
+/* =========================================================
+5. VERIFICAR LOGIN
+========================================================= */
+
+if ($resultado && $resultado->num_rows === 1) {
 
     $usuario = $resultado->fetch_assoc();
 
-    $_SESSION['usuario_id'] = $usuario['id_usuarios'];
-    $_SESSION['nome_usuario'] = $usuario['nome_usuario'];
+    /*
+       Compatibilidade com senhas armazenadas
+       em texto simples ou com password_hash().
+    */
 
-    unset($_SESSION['erro_login']); // 🔥 IMPORTANTE
+    $senhaValida = password_verify(
+        $senhaLogin,
+        $usuario['senha']
+    );
 
-    header("Location: index.php");
-    exit();
+    if (!$senhaValida) {
+        $senhaValida = hash_equals(
+            (string) $usuario['senha'],
+            (string) $senhaLogin
+        );
+    }
 
-} else {
+    if ($senhaValida) {
 
-    $_SESSION['erro_login'] = "Usuário ou senha incorretos";
+        session_regenerate_id(true);
 
-    header("Location: index.php");
-    exit();
+        $_SESSION['usuario_id'] = $usuario['id_usuarios'];
+        $_SESSION['nome_usuario'] = $usuario['nome_usuario'];
+
+        unset($_SESSION['erro_login']);
+
+        $stmt->close();
+
+        header("Location: index.php");
+        exit();
+
+    }
 }
+
+/* =========================================================
+6. LOGIN INVÁLIDO
+========================================================= */
+
+$_SESSION['erro_login'] = "E-mail ou senha incorretos.";
+
+$stmt->close();
+
+header("Location: index.php");
+exit();
 ?>

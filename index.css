@@ -1,99 +1,81 @@
-/* =========================
-   MODAL DE LOGIN
-========================= */
-/* ===== MODAL (FUNDO) ===== */
+
+/* =========================================================
+   CITYFLOW - INDEX.CSS
+   RESPONSIVIDADE: DESKTOP, TABLET E SMARTPHONES
+========================================================= */
+
+/* =========================================================
+   1. RESET GERAL
+========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* =========================================================
+   2. MODAL DE LOGIN
+========================================================= */
+
 .modal {
     display: none;
-
     position: fixed;
     inset: 0;
-
     justify-content: center;
     align-items: center;
-
     background: rgba(0, 0, 0, .75);
-
-    /* Acima do header (10000) e do submenu (10002) */
     z-index: 20000;
 }
 
-/* ===== CONTEÚDO DO MODAL (MAIS LARGO) ===== */
 .modal-conteudo {
     background-color: #fff;
-
     width: 500px;
     max-width: 95%;
-
     padding: 22px 28px;
-
     border-radius: 15px;
-
     position: relative;
     text-align: center;
-
-    box-shadow: 0px 0px 25px rgba(45, 185, 201, 0.6);
+    box-shadow: 0 0 25px rgba(45, 185, 201, .6);
 
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-/* ===== BOTÃO FECHAR ===== */
 .fechar {
     position: absolute;
     top: 10px;
     right: 15px;
-
     font-size: 24px;
     font-weight: bold;
     cursor: pointer;
-
     color: #a8329e;
-    transition: color 0.2s;
+    transition: color .2s;
 }
 
 .fechar:hover {
     color: #2dbac9;
 }
 
-/* ===== AJUSTES DO SUBMENU DA CONTA (ALINHADO COM HEADER.CSS) ===== */
-.submenu li a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    padding: 12px;
-    text-decoration: none;
-    box-sizing: border-box;
-    border-radius: 7px;
-    transition: 0.2s ease;
-}
-
-.submenu li a:hover {
-    background-color: rgba(45, 185, 201, 0.12);
-    color: #2dbac9;
-    padding-left: 17px;
-}
-
-/* BOTÃO SAIR (SUBMENU E MOBILE) */
-.submenu li a.btn-sair,
-.opcao-mobile a.btn-sair {
-    color: #ff4d4d !important;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.submenu li a.btn-sair:hover,
-.opcao-mobile a.btn-sair:hover {
-    background-color: #e74c3c !important;
-    color: #fff !important;
-}
-
-.opcao-mobile a.btn-sair:hover i {
-    color: #fff !important;
-}
-
-/* ===== TÍTULO E SUBTÍTULO DO MODAL ===== */
 .modal-conteudo h1 {
     margin-bottom: 4px;
     font-size: 24px;
@@ -117,7 +99,6 @@
     font-size: 14px;
 }
 
-/* ===== FORM ===== */
 .modal-conteudo form {
     display: flex;
     flex-direction: column;
@@ -132,6 +113,8 @@
 }
 
 .modal-conteudo input {
+    width: 100%;
+    min-width: 0;
     padding: 12px;
     border: 1.5px solid #a8329e;
     border-radius: 8px;
@@ -142,20 +125,15 @@
     border-color: #2dbac9;
 }
 
-/* ===== BOTÃO ===== */
 .modal-conteudo button {
     background: linear-gradient(45deg, #a8329e, #2dbac9);
     color: white;
-
     border: none;
     padding: 12px;
     border-radius: 100px;
-
     cursor: pointer;
     font-weight: bold;
-
-    transition: 0.2s;
-
+    transition: .2s;
     margin-top: 12px;
 }
 
@@ -163,12 +141,10 @@
     transform: scale(1.05);
 }
 
-/* ===== TEXTO FINAL ===== */
 .modal-conteudo h4 {
     font-weight: normal;
     font-size: 15px;
     color: #555;
-
     margin-top: 18px;
     margin-bottom: 0;
 }
@@ -187,31 +163,60 @@
     padding-top: 10px;
 }
 
-/* =========================================
-   CARROSSEL STREET / CITYFLOW
-   PALETA ROXA + LARANJA
-========================================= */
+/* =========================================================
+   3. SUBMENU DA CONTA
+========================================================= */
+
+.submenu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-radius: 7px;
+    transition: .2s ease;
+}
+
+.submenu li a:hover {
+    background-color: rgba(45, 185, 201, .12);
+    color: #2dbac9;
+    padding-left: 17px;
+}
+
+.submenu li a.btn-sair,
+.opcao-mobile a.btn-sair {
+    color: #ff4d4d !important;
+    font-weight: bold;
+    transition: .3s;
+}
+
+.submenu li a.btn-sair:hover,
+.opcao-mobile a.btn-sair:hover {
+    background-color: #e74c3c !important;
+    color: #fff !important;
+}
+
+.opcao-mobile a.btn-sair:hover i {
+    color: #fff !important;
+}
+
+/* =========================================================
+   4. CARROSSEL PRINCIPAL
+========================================================= */
 
 .carousel-section {
     width: 100%;
-
     padding: 20px 0 50px;
-
-    overflow: hidden;
+    overflow: visible;
 }
-
-/* =========================================
-   CONTAINER
-========================================= */
 
 .carousel-container {
     position: relative;
-
     width: 100%;
     max-width: 980px;
-
     height: 380px;
-
     margin: auto;
 
     display: flex;
@@ -221,23 +226,16 @@
     overflow: visible;
 }
 
-/* =========================================
-   SLIDES
-========================================= */
+/* SLIDES */
 
 .carousel-slide {
     position: absolute;
-
     width: 72%;
     height: 100%;
-
     background-size: cover;
     background-position: center;
-
     border-radius: 12px;
-
     overflow: hidden;
-
     opacity: 0;
 
     transition:
@@ -245,195 +243,122 @@
         opacity .55s ease,
         filter .55s ease;
 
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, .35);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .35);
 }
 
-/* ESCURECIMENTO */
 .carousel-slide::before {
     content: "";
-
     position: absolute;
     inset: 0;
 
-    background:
-        linear-gradient(to top,
-            rgba(10, 10, 10, .92),
-            rgba(15, 15, 15, .45),
-            transparent);
+    background: linear-gradient(
+        to top,
+        rgba(10, 10, 10, .92),
+        rgba(15, 15, 15, .45),
+        transparent
+    );
 
     z-index: 1;
 }
 
-/* =========================================
-   ATIVO
-========================================= */
+/* SLIDE ATIVO */
 
 .carousel-slide.active {
     opacity: 1;
-
-    transform:
-        scale(1);
-
+    transform: scale(1);
     z-index: 5;
 }
 
-/* =========================================
-   ESQUERDA
-========================================= */
+/* SLIDE ESQUERDO */
 
 .carousel-slide.prev {
     opacity: .35;
-
-    transform:
-        translateX(-65%) scale(.82);
-
+    transform: translateX(-65%) scale(.82);
     z-index: 2;
-
     filter: grayscale(.2);
 }
 
-/* =========================================
-   DIREITA
-========================================= */
+/* SLIDE DIREITO */
 
 .carousel-slide.next {
     opacity: .35;
-
-    transform:
-        translateX(65%) scale(.82);
-
+    transform: translateX(65%) scale(.82);
     z-index: 2;
-
     filter: grayscale(.2);
 }
 
-/* =========================================
-   OVERLAY
-========================================= */
+/* CONTEÚDO DO SLIDE */
 
 .overlay {
     position: absolute;
-
     left: 0;
     bottom: 0;
-
     width: 100%;
-
     padding: 28px;
-
     z-index: 5;
-
     color: white;
 }
 
-/* =========================================
-   TÍTULO
-========================================= */
-
 .overlay h1 {
     font-size: 38px;
-
     font-weight: 900;
-
     line-height: 1;
-
     margin-bottom: 14px;
-
     text-transform: uppercase;
-
     letter-spacing: -1px;
-
-    text-shadow:
-        3px 3px 0px rgba(0, 0, 0, .45);
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, .45);
 }
-
-/* =========================================
-   INFOS
-========================================= */
 
 .overlay p {
     display: flex;
     align-items: center;
-
     gap: 10px;
-
     margin-bottom: 10px;
-
     font-size: 14px;
-
     font-weight: 600;
-
-    color:
-        rgba(255, 255, 255, .92);
+    color: rgba(255, 255, 255, .92);
 }
 
-/* ÍCONES */
 .overlay p i {
     color: #00d4ff;
 }
 
-/* =========================================
-   BOTÃO
-========================================= */
+/* BOTÃO SAIBA MAIS */
 
 .btn-saiba {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     margin-top: 14px;
+    padding: 12px 24px;
 
-    padding:
-        12px 24px;
-
-    background:
-        linear-gradient(135deg,
-            #6d28d9,
-            #9333ea);
-
+    background: linear-gradient(135deg, #6d28d9, #9333ea);
     color: white;
-
     text-decoration: none;
 
     font-size: 13px;
     font-weight: 800;
-
     text-transform: uppercase;
 
     border-radius: 4px;
-
     letter-spacing: 1px;
-
     border: 2px solid #00d4ff;
 
     box-shadow: 0 0 15px rgba(0, 212, 255, .5);
     transition: .25s ease;
 }
 
-/* HOVER */
 .btn-saiba:hover {
-    transform:
-        translate(-3px, -3px);
-
-    background:
-        linear-gradient(135deg,
-            #7c3aed,
-            #a855f7);
-
-    box-shadow:
-        0 0 20px #00d4ff;
+    transform: translate(-3px, -3px);
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    box-shadow: 0 0 20px #00d4ff;
 }
 
-/* =========================================
-   SETAS
-========================================= */
+/* SETAS DO CARROSSEL PRINCIPAL */
 
 .carousel-arrow {
     position: absolute;
-
     top: 50%;
-
     transform: translateY(-50%);
 
     width: 54px;
@@ -446,28 +371,18 @@
     justify-content: center;
 
     cursor: pointer;
-
     z-index: 50;
 
     font-size: 18px;
-
     color: white;
 
-    background:
-        linear-gradient(135deg,
-            #6d28d9,
-            #9333ea);
+    background: linear-gradient(135deg, #6d28d9, #9333ea);
+    border: 2px solid #00d4ff;
 
-    border:
-        2px solid #00d4ff;
-
-    box-shadow:
-        0 0 15px rgba(0, 212, 255, .4);
-
+    box-shadow: 0 0 15px rgba(0, 212, 255, .4);
     transition: .25s ease;
 }
 
-/* POSIÇÕES */
 .carousel-arrow.prev {
     left: -65px;
 }
@@ -476,138 +391,53 @@
     right: -65px;
 }
 
-/* HOVER */
 .carousel-arrow:hover {
-    transform:
-        translateY(-50%) rotate(-6deg) scale(1.06);
-
-    background:
-        linear-gradient(135deg,
-            #7c3aed,
-            #a855f7);
-
-    box-shadow:
-        0 0 20px #00d4ff;
+    transform: translateY(-50%) rotate(-6deg) scale(1.06);
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    box-shadow: 0 0 20px #00d4ff;
 }
 
-/* =========================================
-   RESPONSIVO CARROSSEL PRINCIPAL
-========================================= */
+/* =========================================================
+   5. CARROSSEL DE COLEÇÕES
+========================================================= */
 
-@media(max-width: 1000px) {
+.container-carrossel {
+    position: relative;
 
-    .carousel-arrow.prev {
-        left: 10px;
-    }
+    width: calc(100% - 40px);
+    max-width: 1300px;
 
-    .carousel-arrow.next {
-        right: 10px;
-    }
+    margin: 40px auto;
+    padding: 30px 90px;
+
+    background: linear-gradient(135deg, #3d1a42 0%, #1a3a4a 100%);
+    border-radius: 25px;
 }
 
-@media(max-width: 768px) {
-
-    .carousel-container {
-        height: 300px;
-    }
-
-    .carousel-slide {
-        width: 94%;
-    }
-
-    .carousel-slide.prev,
-    .carousel-slide.next {
-        opacity: 0;
-    }
-
-    .overlay {
-        padding: 22px;
-    }
-
-    .overlay h1 {
-        font-size: 24px;
-    }
-
-    .overlay p {
-        font-size: 12px;
-    }
-
-    .btn-saiba {
-        padding: 10px 18px;
-
-        font-size: 11px;
-    }
-
-    .carousel-arrow {
-        width: 44px;
-        height: 44px;
-
-        font-size: 14px;
-    }
-}
-
-@media(max-width: 480px) {
-
-    .carousel-container {
-        height: 250px;
-    }
-
-    .overlay {
-        padding: 14px;
-    }
-
-    .overlay h1 {
-        font-size: 19px;
-        margin-bottom: 8px;
-    }
-
-    .overlay p {
-        font-size: 11px;
-        margin-bottom: 5px;
-    }
-
-    .btn-saiba {
-        padding: 8px 14px;
-        font-size: 10px;
-    }
-
-    .carousel-arrow {
-        width: 36px;
-        height: 36px;
-        font-size: 12px;
-    }
-}
-
-/* =========================
-   CARROSSEL DE COLEÇÕES
-========================= */
 .container-carrossel h3 {
     font-size: 14px;
     font-weight: 700;
-
     text-align: left;
-
-    margin-bottom: 15px;
-    margin-left: 10px;
-
+    margin: 0 0 15px 10px;
     letter-spacing: 1px;
-
     color: white;
 }
 
+/* TRACK */
+
 .track {
     display: flex;
-
     gap: 20px;
 
-    overflow-x: auto;
+    width: 100%;
+    min-width: 0;
 
+    overflow-x: auto;
     scroll-behavior: smooth;
 
     padding: 10px;
 
     scrollbar-width: none;
-
     -ms-overflow-style: none;
 }
 
@@ -615,133 +445,99 @@
     display: none;
 }
 
+/* CARDS */
+
 .card {
-    min-width: 150px;
+    flex: 0 0 150px;
+    width: 150px;
     height: 150px;
 
     background: white;
-
     border-radius: 22px;
 
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: center;
 
     text-decoration: none;
-
     color: #333;
 
-    transition: all 0.3s ease;
-
-    flex-shrink: 0;
-
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all .3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .2);
 }
 
 .card:hover {
     transform: translateY(-10px) scale(1.05);
-
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .3);
 }
 
 .container-carrossel .icon-box {
     font-size: 42px;
-
     color: #a8329e;
-
     margin-bottom: 15px;
-
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .card:hover .icon-box {
     transform: scale(1.2) rotate(8deg);
-
     color: #2dbac9;
 }
 
 .card span {
     font-size: 13px;
-
     font-weight: bold;
-
     text-align: center;
-
     padding: 0 10px;
-
     line-height: 18px;
 }
 
-/* BOTÕES DAS SETAS */
+/* SETAS DAS COLEÇÕES */
 
 .arrow {
-    background: rgba(255, 255, 255, 0.1);
-
-    border: 1px solid rgba(255, 255, 255, 0.3);
-
+    background: rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .3);
     color: white;
 
     width: 50px;
     height: 50px;
 
     border-radius: 50%;
-
     cursor: pointer;
-
     font-size: 18px;
 
-    transition: 0.3s;
-
+    transition: .3s;
     backdrop-filter: blur(5px);
 }
 
 .arrow:hover {
     background: white;
-
     color: #3d1a42;
-
     transform: scale(1.1);
-}
-
-/* =========================
-   SETAS NAS LATERAIS
-========================= */
-.container-carrossel {
-    background: linear-gradient(135deg, #3d1a42 0%, #1a3a4a 100%);
-
-    padding: 30px 90px;
-
-    border-radius: 25px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    margin: 40px auto;
 }
 
 .btn-next {
     position: absolute;
     top: 50%;
     left: 35px;
+
     width: calc(100% - 70px);
 
     display: flex;
+    align-items: center;
     justify-content: space-between;
 
     transform: translateY(-50%);
-
     pointer-events: none;
+
     box-sizing: border-box;
+    z-index: 5;
 }
 
 .btn-next button {
     pointer-events: all;
 }
 
-/* ESTILO DAS SETAS */
 .btn-next .arrow {
     width: 45px;
     height: 45px;
@@ -749,71 +545,30 @@
     border-radius: 50%;
     border: none;
 
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, .15);
     backdrop-filter: blur(5px);
 
     color: white;
     font-size: 20px;
 
     cursor: pointer;
-
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .btn-next .arrow:hover {
     background: white;
     color: #6c2bd9;
-
     transform: scale(1.1);
 }
 
-@media(max-width: 850px) {
-    .container-carrossel {
-        padding: 25px 45px;
-    }
-
-    .btn-next {
-        left: 12px;
-        width: calc(100% - 24px);
-    }
-}
-
-@media(max-width: 600px) {
-    .container-carrossel {
-        padding: 20px 15px;
-        margin: 25px auto;
-        border-radius: 18px;
-    }
-
-    .btn-next {
-        display: none;
-    }
-}
-
 /* =========================================================
-PÁGINA CATEGORIA
+   6. PÁGINA DE CATEGORIA
 ========================================================= */
 
 .categoria-topo {
     padding-top: 140px;
     text-align: center;
     margin-bottom: 50px;
-}
-
-@media(max-width: 768px) {
-    .categoria-topo {
-        padding-top: 90px;
-        margin-bottom: 30px;
-    }
-
-    .categoria-topo h1 {
-        font-size: clamp(24px, 6vw, 36px);
-    }
-
-    .eventos-grid {
-        padding: 0 15px 50px;
-        gap: 20px;
-    }
 }
 
 .categoria-topo h1 {
@@ -827,27 +582,27 @@ PÁGINA CATEGORIA
     font-size: 16px;
 }
 
-/* GRID */
-
 .eventos-grid {
     width: 100%;
     max-width: 1300px;
+
     margin: auto;
     padding: 0 30px 80px;
+
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
-/* CARD */
-
 .card-evento {
     background: #111;
     border-radius: 24px;
     overflow: hidden;
+
     text-decoration: none;
-    transition: 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: .3s;
+
+    border: 1px solid rgba(255, 255, 255, .08);
 }
 
 .card-evento:hover {
@@ -855,15 +610,11 @@ PÁGINA CATEGORIA
     border-color: #7b2cff;
 }
 
-/* IMAGEM */
-
 .card-evento img {
     width: 100%;
     height: 240px;
     object-fit: cover;
 }
-
-/* INFO */
 
 .info-evento {
     padding: 22px;
@@ -880,46 +631,46 @@ PÁGINA CATEGORIA
     font-size: 14px;
 }
 
-/* SEM EVENTOS */
-
 .nenhum-evento {
     color: #fff;
     text-align: center;
     font-size: 18px;
-    grid-column: 1/-1;
+    grid-column: 1 / -1;
 }
 
 /* =========================================================
-   MINI CARROSSEIS
+   7. MINI CARROSSEIS
 ========================================================= */
 
 .mini-carousel-container {
     position: relative;
+
     width: 92%;
+    max-width: 1300px;
+
+    min-width: 0;
     margin: 80px auto;
 }
 
+/* PLACA DE DATA */
+
 .placa-data {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
 
     padding: 8px 18px;
 
     background: #D97CFF;
-
     color: #fff;
 
     font-size: 1.5rem;
     font-weight: 900;
 
     border-radius: 10px;
-
     transform: rotate(-4deg);
 
     box-shadow: 4px 4px 0 #A8329E;
-
     -webkit-text-fill-color: #fff;
 }
 
@@ -936,10 +687,7 @@ PÁGINA CATEGORIA
 
     margin-bottom: 35px;
 
-    background: linear-gradient(90deg,
-            #2DBAC9,
-            #A8329E);
-
+    background: linear-gradient(90deg, #2DBAC9, #A8329E);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -948,15 +696,15 @@ PÁGINA CATEGORIA
 
 .mini-carousel-track {
     display: flex;
-
     gap: 35px;
 
-    overflow-x: auto;
+    width: 100%;
+    min-width: 0;
 
+    overflow-x: auto;
     scroll-behavior: smooth;
 
     scrollbar-width: none;
-
     padding: 10px 0;
 }
 
@@ -967,12 +715,11 @@ PÁGINA CATEGORIA
 /* CARD */
 
 .mini-card {
-    min-width: 460px;
+    flex: 0 0 460px;
+    min-width: 0;
 
     display: flex;
-
     align-items: center;
-
     gap: 22px;
 
     transition: .3s;
@@ -985,136 +732,150 @@ PÁGINA CATEGORIA
 /* IMAGEM */
 
 .mini-img {
-    width: 230px;
+    flex: 0 0 230px;
 
+    width: 230px;
     height: 165px;
 
     background: #fff;
-
     padding: 8px;
 
     border-radius: 8px;
-
     transform: rotate(-2deg);
 
     border: 3px solid #2DBAC9;
-
     box-shadow: 0 0 25px rgba(45, 186, 201, .25);
 }
 
 .mini-img img {
     width: 100%;
-
     height: 100%;
-
     object-fit: cover;
-
     border-radius: 4px;
 }
 
-/* INFO */
+/* INFORMAÇÕES */
 
 .mini-info {
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
+
+    min-width: 0;
+    max-width: 100%;
 }
 
-/* DATA */
-
 .mini-data {
-    color: #FFFFFF;
-
+    color: #fff;
     font-size: 2rem;
-
     font-weight: 900;
 
     margin-bottom: 12px;
 
     border-top: 3px solid #A8329E;
-
     padding-top: 10px;
 
     width: max-content;
+    max-width: 100%;
 }
 
-/* TÍTULO EVENTO */
-
 .mini-info h3 {
-    color: #FFFFFF;
-
+    color: #fff;
     font-size: 1.5rem;
 
     width: 240px;
+    max-width: 100%;
 
     line-height: 1.2;
-
     margin-bottom: 20px;
+
+    overflow-wrap: anywhere;
 }
 
 /* BOTÃO */
 
 .mini-info a {
     text-decoration: none;
-
-    color: #FFFFFF;
+    color: #fff;
 
     font-weight: 800;
-
     padding: 12px 22px;
 
     border-radius: 8px;
 
-    background:
-        linear-gradient(135deg,
-            #A8329E,
-            #2DBAC9);
+    background: linear-gradient(135deg, #A8329E, #2DBAC9);
 
     width: max-content;
+    max-width: 100%;
 
     transition: .3s;
 }
 
 .mini-info a:hover {
     transform: scale(1.05);
-
     box-shadow: 0 0 20px rgba(45, 186, 201, .6);
 }
 
-/* SETAS */
+/* LOCAL E HORÁRIO */
+
+.mini-local,
+.mini-hora {
+    color: #d8d8d8;
+    font-size: 14px;
+
+    margin-bottom: 8px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    overflow-wrap: anywhere;
+}
+
+.mini-local i {
+    color: #2dbac9;
+}
+
+.mini-hora i {
+    color: #a8329e;
+}
+
+.sem-eventos {
+    color: #bdbdbd;
+    font-size: 16px;
+    padding: 15px 0;
+}
+
+/* SETAS DOS MINI CARROSSEIS */
 
 .mini-arrow {
     position: absolute;
-
     top: 50%;
 
     transform: translateY(-50%);
 
     width: 60px;
-
     height: 60px;
 
     border-radius: 50%;
-
     border: 2px solid #2DBAC9;
 
-    background: #111111;
-
-    color: #FFFFFF;
+    background: #111;
+    color: #fff;
 
     cursor: pointer;
-
     z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     transition: .3s;
 }
 
 .mini-arrow:hover {
     background: #2DBAC9;
-
-    color: #000000;
+    color: #000;
 
     box-shadow: 0 0 25px rgba(45, 186, 201, .7);
 
@@ -1133,11 +894,47 @@ PÁGINA CATEGORIA
     font-size: 1.3rem;
 }
 
-/* RESPONSIVO */
+/* =========================================================
+   8. RESPONSIVIDADE - TABLETS
+========================================================= */
 
-@media(max-width:900px) {
+@media (max-width: 1000px) {
+
+    /* CARROSSEL PRINCIPAL */
+
+    .carousel-arrow.prev {
+        left: 10px;
+    }
+
+    .carousel-arrow.next {
+        right: 10px;
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* CARROSSEL PRINCIPAL */
+
+    .carousel-container {
+        width: 100%;
+    }
+
+    /* COLEÇÕES */
+
+    .container-carrossel {
+        width: calc(100% - 30px);
+        padding: 25px 45px;
+    }
+
+    .btn-next {
+        left: 12px;
+        width: calc(100% - 24px);
+    }
+
+    /* MINI CARROSSEIS */
 
     .mini-carousel-container {
+        width: 94%;
         margin: 45px auto;
     }
 
@@ -1148,50 +945,217 @@ PÁGINA CATEGORIA
         flex-wrap: wrap;
     }
 
-    .mini-arrow {
-        display: none;
-    }
-
     .mini-card {
-        min-width: 300px;
+        flex: 0 0 80%;
+        max-width: 380px;
+        min-width: 0;
 
         flex-direction: column;
-
         align-items: flex-start;
     }
 
     .mini-img {
+        flex: none;
         width: 100%;
-
+        max-width: 100%;
         height: 200px;
+    }
+
+    .mini-info {
+        width: 100%;
     }
 
     .mini-info h3 {
         width: 100%;
     }
 
+    /* SETAS DOS MINI CARROSSEIS */
+
+    .mini-arrow {
+        display: flex;
+        width: 38px;
+        height: 38px;
+    }
+
+    .mini-arrow.left {
+        left: 0;
+    }
+
+    .mini-arrow.right {
+        right: 0;
+    }
+
+    .mini-carousel-track {
+        padding-left: 42px;
+        padding-right: 42px;
+    }
+
+    /* CATEGORIAS */
+
+    .categoria-topo {
+        padding-top: 90px;
+        margin-bottom: 30px;
+    }
+
+    .categoria-topo h1 {
+        font-size: clamp(24px, 6vw, 36px);
+    }
+
+    .eventos-grid {
+        padding: 0 15px 50px;
+        gap: 20px;
+    }
 }
 
-@media(max-width:480px) {
+/* =========================================================
+   9. RESPONSIVIDADE - CELULARES
+========================================================= */
+
+@media (max-width: 600px) {
+
+    /* CARROSSEL PRINCIPAL */
+
+    .carousel-section {
+        padding: 15px 0 25px;
+    }
+
+    .carousel-container {
+        height: 260px;
+        padding: 0;
+    }
+
+    .carousel-slide {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .carousel-slide.prev,
+    .carousel-slide.next {
+        opacity: 0;
+    }
+
+    .overlay {
+        padding: 14px;
+    }
+
+    .overlay h1 {
+        font-size: 19px;
+        margin-bottom: 8px;
+    }
+
+    .overlay p {
+        font-size: 11px;
+        margin-bottom: 5px;
+        flex-wrap: wrap;
+    }
+
+    .btn-saiba {
+        padding: 8px 14px;
+        font-size: 10px;
+    }
+
+    .carousel-arrow {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
+
+    .carousel-arrow.prev {
+        left: 8px;
+    }
+
+    .carousel-arrow.next {
+        right: 8px;
+    }
+
+    /* COLEÇÕES */
+
+    .container-carrossel {
+        width: calc(100% - 24px);
+        margin: 25px auto;
+        padding: 22px 15px;
+        border-radius: 18px;
+    }
+
+    .container-carrossel h3 {
+        font-size: 13px;
+        margin-left: 0;
+    }
+
+    .track {
+        gap: 14px;
+        padding: 10px 2px;
+    }
+
+    .card {
+        flex: 0 0 125px;
+        width: 125px;
+        height: 135px;
+    }
+
+    .container-carrossel .icon-box {
+        font-size: 35px;
+    }
+
+    .card span {
+        font-size: 11px;
+        line-height: 15px;
+    }
+
+    /* SETAS DAS COLEÇÕES */
+
+    .btn-next {
+        display: flex;
+        left: 5px;
+        width: calc(100% - 10px);
+    }
+
+    .btn-next .arrow {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    /* MINI CARROSSEIS */
 
     .mini-carousel-container {
-        width: 95%;
-        margin: 30px auto;
+        width: calc(100% - 30px);
+        margin: 35px auto;
+    }
+
+    .titulo-carrossel {
+        font-size: clamp(1.3rem, 6vw, 2rem);
+        gap: 10px;
+        margin-bottom: 20px;
     }
 
     .placa-data {
-        font-size: 1.1rem;
+        font-size: 1rem;
         padding: 6px 12px;
     }
 
+    .mini-carousel-track {
+        gap: 18px;
+        padding: 10px 42px;
+    }
+
     .mini-card {
-        min-width: 250px;
-        max-width: 85vw;
-        gap: 15px;
+        flex: 0 0 85%;
+        width: 85%;
+        min-width: 0;
+        max-width: 320px;
+        gap: 14px;
     }
 
     .mini-img {
-        height: 160px;
+        flex: none;
+        width: 100%;
+        height: 165px;
+        padding: 6px;
+    }
+
+    .mini-info {
+        width: 100%;
     }
 
     .mini-data {
@@ -1200,8 +1164,16 @@ PÁGINA CATEGORIA
     }
 
     .mini-info h3 {
-        font-size: 1.2rem;
+        width: 100%;
+        font-size: 1.15rem;
+        line-height: 1.3;
         margin-bottom: 12px;
+    }
+
+    .mini-local,
+    .mini-hora {
+        font-size: 12px;
+        flex-wrap: wrap;
     }
 
     .mini-info a {
@@ -1209,31 +1181,164 @@ PÁGINA CATEGORIA
         font-size: 12px;
     }
 
+    .mini-arrow {
+        width: 34px;
+        height: 34px;
+    }
+
+    .mini-arrow i {
+        font-size: 1rem;
+    }
+
+    /* MODAL */
+
+    .modal {
+        padding: 12px;
+        overflow-y: auto;
+    }
+
+    .modal-conteudo {
+        width: 100%;
+        max-width: 420px;
+        max-height: calc(100vh - 24px);
+        overflow-y: auto;
+        padding: 22px 18px;
+    }
+
+    .modal-conteudo h1 {
+        font-size: 20px;
+    }
+
+    .modal-conteudo input {
+        width: 100%;
+        min-width: 0;
+    }
 }
 
-.mini-local,
-.mini-hora {
-    color: #d8d8d8;
+/* =========================================================
+   10. CELULARES PEQUENOS - ATÉ 375px
+========================================================= */
 
-    font-size: 14px;
+@media (max-width: 375px) {
 
-    margin-bottom: 8px;
+    /* CARROSSEL PRINCIPAL */
 
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    .carousel-container {
+        height: 235px;
+    }
+
+    .overlay {
+        padding: 12px;
+    }
+
+    .overlay h1 {
+        font-size: 17px;
+        line-height: 1.2;
+    }
+
+    .overlay p {
+        font-size: 10px;
+    }
+
+    .carousel-arrow {
+        width: 32px;
+        height: 32px;
+    }
+
+    /* COLEÇÕES */
+
+    .container-carrossel {
+        width: calc(100% - 20px);
+        padding: 20px 12px;
+    }
+
+    .card {
+        flex-basis: 115px;
+        width: 115px;
+        height: 125px;
+    }
+
+    .btn-next .arrow {
+        width: 29px;
+        height: 29px;
+        font-size: 12px;
+    }
+
+    /* MINI CARROSSEIS */
+
+    .mini-carousel-container {
+        width: calc(100% - 24px);
+    }
+
+    .mini-card {
+        flex-basis: 88%;
+        width: 88%;
+    }
+
+    .mini-img {
+        height: 145px;
+    }
+
+    .titulo-carrossel {
+        font-size: 1.3rem;
+    }
+
+    .mini-info h3 {
+        font-size: 1.05rem;
+    }
+
+    .mini-local,
+    .mini-hora {
+        font-size: 11px;
+    }
+
+    .mini-arrow {
+        width: 30px;
+        height: 30px;
+    }
+
+    .mini-carousel-track {
+        padding-left: 36px;
+        padding-right: 36px;
+    }
 }
 
-.mini-local i {
-    color: #2dbac9;
-}
+/* =========================================================
+   11. TELAS MUITO ESTREITAS - ATÉ 340px
+========================================================= */
 
-.mini-hora i {
-    color: #a8329e;
-}
+@media (max-width: 340px) {
 
-.sem-eventos {
-    color: #bdbdbd;
-    font-size: 16px;
-    padding: 15px 0;
+    .overlay h1 {
+        font-size: 16px;
+    }
+
+    .container-carrossel h3 {
+        font-size: 11px;
+    }
+
+    .card {
+        flex-basis: 105px;
+        width: 105px;
+    }
+
+    .mini-card {
+        flex-basis: 90%;
+        width: 90%;
+    }
+
+    .mini-carousel-track {
+        padding-left: 32px;
+        padding-right: 32px;
+    }
+
+    .mini-arrow {
+        width: 27px;
+        height: 27px;
+    }
+
+    .modal-conteudo {
+        padding: 20px 14px;
+    }
+
 }

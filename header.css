@@ -175,6 +175,111 @@ header nav,
 
 
 /* =========================================================
+   SUBMENU DA CONTA - CITYFLOW
+========================================================= */
+
+header.header-principal .perfil {
+    position: relative;
+    z-index: 10020;
+}
+
+header.header-principal .perfil-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+header.header-principal .seta-submenu {
+    font-size: 11px;
+    transition: transform .3s ease;
+}
+
+/* Submenu fechado */
+header.header-principal .perfil > ul.submenu {
+    display: none !important;
+
+    position: absolute;
+    top: 100%;
+    right: 0;
+
+    width: 220px;
+    min-width: 220px;
+
+    margin: 0;
+    padding: 8px 0;
+
+    list-style: none;
+
+    background: #111;
+    border: 1px solid rgba(0, 212, 255, .4);
+    border-radius: 8px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, .6);
+
+    z-index: 10020;
+}
+
+/* Abrir pelo clique */
+header.header-principal .menu > li.perfil.submenu-aberto > ul.submenu {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Abrir pelo mouse no desktop */
+@media (min-width: 901px) {
+    header.header-principal .perfil:hover > ul.submenu,
+    header.header-principal .perfil:focus-within > ul.submenu {
+        display: block !important;
+    }
+}
+
+/* Girar seta */
+header.header-principal .perfil.submenu-aberto .seta-submenu {
+    transform: rotate(180deg);
+}
+
+/* Itens */
+header.header-principal .perfil > ul.submenu li {
+    display: block;
+    width: 100%;
+}
+
+header.header-principal .perfil > ul.submenu li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 12px 16px;
+
+    color: #fff;
+    font-size: 13px;
+    text-decoration: none;
+
+    box-sizing: border-box;
+    transition: .3s ease;
+}
+
+/* Hover */
+header.header-principal .perfil > ul.submenu li a:hover {
+    color: #00d4ff;
+    background: rgba(0, 212, 255, .12);
+}
+
+/* Sair */
+header.header-principal .perfil > ul.submenu li a.btn-sair {
+    color: #ff4b6e;
+}
+
+header.header-principal .perfil > ul.submenu li a.btn-sair:hover {
+    color: #fff;
+    background: #e74c3c;
+}
+
+/* =========================================================
 6. BOTÃO ENTRAR
 ========================================================= */
 
@@ -211,136 +316,6 @@ header nav,
     color: #fff;
 }
 
-
-/* =========================================================
-7. PERFIL DO USUÁRIO - DESKTOP
-========================================================= */
-
-.perfil {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-/* Ponte invisível entre o botão do perfil e o submenu para não fechar ao mover o mouse */
-.perfil::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 15px;
-}
-
-.perfil-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.seta-submenu {
-    font-size: 11px;
-    transition: transform .2s ease;
-}
-
-.perfil:hover .seta-submenu,
-.perfil.submenu-aberto .seta-submenu {
-    transform: rotate(180deg);
-}
-
-
-/* =========================================================
-8. SUBMENU DA CONTA - DESKTOP
-========================================================= */
-
-.submenu {
-    display: none;
-
-    position: absolute;
-    top: calc(100% + 12px);
-    right: 0;
-
-    width: 230px;
-    min-width: 210px;
-
-    margin: 0;
-    padding: 8px;
-
-    list-style: none;
-
-    background: rgba(13, 13, 13, .97);
-
-    border: 1px solid #2dbac9;
-    border-radius: 12px;
-
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .8);
-
-    z-index: 10002;
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-}
-
-.submenu::before {
-    content: "MINHA CONTA";
-    display: block;
-
-    padding: 10px 12px;
-
-    color: #2dbac9;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.submenu li {
-    display: block;
-    width: 100%;
-}
-
-.submenu li a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    width: 100%;
-    padding: 12px;
-
-    color: #fff;
-    font-size: 14px;
-
-    border-radius: 7px;
-    transition: .2s ease;
-}
-
-.submenu li a:hover {
-    background: rgba(45, 185, 201, .12);
-    color: #2dbac9;
-    padding-left: 17px;
-}
-
-.submenu li a.btn-sair,
-.submenu li a[href="logout.php"] {
-    color: #ff4d4d;
-}
-
-.submenu li a.btn-sair:hover,
-.submenu li a[href="logout.php"]:hover {
-    background-color: #e74c3c;
-    color: #fff !important;
-}
-
-/* Exibição do submenu no computador */
-@media (min-width: 901px) {
-    .perfil:hover > .submenu,
-    .perfil:focus-within > .submenu,
-    .perfil.submenu-aberto > .submenu {
-        display: block;
-    }
-}
 
 
 /* =========================================================
@@ -813,4 +788,172 @@ header nav,
         transition-duration: .01ms !important;
     }
 
+}
+
+/* =========================================================
+   CORREÇÃO DO MENU HAMBÚRGUER
+========================================================= */
+
+@media (max-width: 900px) {
+
+    header {
+        position: fixed;
+        z-index: 10000;
+    }
+
+    header .hamburguer {
+        display: flex !important;
+        position: relative;
+        z-index: 10010;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+
+    header #menuPrincipal {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+        height: calc(100vh - 80px);
+        height: calc(100dvh - 80px);
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        z-index: 10005;
+    }
+
+    header #menuPrincipal.ativo {
+        display: block !important;
+    }
+
+    header #menuPrincipal .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    header #menuPrincipal {
+        top: 70px;
+        height: calc(100vh - 70px);
+        height: calc(100dvh - 70px);
+    }
+}
+
+/* =========================================
+   CORREÇÃO DO MENU HAMBÚRGUER
+========================================= */
+
+@media (max-width: 900px) {
+
+    header.header-principal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10000;
+    }
+
+    header.header-principal .hamburguer {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 10010;
+        cursor: pointer;
+    }
+
+    header.header-principal #menuPrincipal {
+        display: none !important;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        height: calc(100dvh - 80px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        z-index: 10005;
+        background: #000;
+    }
+
+    header.header-principal #menuPrincipal.ativo {
+        display: block !important;
+    }
+
+    header.header-principal #menuPrincipal .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    header.header-principal #menuPrincipal {
+        top: 70px;
+        height: calc(100vh - 70px);
+        height: calc(100dvh - 70px);
+    }
+}
+/* =========================================
+   CORREÇÃO DEFINITIVA DO MENU HAMBÚRGUER
+========================================= */
+
+@media (max-width: 900px) {
+
+    header.header-principal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10000;
+    }
+
+    header.header-principal .hamburguer {
+        display: flex !important;
+        position: relative;
+        z-index: 10010;
+        cursor: pointer;
+    }
+
+    header.header-principal nav#menuPrincipal {
+        display: none !important;
+
+        position: fixed;
+        top: 80px;
+        left: 0;
+        right: 0;
+
+        width: 100%;
+        height: calc(100vh - 80px);
+        height: calc(100dvh - 80px);
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        background: #050505;
+        z-index: 10005;
+    }
+
+    header.header-principal nav#menuPrincipal.ativo {
+        display: block !important;
+    }
+}
+
+@media (max-width: 480px) {
+
+    header.header-principal nav#menuPrincipal {
+        top: 70px;
+        height: calc(100vh - 70px);
+        height: calc(100dvh - 70px);
+    }
 }

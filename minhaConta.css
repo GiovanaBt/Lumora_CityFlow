@@ -1,379 +1,253 @@
+
+/* =====================================================
+   CITYFLOW - MINHA CONTA
+   CSS COMPLETO E RESPONSIVO
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     background: #000;
     font-family: 'Segoe UI', sans-serif;
     color: #fff;
+    overflow-x: hidden;
 }
 
-/* =========================
+/* =====================================================
    TÍTULO PRINCIPAL
-========================= */
+===================================================== */
 
 .titulo-principal {
     font-family: 'Poppins', sans-serif;
     font-size: 36px;
     text-align: center;
     text-transform: uppercase;
-
     background: linear-gradient(45deg, #a8329e, #2dbac9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
     margin: 40px 0 5px;
     letter-spacing: 2px;
 }
-
-/* =========================
-   SUBTÍTULO
-========================= */
 
 .subtitulo {
     text-align: center;
     font-size: 16px;
     color: #aaa;
-
     margin-bottom: 40px;
 }
 
-/* =========================
+/* =====================================================
    LAYOUT PRINCIPAL
-========================= */
+===================================================== */
 
 .layout-conta {
     display: flex;
+    align-items: flex-start;
     gap: 40px;
-
     padding: 30px 50px;
-
     margin-bottom: 120px;
+    width: 100%;
+    min-width: 0;
 }
-
-/* =========================
-   LADO ESQUERDO - DADOS
-========================= */
 
 .lado-esquerdo {
     width: 32%;
-
+    min-width: 0;
     background: rgba(20, 20, 20, 0.9);
-
     padding: 35px 32px 40px;
-
     border-radius: 20px;
-
     border: 1px solid rgba(255, 255, 255, 0.05);
-
     box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
-
-    box-sizing: border-box;
 }
-
-/* =========================
-   LADO DIREITO
-========================= */
 
 .lado-direito {
     width: 68%;
-
+    min-width: 0;
     height: auto;
-
     padding-top: 35px;
     padding-bottom: 40px;
-
-    box-sizing: border-box;
 }
 
-/* =========================
+/* =====================================================
    FORMULÁRIO
-========================= */
+===================================================== */
 
 .dados {
     width: 100%;
-
     display: flex;
     flex-direction: column;
-
     gap: 22px;
 }
 
-/* =========================
-   GRID DOS DADOS
-========================= */
-
 .grid-dados {
     display: grid;
-
     grid-template-columns: 1fr;
-
     gap: 20px;
 }
 
-/* =========================
-   CAMPO
-========================= */
-
 .campo {
     position: relative;
-
     width: 100%;
+    min-width: 0;
 }
-
-/* =========================
-   LABEL
-========================= */
 
 .campo label {
     display: block;
-
     color: #ccc;
-
     font-size: 13px;
     font-weight: 500;
-
     margin-bottom: 8px;
-
     padding-left: 2px;
 }
 
-/* =========================
-   INPUT
-========================= */
-
 .campo input {
     display: block;
-
     width: 100%;
     max-width: 100%;
-
     height: 46px;
-
     padding: 0 42px 0 14px;
-
-    box-sizing: border-box;
-
     border-radius: 10px;
-
     border: 1px solid rgba(168, 50, 158, 0.55);
-
     background: #0d0d0d;
-
     color: #fff;
-
     font-family: 'Segoe UI', sans-serif;
     font-size: 14px;
-
     outline: none;
-
     transition: 0.3s ease;
 }
-
-/* =========================
-   INPUT DESABILITADO
-========================= */
 
 .campo input:disabled {
     opacity: 1;
     cursor: default;
 }
 
-/* =========================
-   INPUT EM FOCO
-========================= */
-
 .campo input:focus {
     border-color: #2dbac9;
-
     box-shadow: 0 0 8px rgba(45, 186, 201, 0.15);
 }
 
-/* =========================
-   ÍCONE EDITAR
-========================= */
-
 .campo i {
     position: absolute;
-
     right: 10px;
     top: 35px;
-
     color: #a8329e;
-
     font-size: 18px;
-
     cursor: pointer;
-
     transition: 0.3s ease;
 }
 
 .campo i:hover {
     color: #2dbac9;
-
     transform: scale(1.1);
 }
 
-/* =========================
-   BOTÕES SALVAR / CANCELAR
-========================= */
+/* =====================================================
+   BOTÕES SALVAR E CANCELAR
+===================================================== */
 
 .botoes-edicao {
     display: none;
-
     width: 100%;
-
     gap: 14px;
-
     margin-top: 30px;
-
     align-items: center;
-
-    box-sizing: border-box;
 }
-
-/* =========================
-   BOTÕES
-========================= */
 
 .btn-salvar,
 .btn-cancelar {
     flex: 1;
-
     width: 50%;
+    min-width: 0;
     height: 54px;
-
     margin: 0 !important;
     padding: 0 15px;
-
-    box-sizing: border-box;
-
     border-radius: 28px;
-
     font-family: 'Poppins', sans-serif;
-
     font-size: 15px;
     font-weight: 600;
-
     cursor: pointer;
-
     transition: 0.3s ease;
 }
 
-/* =========================
-   BOTÃO SALVAR
-========================= */
-
 .btn-salvar {
     display: block;
-
     border: none;
-
-    background: linear-gradient(90deg,
-            #a8329e,
-            #2dbac9);
-
+    background: linear-gradient(90deg, #a8329e, #2dbac9);
     color: #fff;
 }
 
 .btn-salvar:hover {
     transform: translateY(-2px);
-
     opacity: 0.9;
-
-    box-shadow:
-        0 5px 15px rgba(168, 50, 158, 0.25);
+    box-shadow: 0 5px 15px rgba(168, 50, 158, 0.25);
 }
-
-/* =========================
-   BOTÃO CANCELAR
-========================= */
 
 .btn-cancelar {
     display: block;
-
     border: 1px solid #a8329e;
-
     background: transparent;
-
     color: #fff;
 }
 
 .btn-cancelar:hover {
     background: #a8329e;
-
     transform: translateY(-2px);
-
-    box-shadow:
-        0 5px 15px rgba(168, 50, 158, 0.25);
+    box-shadow: 0 5px 15px rgba(168, 50, 158, 0.25);
 }
 
-/* =========================
+/* =====================================================
    CARROSSEL
-========================= */
+===================================================== */
 
 .carrossel-wrapper {
     width: 100%;
-
+    min-width: 0;
     display: flex;
-
     align-items: center;
-
     gap: 15px;
 }
 
 .carrossel-container {
     flex: 1;
-
     min-width: 0;
-
     display: flex;
-
     gap: 25px;
-
     overflow-x: auto;
     overflow-y: hidden;
-
     scroll-behavior: smooth;
-
     padding: 10px 5px 20px;
-
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .carrossel-container::-webkit-scrollbar {
     display: none;
 }
 
-/* =========================
-   SETAS
-========================= */
+/* =====================================================
+   SETAS DOS CARROSSÉIS
+===================================================== */
 
 .seta-carrossel {
     flex: 0 0 40px;
-
     width: 40px;
     height: 40px;
-
+    padding: 0;
     border: none;
-
     border-radius: 50%;
-
-    background: linear-gradient(45deg,
-            #a8329e,
-            #2dbac9);
-
+    background: linear-gradient(45deg, #a8329e, #2dbac9);
     color: #fff;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     cursor: pointer;
-
     transition: 0.3s ease;
 }
 
 .seta-carrossel:hover {
     transform: scale(1.1);
-
     box-shadow:
         0 0 15px rgba(168, 50, 158, 0.5),
         0 0 15px rgba(45, 186, 201, 0.3);
@@ -383,132 +257,86 @@ body {
     font-size: 16px;
 }
 
-/* =========================
+/* =====================================================
    CONTAINER DOS EVENTOS
-========================= */
+===================================================== */
 
 .container {
     width: 100%;
-
+    min-width: 0;
     display: flex;
-
     gap: 25px;
-
     overflow-x: auto;
     overflow-y: hidden;
-
     scroll-behavior: smooth;
-
     padding: 10px 5px 20px;
-
     scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .container::-webkit-scrollbar {
     display: none;
 }
 
-/* =========================
+/* =====================================================
    LINKS DOS CARDS
-========================= */
+===================================================== */
 
-.carrossel-container>a,
-.container>a {
+.carrossel-container > a,
+.container > a {
     flex: 0 0 230px;
-
     width: 230px;
-
     text-decoration: none;
-
     color: inherit;
 }
 
-/* =========================
-   CARD
-========================= */
+/* =====================================================
+   CARDS
+===================================================== */
 
 .card {
     position: relative;
-
     width: 230px;
     height: 245px;
-
     background: rgba(20, 20, 20, 0.9);
-
     border-radius: 18px;
-
     overflow: hidden;
-
     border: 1px solid rgba(255, 255, 255, 0.05);
-
     backdrop-filter: blur(10px);
-
     transition: all 0.4s ease;
-
-    box-sizing: border-box;
 }
-
-/* =========================
-   BORDA GRADIENTE
-========================= */
 
 .card::before {
     content: "";
-
     position: absolute;
-
     inset: 0;
-
     border-radius: 18px;
-
     padding: 1px;
-
-    background: linear-gradient(45deg,
-            #a8329e,
-            #2dbac9);
-
+    background: linear-gradient(45deg, #a8329e, #2dbac9);
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
-
     -webkit-mask-composite: xor;
-
     mask-composite: exclude;
-
     opacity: 0;
-
     transition: 0.4s;
-
     pointer-events: none;
 }
 
-/* =========================
-   HOVER CARD
-========================= */
-
 .card:hover {
     transform: translateY(-8px) scale(1.03);
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .card:hover::before {
     opacity: 1;
 }
 
-/* =========================
-   IMAGEM
-========================= */
-
 .card img {
     display: block;
-
     width: 230px;
     height: 150px;
-
     object-fit: cover;
-
     transition: 0.4s;
 }
 
@@ -516,236 +344,178 @@ body {
     transform: scale(1.08);
 }
 
-/* =========================
-   DESCRIÇÃO
-========================= */
+/* =====================================================
+   DESCRIÇÃO DOS EVENTOS
+===================================================== */
 
 .descricao {
     padding: 12px 12px 5px;
-
     font-weight: bold;
-
     color: #fff;
-
     font-size: 15px;
-
     line-height: 1.3;
-
     height: 42px;
-
     overflow: hidden;
-
     display: -webkit-box;
-
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
-/* =========================
-   LOCAL
-========================= */
-
 .local {
     padding: 5px 12px 12px;
-
     font-size: 13px;
-
     color: #2dbac9;
-
     white-space: nowrap;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
 }
 
-/* =========================
+/* =====================================================
    TÍTULOS DAS SEÇÕES
-========================= */
+===================================================== */
 
 .secao {
     font-size: 20px;
-
     color: #fff;
-
     display: flex;
-
     align-items: center;
-
     gap: 10px;
-
     margin: 30px 0 20px;
 }
 
 .secao::after {
     content: "";
-
     flex: 1;
-
     height: 2px;
-
-    background: linear-gradient(90deg,
-            #a8329e,
-            #2dbac9);
+    background: linear-gradient(90deg, #a8329e, #2dbac9);
 }
 
-/* =========================
-   ÍCONES DAS SEÇÕES
-========================= */
-
-.icone-participando {
-    color: #fff;
-}
-
-.icone-favorito {
-    color: #fff;
-}
-
+.icone-participando,
+.icone-favorito,
 .icone-eventos {
     color: #fff;
 }
 
-/* =========================
-   MENSAGEM VAZIA
-========================= */
+/* =====================================================
+   MENSAGEM DE CARROSSEL VAZIO
+===================================================== */
 
-.carrossel-container>p,
-.container>p {
+.carrossel-container > p,
+.container > p {
     flex: 1;
-
     width: 100%;
-
     min-height: 55px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     margin: 0;
-
     padding: 20px;
-
-    box-sizing: border-box;
-
     background: #111;
-
     border-radius: 15px;
-
     border: 1px dashed #333;
-
     color: #aaa;
-
     text-align: center;
 }
 
-/* =========================
+/* =====================================================
+   MEUS EVENTOS - SETAS
+===================================================== */
+
+#meusEventos .carrossel-wrapper {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#meusEventos .container {
+    flex: 1;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+}
+
+/* =====================================================
    BOTÃO EDITAR MEUS EVENTOS
-========================= */
+===================================================== */
 
 .btn-editar-eventos {
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     gap: 9px;
-
     margin-top: 8px;
     margin-bottom: 28px;
-
     padding: 11px 18px;
-
     border-radius: 10px;
-
     border: 1px solid rgba(168, 50, 158, 0.45);
-
-    background: linear-gradient(135deg,
-            rgba(168, 50, 158, 0.18),
-            rgba(123, 44, 255, 0.12));
-
+    background: linear-gradient(
+        135deg,
+        rgba(168, 50, 158, 0.18),
+        rgba(123, 44, 255, 0.12)
+    );
     color: #d8a8ff;
-
     text-decoration: none;
-
     font-size: 13px;
-
     font-weight: 700;
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+    transition: 0.25s ease;
 }
 
 .btn-editar-eventos:hover {
     transform: translateY(-2px);
-
-    background: linear-gradient(135deg,
-            rgba(168, 50, 158, 0.30),
-            rgba(123, 44, 255, 0.22));
-
+    background: linear-gradient(
+        135deg,
+        rgba(168, 50, 158, 0.30),
+        rgba(123, 44, 255, 0.22)
+    );
     border-color: #a8329e;
-
     color: #fff;
-
-    box-shadow:
-        0 8px 25px rgba(168, 50, 158, 0.18);
+    box-shadow: 0 8px 25px rgba(168, 50, 158, 0.18);
 }
 
 .btn-editar-eventos i {
     font-size: 13px;
-
     color: #d18aff;
 }
 
-/* =========================
+/* =====================================================
    MENSAGENS
-========================= */
+===================================================== */
 
 .mensagem {
     width: 90%;
     max-width: 600px;
-
     margin: 20px auto;
-
     padding: 15px 20px;
-
     border-radius: 8px;
-
     text-align: center;
-
     font-weight: 500;
 }
 
 .mensagem.sucesso {
     background-color: rgba(45, 186, 201, 0.15);
-
     border: 1px solid #2dbac9;
-
     color: #2dbac9;
 }
 
 .mensagem.erro {
     background-color: rgba(255, 70, 70, 0.15);
-
     border: 1px solid #ff4646;
-
     color: #ff4646;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
+/* =====================================================
+   TABLETS
+===================================================== */
 
 @media (max-width: 900px) {
 
     .layout-conta {
         flex-direction: column;
-
+        gap: 25px;
         padding: 20px;
-
         margin-bottom: 80px;
     }
 
@@ -763,16 +533,14 @@ body {
     }
 
     .seta-carrossel {
-        flex: 0 0 35px;
-
+        flex-basis: 35px;
         width: 35px;
         height: 35px;
     }
 
-    .carrossel-container>a,
-    .container>a {
-        flex: 0 0 210px;
-
+    .carrossel-container > a,
+    .container > a {
+        flex-basis: 210px;
         width: 210px;
     }
 
@@ -794,9 +562,9 @@ body {
     }
 }
 
-/* =========================
-   CELULAR PEQUENO
-========================= */
+/* =====================================================
+   CELULARES
+===================================================== */
 
 @media (max-width: 500px) {
 
@@ -810,12 +578,19 @@ body {
         border-radius: 15px;
     }
 
+    .lado-direito {
+        padding-bottom: 25px;
+    }
+
     .titulo-principal {
         font-size: clamp(22px, 6vw, 28px);
+        letter-spacing: 1px;
+        margin-top: 30px;
     }
 
     .subtitulo {
-        font-size: clamp(18px, 5vw, 22px);
+        font-size: clamp(16px, 4.5vw, 20px);
+        margin-bottom: 25px;
     }
 
     .botoes-edicao {
@@ -825,25 +600,121 @@ body {
     .btn-salvar,
     .btn-cancelar {
         width: 100%;
+        flex: none;
+    }
+
+    /* Setas continuam visíveis */
+    .carrossel-wrapper {
+        gap: 6px;
     }
 
     .seta-carrossel {
-        display: none;
+        display: flex;
+        flex: 0 0 28px;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+    }
+
+    .seta-carrossel i {
+        font-size: 12px;
+    }
+
+    .carrossel-container,
+    .container {
+        gap: 12px;
+        padding: 10px 3px 20px;
+    }
+
+    .carrossel-container > a,
+    .container > a {
+        flex: 0 0 180px;
+        width: 180px;
+    }
+
+    .card {
+        width: 180px;
+    }
+
+    .card img {
+        width: 180px;
+        height: 140px;
+    }
+
+    .secao {
+        font-size: 17px;
+        gap: 7px;
+    }
+
+    .btn-editar-eventos {
+        max-width: 100%;
+        font-size: 12px;
     }
 }
-/* MEUS EVENTOS COM SETAS */
 
-#meusEventos .carrossel-wrapper {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+/* =====================================================
+   CELULARES PEQUENOS
+===================================================== */
+
+@media (max-width: 350px) {
+
+    .layout-conta {
+        padding: 8px;
+    }
+
+    .lado-esquerdo {
+        padding: 18px 12px 22px;
+    }
+
+    .carrossel-wrapper {
+        gap: 4px;
+    }
+
+    .seta-carrossel {
+        flex-basis: 25px;
+        width: 25px;
+        height: 25px;
+    }
+
+    .seta-carrossel i {
+        font-size: 11px;
+    }
+
+    .carrossel-container > a,
+    .container > a {
+        flex-basis: 160px;
+        width: 160px;
+    }
+
+    .card {
+        width: 160px;
+    }
+
+    .card img {
+        width: 160px;
+        height: 125px;
+    }
+
+    .secao {
+        font-size: 15px;
+    }
 }
 
-#meusEventos .container {
-    flex: 1;
-    min-width: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
+/* =====================================================
+   ACESSIBILIDADE
+===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .carrossel-container,
+    .container {
+        scroll-behavior: auto;
+    }
+
+    .card,
+    .card img,
+    .seta-carrossel,
+    .btn-editar-eventos {
+        transition: none;
+    }
 }

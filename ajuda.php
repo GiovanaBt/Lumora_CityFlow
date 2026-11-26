@@ -2,58 +2,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>City Flow - O pulso da sua cidade</title>
-    <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="ajuda.css">
-    <link rel="shortcut icon" href="imgs/logoCityFlow.webp">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="submenu.css">
+
+<link rel="shortcut icon" href="imgs/logoCityFlow.webp">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">l="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-
-<header>
-    <div class="logo">
-        <a href="index.php"><img src="imgs/cityFlow.webp"></a>
-    </div>
-
-    <div class="hamburguer" id="hamburguer">
-        <i class="fa-solid fa-bars"></i>
-    </div>
-
-    <a href="mapa.php" target="_blank">
-        <button class="botaoMapa">MAPA</button>
-    </a>
-
-    <nav>
-        <ul class="menu">
-            <li><a href="index.php">INÍCIO</a></li>
-            <li><a href="informacoes.php">INFORMAÇÕES</a></li>
-            <li><a href="cadastroEvento.php"><i class="fa-solid fa-circle-plus"></i> DIVULGAR EVENTOS</a></li>
-
-            <?php if (isset($_SESSION['usuario_id'])): ?>
-                <li class="perfil">
-                    <a href="#"><i class="fa-solid fa-circle-user"></i> <?php echo $_SESSION['nome_usuario']; ?></a>
-                    <ul class="submenu">
-                        <li><a href="minhaConta.php"><i class="fa-solid fa-user-gear"></i> Minha Conta</a></li>
-                        <li><a href="minhaConta.php#favoritos"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
-                        <li><a href="ajuda.php"><i class="fa-solid fa-circle-question"></i> Central de ajuda</a></li>
-                        <hr style="border:0.5px solid #333; margin:5px 15px; opacity:0.2;">
-                        <li><a href="logout.php" class="btn-sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
-                    </ul>
-                </li>
-
-            <?php else: ?>
-                <li>
-                    <div class="menu-container" id="abrirModal">
-                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                        <span class="texto-entrar">ENTRAR</span>
-                    </div>
-                </li>
-            <?php endif; ?>
-        </ul>
-    </nav>
-</header>
+<?php include 'header.php'; ?>
 <div class="central-container">
     
     <h1 class="titulo-central">Central de Ajuda</h1>
@@ -210,80 +169,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<?php include 'footer.php'; ?>
 
 <script src="script.js"></script>
 
-</body>
-</html>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer</title>
-    <link rel="stylesheet" href="footer.css">
-</head>
-<body>
-<?php
-// Configurações do Rodapé
-$ano_atual = date('Y');
-$footer_data = [
-    'ajuda' => [
-        'titulo' => 'Ajuda',
-        'links'  => [
-            ['txt' => 'Central de Ajuda', 'url' => '#'],
-            ['txt' => 'FAQ', 'url' => '#'],
-            ['txt' => 'Contato e Suporte', 'url' => '#'],
-            ['txt' => 'Reportar Problema', 'url' => '#']
-        ]
-    ],
-    'institucional' => [
-        'titulo' => 'Institucional',
-        'links'  => [
-            ['txt' => 'Sobre o CityFlow', 'url' => '#'],
-            ['txt' => 'Missão e Valores', 'url' => '#'],
-            ['txt' => 'Privacidade', 'url' => '#'],
-            ['txt' => 'Termos de Uso', 'url' => '#']
-        ]
-    ]
-];
-?>
-
-<footer class="footer-main">
-    <div class="footer-overlay">
-        <div class="footer-container">
-            
-            <?php foreach ($footer_data as $coluna): ?>
-            <div class="footer-col">
-                <h4 class="footer-title"><?php echo $coluna['titulo']; ?></h4>
-                <ul class="footer-links">
-                    <?php foreach ($coluna['links'] as $link): ?>
-                        <li><a href="<?php echo $link['url']; ?>"><?php echo $link['txt']; ?></a></li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-            <?php endforeach; ?>
-
-            <div class="footer-brand">
-                <div class="logo-wrapper">
-                    <span class="logo-city">CITY</span><span class="logo-flow">FLOW</span>
-                </div>
-                <p class="brand-text">
-                    Conectando a essência das ruas e a cultura urbana. Descubra eventos, arte e movimento em um só lugar.
-                </p>
-                <div class="social-icons">
-                    <a href="https://www.instagram.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-                    <a href="https://twitter.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Twitter">TW</a>
-                    <a href="https://www.facebook.com/seu_perfil" target="_blank" rel="noopener noreferrer" aria-label="Facebook">FB</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; <?php echo $ano_atual; ?> CityFlow - Todos os direitos reservados.</p>
-        </div>
-    </div>
-</footer>
 </body>
 </html>
